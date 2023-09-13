@@ -1,0 +1,142 @@
+@import 'node_modules/modern-normalize/modern-normalize.css';
+body {
+  --black: #1c1e25;
+  --white-10: #f5f7f31a;
+  --white-50: #f5f7f380;
+  --background: #121317;
+  --light-green: #92fe9d;
+  --powder-white: #f5f7f3;
+}
+
+main {
+  display: flex;
+  min-height: 100vh;
+}
+
+.H1-Lato-fw-700-fs-32 {
+  font-family: var(--font-lato);
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 48px;
+}
+
+.H2-Lato-fw-700-fs-24 {
+  font-family: var(--font-lato);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 40px;
+}
+
+.Body-Lato-fw-800-fs-24 {
+  font-family: var(--font-lato);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 32px;
+}
+
+.Body-Lato-fw-600-fs-24 {
+  font-family: var(--font-lato);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+}
+
+.Body-Lato-fw-700-fs-18 {
+  font-family: var(--font-lato);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 40px;
+}
+
+.Body-Lato-fw-500-fs-18 {
+  font-family: var(--font-lato);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 40px;
+}
+
+.Body-Lato-fw-700-fs-16 {
+  font-family: var(--font-lato);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.Body-Lato-fw-700-fs-14 {
+  font-family: var(--font-lato);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.Body-Lato-fw-600-fs-14 {
+  font-family: var(--font-lato);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 16px;
+}
+
+.Body-Lato-fw-500-fs-10 {
+  font-family: var(--font-lato);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.profile-Lato-fw-700-fs-20 {
+  font-family: var(--font-lato);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.lvl-Lato-fw-700-fs-18 {
+  font-family: var(--font-lato);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.menu-Lato-fw-500-fs-14 {
+  font-family: var(--font-lato);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.menu-Lato-fw-700-fs-14 {
+  font-family: var(--font-lato);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.menu-Lato-fw-700-fs-12 {
+  font-family: var(--font-lato);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+}
+
+.points-Lato-fw-700-fs-12 {
+  font-family: var(--font-lato);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+}
