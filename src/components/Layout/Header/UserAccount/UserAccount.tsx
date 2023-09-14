@@ -7,7 +7,7 @@ import Image from 'next/image';
 import MenuIcon from '@/components/Icons/MenuIcon';
 import { useAccount, useDisconnect } from 'wagmi';
 import { useTheme } from '@mui/material/styles';
-import {useCustomTheme} from "../../../../hooks/useCustomTheme";
+import { useCustomTheme } from '../../../../hooks/useCustomTheme';
 const UserAccount = () => {
   const theme = useCustomTheme();
   const { address } = useAccount();

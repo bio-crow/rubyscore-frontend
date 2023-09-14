@@ -4,7 +4,7 @@ import Image from 'next/image';
 import ThemeSwitch from '@/components/Layout/Header/ThemeSwith/ThemeSwith';
 import { appRoutes } from '../../../constants/routes';
 import NavLink from '@/components/Layout/Header/NavLink/NavLink';
-import {useCustomTheme} from "../../../hooks/useCustomTheme";
+import { useCustomTheme } from '../../../hooks/useCustomTheme';
 
 const navLinks = [
   {

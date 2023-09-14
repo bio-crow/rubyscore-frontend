@@ -2,8 +2,8 @@
 import { Box } from '@mui/system';
 import { useEffect } from 'react';
 import { useConnectModal } from '@rainbow-me/rainbowkit';
-import {useCustomTheme} from "../../hooks/useCustomTheme";
-import CustomConnectButton from "@/components/CustomConnectButton/CustomConnectButton";
+import { useCustomTheme } from '../../hooks/useCustomTheme';
+import CustomConnectButton from '@/components/CustomConnectButton/CustomConnectButton';
 
 const AuthLayout = () => {
   const theme = useCustomTheme();
@@ -19,7 +19,7 @@ const AuthLayout = () => {
       justifyContent='center'
       bgcolor={theme.palette.backgroundColor}
     >
-      <CustomConnectButton/>
+      <CustomConnectButton />
     </Box>
   );
 };
