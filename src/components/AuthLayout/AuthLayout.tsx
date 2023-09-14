@@ -1,9 +1,12 @@
 'use client';
 import { Box } from '@mui/system';
-import { FC, ReactNode, useEffect } from 'react';
-import { ConnectButton, useConnectModal } from '@rainbow-me/rainbowkit';
+import { useEffect } from 'react';
+import { useConnectModal } from '@rainbow-me/rainbowkit';
+import {useCustomTheme} from "../../hooks/useCustomTheme";
+import CustomConnectButton from "@/components/CustomConnectButton/CustomConnectButton";
 
 const AuthLayout = () => {
+  const theme = useCustomTheme();
   const { openConnectModal } = useConnectModal();
   useEffect(() => {
     openConnectModal && openConnectModal();
@@ -14,9 +17,9 @@ const AuthLayout = () => {
       width='100%'
       alignItems='center'
       justifyContent='center'
-      bgcolor={`var(--background, #121317)`}
+      bgcolor={theme.palette.backgroundColor}
     >
-      <ConnectButton />
+      <CustomConnectButton/>
     </Box>
   );
 };

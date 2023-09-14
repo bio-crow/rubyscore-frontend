@@ -6,8 +6,10 @@ import { Menu } from '@mui/material';
 import Image from 'next/image';
 import MenuIcon from '@/components/Icons/MenuIcon';
 import { useAccount, useDisconnect } from 'wagmi';
-
+import { useTheme } from '@mui/material/styles';
+import {useCustomTheme} from "../../../../hooks/useCustomTheme";
 const UserAccount = () => {
+  const theme = useCustomTheme();
   const { address } = useAccount();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { disconnect } = useDisconnect();
@@ -26,8 +28,8 @@ const UserAccount = () => {
   return (
     <Box
       borderRadius='10px'
-      border='1px solid var(--white-10, rgba(245, 247, 243, 0.10))'
-      bgcolor=' var(--background, #121317)'
+      border={`1px solid ${theme.palette.white50}`}
+      bgcolor={theme.palette.backgroundColor}
       p='0px 16px 0px  16px'
       height='48px'
       display='flex'
@@ -38,10 +40,10 @@ const UserAccount = () => {
       <Box display='flex' alignItems='center' gap='5px'>
         <Image src='/asserts/emptyUserIcon.png' alt='icon' width='32' height='32' />
         <Box display='flex' flexDirection='column'>
-          <Box className='menu-Lato-fw-700-fs-12' color='var(--powder-white, #F5F7F3)'>
+          <Box className='menu-Lato-fw-700-fs-12' color={theme.palette.powderWhite}>
             {maskedAddress}
           </Box>
-          <Box className='menu-Lato-fw-700-fs-12' color='var(--white-50, rgba(245, 247, 243, 0.50))'>
+          <Box className='menu-Lato-fw-700-fs-12' color={theme.palette.white50}>
             0 Points
           </Box>
         </Box>
@@ -55,7 +57,7 @@ const UserAccount = () => {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        <MenuIcon />
+        <MenuIcon fill={theme.palette.powderWhite} />
       </Box>
       <Menu
         id='user-menu'

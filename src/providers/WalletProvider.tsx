@@ -46,7 +46,7 @@ const wagmiConfig = createConfig({
 const WalletProvider: FC<Props> = ({ children }) => {
   return (
     <WagmiConfig config={wagmiConfig}>
-      <RainbowKitProvider appInfo={demoAppInfo} chains={chains}>
+      <RainbowKitProvider appInfo={demoAppInfo} chains={chains} >
         {children}
       </RainbowKitProvider>
     </WagmiConfig>

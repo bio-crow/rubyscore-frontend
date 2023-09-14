@@ -4,6 +4,7 @@ import Image from 'next/image';
 import ThemeSwitch from '@/components/Layout/Header/ThemeSwith/ThemeSwith';
 import { appRoutes } from '../../../constants/routes';
 import NavLink from '@/components/Layout/Header/NavLink/NavLink';
+import {useCustomTheme} from "../../../hooks/useCustomTheme";
 
 const navLinks = [
   {
@@ -21,14 +22,15 @@ const navLinks = [
 ];
 
 const Header = () => {
+  const theme = useCustomTheme();
   return (
     <Box
       width='100%'
       height='60px'
       display='flex'
       justifyContent='center'
-      bgcolor={`var(--black, #1C1E25)`}
-      border='1px solid var(--white-10, rgba(245, 247, 243, 0.10))'
+      bgcolor={theme.palette.black}
+      border={`1px solid ${theme.palette.white10}`}
     >
       <Box maxWidth='1392px' width='100%' display='flex' gap='20px' alignItems='center'>
         <Box flex='1'>
