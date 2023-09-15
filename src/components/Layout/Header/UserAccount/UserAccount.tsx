@@ -1,6 +1,6 @@
 'use client';
 import { Box } from '@mui/system';
-import {useState, MouseEvent, FC} from 'react';
+import { useState, MouseEvent, FC } from 'react';
 import { MenuItem } from '@mui/material';
 import { Menu } from '@mui/material';
 import Image from 'next/image';
@@ -8,15 +8,15 @@ import MenuIcon from '@/components/Icons/MenuIcon';
 import { useAccount, useDisconnect } from 'wagmi';
 import { useTheme } from '@mui/material/styles';
 import { useCustomTheme } from '../../../../hooks/useCustomTheme';
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useRouter } from 'next/navigation'
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useRouter } from 'next/navigation';
 interface Props {
-  navLinks: {label: string, route: string}[]
+  navLinks: { label: string; route: string }[];
 }
-const UserAccount:FC<Props> = ({navLinks}) => {
+const UserAccount: FC<Props> = ({ navLinks }) => {
   const theme = useCustomTheme();
   const isLowerLg = useMediaQuery(theme.breakpoints.down('lg'));
-  const router = useRouter()
+  const router = useRouter();
   const { address } = useAccount();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { disconnect } = useDisconnect();
@@ -75,7 +75,12 @@ const UserAccount:FC<Props> = ({navLinks}) => {
           'aria-labelledby': 'basic-button',
         }}
       >
-        {isLowerLg && navLinks.map((item:any) => <MenuItem key={item.label} onClick={() => router.push(item.route)}>{item.label}</MenuItem>)}
+        {isLowerLg &&
+          navLinks.map((item: any) => (
+            <MenuItem key={item.label} onClick={() => router.push(item.route)}>
+              {item.label}
+            </MenuItem>
+          ))}
         <MenuItem onClick={logout}>Logout</MenuItem>
       </Menu>
     </Box>
