@@ -1,12 +1,12 @@
 'use client';
-import Layout from '@/components/Layout/Layout';
+import Layout from '@/components/layout/Layout/Layout';
 import { Box, Typography } from '@mui/material';
 import { useCustomTheme } from '../../hooks/useCustomTheme';
-import PrimaryButton from '@/components/ui/PrimaryButton/PrimaryButton';
-import SecondaryButton from '@/components/ui/SecondaryButton/SecondaryButton';
-import ThirdlyButton from '@/components/ui/ThirdlyButton/ThirdlyButton';
+import PrimaryButton from '@/components/common/ui/PrimaryButton/PrimaryButton';
+import SecondaryButton from '@/components/common/ui/SecondaryButton/SecondaryButton';
+import ThirdlyButton from '@/components/common/ui/ThirdlyButton/ThirdlyButton';
 import Image from 'next/image';
-import CustomInput from '@/components/ui/CustomInput/CustomInput';
+import CustomInput from '@/components/common/ui/CustomInput/CustomInput';
 const Dashboard = () => {
   const theme = useCustomTheme();
   return (

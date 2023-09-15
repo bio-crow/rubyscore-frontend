@@ -2,7 +2,7 @@
 import { useIsMounted } from '../src/hooks/useIsMounted';
 import { useAccount } from 'wagmi';
 import Dashboard from '@/modules/Dashboard/Dashboard';
-import AuthLayout from '@/components/AuthLayout/AuthLayout';
+import AuthLayout from '@/components/layout/AuthLayout/AuthLayout';
 
 export default function Page() {
   const { isConnected } = useAccount();

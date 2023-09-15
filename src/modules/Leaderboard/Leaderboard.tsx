@@ -1,4 +1,4 @@
-import Layout from '@/components/Layout/Layout';
+import Layout from '@/components/layout/Layout/Layout';
 import { Box, Button, Typography } from '@mui/material';
 import { useCustomTheme } from '../../hooks/useCustomTheme';
 

@@ -1,10 +1,10 @@
 import { Box } from '@mui/system';
-import UserAccount from '@/components/Layout/Header/UserAccount/UserAccount';
+import UserAccount from '@/components/layout/Layout/Header/UserAccount/UserAccount';
 import Image from 'next/image';
-import ThemeSwitch from '@/components/Layout/Header/ThemeSwith/ThemeSwith';
-import { appRoutes } from '../../../constants/routes';
-import NavLink from '@/components/Layout/Header/NavLink/NavLink';
-import { useCustomTheme } from '../../../hooks/useCustomTheme';
+import ThemeSwitch from '@/components/layout/Layout/Header/ThemeSwith/ThemeSwith';
+import { appRoutes } from '../../../../constants/routes';
+import NavLink from '@/components/layout/Layout/Header/NavLink/NavLink';
+import { useCustomTheme } from '../../../../hooks/useCustomTheme';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 const navLinks = [
@@ -33,6 +33,10 @@ const Header = () => {
       justifyContent='center'
       bgcolor={theme.palette.black}
       border={`1px solid ${theme.palette.white10}`}
+      position='fixed'
+      top='0'
+      left='0'
+      zIndex='1'
     >
       <Box
         sx={{

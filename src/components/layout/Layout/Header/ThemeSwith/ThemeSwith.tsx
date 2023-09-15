@@ -1,10 +1,10 @@
 'use client';
 import { Box } from '@mui/system';
-import DarkIcon from '@/components/Icons/DarkIcon';
+import DarkIcon from '@/components/common/Icons/DarkIcon';
 import { useContext, useState } from 'react';
-import LightIcon from '@/components/Icons/LightIcon';
+import LightIcon from '@/components/common/Icons/LightIcon';
 import { ColorModeContext } from '@/theme/ThemeRegistry';
-import { useCustomTheme } from '../../../../hooks/useCustomTheme';
+import { useCustomTheme } from '../../../../../hooks/useCustomTheme';
 
 const ThemeSwitch = () => {
   const theme = useCustomTheme();

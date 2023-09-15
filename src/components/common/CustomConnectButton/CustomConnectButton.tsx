@@ -1,6 +1,6 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { Button } from '@mui/material';
-import PrimaryButton from '@/components/ui/PrimaryButton/PrimaryButton';
+import PrimaryButton from '@/components/common/ui/PrimaryButton/PrimaryButton';
 import { Box } from '@mui/system';
 
 const CustomConnectButton = () => {

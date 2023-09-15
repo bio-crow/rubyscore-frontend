@@ -3,7 +3,7 @@ import { Box } from '@mui/system';
 import Link from 'next/link';
 import { FC } from 'react';
 import { usePathname } from 'next/navigation';
-import { useCustomTheme } from '../../../../hooks/useCustomTheme';
+import { useCustomTheme } from '../../../../../hooks/useCustomTheme';
 
 interface Props {
   route: string;

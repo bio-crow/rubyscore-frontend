@@ -39,6 +39,9 @@
       ],
       "@/context/*": [
         "src/context/*"
+      ],
+      "@/hooks/*": [
+        "src/hooks/*"
       ]
     },
     "plugins": [

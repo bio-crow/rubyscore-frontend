@@ -1,6 +1,6 @@
 import { Box } from '@mui/system';
-import Header from '@/components/Layout/Header/Header';
-import Content from '@/components/Layout/Content/Content';
+import Header from '@/components/layout/Layout/Header/Header';
+import Content from '@/components/layout/Layout/Content/Content';
 import { FC, ReactNode } from 'react';
 
 interface Props {

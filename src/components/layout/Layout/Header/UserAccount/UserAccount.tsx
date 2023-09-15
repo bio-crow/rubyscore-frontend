@@ -4,10 +4,10 @@ import { useState, MouseEvent, FC } from 'react';
 import { MenuItem } from '@mui/material';
 import { Menu } from '@mui/material';
 import Image from 'next/image';
-import MenuIcon from '@/components/Icons/MenuIcon';
+import MenuIcon from '@/components/common/Icons/MenuIcon';
 import { useAccount, useDisconnect } from 'wagmi';
 import { useTheme } from '@mui/material/styles';
-import { useCustomTheme } from '../../../../hooks/useCustomTheme';
+import { useCustomTheme } from '../../../../../hooks/useCustomTheme';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useRouter } from 'next/navigation';
 interface Props {
@@ -45,7 +45,7 @@ const UserAccount: FC<Props> = ({ navLinks }) => {
       width='226px'
     >
       <Box display='flex' alignItems='center' gap='5px'>
-        <Image src='/asserts/emptyUserIcon.png' alt='icon' width='32' height='32' />
+        <Image src='/asserts/emptyUserIcon.svg' alt='icon' width='32' height='32' />
         <Box display='flex' flexDirection='column'>
           <Box className='menu-Lato-fw-700-fs-12' color={theme.palette.powderWhite}>
             {maskedAddress}
