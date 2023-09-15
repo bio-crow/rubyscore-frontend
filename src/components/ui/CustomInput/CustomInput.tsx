@@ -2,7 +2,7 @@ import { styled } from '@mui/system';
 import { TextField } from '@mui/material';
 import { CustomTheme } from '@/theme/index';
 
-const CustomInput = styled(TextField)(({ theme }: { theme: CustomTheme }) => {
+const CustomInput = styled(TextField)(({ theme }: { theme: CustomTheme | any }) => {
   return {
     '&.MuiTextField-root': {
       '.MuiOutlinedInput-root': {

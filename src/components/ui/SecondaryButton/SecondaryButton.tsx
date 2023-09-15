@@ -2,7 +2,7 @@ import { styled } from '@mui/system';
 import { Button } from '@mui/material';
 import { CustomTheme } from '@/theme/index';
 
-const SecondaryButton = styled(Button)(({ theme }: { theme: CustomTheme }) => {
+const SecondaryButton = styled(Button)(({ theme }: { theme: CustomTheme | any }) => {
   return {
     '&.MuiButton-contained': {
       background: theme.palette.btnSecondaryDefault,
