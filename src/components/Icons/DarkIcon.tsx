@@ -5,7 +5,7 @@ interface Props {
   fill?: string;
 }
 
-const MenuIcon: FC<Props> = ({ style, fill = 'var(--powder-white)' }) => {
+const MenuIcon: FC<Props> = ({ style, fill = '#333333' }) => {
   return (
     <svg
       style={style}

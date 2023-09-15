@@ -1,5 +1,7 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { Button } from '@mui/material';
+import PrimaryButton from '@/components/ui/PrimaryButton/PrimaryButton';
+import { Box } from '@mui/system';
 
 const CustomConnectButton = () => {
   return (
@@ -20,7 +22,8 @@ const CustomConnectButton = () => {
           ready && account && chain && (!authenticationStatus || authenticationStatus === 'authenticated');
 
         return (
-          <div
+          <Box
+            width='250px'
             {...(!ready && {
               'aria-hidden': true,
             })}
@@ -28,23 +31,35 @@ const CustomConnectButton = () => {
             {(() => {
               if (!connected) {
                 return (
-                  <Button variant='contained' onClick={openConnectModal} type='button'>
+                  <PrimaryButton
+                    variant='contained'
+                    size='large'
+                    onClick={openConnectModal}
+                    type='button'
+                    fullWidth
+                  >
                     Connect Wallet
-                  </Button>
+                  </PrimaryButton>
                 );
               }
 
               if (chain.unsupported) {
                 return (
-                  <Button variant='contained' onClick={openChainModal} type='button'>
+                  <PrimaryButton
+                    variant='contained'
+                    size='large'
+                    onClick={openChainModal}
+                    type='button'
+                    fullWidth
+                  >
                     Wrong network
-                  </Button>
+                  </PrimaryButton>
                 );
               }
 
               return null;
             })()}
-          </div>
+          </Box>
         );
       }}
     </ConnectButton.Custom>

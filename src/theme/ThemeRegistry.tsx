@@ -2,7 +2,6 @@
 import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme, ThemeOptions, ThemeProvider } from '@mui/material/styles';
-import { Inter } from 'next/font/google';
 import { NextAppDirEmotionCacheProvider } from './EmotionCache';
 import { PaletteMode } from '@mui/material';
 import { getDesignTokens } from '@/theme/index';
@@ -10,7 +9,6 @@ import { getDesignTokens } from '@/theme/index';
 export const ColorModeContext = React.createContext({
   toggleColorMode: () => {},
 });
-const inter = Inter({ subsets: ['latin'] });
 
 export default function ThemeRegistry({ children }: { children: React.ReactNode }) {
   const [mode, setMode] = React.useState<PaletteMode>('dark');
