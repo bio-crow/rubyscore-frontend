@@ -11,7 +11,7 @@ const Content: FC<Props> = ({ children }) => {
   return (
     <Box
       sx={{
-        width: '100vw',
+        width: '100%',
         display: 'flex',
         gap: '20px',
         flex: 1,
