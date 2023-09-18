@@ -5,6 +5,7 @@ import ProfileInfo from '@/modules/Profile/ProfileInfo/ProfileInfo';
 import ClaimProfile from '@/modules/Profile/ClaimProfile/ClaimProfile';
 import Benefits from '@/modules/Profile/Benefits/Benefits';
 import Score from '@/modules/Profile/Score/Score';
+import DailyActivity from '@/modules/Profile/DailyActivity/DailyActivity';
 
 const Profile = () => {
   const theme = useCustomTheme();
@@ -30,6 +31,7 @@ const Profile = () => {
           <ClaimProfile />
           <Benefits />
           <Score />
+          <DailyActivity />
         </Box>
         <ProfileInfo />
       </Box>

@@ -1,3 +1,5 @@
+import DailyActivityCard from '@/modules/Profile/DailyActivity/DailyActivityCard/DailyActivityCard';
+
 export interface IQuestCard {
   net: {
     icon: string;
@@ -11,4 +13,12 @@ export interface IScoreNetwork {
   icon: string;
   lvl: number;
   points: number;
+}
+export interface IDailyActivityCard {
+  description: string;
+  net: {
+    title: string;
+    icon: string;
+  };
+  badges: string[];
 }

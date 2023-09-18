@@ -92,7 +92,13 @@ main {
   font-weight: 500;
   line-height: 16px;
 }
-
+.Body-Lato-fw-500-fs-12-h-24{
+  font-family: var(--font-lato);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
 .profile-Lato-fw-700-fs-20 {
   font-family: var(--font-lato);
   font-size: 20px;
