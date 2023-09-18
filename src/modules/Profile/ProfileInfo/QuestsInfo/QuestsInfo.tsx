@@ -2,9 +2,11 @@ import { Box } from '@mui/system';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { FC } from 'react';
 import Image from 'next/image';
+import { IQuestCard } from '@/types/index';
+import QuestsCard from '@/modules/Profile/ProfileInfo/QuestsInfo/QuestCard/QuestCard';
 
 interface Props {
-  quests: any[];
+  quests: IQuestCard[];
 }
 
 const QuestsInfo: FC<Props> = ({ quests }) => {
@@ -40,7 +42,7 @@ const QuestsInfo: FC<Props> = ({ quests }) => {
           </Box>
         </Box>
       </Box>
-      <Box display='flex' flexDirection='column' paddingTop='16px'>
+      <Box display='flex' flexDirection='column' paddingTop='16px' gap='10px'>
         {quests.length === 0 ? (
           <Box display='flex' alignItems='center' gap='10px' justifyContent='center' minHeight='84px'>
             <Image src='/asserts/groupIcon.png' alt='icon' width='24' height='24' />
@@ -56,7 +58,11 @@ const QuestsInfo: FC<Props> = ({ quests }) => {
             </Box>
           </Box>
         ) : (
-          <Box>1</Box>
+          <>
+            {quests.map(item => (
+              <QuestsCard key={item.questTitle} quest={item} />
+            ))}
+          </>
         )}
       </Box>
     </Box>

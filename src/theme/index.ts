@@ -11,6 +11,7 @@ export interface CustomTheme {
     lightGreen: string;
     powderWhite: string;
     benefitsGradient: string;
+    benefitsGradient2: string;
     btnPrimaryDefault: string;
     btnPrimaryHover: string;
     btnPrimaryFocus: string;
@@ -57,6 +58,8 @@ export const getDesignTokens = (mode: PaletteMode) => ({
           lightGreen: '#92fe9d',
           powderWhite: '#f5f7f3',
           benefitsGradient: 'linear-gradient(90deg, #1C1E25 0%, #0A0C0E 47.61%, #0A0C0E 100%)',
+          benefitsGradient2:
+            'linear-gradient(0deg, rgba(245, 247, 243, 0.10) 0%, rgba(245, 247, 243, 0.10) 100%)',
           btnPrimaryDefault: 'linear-gradient(90deg, #92FE9D 0%, #00C9FF 100%, #00C9FF 100%)',
           btnPrimaryHover: '#04CBFD',
           btnPrimaryFocus: '#02A2CA',
@@ -86,6 +89,8 @@ export const getDesignTokens = (mode: PaletteMode) => ({
           lightGreen: '#92fe9d',
           powderWhite: '#333333',
           benefitsGradient: 'linear-gradient(90deg, #1C1E25 0%, #0A0C0E 47.61%, #0A0C0E 100%)',
+          benefitsGradient2:
+            'linear-gradient(0deg, rgba(245, 247, 243, 0.10) 0%, rgba(245, 247, 243, 0.10) 100%)',
           btnPrimaryDefault: 'linear-gradient(90deg, #92FE9D 0%, #00C9FF 100%, #00C9FF 100%)',
           btnPrimaryHover: '#04CBFD',
           btnPrimaryFocus: '#02A2CA',

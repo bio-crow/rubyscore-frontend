@@ -140,3 +140,17 @@ main {
   font-weight: 700;
   line-height: 16px;
 }
+.benefit-content-Lato-fw-500-fs-14 {
+  font-family: var(--font-lato);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+.benefit-title-Lato-fw-800-fs-32 {
+  font-family: var(--font-lato);
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 40px;
+}

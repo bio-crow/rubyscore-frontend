@@ -28,7 +28,7 @@ const ThirdlyButton = styled(Button)(({ theme }: { theme: CustomTheme | any }) =
       fontSize: '16px',
       fontWeight: '700',
       lineHeight: '24px',
-      width: '134px',
+      width: 'fit-content',
       '&.MuiButton-fullWidth': {
         width: '100%',
       },
@@ -39,7 +39,7 @@ const ThirdlyButton = styled(Button)(({ theme }: { theme: CustomTheme | any }) =
       fontSize: '14px',
       fontWeight: '700',
       lineHeight: '24px',
-      width: '97px',
+      width: 'fit-content',
       '&.MuiButton-fullWidth': {
         width: '100%',
       },
@@ -50,7 +50,7 @@ const ThirdlyButton = styled(Button)(({ theme }: { theme: CustomTheme | any }) =
       fontSize: '10px',
       fontWeight: '500',
       lineHeight: '16px',
-      width: '62px',
+      width: 'fit-content',
       '&.MuiButton-fullWidth': {
         width: '100%',
       },

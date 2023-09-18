@@ -8,9 +8,14 @@ const CustomInput = styled(TextField)(({ theme }: { theme: CustomTheme | any }) 
       '.MuiOutlinedInput-root': {
         background: theme.palette.white10,
         border: `none`,
+        fontSize: '16px',
+        fontStyle: 'normal',
+        fontWeight: '700',
+        lineHeight: '23px',
         borderRadius: '10px',
         input: {
           borderRadius: '10px',
+          padding: '12px 24px 12px 24px',
           border: `1px solid ${theme.palette.white10}`,
           '&:hover': {
             border: `1px solid ${theme.palette.white50}`,
