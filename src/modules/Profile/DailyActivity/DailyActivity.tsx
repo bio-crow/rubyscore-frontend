@@ -49,7 +49,7 @@ const DailyActivity = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          gap: '20px',
+          gap: '5px',
         }}
       >
         <Box className='H1-Lato-fw-700-fs-32' color={theme.palette.powderWhite}>

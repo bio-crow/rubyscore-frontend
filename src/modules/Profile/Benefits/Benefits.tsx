@@ -28,7 +28,7 @@ const Benefits = () => {
         padding: '40px 32px',
         position: 'relative',
         overflow: 'hidden',
-        zIndex: 1,
+        zIndex: 5,
       }}
     >
       <Box

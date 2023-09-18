@@ -11,12 +11,24 @@ export const ColorModeContext = React.createContext({
 });
 
 export default function ThemeRegistry({ children }: { children: React.ReactNode }) {
-  const [mode, setMode] = React.useState<PaletteMode>('dark');
+  const [mode, setMode] = React.useState<PaletteMode>(() => {
+    if (typeof window !== 'undefined') {
+      const themeMode = localStorage?.getItem('theme_mode');
+      if (themeMode && themeMode === 'light') {
+        return 'light';
+      } else {
+        return 'dark';
+      }
+    }
+    return 'dark';
+  });
   const colorMode = React.useMemo(
     () => ({
-      // The dark mode switch would invoke this method
       toggleColorMode: () => {
-        setMode((prevMode: PaletteMode) => (prevMode === 'light' ? 'dark' : 'light'));
+        setMode((prevMode: PaletteMode) => {
+          localStorage.setItem('theme_mode', prevMode === 'light' ? 'dark' : 'light');
+          return prevMode === 'light' ? 'dark' : 'light';
+        });
       },
     }),
     []

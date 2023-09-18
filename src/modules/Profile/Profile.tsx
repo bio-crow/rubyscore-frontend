@@ -6,6 +6,7 @@ import ClaimProfile from '@/modules/Profile/ClaimProfile/ClaimProfile';
 import Benefits from '@/modules/Profile/Benefits/Benefits';
 import Score from '@/modules/Profile/Score/Score';
 import DailyActivity from '@/modules/Profile/DailyActivity/DailyActivity';
+import ReferralLinks from '@/modules/Profile/ReferralLinks/ReferralLinks';
 
 const Profile = () => {
   const theme = useCustomTheme();
@@ -32,6 +33,7 @@ const Profile = () => {
           <Benefits />
           <Score />
           <DailyActivity />
+          <ReferralLinks />
         </Box>
         <ProfileInfo />
       </Box>

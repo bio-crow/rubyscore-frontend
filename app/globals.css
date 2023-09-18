@@ -153,6 +153,13 @@ main {
   font-weight: 500;
   line-height: 20px;
 }
+.benefit-title-Lato-fw-800-fs-18 {
+  font-family: var(--font-lato);
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 40px;
+}
 .benefit-title-Lato-fw-800-fs-32 {
   font-family: var(--font-lato);
   font-size: 32px;
