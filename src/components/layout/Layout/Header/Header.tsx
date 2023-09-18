@@ -27,7 +27,7 @@ const Header = () => {
   const isMd = useMediaQuery(theme.breakpoints.up('md'));
   return (
     <Box
-      width='100%'
+      width='100vw'
       height='60px'
       display='flex'
       justifyContent='center'

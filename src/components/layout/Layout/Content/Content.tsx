@@ -11,11 +11,12 @@ const Content: FC<Props> = ({ children }) => {
   return (
     <Box
       sx={{
-        width: '100%',
+        width: '100vw',
         display: 'flex',
         gap: '20px',
         flex: 1,
         paddingTop: { xs: '90px', md: '120px' },
+        paddingBottom: { xs: '30px', md: '60px' },
         justifyContent: 'center',
         backgroundColor: theme.palette.backgroundColor,
       }}

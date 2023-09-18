@@ -1,9 +1,10 @@
 import Layout from '@/components/layout/Layout/Layout';
-import { Box, Button, Typography } from '@mui/material';
-import { useCustomTheme } from '../../hooks/useCustomTheme';
+import { Box } from '@mui/material';
+import { useCustomTheme } from '@/hooks/useCustomTheme';
 import ProfileInfo from '@/modules/Profile/ProfileInfo/ProfileInfo';
 import ClaimProfile from '@/modules/Profile/ClaimProfile/ClaimProfile';
 import Benefits from '@/modules/Profile/Benefits/Benefits';
+import Score from '@/modules/Profile/Score/Score';
 
 const Profile = () => {
   const theme = useCustomTheme();
@@ -13,6 +14,7 @@ const Profile = () => {
         sx={{
           display: 'grid',
           gap: '20px',
+          width: '100%',
           gridTemplateColumns: { xs: '1fr', xl: '1fr 333px' },
         }}
       >
@@ -22,10 +24,12 @@ const Profile = () => {
             flexDirection: 'column',
             gap: '56px',
             order: { xs: 2, xl: 1 },
+            overflow: 'hidden',
           }}
         >
           <ClaimProfile />
           <Benefits />
+          <Score />
         </Box>
         <ProfileInfo />
       </Box>

@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "eslint --fix",
-    "prettier": "npx prettier \"{app,public,src}/**/*.tsx\" --write",
+    "prettier": "npx prettier \"{app,public,src}/**/*.ts\" --write",
     "format": "yarn prettier && yarn lint:fix"
   },
   "dependencies": {
@@ -19,6 +19,8 @@
     "@rainbow-me/rainbowkit": "^1.0.11",
     "@rainbow-me/rainbowkit-siwe-next-auth": "^0.3.0",
     "@types/pluralize": "^0.0.30",
+    "@types/swiper": "^6.0.0",
+    "@types/uuid": "^9.0.4",
     "add": "^2.0.6",
     "encoding": "^0.1.13",
     "ethers": "^6.7.1",
@@ -32,6 +34,8 @@
     "react-dom": "18.2.0",
     "siwe": "^2.1.4",
     "styled-components": "^6.0.8",
+    "swiper": "^9.2.4",
+    "uuid": "^9.0.1",
     "viem": "^1.10.9",
     "wagmi": "^1.4.1",
     "yarn": "^1.22.19"

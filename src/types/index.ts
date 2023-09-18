@@ -6,3 +6,9 @@ export interface IQuestCard {
   points: number;
   questTitle: string;
 }
+export interface IScoreNetwork {
+  title: string;
+  icon: string;
+  lvl: number;
+  points: number;
+}
