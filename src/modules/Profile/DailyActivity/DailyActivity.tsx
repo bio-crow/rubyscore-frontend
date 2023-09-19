@@ -1,14 +1,12 @@
 import { Box } from '@mui/system';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import SecondaryButton from '@/components/common/ui/SecondaryButton/SecondaryButton';
-import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { IDailyActivityCard, IScoreNetwork } from '@/types/index';
 import { v4 as uuidv4 } from 'uuid';
-import NetworkCard from '@/modules/Profile/Score/NetworkCard/NetworkCard';
 import DailyActivityCard from '@/modules/Profile/DailyActivity/DailyActivityCard/DailyActivityCard';
 import useMediaQuery from '@mui/material/useMediaQuery';
-
+import 'swiper/css';
 const activities: IDailyActivityCard[] = [
   {
     description: 'Welcome Base Mainnet & Onchain Summer',

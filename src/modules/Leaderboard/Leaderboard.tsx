@@ -4,7 +4,7 @@ import { useCustomTheme } from '@/hooks/useCustomTheme';
 import LeaderboardTab from '@/modules/Leaderboard/LeaderboardTab/LeaderboardTab';
 import { SyntheticEvent, useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import CustomTabs from '@/components/common/ui/CustomTabs/CustomTabs';
+import LeaderboardTabs from '@/components/common/ui/LeaderboardTabs/LeaderboardTabs';
 type TabIndexType = 0 | 1 | 2 | 3 | 4 | 5;
 const panelTabs = [
   {
@@ -32,7 +32,7 @@ const panelTabs = [
     label: 'ZkEvm',
   },
 ];
-const Leaderboard = () => {
+const Dashboard = () => {
   const theme = useCustomTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'));
   const [activeTabIndex, setActiveTabIndex] = useState<TabIndexType>(0);
@@ -56,7 +56,7 @@ const Leaderboard = () => {
           gap: '56px',
         }}
       >
-        <CustomTabs
+        <LeaderboardTabs
           value={activeTabIndex}
           onChange={handleChange}
           variant={isMd ? 'fullWidth' : 'scrollable'}
@@ -64,13 +64,13 @@ const Leaderboard = () => {
           {panelTabs.map(item => (
             <Tab key={item.label} label={item.label} {...a11yProps(item.index)} />
           ))}
-        </CustomTabs>
+        </LeaderboardTabs>
         {leaderboardTabs[activeTabIndex]}
       </Box>
     </Layout>
   );
 };
-export default Leaderboard;
+export default Dashboard;
 
 function a11yProps(index: number) {
   return {

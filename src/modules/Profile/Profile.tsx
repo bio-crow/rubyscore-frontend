@@ -7,7 +7,7 @@ import Benefits from '@/modules/Profile/Benefits/Benefits';
 import Score from '@/modules/Profile/Score/Score';
 import DailyActivity from '@/modules/Profile/DailyActivity/DailyActivity';
 import ReferralLinks from '@/modules/Profile/ReferralLinks/ReferralLinks';
-import MyLevel from '@/modules/Profile/MyLevel/MyLevel';
+import MyLevelSection from '@/components/common/MyLevelSection/MyLevelSection';
 import StreakDays from '@/modules/Profile/StreakDays/StreakDays';
 
 const Profile = () => {
@@ -31,7 +31,7 @@ const Profile = () => {
             overflow: 'hidden',
           }}
         >
-          <MyLevel />
+          <MyLevelSection />
           <ClaimProfile />
           <Benefits />
           <Score />

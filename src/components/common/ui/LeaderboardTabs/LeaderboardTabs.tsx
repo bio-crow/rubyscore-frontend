@@ -2,7 +2,7 @@ import { styled } from '@mui/system';
 import { Tabs } from '@mui/material';
 import { CustomTheme } from '@/theme/index';
 
-const CustomTabs = styled(Tabs)(({ theme }: { theme: CustomTheme | any }) => {
+const LeaderboardTabs = styled(Tabs)(({ theme }: { theme: CustomTheme | any }) => {
   return {
     '.MuiButtonBase-root': {
       borderRadius: '10px 10px 0px 0px',
@@ -27,4 +27,4 @@ const CustomTabs = styled(Tabs)(({ theme }: { theme: CustomTheme | any }) => {
     },
   };
 });
-export default CustomTabs;
+export default LeaderboardTabs;
