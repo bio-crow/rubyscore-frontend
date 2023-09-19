@@ -2,6 +2,7 @@ import { Box } from '@mui/system';
 import { useCustomTheme } from '../../../hooks/useCustomTheme';
 import ThirdlyButton from '@/components/common/ui/ThirdlyButton/ThirdlyButton';
 import Image from 'next/image';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const benefitsConfig = [
   {
@@ -19,6 +20,7 @@ const benefitsConfig = [
 ];
 const Benefits = () => {
   const theme = useCustomTheme();
+  const isSm = useMediaQuery(theme.breakpoints.up('sm'));
   return (
     <Box
       sx={{
@@ -60,7 +62,7 @@ const Benefits = () => {
               <Box color={theme.palette.powderWhite} className='benefit-title-Lato-fw-800-fs-32'>
                 {item.title}
               </Box>
-              <Box color={theme.palette.white10} className='benefit-content-Lato-fw-500-fs-14'>
+              <Box color={theme.palette.white50} className='benefit-content-Lato-fw-500-fs-14'>
                 {item.content}
               </Box>
             </Box>
@@ -70,6 +72,7 @@ const Benefits = () => {
           variant='contained'
           size='large'
           startIcon={<Image src='/asserts/crownBlack.png' alt='icon' height='24' width='24' />}
+          fullWidth={!isSm}
         >
           Upgrade Profile
         </ThirdlyButton>

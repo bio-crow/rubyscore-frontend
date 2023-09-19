@@ -4,6 +4,7 @@ import CustomInput from '@/components/common/ui/CustomInput/CustomInput';
 import PrimaryButton from '@/components/common/ui/PrimaryButton/PrimaryButton';
 import pluralize from 'pluralize';
 import { useState } from 'react';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const namePrefix = [
   {
@@ -29,6 +30,7 @@ const namePrefix = [
 ];
 const ClaimProfile = () => {
   const theme = useCustomTheme();
+  const isSm = useMediaQuery(theme.breakpoints.up('sm'));
   const [activePrefix, setActivePrefix] = useState('.x');
   return (
     <Box
@@ -64,7 +66,7 @@ const ClaimProfile = () => {
           placeholder='Search for your name'
           autoComplete='off'
         />
-        <PrimaryButton variant='contained' size='large'>
+        <PrimaryButton variant='contained' size='large' fullWidth={!isSm}>
           Claim
         </PrimaryButton>
       </Box>

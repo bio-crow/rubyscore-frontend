@@ -7,6 +7,7 @@ import { IDailyActivityCard, IScoreNetwork } from '@/types/index';
 import { v4 as uuidv4 } from 'uuid';
 import NetworkCard from '@/modules/Profile/Score/NetworkCard/NetworkCard';
 import DailyActivityCard from '@/modules/Profile/DailyActivity/DailyActivityCard/DailyActivityCard';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const activities: IDailyActivityCard[] = [
   {
@@ -36,6 +37,7 @@ const activities: IDailyActivityCard[] = [
 ];
 const DailyActivity = () => {
   const theme = useCustomTheme();
+  const isSm = useMediaQuery(theme.breakpoints.up('sm'));
   return (
     <Box
       sx={{
@@ -47,15 +49,16 @@ const DailyActivity = () => {
       <Box
         sx={{
           display: 'flex',
-          alignItems: 'center',
+          alignItems: { xs: 'unset', sm: 'center' },
+          flexDirection: { xs: 'column', sm: 'row' },
           justifyContent: 'space-between',
-          gap: '5px',
+          gap: '20px',
         }}
       >
         <Box className='H1-Lato-fw-700-fs-32' color={theme.palette.powderWhite}>
           Daily activity
         </Box>
-        <SecondaryButton variant='contained' size='large'>
+        <SecondaryButton variant='contained' size='large' fullWidth={!isSm}>
           Claim all
         </SecondaryButton>
       </Box>
