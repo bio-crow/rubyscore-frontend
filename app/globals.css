@@ -107,6 +107,20 @@ main {
   font-weight: 500;
   line-height: 24px;
 }
+.Body-Inter-fw-700-fs-16{
+  font-family: var(--font-inter);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+}
+.Body-Inter-fw-700-fs-18{
+  font-family: var(--font-inter);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 40px;
+}
 .profile-Lato-fw-700-fs-20 {
   font-family: var(--font-lato);
   font-size: 20px;

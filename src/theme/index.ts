@@ -38,6 +38,7 @@ export interface CustomTheme {
       sm: number;
       md: number;
       lg: number;
+      xlg: number;
       xl: number;
     };
     up: Function;
@@ -117,6 +118,7 @@ export const getDesignTokens = (mode: PaletteMode) => ({
       sm: 500,
       md: 767,
       lg: 992,
+      xlg: 1200,
       xl: 1392,
     },
   },
