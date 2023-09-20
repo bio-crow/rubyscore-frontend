@@ -34,19 +34,27 @@ const UserAccount: FC<Props> = ({ navLinks }) => {
   const maskedAddress = address && address.slice(0, 6) + '...' + address.slice(-6);
   return (
     <Box
-      borderRadius='10px'
-      border={`1px solid ${theme.palette.white50}`}
-      bgcolor={theme.palette.backgroundColor}
-      p='0px 16px 0px  16px'
-      height='48px'
-      display='flex'
-      justifyContent='space-between'
-      alignItems='center'
-      width='226px'
+      sx={{
+        borderRadius: '10px',
+        border: `1px solid ${theme.palette.white10}`,
+        background: theme.palette.backgroundColor,
+        padding: '0px 16px 0px  16px',
+        height: '48px',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        gap: '10px',
+        width: { xs: 'unset', sm: '226px' },
+      }}
     >
       <Box display='flex' alignItems='center' gap='5px'>
         <Image src='/asserts/emptyUserIcon.svg' alt='icon' width='32' height='32' />
-        <Box display='flex' flexDirection='column'>
+        <Box
+          sx={{
+            display: { xs: 'none', sm: 'flex' },
+            flexDirection: 'column',
+          }}
+        >
           <Box className='menu-Lato-fw-700-fs-12' color={theme.palette.powderWhite}>
             {maskedAddress}
           </Box>
@@ -75,6 +83,20 @@ const UserAccount: FC<Props> = ({ navLinks }) => {
           'aria-labelledby': 'basic-button',
         }}
       >
+        <Box
+          sx={{
+            display: { xs: 'flex', sm: 'none' },
+            flexDirection: 'column',
+            padding: '6px 16px',
+          }}
+        >
+          <Box className='menu-Lato-fw-700-fs-12' color={theme.palette.powderWhite}>
+            {maskedAddress}
+          </Box>
+          <Box className='menu-Lato-fw-700-fs-12' color={theme.palette.white50}>
+            0 Points
+          </Box>
+        </Box>
         {isLowerLg &&
           navLinks.map((item: any) => (
             <MenuItem key={item.label} onClick={() => router.push(item.route)}>

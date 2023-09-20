@@ -7,7 +7,7 @@ import PrevIcon from '@/components/common/Icons/PrevIcon';
 import NextIcon from '@/components/common/Icons/NextIcon';
 import { v4 as uuidv4 } from 'uuid';
 import { IScoreNetwork } from '@/types/index';
-import NetworkCard from '@/modules/Profile/Score/NetworkCard/NetworkCard';
+import NetworkCard from '@/components/common/sections/ScoreSection/NetworkCard/NetworkCard';
 interface btnProps {
   hasNext?: boolean;
   onClick: Function;
@@ -44,7 +44,27 @@ const networks: IScoreNetwork[] = [
     points: 123456,
   },
 ];
-const Score = () => {
+const breakpointsConfig = {
+  0: {
+    slidesPerView: 1,
+  },
+  500: {
+    slidesPerView: 2,
+  },
+  767: {
+    slidesPerView: 3,
+  },
+  992: {
+    slidesPerView: 4,
+  },
+  1392: {
+    slidesPerView: 4,
+  },
+};
+interface Props {
+  bpConfig?: any;
+}
+const ScoreSection: FC<Props> = ({ bpConfig = breakpointsConfig }) => {
   const theme = useCustomTheme();
   const [swiperRef, setSwiperRef] = useState<any>();
   const [hasNext, setHasNext] = useState(false);
@@ -94,8 +114,12 @@ const Score = () => {
             gap: '16px',
           }}
         >
-          <PrevButton onClick={handlePrevious} hasNext={hasPrev} />
-          <NextButton onClick={handleNext} hasNext={hasNext} />
+          {(hasPrev || hasNext) && (
+            <>
+              <PrevButton onClick={handlePrevious} hasNext={hasPrev} />
+              <NextButton onClick={handleNext} hasNext={hasNext} />
+            </>
+          )}
         </Box>
       </Box>
       <Box>
@@ -106,23 +130,7 @@ const Score = () => {
           slidesPerView={4}
           loop={false}
           spaceBetween={20}
-          breakpoints={{
-            0: {
-              slidesPerView: 1,
-            },
-            500: {
-              slidesPerView: 2,
-            },
-            767: {
-              slidesPerView: 3,
-            },
-            992: {
-              slidesPerView: 4,
-            },
-            1392: {
-              slidesPerView: 4,
-            },
-          }}
+          breakpoints={bpConfig}
         >
           {networks.map((data: IScoreNetwork) => (
             <SwiperSlide key={uuidv4()}>
@@ -134,7 +142,7 @@ const Score = () => {
     </Box>
   );
 };
-export default Score;
+export default ScoreSection;
 
 const PrevButton: FC<btnProps> = ({ hasNext, onClick }) => {
   const theme = useCustomTheme();

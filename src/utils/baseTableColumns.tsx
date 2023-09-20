@@ -26,3 +26,43 @@ export const referralBaseColumns: GridColDef[] = [
     width: 150,
   },
 ];
+export const leaderBoardBaseColumns: GridColDef[] = [
+  {
+    field: 'rank',
+    headerName: 'Rank',
+    sortable: false,
+    width: 150,
+  },
+  {
+    field: 'user',
+    headerName: 'Name',
+    sortable: false,
+    flex: 1,
+    minWidth: 200,
+    renderCell: ReferralUserCell,
+  },
+  {
+    field: 'points',
+    headerName: 'Points',
+    sortable: false,
+    width: 150,
+  },
+  {
+    field: 'lvl',
+    headerName: 'Level',
+    sortable: false,
+    width: 150,
+  },
+  {
+    field: 'activeReferrals',
+    headerName: 'Active Referrals',
+    sortable: false,
+    width: 200,
+  },
+  {
+    field: 'maxSteak',
+    headerName: 'Max Steak',
+    sortable: false,
+    width: 150,
+  },
+];

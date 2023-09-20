@@ -1,4 +1,5 @@
 import DailyActivityCard from '@/modules/Profile/DailyActivity/DailyActivityCard/DailyActivityCard';
+import AchievementCard from '@/modules/Dashboard/DashboardTab/Achievements/AchievementCard/AchievementCard';
 
 export interface IQuestCard {
   net: {
@@ -27,4 +28,21 @@ export interface IReferralTableData {
   userName: string;
   userIcon: string;
   points: number;
+}
+export interface IAchievementCard {
+  currency: string;
+  amount: number;
+  pointsAmount: number;
+  maxAmount: number;
+  maxPoints: number;
+  description: string;
+}
+export interface ILeaderboardData {
+  rank: number;
+  userName: string;
+  userIcon: string;
+  points: number;
+  lvl: number;
+  activeReferrals: number;
+  maxSteak: number;
 }

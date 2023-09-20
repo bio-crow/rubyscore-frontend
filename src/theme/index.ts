@@ -10,6 +10,7 @@ export interface CustomTheme {
     backgroundColor: string;
     lightGreen: string;
     powderWhite: string;
+    primaryGradient: string;
     benefitsGradient: string;
     benefitsGradient2: string;
     btnPrimaryDefault: string;
@@ -58,6 +59,7 @@ export const getDesignTokens = (mode: PaletteMode) => ({
           backgroundColor: '#121317',
           lightGreen: '#92fe9d',
           powderWhite: '#f5f7f3',
+          primaryGradient: 'linear-gradient(90deg, #92FE9D 0%, #00C9FF 100%, #00C9FF 100%)',
           benefitsGradient: 'linear-gradient(90deg, #1C1E25 0%, #0A0C0E 47.61%, #0A0C0E 100%)',
           benefitsGradient2:
             'linear-gradient(0deg, rgba(245, 247, 243, 0.10) 0%, rgba(245, 247, 243, 0.10) 100%)',
@@ -89,6 +91,7 @@ export const getDesignTokens = (mode: PaletteMode) => ({
           backgroundColor: '#FFFFFF',
           lightGreen: '#92fe9d',
           powderWhite: '#333333',
+          primaryGradient: 'linear-gradient(90deg, #92FE9D 0%, #00C9FF 100%, #00C9FF 100%)',
           benefitsGradient: 'linear-gradient(90deg, #1C1E25 0%, #0A0C0E 47.61%, #0A0C0E 100%)',
           benefitsGradient2:
             'linear-gradient(0deg, rgba(245, 247, 243, 0.10) 0%, rgba(245, 247, 243, 0.10) 100%)',

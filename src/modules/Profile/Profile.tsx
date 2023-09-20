@@ -4,10 +4,10 @@ import { useCustomTheme } from '@/hooks/useCustomTheme';
 import ProfileInfo from '@/modules/Profile/ProfileInfo/ProfileInfo';
 import ClaimProfile from '@/modules/Profile/ClaimProfile/ClaimProfile';
 import Benefits from '@/modules/Profile/Benefits/Benefits';
-import Score from '@/modules/Profile/Score/Score';
+import ScoreSection from '@/components/common/sections/ScoreSection/ScoreSection';
 import DailyActivity from '@/modules/Profile/DailyActivity/DailyActivity';
 import ReferralLinks from '@/modules/Profile/ReferralLinks/ReferralLinks';
-import MyLevelSection from '@/components/common/MyLevelSection/MyLevelSection';
+import MyLevelSection from '@/components/common/sections/MyLevelSection/MyLevelSection';
 import StreakDays from '@/modules/Profile/StreakDays/StreakDays';
 
 const Profile = () => {
@@ -34,7 +34,7 @@ const Profile = () => {
           <MyLevelSection />
           <ClaimProfile />
           <Benefits />
-          <Score />
+          <ScoreSection />
           <DailyActivity />
           <StreakDays />
           <ReferralLinks />

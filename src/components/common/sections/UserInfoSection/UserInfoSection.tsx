@@ -3,6 +3,7 @@ import { useCustomTheme } from '@/hooks/useCustomTheme';
 import Image from 'next/image';
 import CopyIcon from '@/components/common/Icons/CopyIcon';
 import { useAccount } from 'wagmi';
+import { copyToClickBoard } from '@/utils/helpers';
 const options = [
   {
     label: 'Points',
@@ -17,7 +18,7 @@ const options = [
     value: 3,
   },
 ];
-const LeaderboardTabInfo = () => {
+const UserInfoSection = () => {
   const theme = useCustomTheme();
   const { address } = useAccount();
   const maskedAddress = address && address.slice(0, 6) + '...' + address.slice(-6);
@@ -71,6 +72,7 @@ const LeaderboardTabInfo = () => {
                 cursor: 'pointer',
                 height: '24px',
               }}
+              onClick={() => copyToClickBoard(address)}
             >
               <CopyIcon fill={theme.palette.white50} />
             </Box>
@@ -162,4 +164,4 @@ const LeaderboardTabInfo = () => {
     </Box>
   );
 };
-export default LeaderboardTabInfo;
+export default UserInfoSection;

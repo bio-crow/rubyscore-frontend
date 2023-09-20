@@ -3,9 +3,11 @@ import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { Box } from '@mui/system';
 import Image from 'next/image';
 import CopyIcon from '@/components/common/Icons/CopyIcon';
+import { copyToClickBoard } from '@/utils/helpers';
 
 export const ReferralUserCell = (params: GridRenderCellParams<any>) => {
   const theme = useCustomTheme();
+
   return (
     <Box
       sx={{
@@ -22,7 +24,15 @@ export const ReferralUserCell = (params: GridRenderCellParams<any>) => {
           height: '24px',
         }}
       >
-        <CopyIcon fill={theme.palette.white50} />
+        <Box
+          height='24px'
+          onClick={e => {
+            e.stopPropagation();
+            copyToClickBoard(params.row.userName);
+          }}
+        >
+          <CopyIcon fill={theme.palette.white50} />
+        </Box>
       </Box>
     </Box>
   );

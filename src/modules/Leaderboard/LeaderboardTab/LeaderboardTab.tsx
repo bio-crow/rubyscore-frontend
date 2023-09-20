@@ -1,5 +1,5 @@
 import { Box } from '@mui/system';
-import LeaderboardTabInfo from '@/modules/Leaderboard/LeaderboardTabInfo/LeaderboardTabInfo';
+import UserInfoSection from '@/components/common/sections/UserInfoSection/UserInfoSection';
 import LeaderboardTabTable from '@/modules/Leaderboard/LeaderboardTabTable/LeaderboardTabTable';
 import { FC } from 'react';
 
@@ -10,7 +10,7 @@ interface Props {
 const LeaderboardTab: FC<Props> = () => {
   return (
     <>
-      <LeaderboardTabInfo />
+      <UserInfoSection />
       <LeaderboardTabTable />
     </>
   );

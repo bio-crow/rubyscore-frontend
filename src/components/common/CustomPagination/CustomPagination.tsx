@@ -1,14 +1,12 @@
-import { Pagination } from '@mui/material';
 import { gridPageCountSelector, gridPageSelector, useGridApiContext } from '@mui/x-data-grid';
+import PrimaryPagination from '@/components/common/ui/PrimaryPagination/PrimaryPagination';
 
 const CustomPagination = () => {
   const apiRef = useGridApiContext();
   const count = gridPageCountSelector(apiRef);
   const page = gridPageSelector(apiRef) + 1;
   return (
-    <Pagination
-      showFirstButton
-      showLastButton
+    <PrimaryPagination
       page={page}
       count={count}
       variant='outlined'
