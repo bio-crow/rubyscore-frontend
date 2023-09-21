@@ -46,3 +46,11 @@ export interface ILeaderboardData {
   activeReferrals: number;
   maxSteak: number;
 }
+export interface INFTCard {
+  image: string;
+  net: {
+    icon: string;
+    title: string;
+  };
+  description: string;
+}

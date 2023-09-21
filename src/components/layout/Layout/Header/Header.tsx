@@ -2,10 +2,11 @@ import { Box } from '@mui/system';
 import UserAccount from '@/components/layout/Layout/Header/UserAccount/UserAccount';
 import Image from 'next/image';
 import ThemeSwitch from '@/components/layout/Layout/Header/ThemeSwith/ThemeSwith';
-import { appRoutes } from '../../../../constants/routes';
+import { appRoutes } from '@/constants/routes';
 import NavLink from '@/components/layout/Layout/Header/NavLink/NavLink';
-import { useCustomTheme } from '../../../../hooks/useCustomTheme';
+import { useCustomTheme } from '@/hooks/useCustomTheme';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useRouter } from 'next/navigation';
 
 const navLinks = [
   {
@@ -24,6 +25,7 @@ const navLinks = [
 
 const Header = () => {
   const theme = useCustomTheme();
+  const router = useRouter();
   const isMd = useMediaQuery(theme.breakpoints.up('md'));
   return (
     <Box
@@ -49,12 +51,14 @@ const Header = () => {
         }}
       >
         <Box flex='1' display='flex' alignItems='center'>
-          <Image
-            width={isMd ? '260' : '32'}
-            height={isMd ? '40' : '32'}
-            src={isMd ? '/asserts/logo.svg' : '/asserts/logoIcon.svg'}
-            alt='logo'
-          />
+          <Box onClick={() => router.push(appRoutes.DASHBOARD)} sx={{ cursor: 'pointer' }}>
+            <Image
+              width={isMd ? '260' : '32'}
+              height={isMd ? '40' : '32'}
+              src={isMd ? '/asserts/logo.svg' : '/asserts/logoIcon.svg'}
+              alt='logo'
+            />
+          </Box>
         </Box>
         <Box
           sx={{
