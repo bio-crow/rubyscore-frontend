@@ -32,6 +32,10 @@ export interface CustomTheme {
     btnThirdlyHover: string;
     btnThirdlyFocus: string;
     btnThirdlyDisabled: string;
+    chartGradientStartColor: string;
+    chartGradientEndColor: string;
+    chartGradientStartOpacity: number;
+    chartGradientEndOpacity: number;
   };
   breakpoints: {
     values: {
@@ -82,6 +86,10 @@ export const getDesignTokens = (mode: PaletteMode) => ({
           btnThirdlyHover: '#F2BD36',
           btnThirdlyFocus: '#F24236',
           btnThirdlyDisabled: '#484C5B',
+          chartGradientStartColor: '#92fe9d',
+          chartGradientEndColor: '#f5f7f3',
+          chartGradientStartOpacity: 0.6,
+          chartGradientEndOpacity: 0,
         }
       : {
           black: '#FFFFFF',
@@ -113,6 +121,10 @@ export const getDesignTokens = (mode: PaletteMode) => ({
           btnThirdlyDefault: 'linear-gradient(94deg, #F24236 0%, #F2BD36 100%)',
           btnThirdlyHover: '#F2BD36',
           btnThirdlyFocus: '#F24236',
+          chartGradientStartColor: '#F24236',
+          chartGradientEndColor: '#f5f7f3',
+          chartGradientStartOpacity: 0.6,
+          chartGradientEndOpacity: 0,
         }),
   },
   breakpoints: {

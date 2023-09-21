@@ -2,8 +2,8 @@ import { Box } from '@mui/system';
 import { FC } from 'react';
 import MyLevelSection from '@/components/common/sections/MyLevelSection/MyLevelSection';
 import MainInfo from '@/modules/Dashboard/DashboardTab/MainInfo/MainInfo';
-import TransactionInfo from '@/modules/Dashboard/DashboardTab/TransactionInfo/TransactionInfo';
 import Achievements from '@/modules/Dashboard/DashboardTab/Achievements/Achievements';
+import Transactions from '@/modules/Dashboard/DashboardTab/Transactions/Transactions';
 
 interface Props {
   title: string;
@@ -20,7 +20,7 @@ const DashboardTab: FC<Props> = () => {
     >
       <MainInfo />
       <MyLevelSection />
-      <TransactionInfo />
+      <Transactions />
       <Achievements />
     </Box>
   );
