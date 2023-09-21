@@ -66,7 +66,6 @@ const AchievementCard: FC<Props> = ({ data }) => {
         <Box
           sx={{
             width: '100%',
-            //  background: 'pink'
           }}
         >
           <CustomLinearProgress variant='determinate' value={progress} />

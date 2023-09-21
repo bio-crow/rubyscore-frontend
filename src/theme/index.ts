@@ -9,6 +9,7 @@ export interface CustomTheme {
     white50: string;
     backgroundColor: string;
     lightGreen: string;
+    lightBlue: string;
     powderWhite: string;
     primaryGradient: string;
     benefitsGradient: string;
@@ -62,6 +63,7 @@ export const getDesignTokens = (mode: PaletteMode) => ({
           white50: '#f5f7f380',
           backgroundColor: '#121317',
           lightGreen: '#92fe9d',
+          lightBlue: '#04CBFD',
           powderWhite: '#f5f7f3',
           primaryGradient: 'linear-gradient(90deg, #92FE9D 0%, #00C9FF 100%, #00C9FF 100%)',
           benefitsGradient: 'linear-gradient(90deg, #1C1E25 0%, #0A0C0E 47.61%, #0A0C0E 100%)',
@@ -98,6 +100,7 @@ export const getDesignTokens = (mode: PaletteMode) => ({
           white50: '#333333',
           backgroundColor: '#FFFFFF',
           lightGreen: '#92fe9d',
+          lightBlue: '#04CBFD',
           powderWhite: '#333333',
           primaryGradient: 'linear-gradient(90deg, #92FE9D 0%, #00C9FF 100%, #00C9FF 100%)',
           benefitsGradient: 'linear-gradient(90deg, #1C1E25 0%, #0A0C0E 47.61%, #0A0C0E 100%)',

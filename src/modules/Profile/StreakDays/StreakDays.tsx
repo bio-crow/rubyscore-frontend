@@ -2,10 +2,29 @@ import { Box } from '@mui/system';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import SecondaryButton from '@/components/common/ui/SecondaryButton/SecondaryButton';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import CustomStepper from '@/modules/Profile/StreakDays/CustomSteper/CustomStepper';
 
+const daySteps = [
+  {
+    day: 5,
+    points: 1,
+  },
+  {
+    day: 10,
+    points: 5,
+  },
+  {
+    day: 15,
+    points: 10,
+  },
+];
 const StreakDays = () => {
   const theme = useCustomTheme();
   const isSm = useMediaQuery(theme.breakpoints.up('sm'));
+  const currentDay = 7;
+  const lastDay = 15;
+  const currentStep = daySteps.find(step => step.day > currentDay);
+  const nextDay = currentStep ? currentStep.day : null;
   return (
     <Box
       sx={{
@@ -13,7 +32,7 @@ const StreakDays = () => {
         flexDirection: 'column',
         padding: '40px 32px',
         borderRadius: '10px',
-        gap: '40px',
+        gap: { xs: '60px', md: '40px' },
         border: `1px solid ${theme.palette.white10}`,
         background: theme.palette.black,
       }}
@@ -47,7 +66,9 @@ const StreakDays = () => {
             }}
             className='Body-Lato-fw-500-fs-18'
           >
-            Till the next achievement: 6 of 10 days
+            {nextDay
+              ? `Till the next achievement: ${currentDay} of ${nextDay} days`
+              : `Max level achieved. Claim it`}
           </Box>
         </Box>
         <SecondaryButton variant='contained' size='large' fullWidth={!isSm}>
@@ -55,7 +76,7 @@ const StreakDays = () => {
         </SecondaryButton>
       </Box>
 
-      <Box bgcolor='pink'>steps</Box>
+      <CustomStepper currentDay={currentDay} maxDay={lastDay} steps={daySteps} />
     </Box>
   );
 };
