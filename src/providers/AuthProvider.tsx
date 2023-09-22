@@ -8,12 +8,14 @@ import GlobalLoader from '@/components/common/GlobalLoader/GlobalLoader';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { ILoginPayload } from '@/core/types';
 import { login } from '@/core/thunk/auth.thunk';
-
+import { useSearchParams } from 'next/navigation';
 interface Props {
   children: ReactNode;
 }
 
 const AuthProvider: FC<Props> = ({ children }) => {
+  const searchParams = useSearchParams();
+  const referralCode = searchParams.get('ref');
   const { address, isConnected, connector } = useAccount();
   const token = useAppSelector(state => state.authState.token);
   const loading = useAppSelector(state => state.authState.loading);
@@ -26,11 +28,14 @@ const AuthProvider: FC<Props> = ({ children }) => {
       signMessage({ message });
     }
     if (signMessageData && isConnected && address) {
-      const data: ILoginPayload = {
+      let data: ILoginPayload = {
         signature: signMessageData,
         message: message,
         wallet: address,
       };
+      if (referralCode) {
+        data = { ...data, referralCode };
+      }
       dispatch(login(data));
     }
     if (!isConnected) {

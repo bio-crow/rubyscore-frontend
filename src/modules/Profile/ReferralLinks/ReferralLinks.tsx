@@ -1,14 +1,16 @@
+'use client';
 import { Box } from '@mui/system';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import SecondaryButton from '@/components/common/ui/SecondaryButton/SecondaryButton';
 import ReferralTable from '@/modules/Profile/ReferralLinks/ReferralTable/ReferralTable';
 import { useAppSelector } from '@/core/store';
 import { copyToClickBoard } from '@/utils/helpers';
+import { appRoutes } from '@/constants/routes';
 const ReferralLinks = () => {
   const theme = useCustomTheme();
-  const referralLink = useAppSelector(state => state.userState.referralLink);
+  const refCode = useAppSelector(state => state.userState.refCode);
   const copyReferralLink = () => {
-    referralLink && copyToClickBoard(referralLink);
+    refCode && copyToClickBoard(`${window.location.origin}${appRoutes.PROFILE}/?ref=${refCode}`);
   };
   return (
     <Box

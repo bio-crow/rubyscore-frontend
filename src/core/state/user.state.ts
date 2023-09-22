@@ -3,13 +3,13 @@ import { getReferrals } from '@/core/thunk/user.thunk';
 
 interface IAuthState {
   referrals: any[];
-  referralLink: string | null;
+  refCode: string | null;
   loading: boolean;
 }
 
 const initialState: IAuthState = {
   referrals: [],
-  referralLink: null,
+  refCode: null,
   loading: false,
 };
 
@@ -25,7 +25,7 @@ export const userSlice = createSlice({
       .addCase(getReferrals.fulfilled, (state, action) => {
         if (action.payload) {
           state.referrals = action.payload.data.result.referrals;
-          state.referralLink = action.payload.data.result.referralLink;
+          state.refCode = action.payload.data.result.refCode;
         }
         state.loading = false;
       });

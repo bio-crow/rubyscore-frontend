@@ -16,6 +16,15 @@ apiPrivateAxios.interceptors.request.use(config => {
 apiPrivateAxios.interceptors.response.use(
   config => config,
   async error => {
+    const originalRequest = error.config;
+    if (error?.response?.status === 401) {
+      /* try {
+        // call refresh thunk
+        return apiPrivateAxios.request(originalRequest)
+      } catch (error) {
+        throw error;
+      }*/
+    }
     // console.log("!!", error);
     throw error;
   }

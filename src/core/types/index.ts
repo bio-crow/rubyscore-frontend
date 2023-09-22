@@ -2,6 +2,7 @@ export interface ILoginPayload {
   signature: string;
   message: string;
   wallet: string;
+  referralCode?: string;
 }
 export interface ILoginResponse {
   result: {
@@ -12,6 +13,6 @@ export interface ILoginResponse {
 export interface IReferralsResponse {
   result: {
     referrals: any[];
-    referralLink: string;
+    refCode: string;
   };
 }
