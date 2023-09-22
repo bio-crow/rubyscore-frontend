@@ -10,6 +10,9 @@ import {
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
 import { polygonMumbai } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
+import { store } from '@/core/store';
+import { Provider } from 'react-redux';
+
 type Props = {
   children: ReactNode;
 };
@@ -42,11 +45,13 @@ const wagmiConfig = createConfig({
 
 const WalletProvider: FC<Props> = ({ children }) => {
   return (
-    <WagmiConfig config={wagmiConfig}>
-      <RainbowKitProvider appInfo={demoAppInfo} chains={chains}>
-        {children}
-      </RainbowKitProvider>
-    </WagmiConfig>
+    <Provider store={store}>
+      <WagmiConfig config={wagmiConfig}>
+        <RainbowKitProvider appInfo={demoAppInfo} chains={chains}>
+          {children}
+        </RainbowKitProvider>
+      </WagmiConfig>
+    </Provider>
   );
 };
 

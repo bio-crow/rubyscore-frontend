@@ -45,6 +45,9 @@
       ],
       "@/constants/*": [
         "src/constants/*"
+      ],
+      "@/core/*": [
+        "src/core/*"
       ]
     },
     "plugins": [

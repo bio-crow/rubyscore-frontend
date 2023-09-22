@@ -5,6 +5,9 @@ import { useSignMessage } from 'wagmi';
 import { useIsMounted } from '@/hooks/useIsMounted';
 import AuthLayout from '@/components/layout/AuthLayout/AuthLayout';
 import GlobalLoader from '@/components/common/GlobalLoader/GlobalLoader';
+import { useAppDispatch, useAppSelector } from '@/core/store';
+import { ILoginPayload } from '@/core/types';
+import { login } from '@/core/thunk/auth.thunk';
 
 interface Props {
   children: ReactNode;
@@ -12,29 +15,32 @@ interface Props {
 
 const AuthProvider: FC<Props> = ({ children }) => {
   const { address, isConnected, connector } = useAccount();
-  const message = 'Check Wallet';
-  const { data: signMessageData, error, isLoading, signMessage, variables } = useSignMessage();
+  const token = useAppSelector(state => state.authState.token);
+  const loading = useAppSelector(state => state.authState.loading);
+  const message = 'check';
+  const { data: signMessageData, error, isLoading, signMessage, variables, reset } = useSignMessage();
   const mounted = useIsMounted();
+  const dispatch = useAppDispatch();
   useEffect(() => {
     if (!signMessageData && isConnected && connector) {
       signMessage({ message });
     }
-    if (signMessageData && isConnected) {
-      const data = {
+    if (signMessageData && isConnected && address) {
+      const data: ILoginPayload = {
         signature: signMessageData,
         message: message,
         wallet: address,
       };
-      // console.log(data);
+      dispatch(login(data));
+    }
+    if (!isConnected) {
+      reset();
     }
   }, [signMessageData, isConnected, connector]);
-  if (!mounted) {
+  if (!mounted || loading || (isConnected && !signMessageData)) {
     return <GlobalLoader />;
   }
-  if (isConnected && !signMessageData) {
-    return <GlobalLoader />;
-  }
-  if (isConnected && signMessageData) {
+  if (isConnected && signMessageData && token) {
     return <>{children}</>;
   }
   return <AuthLayout />;
