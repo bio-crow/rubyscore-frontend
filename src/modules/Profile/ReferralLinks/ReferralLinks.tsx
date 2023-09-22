@@ -2,9 +2,14 @@ import { Box } from '@mui/system';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import SecondaryButton from '@/components/common/ui/SecondaryButton/SecondaryButton';
 import ReferralTable from '@/modules/Profile/ReferralLinks/ReferralTable/ReferralTable';
-
+import { useAppSelector } from '@/core/store';
+import { copyToClickBoard } from '@/utils/helpers';
 const ReferralLinks = () => {
   const theme = useCustomTheme();
+  const referralLink = useAppSelector(state => state.userState.referralLink);
+  const copyReferralLink = () => {
+    referralLink && copyToClickBoard(referralLink);
+  };
   return (
     <Box
       sx={{
@@ -45,7 +50,7 @@ const ReferralLinks = () => {
             Points are only awarded for active users
           </Box>
         </Box>
-        <SecondaryButton variant='outlined' size='large'>
+        <SecondaryButton variant='outlined' size='large' onClick={copyReferralLink}>
           My referral link
         </SecondaryButton>
       </Box>

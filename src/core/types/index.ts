@@ -9,3 +9,9 @@ export interface ILoginResponse {
     isClaimed: boolean;
   };
 }
+export interface IReferralsResponse {
+  result: {
+    referrals: any[];
+    referralLink: string;
+  };
+}

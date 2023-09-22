@@ -32,7 +32,6 @@ const panelTabs = [
 const Dashboard = () => {
   const theme = useCustomTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'));
-  const token = useAppSelector(state => state.authState.token);
   const [activeTabIndex, setActiveTabIndex] = useState<TabIndexType>(0);
   const handleChange = (event: SyntheticEvent, newValue: TabIndexType) => {
     setActiveTabIndex(newValue);

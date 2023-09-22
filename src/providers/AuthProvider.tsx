@@ -17,7 +17,7 @@ const AuthProvider: FC<Props> = ({ children }) => {
   const { address, isConnected, connector } = useAccount();
   const token = useAppSelector(state => state.authState.token);
   const loading = useAppSelector(state => state.authState.loading);
-  const message = 'check';
+  const message = 'Check Wallet';
   const { data: signMessageData, error, isLoading, signMessage, variables, reset } = useSignMessage();
   const mounted = useIsMounted();
   const dispatch = useAppDispatch();

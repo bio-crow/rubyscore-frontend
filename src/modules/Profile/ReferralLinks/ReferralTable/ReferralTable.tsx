@@ -1,11 +1,18 @@
+'use client';
 import { Box } from '@mui/system';
 import { mokeTableData } from '@/modules/Profile/ReferralLinks/mokeTableData';
 import { referralBaseColumns } from '@/utils/baseTableColumns';
 import CustomPagination from '@/components/common/CustomPagination/CustomPagination';
 import PrimaryTable from '@/components/common/ui/PrimaryTable/PrimaryTable';
-import fa from '@walletconnect/legacy-modal/dist/cjs/browser/languages/fa';
+import { useAppDispatch } from '@/core/store';
+import { useEffect } from 'react';
+import { getReferrals } from '@/core/thunk/user.thunk';
 
 const ReferralTable = () => {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getReferrals());
+  }, []);
   return (
     <Box>
       <PrimaryTable
