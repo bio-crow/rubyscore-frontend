@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getReferrals } from '@/core/thunk/user.thunk';
+import { IReferral } from '@/types/index';
 
 interface IAuthState {
-  referrals: any[];
+  referrals: IReferral[];
   refCode: string | null;
   loading: boolean;
 }

@@ -6,9 +6,11 @@ import ReferralTable from '@/modules/Profile/ReferralLinks/ReferralTable/Referra
 import { useAppSelector } from '@/core/store';
 import { copyToClickBoard } from '@/utils/helpers';
 import { appRoutes } from '@/constants/routes';
+
 const ReferralLinks = () => {
   const theme = useCustomTheme();
   const refCode = useAppSelector(state => state.userState.refCode);
+  const referrals = useAppSelector(state => state.userState.referrals);
   const copyReferralLink = () => {
     refCode && copyToClickBoard(`${window.location.origin}${appRoutes.PROFILE}/?ref=${refCode}`);
   };
@@ -56,7 +58,7 @@ const ReferralLinks = () => {
           My referral link
         </SecondaryButton>
       </Box>
-      <ReferralTable />
+      <ReferralTable data={referrals} />
     </Box>
   );
 };

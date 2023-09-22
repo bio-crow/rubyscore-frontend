@@ -23,11 +23,10 @@ export interface IDailyActivityCard {
   };
   badges: string[];
 }
-export interface IReferralTableData {
-  rank: number;
-  userName: string;
-  userIcon: string;
-  points: number;
+export interface IReferral {
+  wallet: string;
+  name: string;
+  score: number;
 }
 export interface IAchievementCard {
   currency: string;
