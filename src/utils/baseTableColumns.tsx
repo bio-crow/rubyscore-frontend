@@ -10,7 +10,6 @@ export const referralBaseColumns: GridColDef[] = [
     headerName: 'Rank',
     sortable: false,
     width: 150,
-    renderCell: params => 1,
   },
   {
     field: 'name',

@@ -12,6 +12,9 @@ interface Props {
 }
 const ReferralTable: FC<Props> = ({ data }) => {
   const dispatch = useAppDispatch();
+  const prepareData = data.map((item, index) => {
+    return { ...item, rank: index + 1 };
+  });
   useEffect(() => {
     dispatch(getReferrals());
   }, []);
@@ -19,7 +22,7 @@ const ReferralTable: FC<Props> = ({ data }) => {
     <Box>
       <PrimaryTable
         getRowId={params => params.wallet}
-        rows={data}
+        rows={prepareData}
         columns={referralBaseColumns}
         slots={{
           pagination: CustomPagination,
