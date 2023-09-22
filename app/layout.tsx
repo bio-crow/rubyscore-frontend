@@ -6,6 +6,7 @@ import ThemeRegistry from '@/theme/ThemeRegistry';
 import { ReactNode } from 'react';
 import WalletProvider from '@/providers/WalletProvider';
 import ToastieContainer from '@/components/common/ToastieContainer/ToastieContainer';
+import AuthProvider from '@/providers/AuthProvider';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const lato = Lato({ subsets: ['latin'], variable: '--font-lato', weight: ['100', '300', '400', '700'] });
@@ -19,7 +20,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang='en'>
       <ThemeRegistry>
         <body className={`${inter.variable} ${lato.variable}`}>
-          <WalletProvider>{children}</WalletProvider>
+          <WalletProvider>
+            <AuthProvider>{children}</AuthProvider>
+          </WalletProvider>
           <ToastieContainer />
         </body>
       </ThemeRegistry>

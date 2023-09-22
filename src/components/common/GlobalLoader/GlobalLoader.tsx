@@ -8,7 +8,8 @@ const GlobalLoader = () => {
   return (
     <Box
       display='flex'
-      width='100%'
+      width='100vw'
+      height='100vh'
       alignItems='center'
       justifyContent='center'
       bgcolor={theme.palette.backgroundColor}
