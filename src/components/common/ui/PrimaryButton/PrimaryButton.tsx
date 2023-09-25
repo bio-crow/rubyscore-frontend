@@ -1,8 +1,8 @@
 import { styled } from '@mui/system';
-import { Button } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
 import { CustomTheme } from '@/theme/index';
 
-const PrimaryButton = styled(Button)(({ theme }: { theme: CustomTheme | any }) => {
+const PrimaryButton = styled(LoadingButton)(({ theme }: { theme: CustomTheme | any }) => {
   return {
     '&.MuiButton-contained': {
       background: theme.palette.btnPrimaryDefault,

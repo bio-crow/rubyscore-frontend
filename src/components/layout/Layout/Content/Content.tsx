@@ -23,8 +23,10 @@ const Content: FC<Props> = ({ children }) => {
     >
       <Box
         sx={{
+          display: 'flex',
           maxWidth: '1392px',
           width: '100%',
+          flex: 1,
           padding: { xs: '0px 15px 0px 15px', xl: 0 },
         }}
       >

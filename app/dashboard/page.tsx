@@ -1,9 +1,9 @@
 'use client';
-import Leaderboard from '@/modules/Leaderboard/Leaderboard';
+import Dashboard from '@/modules/Dashboard/Dashboard';
 export default function Page() {
   return (
     <main>
-      <Leaderboard />
+      <Dashboard />
     </main>
   );
 }

@@ -34,15 +34,15 @@ export const leaderBoardBaseColumns: GridColDef[] = [
     width: 150,
   },
   {
-    field: 'user',
+    field: 'name',
     headerName: 'Name',
     sortable: false,
     flex: 1,
-    minWidth: 200,
+    minWidth: 250,
     renderCell: ReferralUserCell,
   },
   {
-    field: 'points',
+    field: 'score',
     headerName: 'Points',
     sortable: false,
     width: 150,

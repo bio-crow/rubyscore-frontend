@@ -7,6 +7,9 @@ import NavLink from '@/components/layout/Layout/Header/NavLink/NavLink';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useRouter } from 'next/navigation';
+import { useAppSelector } from '@/core/store';
+import CustomConnectButton from '@/components/common/CustomConnectButton/CustomConnectButton';
+import PrimaryButton from '@/components/common/ui/PrimaryButton/PrimaryButton';
 
 const navLinks = [
   {
@@ -26,7 +29,9 @@ const navLinks = [
 const Header = () => {
   const theme = useCustomTheme();
   const router = useRouter();
-  const isMd = useMediaQuery(theme.breakpoints.up('md'));
+  const isLowerLg = useMediaQuery(theme.breakpoints.down('lg'));
+  const loading = useAppSelector(state => state.authState.loading);
+  const isAuth = useAppSelector(state => state.authState.isAuth);
   return (
     <Box
       width='100%'
@@ -53,9 +58,9 @@ const Header = () => {
         <Box flex='1' display='flex' alignItems='center'>
           <Box onClick={() => router.push(appRoutes.DASHBOARD)} sx={{ cursor: 'pointer' }}>
             <Image
-              width={isMd ? '260' : '32'}
-              height={isMd ? '40' : '32'}
-              src={isMd ? '/asserts/logo.svg' : '/asserts/logoIcon.svg'}
+              width={!isLowerLg ? '260' : '32'}
+              height={!isLowerLg ? '40' : '32'}
+              src={!isLowerLg ? '/asserts/logo.svg' : '/asserts/logoIcon.svg'}
               alt='logo'
             />
           </Box>
@@ -72,7 +77,17 @@ const Header = () => {
           ))}
         </Box>
         <ThemeSwitch />
-        <UserAccount navLinks={navLinks} />
+        {isAuth || isLowerLg ? (
+          <UserAccount navLinks={navLinks} />
+        ) : (
+          <CustomConnectButton
+            Trigger={
+              <PrimaryButton variant='contained' size='medium' loading={loading}>
+                Connect Wallet
+              </PrimaryButton>
+            }
+          />
+        )}
       </Box>
     </Box>
   );

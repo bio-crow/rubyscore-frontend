@@ -9,12 +9,18 @@ import { useAccount, useDisconnect } from 'wagmi';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useRouter } from 'next/navigation';
+import { useAppSelector } from '@/core/store';
+import CustomConnectButton from '@/components/common/CustomConnectButton/CustomConnectButton';
+import PrimaryButton from '@/components/common/ui/PrimaryButton/PrimaryButton';
+
 interface Props {
   navLinks: { label: string; route: string }[];
 }
+
 const UserAccount: FC<Props> = ({ navLinks }) => {
   const theme = useCustomTheme();
   const isLowerLg = useMediaQuery(theme.breakpoints.down('lg'));
+  const loading = useAppSelector(state => state.authState.loading);
   const router = useRouter();
   const { address } = useAccount();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -31,6 +37,7 @@ const UserAccount: FC<Props> = ({ navLinks }) => {
     disconnect();
   };
   const maskedAddress = address && address.slice(0, 6) + '...' + address.slice(-6);
+  const isAuth = useAppSelector(state => state.authState.isAuth);
   return (
     <Box
       sx={{
@@ -82,20 +89,38 @@ const UserAccount: FC<Props> = ({ navLinks }) => {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <Box
-          sx={{
-            display: { xs: 'flex', sm: 'none' },
-            flexDirection: 'column',
-            padding: '6px 16px',
-          }}
-        >
-          <Box className='menu-Lato-fw-700-fs-12' color={theme.palette.powderWhite}>
-            {maskedAddress}
+        {isAuth ? (
+          <Box
+            sx={{
+              display: { xs: 'flex', sm: 'none' },
+              flexDirection: 'column',
+              padding: '6px 16px',
+            }}
+          >
+            <Box className='menu-Lato-fw-700-fs-12' color={theme.palette.powderWhite}>
+              {maskedAddress}
+            </Box>
+            <Box className='menu-Lato-fw-700-fs-12' color={theme.palette.white50}>
+              0 Points
+            </Box>
           </Box>
-          <Box className='menu-Lato-fw-700-fs-12' color={theme.palette.white50}>
-            0 Points
+        ) : (
+          <Box
+            sx={{
+              display: { xs: 'flex', sm: 'none' },
+              flexDirection: 'column',
+              padding: '6px 16px',
+            }}
+          >
+            <CustomConnectButton
+              Trigger={
+                <PrimaryButton variant='contained' size='small' loading={loading}>
+                  Connect Wallet
+                </PrimaryButton>
+              }
+            />{' '}
           </Box>
-        </Box>
+        )}
         {isLowerLg &&
           navLinks.map((item: any) => (
             <MenuItem key={item.label} onClick={() => router.push(item.route)}>

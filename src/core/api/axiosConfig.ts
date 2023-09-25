@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { store } from '@/core/store';
+import { refreshToken } from '@/core/thunk/auth.thunk';
+
 const config = {
   withCredentials: true,
   baseURL: typeof window !== 'undefined' ? `${window.location.origin}/api` : '',
@@ -18,14 +20,13 @@ apiPrivateAxios.interceptors.response.use(
   async error => {
     const originalRequest = error.config;
     if (error?.response?.status === 401) {
-      /* try {
-        // call refresh thunk
-        return apiPrivateAxios.request(originalRequest)
+      try {
+        store.dispatch(refreshToken());
+        return apiPrivateAxios.request(originalRequest);
       } catch (error) {
         throw error;
-      }*/
+      }
     }
-    // console.log("!!", error);
     throw error;
   }
 );

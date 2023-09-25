@@ -36,7 +36,13 @@ main {
   font-weight: 700;
   line-height: 40px;
 }
-
+.Body-Lato-fw-900-fs-64 {
+  font-family: var(--font-lato);
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 72px;
+}
 .Body-Lato-fw-800-fs-24 {
   font-family: var(--font-lato);
   font-size: 24px;
@@ -52,7 +58,13 @@ main {
   font-weight: 600;
   line-height: 32px;
 }
-
+.Body-Lato-fw-500-fs-24 {
+  font-family: var(--font-lato);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px;
+}
 .Body-Lato-fw-700-fs-18 {
   font-family: var(--font-lato);
   font-size: 18px;

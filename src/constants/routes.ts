@@ -1,5 +1,6 @@
 export const appRoutes = {
-  DASHBOARD: '/',
+  DASHBOARD: '/dashboard',
+  LANDING: '/',
   LEADERBOARD: '/leaderboard',
   LEADERBOARD_USER: '/leaderboard/user',
   PROFILE: '/profile',

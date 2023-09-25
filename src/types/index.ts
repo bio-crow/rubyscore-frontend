@@ -37,13 +37,9 @@ export interface IAchievementCard {
   description: string;
 }
 export interface ILeaderboardData {
-  rank: number;
-  userName: string;
-  userIcon: string;
-  points: number;
-  lvl: number;
-  activeReferrals: number;
-  maxSteak: number;
+  wallet: string;
+  name: string;
+  score: number;
 }
 export interface INFTCard {
   image: string;

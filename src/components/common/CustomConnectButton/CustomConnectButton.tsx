@@ -1,9 +1,11 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { Button } from '@mui/material';
-import PrimaryButton from '@/components/common/ui/PrimaryButton/PrimaryButton';
 import { Box } from '@mui/system';
-
-const CustomConnectButton = () => {
+import { cloneElement, FC, ReactNode } from 'react';
+import { useAppSelector } from '@/core/store';
+interface Props {
+  Trigger: any;
+}
+const CustomConnectButton: FC<Props> = ({ Trigger }) => {
   return (
     <ConnectButton.Custom>
       {({
@@ -15,49 +17,27 @@ const CustomConnectButton = () => {
         authenticationStatus,
         mounted,
       }) => {
-        // Note: If your app doesn't use authentication, you
-        // can remove all 'authenticationStatus' checks
         const ready = mounted && authenticationStatus !== 'loading';
         const connected =
           ready && account && chain && (!authenticationStatus || authenticationStatus === 'authenticated');
-
+        const ConnectBtn = cloneElement(Trigger, { onClick: openConnectModal }, Trigger.props.children);
+        const WrongBtn = cloneElement(Trigger, { onClick: openChainModal }, Trigger.props.children);
         return (
           <Box
-            width='250px'
             {...(!ready && {
               'aria-hidden': true,
             })}
           >
             {(() => {
               if (!connected) {
-                return (
-                  <PrimaryButton
-                    variant='contained'
-                    size='large'
-                    onClick={openConnectModal}
-                    type='button'
-                    fullWidth
-                  >
-                    Connect Wallet
-                  </PrimaryButton>
-                );
+                return <>{ConnectBtn}</>;
               }
 
               if (chain.unsupported) {
-                return (
-                  <PrimaryButton
-                    variant='contained'
-                    size='large'
-                    onClick={openChainModal}
-                    type='button'
-                    fullWidth
-                  >
-                    Wrong network
-                  </PrimaryButton>
-                );
+                return <>{WrongBtn}</>;
               }
 
-              return null;
+              return <>{ConnectBtn}</>;
             })()}
           </Box>
         );

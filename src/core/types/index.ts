@@ -16,3 +16,28 @@ export interface IReferralsResponse {
     refCode: string;
   };
 }
+export interface ILoginResponse {
+  result: {
+    token: string;
+    isClaimed: boolean;
+  };
+}
+export interface IRefreshResponse {
+  result: {
+    token: string;
+  };
+}
+export interface ILeaderBoardResponse {
+  result: {
+    leaderboard: {
+      wallet: string;
+      name: string;
+      score: number;
+    }[];
+    user: {
+      wallet: string;
+      name: string;
+      score: number;
+    };
+  };
+}

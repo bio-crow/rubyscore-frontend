@@ -7,6 +7,7 @@ import { useAppDispatch } from '@/core/store';
 import { FC, useEffect } from 'react';
 import { getReferrals } from '@/core/thunk/user.thunk';
 import { IReferral } from '@/types/index';
+import CustomNoRows from '@/components/common/CustomNoRows/CustomNoRows';
 interface Props {
   data: IReferral[];
 }
@@ -26,6 +27,7 @@ const ReferralTable: FC<Props> = ({ data }) => {
         columns={referralBaseColumns}
         slots={{
           pagination: CustomPagination,
+          noRowsOverlay: CustomNoRows,
         }}
         initialState={{
           pagination: {

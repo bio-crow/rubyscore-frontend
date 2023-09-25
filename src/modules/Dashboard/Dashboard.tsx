@@ -5,7 +5,6 @@ import { SyntheticEvent, useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import DashboardTab from '@/modules/Dashboard/DashboardTab/DashboardTab';
 import DashboardTabs from '@/components/common/ui/DashboardTabs/DashboardTabs';
-import { useAppSelector } from '@/core/store';
 type TabIndexType = 0 | 1 | 2 | 3 | 4;
 const panelTabs = [
   {
@@ -51,6 +50,7 @@ const Dashboard = () => {
           display: 'flex',
           flexDirection: 'column',
           gap: '56px',
+          width: '100%',
         }}
       >
         <DashboardTabs
