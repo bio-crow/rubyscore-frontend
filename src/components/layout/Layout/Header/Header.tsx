@@ -56,7 +56,7 @@ const Header = () => {
         }}
       >
         <Box flex='1' display='flex' alignItems='center'>
-          <Box onClick={() => router.push(appRoutes.DASHBOARD)} sx={{ cursor: 'pointer' }}>
+          <Box onClick={() => router.push(appRoutes.LANDING)} sx={{ cursor: 'pointer' }}>
             <Image
               width={!isLowerLg ? '260' : '32'}
               height={!isLowerLg ? '40' : '32'}

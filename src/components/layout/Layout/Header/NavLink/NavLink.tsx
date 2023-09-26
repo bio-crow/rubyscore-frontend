@@ -15,7 +15,12 @@ const NavLink: FC<Props> = ({ route, label }) => {
   const pathname = usePathname();
   return (
     <Link style={{ textDecoration: 'none' }} href={route}>
-      <Box color={pathname === route ? theme.palette.lightGreen : theme.palette.white50}>{label}</Box>
+      <Box
+        color={pathname === route ? theme.palette.lightGreen : theme.palette.white50}
+        className='menu-Lato-fw-700-fs-14'
+      >
+        {label}
+      </Box>
     </Link>
   );
 };

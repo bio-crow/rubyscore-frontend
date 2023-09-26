@@ -3,6 +3,7 @@ import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YA
 import { mokeChartData } from '@/modules/Dashboard/DashboardTab/Transactions/TransactionChart/mokeChartData';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { Box } from '@mui/system';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 interface Props {
   index: number;
@@ -10,9 +11,10 @@ interface Props {
 
 const TransactionChart: FC<Props> = ({ index }) => {
   const theme = useCustomTheme();
-
+  const isLg = useMediaQuery(theme.breakpoints.up('lg'));
+  const isMd = useMediaQuery(theme.breakpoints.up('md'));
   return (
-    <ResponsiveContainer width='100%' aspect={11.0 / 4.0}>
+    <ResponsiveContainer width='100%' aspect={isMd ? 11.0 / 4.0 : 2.0 / 1.1}>
       <AreaChart
         data={mokeChartData}
         margin={{
@@ -37,12 +39,12 @@ const TransactionChart: FC<Props> = ({ index }) => {
           </linearGradient>
         </defs>
         <XAxis
-          dataKey='name'
+          dataKey={isLg ? 'name' : 'shortName'}
           stroke={theme.palette.gray}
           axisLine={{ display: 'none' }}
           tick={{
             fill: theme.palette.powderWhite,
-            fontSize: '14px',
+            fontSize: isLg ? '14px' : '11px',
             fontFamily: 'var(--font-lato)',
             fontWeight: 500,
           }}
@@ -55,7 +57,7 @@ const TransactionChart: FC<Props> = ({ index }) => {
           axisLine={{ display: 'none' }}
           tick={{
             fill: theme.palette.white50,
-            fontSize: '14px',
+            fontSize: isLg ? '14px' : '11px',
             fontFamily: 'var(--font-lato)',
             fontWeight: 500,
           }}

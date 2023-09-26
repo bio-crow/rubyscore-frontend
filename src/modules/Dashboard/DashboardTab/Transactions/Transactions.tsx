@@ -62,10 +62,10 @@ const Transactions = () => {
           display: 'flex',
           flexDirection: 'column',
           gap: '40px',
-          padding: '20px',
-          borderRadius: '10px',
-          border: `1px solid ${theme.palette.white10}`,
-          background: theme.palette.black,
+          padding: { xs: '0px', lg: '20px' },
+          borderRadius: { xs: 'unset', lg: '10px' },
+          border: { xs: 'none', lg: `1px solid ${theme.palette.white10}` },
+          background: { xs: 'transparent', lg: theme.palette.black },
         }}
       >
         <ChartTabs

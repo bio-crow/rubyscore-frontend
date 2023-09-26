@@ -2,9 +2,12 @@ import { Box } from '@mui/system';
 import Layout from '@/components/layout/Layout/Layout';
 import PrimaryButton from '@/components/common/ui/PrimaryButton/PrimaryButton';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
+import { useRouter } from 'next/navigation';
+import { appRoutes } from '@/constants/routes';
 
 const Landing = () => {
   const theme = useCustomTheme();
+  const router = useRouter();
   return (
     <Layout>
       <Box
@@ -49,7 +52,7 @@ const Landing = () => {
             Provide users with insights into their engagement and value on Web3 and explore new opportunities
           </Box>
           <Box>
-            <PrimaryButton variant='contained' size='large'>
+            <PrimaryButton variant='contained' size='large' onClick={() => router.push(appRoutes.DASHBOARD)}>
               Launch App
             </PrimaryButton>
           </Box>
