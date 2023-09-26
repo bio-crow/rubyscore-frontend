@@ -127,7 +127,7 @@ const UserAccount: FC<Props> = ({ navLinks }) => {
               {item.label}
             </MenuItem>
           ))}
-        <MenuItem onClick={logout}>Logout</MenuItem>
+        {isAuth && <MenuItem onClick={logout}>Logout</MenuItem>}
       </Menu>
     </Box>
   );

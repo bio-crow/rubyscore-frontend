@@ -15,6 +15,13 @@ export interface IScoreNetwork {
   lvl: number;
   points: number;
 }
+export interface ILevelCard {
+  lvl: number;
+  icon: string;
+  points: number;
+  isAvailable: boolean;
+  isClaimed: boolean;
+}
 export interface IDailyActivityCard {
   description: string;
   net: {

@@ -11,7 +11,23 @@ import MyLevelSection from '@/components/common/sections/MyLevelSection/MyLevelS
 import StreakDays from '@/modules/Profile/StreakDays/StreakDays';
 import { useAppSelector } from '@/core/store';
 import PrivatePageLayout from '@/components/layout/PrivatePageLayout/PrivatePageLayout';
-
+const breakpointsConfig = {
+  0: {
+    slidesPerView: 1.4,
+  },
+  500: {
+    slidesPerView: 2.4,
+  },
+  767: {
+    slidesPerView: 3.4,
+  },
+  992: {
+    slidesPerView: 4.4,
+  },
+  1392: {
+    slidesPerView: 4.4,
+  },
+};
 const Profile = () => {
   const theme = useCustomTheme();
   const isAuth = useAppSelector(state => state.authState.isAuth);
@@ -35,7 +51,7 @@ const Profile = () => {
               overflow: 'hidden',
             }}
           >
-            <MyLevelSection />
+            <MyLevelSection breakpoints={breakpointsConfig} initSlidePerPage={4.4} />
             <ClaimProfile />
             <Benefits />
             <ScoreSection />
