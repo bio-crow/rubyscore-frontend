@@ -1,6 +1,15 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchLeaderboard } from '@/core/api/leaderboard.api';
+import { fetchPrivateLeaderboard, fetchPublicLeaderboard } from '@/core/api/leaderboard.api';
 
-export const getLeaderboardData = createAsyncThunk('leaderboardSlice/getLeaderBoardData', async () => {
-  return await fetchLeaderboard();
-});
+export const getPublicLeaderboardData = createAsyncThunk(
+  'leaderboardSlice/getPublicLeaderBoardData',
+  async (projectName: string) => {
+    return await fetchPublicLeaderboard(projectName);
+  }
+);
+export const getPrivateLeaderboardData = createAsyncThunk(
+  'leaderboardSlice/getPrivateLeaderBoardData',
+  async (projectName: string) => {
+    return await fetchPrivateLeaderboard(projectName);
+  }
+);

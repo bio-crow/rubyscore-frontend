@@ -47,6 +47,13 @@ export interface ILeaderboardData {
   wallet: string;
   name: string;
   score: number;
+  rank?: number;
+}
+export interface ILeaderboardUser {
+  position: number;
+  wallet: string;
+  name: string;
+  score: number;
 }
 export interface INFTCard {
   image: string;

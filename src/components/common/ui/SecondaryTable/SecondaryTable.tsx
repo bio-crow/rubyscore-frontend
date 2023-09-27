@@ -40,14 +40,16 @@ const SecondaryTable = styled(DataGrid)(({ theme }: { theme: CustomTheme | any }
     },
     '.MuiDataGrid-virtualScroller': {
       background: theme.palette.black,
+      padding: '0',
     },
     '.MuiDataGrid-footerContainer': {
-      border: 'none',
-      paddingTop: '20px',
+      display: 'none',
     },
     '.MuiDataGrid-main': {
-      border: `1px solid ${theme.palette.white10}`,
       borderRadius: '10px',
+    },
+    '.active-user-highlight': {
+      background: theme.palette.gray,
     },
   };
 });

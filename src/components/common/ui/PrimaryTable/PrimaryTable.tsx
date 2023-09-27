@@ -43,7 +43,6 @@ const PrimaryTable = styled(DataGrid)(({ theme }: { theme: CustomTheme | any }) 
       paddingTop: '20px',
     },
     '.MuiDataGrid-main': {
-      border: `1px solid ${theme.palette.white10}`,
       borderRadius: '10px',
     },
   };

@@ -1,3 +1,5 @@
+import { ILeaderboardData, ILeaderboardUser } from '@/types/index';
+
 export interface ILoginPayload {
   signature: string;
   message: string;
@@ -29,15 +31,7 @@ export interface IRefreshResponse {
 }
 export interface ILeaderBoardResponse {
   result: {
-    leaderboard: {
-      wallet: string;
-      name: string;
-      score: number;
-    }[];
-    user: {
-      wallet: string;
-      name: string;
-      score: number;
-    };
+    leaderboard: ILeaderboardData[];
+    user: ILeaderboardUser;
   };
 }

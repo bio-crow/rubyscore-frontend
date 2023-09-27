@@ -6,55 +6,52 @@ import { SyntheticEvent, useEffect, useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import LeaderboardTabs from '@/components/common/ui/LeaderboardTabs/LeaderboardTabs';
 import { useAppDispatch, useAppSelector } from '@/core/store';
-import { getReferrals } from '@/core/thunk/user.thunk';
-import { getLeaderboardData } from '@/core/thunk/leaderboard.thunk';
-type TabIndexType = 0 | 1 | 2 | 3 | 4 | 5;
-const panelTabs = [
+import { getPrivateLeaderboardData, getPublicLeaderboardData } from '@/core/thunk/leaderboard.thunk';
+type TabIndexType = 'rubyscore' | 'zk_era' | 'linea' | 'base' | 'zora' | 'zk_evm';
+const panelTabs: { index: TabIndexType; label: string }[] = [
   {
-    index: 0,
+    index: 'rubyscore',
     label: 'RubyScore',
   },
   {
-    index: 1,
+    index: 'zk_era',
     label: 'ZkSync',
   },
   {
-    index: 2,
+    index: 'linea',
     label: 'Linea',
   },
   {
-    index: 3,
+    index: 'base',
     label: 'Base',
   },
   {
-    index: 4,
+    index: 'zora',
     label: 'Zora',
   },
   {
-    index: 5,
+    index: 'zk_evm',
     label: 'ZkEvm',
   },
 ];
 const Dashboard = () => {
   const theme = useCustomTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'));
+  const isAuth = useAppSelector(state => state.authState.isAuth);
   const dispatch = useAppDispatch();
-  const [activeTabIndex, setActiveTabIndex] = useState<TabIndexType>(0);
+  const [activeTab, setActiveTab] = useState<{ index: TabIndexType; label: string }>(panelTabs[0]);
   const leaderboard = useAppSelector(state => state.leaderboardState.leaderboard);
   const handleChange = (event: SyntheticEvent, newValue: TabIndexType) => {
-    setActiveTabIndex(newValue);
-  };
-  const leaderboardTabs = {
-    0: <LeaderboardTab title='RubyScore' tableData={leaderboard} />,
-    1: <LeaderboardTab title='ZkSync' tableData={leaderboard} />,
-    2: <LeaderboardTab title='Linea' tableData={leaderboard} />,
-    3: <LeaderboardTab title='Base' tableData={leaderboard} />,
-    4: <LeaderboardTab title='Zora' tableData={leaderboard} />,
-    5: <LeaderboardTab title='ZkEvm' tableData={leaderboard} />,
+    const tab = panelTabs.find(item => item.index === newValue);
+    tab && setActiveTab(tab);
   };
   useEffect(() => {
-    dispatch(getLeaderboardData());
-  }, []);
+    if (isAuth) {
+      dispatch(getPrivateLeaderboardData(activeTab.index));
+    } else {
+      dispatch(getPublicLeaderboardData(activeTab.index));
+    }
+  }, [isAuth, activeTab]);
   return (
     <Layout>
       <Box
@@ -66,22 +63,22 @@ const Dashboard = () => {
         }}
       >
         <LeaderboardTabs
-          value={activeTabIndex}
+          value={activeTab.index}
           onChange={handleChange}
           variant={isMd ? 'fullWidth' : 'scrollable'}
         >
           {panelTabs.map(item => (
-            <Tab key={item.label} label={item.label} {...a11yProps(item.index)} />
+            <Tab key={item.index} label={item.label} {...a11yProps(item.index)} value={item.index} />
           ))}
         </LeaderboardTabs>
-        {leaderboardTabs[activeTabIndex]}
+        <LeaderboardTab tableData={leaderboard} activeTab={activeTab} />
       </Box>
     </Layout>
   );
 };
 export default Dashboard;
 
-function a11yProps(index: number) {
+function a11yProps(index: string) {
   return {
     id: `leaderboard-tab-${index}`,
     'aria-controls': `leaderboard-tabpanel-${index}`,
