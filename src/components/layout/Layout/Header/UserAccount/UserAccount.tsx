@@ -38,6 +38,7 @@ const UserAccount: FC<Props> = ({ navLinks }) => {
   };
   const maskedAddress = address && address.slice(0, 6) + '...' + address.slice(-6);
   const isAuth = useAppSelector(state => state.authState.isAuth);
+  const userName = useAppSelector(state => state.userState.userName);
   return (
     <Box
       sx={{
@@ -62,7 +63,7 @@ const UserAccount: FC<Props> = ({ navLinks }) => {
           }}
         >
           <Box className='menu-Lato-fw-700-fs-12' color={theme.palette.powderWhite}>
-            {maskedAddress}
+            {userName || maskedAddress}
           </Box>
           <Box className='menu-Lato-fw-700-fs-12' color={theme.palette.white50}>
             0 Points

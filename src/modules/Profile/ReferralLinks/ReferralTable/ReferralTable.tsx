@@ -12,13 +12,9 @@ interface Props {
   data: IReferral[];
 }
 const ReferralTable: FC<Props> = ({ data }) => {
-  const dispatch = useAppDispatch();
   const prepareData = data.map((item, index) => {
     return { ...item, rank: index + 1 };
   });
-  useEffect(() => {
-    dispatch(getReferrals());
-  }, []);
   return (
     <Box>
       <PrimaryTable

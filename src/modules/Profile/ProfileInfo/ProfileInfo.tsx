@@ -3,6 +3,10 @@ import UserInfo from '@/modules/Profile/ProfileInfo/UserInfo/UserInfo';
 import QuestsInfo from '@/modules/Profile/ProfileInfo/QuestsInfo/QuestsInfo';
 import NFTInfo from '@/modules/Profile/ProfileInfo/NFTInfo/NFTInfo';
 import { IQuestCard } from '@/types/index';
+import { useAppDispatch } from '@/core/store';
+import { useEffect } from 'react';
+import { getNameByAddress, getReferrals } from '@/core/thunk/user.thunk';
+import { useAccount } from 'wagmi';
 
 const quests: IQuestCard[] = [
   {
@@ -23,6 +27,13 @@ const quests: IQuestCard[] = [
   },
 ];
 const ProfileInfo = () => {
+  const { address } = useAccount();
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (address) {
+      dispatch(getNameByAddress(address));
+    }
+  }, [address]);
   return (
     <Box
       sx={{

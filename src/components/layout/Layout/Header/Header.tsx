@@ -7,9 +7,12 @@ import NavLink from '@/components/layout/Layout/Header/NavLink/NavLink';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useRouter } from 'next/navigation';
-import { useAppSelector } from '@/core/store';
+import { useAppDispatch, useAppSelector } from '@/core/store';
 import CustomConnectButton from '@/components/common/CustomConnectButton/CustomConnectButton';
 import PrimaryButton from '@/components/common/ui/PrimaryButton/PrimaryButton';
+import { useAccount } from 'wagmi';
+import { useEffect } from 'react';
+import { getNameByAddress, getReferrals } from '@/core/thunk/user.thunk';
 
 const navLinks = [
   {
@@ -28,10 +31,18 @@ const navLinks = [
 
 const Header = () => {
   const theme = useCustomTheme();
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const isLowerLg = useMediaQuery(theme.breakpoints.down('lg'));
   const loading = useAppSelector(state => state.authState.loading);
   const isAuth = useAppSelector(state => state.authState.isAuth);
+  const { address } = useAccount();
+  const userName = useAppSelector(state => state.userState.userName);
+  useEffect(() => {
+    if (address && isAuth) {
+      dispatch(getNameByAddress(address));
+    }
+  }, [address, isAuth]);
   return (
     <Box
       width='100%'

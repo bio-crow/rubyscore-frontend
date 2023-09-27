@@ -3,9 +3,10 @@ import { useCustomTheme } from '@/hooks/useCustomTheme';
 import Image from 'next/image';
 import { useAccount } from 'wagmi';
 import ThirdlyButton from '@/components/common/ui/ThirdlyButton/ThirdlyButton';
+import { useAppSelector } from '@/core/store';
 
 const UserInfo = () => {
-  const userName = null;
+  const userName = useAppSelector(state => state.userState.userName);
   const isNew = !userName;
   const isPro = false;
   const isClaimed = !!userName && !isPro;

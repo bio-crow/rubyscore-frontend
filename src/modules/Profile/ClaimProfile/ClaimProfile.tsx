@@ -7,33 +7,18 @@ import ClaimProfileForm from '@/modules/Profile/ClaimProfile/ClaimProfileForm/Cl
 import ProfilePrefixSelect from '@/modules/Profile/ClaimProfile/ProfilePrefixSelect/ProfilePrefixSelect';
 import { claimProfileSchema } from '@/utils/validationConfig';
 import { ClaimProfileFormContext } from '@/context/index';
-import fa from '@walletconnect/legacy-modal/dist/cjs/browser/languages/fa';
 import { CLAIM_PROFILE_FIELDS } from '@/constants/formFields';
+import { wagmiClaimName } from '@/core/api/contract.api';
+import { useAccount } from 'wagmi';
+import { useAppDispatch, useAppSelector } from '@/core/store';
+import { claimProfile } from '@/core/thunk/user.thunk';
 
-const namePrefix = [
-  {
-    value: '.x',
-    points: 1,
-  },
-  {
-    value: '.linea',
-    points: 1,
-  },
-  {
-    value: '.base',
-    points: 1,
-  },
-  {
-    value: '.zora',
-    points: 1,
-  },
-  {
-    value: '.zkSync',
-    points: 1,
-  },
-];
 const ClaimProfile = () => {
   const theme = useCustomTheme();
+  const dispatch = useAppDispatch();
+  const claimProfileLoading = useAppSelector(state => state.userState.claimProfileLoading);
+  const { address } = useAccount();
+  const [isLoading, setIsLoading] = useState(false);
   const [activePrefix, setActivePrefix] = useState('.x');
   const {
     register,
@@ -50,9 +35,13 @@ const ClaimProfile = () => {
   } = useForm({
     resolver: yupResolver<any>(claimProfileSchema),
   });
-  const onSubmit = async (data: any) => {
-    data = { [CLAIM_PROFILE_FIELDS.NAME]: data[CLAIM_PROFILE_FIELDS.NAME] + activePrefix };
-    // console.log(data)
+  const onSubmit = (data: any) => {
+    const name = data[CLAIM_PROFILE_FIELDS.NAME] + activePrefix;
+    data = {
+      account: address,
+      name: name,
+    };
+    dispatch(claimProfile(data));
   };
   const onError = (data: any) => {
     // console.log(data)
@@ -94,7 +83,7 @@ const ClaimProfile = () => {
           activePrefix={activePrefix}
           onSubmit={onSubmit}
           onError={onError}
-          isLoading={false}
+          isLoading={claimProfileLoading}
         />
         <ProfilePrefixSelect activePrefix={activePrefix} setActivePrefix={setActivePrefix} />
       </Box>

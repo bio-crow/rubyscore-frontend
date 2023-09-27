@@ -15,7 +15,7 @@ interface Props {
   isLoading: boolean;
 }
 
-const ClaimProfileForm: FC<Props> = ({ activePrefix, onSubmit, onError }) => {
+const ClaimProfileForm: FC<Props> = ({ activePrefix, onSubmit, onError, isLoading }) => {
   const theme = useCustomTheme();
   const isSm = useMediaQuery(theme.breakpoints.up('sm'));
   const { control, handleSubmit, errors } = useContext(ClaimProfileFormContext);
@@ -42,6 +42,7 @@ const ClaimProfileForm: FC<Props> = ({ activePrefix, onSubmit, onError }) => {
       <PrimaryButton
         variant='contained'
         size='large'
+        loading={isLoading}
         fullWidth={!isSm}
         type='submit'
         sx={{

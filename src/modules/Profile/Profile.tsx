@@ -9,8 +9,11 @@ import DailyActivity from '@/modules/Profile/DailyActivity/DailyActivity';
 import ReferralLinks from '@/modules/Profile/ReferralLinks/ReferralLinks';
 import MyLevelSection from '@/components/common/sections/MyLevelSection/MyLevelSection';
 import StreakDays from '@/modules/Profile/StreakDays/StreakDays';
-import { useAppSelector } from '@/core/store';
+import { useAppDispatch, useAppSelector } from '@/core/store';
 import PrivatePageLayout from '@/components/layout/PrivatePageLayout/PrivatePageLayout';
+import { useEffect } from 'react';
+import { getNameByAddress, getReferrals } from '@/core/thunk/user.thunk';
+import { useAccount } from 'wagmi';
 const breakpointsConfig = {
   0: {
     slidesPerView: 1.4,
@@ -30,7 +33,15 @@ const breakpointsConfig = {
 };
 const Profile = () => {
   const theme = useCustomTheme();
+  const dispatch = useAppDispatch();
+  const { address } = useAccount();
   const isAuth = useAppSelector(state => state.authState.isAuth);
+  const userName = useAppSelector(state => state.userState.userName);
+  useEffect(() => {
+    if (address && isAuth) {
+      dispatch(getReferrals());
+    }
+  }, [address, isAuth]);
   return (
     <Layout>
       {isAuth ? (
@@ -52,7 +63,7 @@ const Profile = () => {
             }}
           >
             <MyLevelSection breakpoints={breakpointsConfig} initSlidePerPage={4.4} />
-            <ClaimProfile />
+            {!userName && <ClaimProfile />}
             <Benefits />
             <ScoreSection />
             <DailyActivity />

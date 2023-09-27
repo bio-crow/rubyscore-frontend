@@ -35,3 +35,7 @@ export interface ILeaderBoardResponse {
     user: ILeaderboardUser;
   };
 }
+export interface IClaimPayload {
+  account: any;
+  name: string;
+}
