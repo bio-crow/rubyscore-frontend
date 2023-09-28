@@ -13,6 +13,7 @@ import PrimaryButton from '@/components/common/ui/PrimaryButton/PrimaryButton';
 import { useAccount } from 'wagmi';
 import { useEffect } from 'react';
 import { getNameByAddress, getReferrals } from '@/core/thunk/user.thunk';
+import { setUserName } from '@/core/state/user.state';
 
 const navLinks = [
   {
@@ -41,6 +42,9 @@ const Header = () => {
   useEffect(() => {
     if (address && isAuth) {
       dispatch(getNameByAddress(address));
+    }
+    if (!isAuth) {
+      dispatch(setUserName(null));
     }
   }, [address, isAuth]);
   return (

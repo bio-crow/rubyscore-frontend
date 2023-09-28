@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { claimProfile, getNameByAddress, getReferrals } from '@/core/thunk/user.thunk';
 import { IReferral } from '@/types/index';
 import { toast } from 'react-toastify';
@@ -22,7 +22,11 @@ const initialState: IAuthState = {
 export const userSlice = createSlice({
   initialState,
   name: 'userSlice',
-  reducers: {},
+  reducers: {
+    setUserName: (state, action: PayloadAction<string | null>) => {
+      state.userName = action.payload;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(getReferrals.pending, (state, action) => {
@@ -51,4 +55,4 @@ export const userSlice = createSlice({
 
 export default userSlice.reducer;
 
-export const {} = userSlice.actions;
+export const { setUserName } = userSlice.actions;

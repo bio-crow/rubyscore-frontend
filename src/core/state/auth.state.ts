@@ -27,8 +27,6 @@ export const authSlice = createSlice({
       state.loading = action.payload;
     },
     logout: state => {
-      const { userState } = store.getState();
-      userState.userName = null;
       state.isAuth = false;
       localStorage.removeItem('signature');
       localStorage.removeItem('isAuth');
