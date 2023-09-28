@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { login, refreshToken } from '@/core/thunk/auth.thunk';
+import { login, refreshToken, logout } from '@/core/thunk/auth.thunk';
 import { disconnect } from '@wagmi/core';
 import { store } from '@/core/store';
+
 interface IAuthState {
   token: string | null;
   loading: boolean;
@@ -25,13 +26,6 @@ export const authSlice = createSlice({
     },
     setAuthLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
-    },
-    logout: state => {
-      state.isAuth = false;
-      localStorage.removeItem('signature');
-      localStorage.removeItem('isAuth');
-      state.token = null;
-      disconnect();
     },
   },
   extraReducers: builder => {
@@ -59,10 +53,16 @@ export const authSlice = createSlice({
         if (action.payload) {
           state.token = action.payload.data.result.token;
         }
+      })
+      .addCase(logout.fulfilled, (state, action) => {
+        state.isAuth = false;
+        localStorage.removeItem('signature');
+        localStorage.removeItem('isAuth');
+        state.token = null;
       });
   },
 });
 
 export default authSlice.reducer;
 
-export const { setIsAuth, setAuthLoading, logout } = authSlice.actions;
+export const { setIsAuth, setAuthLoading } = authSlice.actions;

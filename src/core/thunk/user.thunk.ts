@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchReferrals } from '@/core/api/user.api';
 import { wagmiClaimName, wagmiGetNameByOwner } from '@/core/api/contract.api';
 import { IClaimPayload } from '@/core/types';
-
+import { disconnect } from '@wagmi/core';
 export const getReferrals = createAsyncThunk('userSlice/fetchReferrals', async () => {
   return await fetchReferrals();
 });

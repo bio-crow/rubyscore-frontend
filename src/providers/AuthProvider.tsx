@@ -4,9 +4,9 @@ import { useAccount, useConnect, useDisconnect } from 'wagmi';
 import { useSignMessage } from 'wagmi';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { ILoginPayload } from '@/core/types';
-import { login } from '@/core/thunk/auth.thunk';
+import { login, logout } from '@/core/thunk/auth.thunk';
 import { useSearchParams } from 'next/navigation';
-import { logout, setAuthLoading, setIsAuth } from '@/core/state/auth.state';
+import { setAuthLoading, setIsAuth } from '@/core/state/auth.state';
 interface Props {
   children: ReactNode;
 }

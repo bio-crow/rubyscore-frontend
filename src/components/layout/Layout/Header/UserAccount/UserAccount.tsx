@@ -12,7 +12,7 @@ import { useRouter } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import CustomConnectButton from '@/components/common/CustomConnectButton/CustomConnectButton';
 import PrimaryButton from '@/components/common/ui/PrimaryButton/PrimaryButton';
-import { logout } from '@/core/state/auth.state';
+import { logout } from '@/core/thunk/auth.thunk';
 
 interface Props {
   navLinks: { label: string; route: string }[];
