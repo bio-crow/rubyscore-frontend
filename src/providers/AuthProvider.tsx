@@ -62,6 +62,7 @@ const AuthProvider: FC<Props> = ({ children }) => {
     dispatch(setAuthLoading(isLoading));
     if (error) {
       dispatch(logout());
+      reset();
     }
   }, [error]);
   return <>{children}</>;
