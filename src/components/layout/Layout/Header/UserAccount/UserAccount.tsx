@@ -9,9 +9,10 @@ import { useAccount, useDisconnect } from 'wagmi';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useRouter } from 'next/navigation';
-import { useAppSelector } from '@/core/store';
+import { useAppDispatch, useAppSelector } from '@/core/store';
 import CustomConnectButton from '@/components/common/CustomConnectButton/CustomConnectButton';
 import PrimaryButton from '@/components/common/ui/PrimaryButton/PrimaryButton';
+import { logout } from '@/core/state/auth.state';
 
 interface Props {
   navLinks: { label: string; route: string }[];
@@ -24,7 +25,7 @@ const UserAccount: FC<Props> = ({ navLinks }) => {
   const router = useRouter();
   const { address } = useAccount();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const { disconnect } = useDisconnect();
+  const dispatch = useAppDispatch();
   const open = Boolean(anchorEl);
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -32,9 +33,9 @@ const UserAccount: FC<Props> = ({ navLinks }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const logout = () => {
+  const logoutFunc = () => {
     setAnchorEl(null);
-    disconnect();
+    dispatch(logout());
   };
   const maskedAddress = address && address.slice(0, 6) + '...' + address.slice(-6);
   const isAuth = useAppSelector(state => state.authState.isAuth);
@@ -93,7 +94,7 @@ const UserAccount: FC<Props> = ({ navLinks }) => {
         {isAuth ? (
           <Box
             sx={{
-              display: { xs: 'flex', sm: 'none' },
+              display: { xs: 'flex', lg: 'none' },
               flexDirection: 'column',
               padding: '6px 16px',
             }}
@@ -108,7 +109,7 @@ const UserAccount: FC<Props> = ({ navLinks }) => {
         ) : (
           <Box
             sx={{
-              display: { xs: 'flex', sm: 'none' },
+              display: { xs: 'flex', lg: 'none' },
               flexDirection: 'column',
               padding: '6px 16px',
             }}
@@ -128,7 +129,7 @@ const UserAccount: FC<Props> = ({ navLinks }) => {
               {item.label}
             </MenuItem>
           ))}
-        {isAuth && <MenuItem onClick={logout}>Logout</MenuItem>}
+        {isAuth && <MenuItem onClick={logoutFunc}>Logout</MenuItem>}
       </Menu>
     </Box>
   );
