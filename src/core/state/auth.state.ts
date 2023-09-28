@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { login, refreshToken } from '@/core/thunk/auth.thunk';
 import { disconnect } from '@wagmi/core';
+import { store } from '@/core/store';
 interface IAuthState {
   token: string | null;
   loading: boolean;
@@ -26,6 +27,8 @@ export const authSlice = createSlice({
       state.loading = action.payload;
     },
     logout: state => {
+      const { userState } = store.getState();
+      userState.userName = null;
       state.isAuth = false;
       localStorage.removeItem('signature');
       localStorage.removeItem('isAuth');
