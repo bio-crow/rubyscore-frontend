@@ -40,7 +40,7 @@ export const leaderboardSlice = createSlice({
           const user = action.payload.data.result?.user;
           const leaderboard = action.payload.data.result?.leaderboard;
           state.leaderboardUser = user || null;
-          state.leaderboard = leaderboard;
+          state.leaderboard = leaderboard || [];
           const isUserOnPage = leaderboard?.find(item => item.wallet === user.wallet);
           if (user && leaderboard && !isUserOnPage) {
             leaderboard.push({
