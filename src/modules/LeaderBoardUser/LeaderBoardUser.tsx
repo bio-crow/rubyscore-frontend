@@ -3,6 +3,7 @@ import { Box } from '@mui/material';
 import ScoreSection from '@/components/common/sections/ScoreSection/ScoreSection';
 import UserInfoSection from '@/components/common/sections/UserInfoSection/UserInfoSection';
 import LeaderBoardUserStatistics from '@/modules/LeaderBoardUser/LeaderBoardUserStatistics/LeaderBoardUserStatistics';
+
 const breakpointsConfig = {
   0: {
     slidesPerView: 1,
@@ -28,6 +29,7 @@ const LeaderBoardUser = () => {
           display: 'flex',
           flexDirection: 'column',
           gap: '56px',
+          width: '100%',
         }}
       >
         <UserInfoSection />
