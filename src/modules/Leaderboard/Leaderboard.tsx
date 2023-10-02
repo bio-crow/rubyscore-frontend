@@ -40,7 +40,7 @@ const Dashboard = () => {
   const isAuth = useAppSelector(state => state.authState.isAuth);
   const dispatch = useAppDispatch();
   const [activeTab, setActiveTab] = useState<{ index: TabIndexType; label: string }>(panelTabs[0]);
-  const leaderboard = useAppSelector(state => state.leaderboardState.leaderboard);
+  const shownLeaderBoard = useAppSelector(state => state.leaderboardState.shownLeaderBoard);
   const handleChange = (event: SyntheticEvent, newValue: TabIndexType) => {
     const tab = panelTabs.find(item => item.index === newValue);
     tab && setActiveTab(tab);
@@ -71,7 +71,7 @@ const Dashboard = () => {
             <Tab key={item.index} label={item.label} {...a11yProps(item.index)} value={item.index} />
           ))}
         </LeaderboardTabs>
-        <LeaderboardTab tableData={leaderboard} activeTab={activeTab} />
+        <LeaderboardTab tableData={shownLeaderBoard} activeTab={activeTab} />
       </Box>
     </Layout>
   );

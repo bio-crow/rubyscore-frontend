@@ -7,6 +7,9 @@ import { ILeaderboardData } from '@/types/index';
 import { FC } from 'react';
 import CustomNoRows from '@/components/common/CustomNoRows/CustomNoRows';
 import { useAppSelector } from '@/core/store';
+import CustomPagination from '@/components/common/CustomPagination/CustomPagination';
+import PrimaryPagination from '@/components/common/ui/PrimaryPagination/PrimaryPagination';
+import LeaderBoardPagination from '@/modules/Leaderboard/LeaderboardTabTable/LeaderBoardPagination/LeaderBoardPagination';
 
 interface Props {
   tableData: ILeaderboardData[];
@@ -14,15 +17,19 @@ interface Props {
 
 const LeaderboardTabTable: FC<Props> = ({ tableData }) => {
   const router = useRouter();
-  const prepareData = tableData.map((item, index) => {
-    return { ...item, rank: item.rank || index + 1 };
-  });
+
   const leaderboardUser = useAppSelector(state => state.leaderboardState.leaderboardUser);
   return (
-    <Box>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '20px',
+      }}
+    >
       <SecondaryTable
         getRowId={params => params.wallet}
-        rows={prepareData}
+        rows={tableData}
         getRowClassName={params =>
           leaderboardUser?.wallet === params.row.wallet ? 'active-user-highlight' : ''
         }
@@ -43,6 +50,7 @@ const LeaderboardTabTable: FC<Props> = ({ tableData }) => {
         disableColumnMenu
         disableRowSelectionOnClick
       />
+      <LeaderBoardPagination />
     </Box>
   );
 };
