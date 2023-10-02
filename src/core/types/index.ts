@@ -38,4 +38,5 @@ export interface ILeaderBoardResponse {
 export interface IClaimPayload {
   account: any;
   name: string;
+  payable?: boolean;
 }

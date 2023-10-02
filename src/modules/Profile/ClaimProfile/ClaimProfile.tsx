@@ -2,7 +2,7 @@ import { Box } from '@mui/system';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ClaimProfileForm from '@/modules/Profile/ClaimProfile/ClaimProfileForm/ClaimProfileForm';
 import ProfilePrefixSelect from '@/modules/Profile/ClaimProfile/ProfilePrefixSelect/ProfilePrefixSelect';
 import { claimProfileSchema } from '@/utils/validationConfig';
@@ -19,6 +19,7 @@ const ClaimProfile = () => {
   const claimProfileLoading = useAppSelector(state => state.userState.claimProfileLoading);
   const { address } = useAccount();
   const [isLoading, setIsLoading] = useState(false);
+  const [isPaid, setIsPaid] = useState(false);
   const [activePrefix, setActivePrefix] = useState('.x');
   const {
     register,
@@ -40,12 +41,21 @@ const ClaimProfile = () => {
     data = {
       account: address,
       name: name,
+      payable: isPaid,
     };
     dispatch(claimProfile(data));
   };
   const onError = (data: any) => {
     // console.log(data)
   };
+  useEffect(() => {
+    const subscription = watch((value: any, { name, type }: any) => {
+      if (name === CLAIM_PROFILE_FIELDS.NAME) {
+        setIsPaid(value[CLAIM_PROFILE_FIELDS.NAME].length < 6);
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, [watch]);
   return (
     <ClaimProfileFormContext.Provider
       value={{
@@ -77,7 +87,7 @@ const ClaimProfile = () => {
           Claim Profile
         </Box>
         <Box color={theme.palette.white50} className='Body-Lato-fw-500-fs-18'>
-          Own your identity in the digital world. Get started with a Web3 domain.
+          Own your identity in the digital world. Get started with a Web3 domain. {isPaid ? 'PAID' : 'FREE'}
         </Box>
         <ClaimProfileForm
           activePrefix={activePrefix}

@@ -83,8 +83,27 @@ export const abiIXProjectSBT = [
         name: 'name',
         type: 'string',
       },
+      {
+        indexed: true,
+        internalType: 'bool',
+        name: 'premium',
+        type: 'bool',
+      },
     ],
     name: 'NameClaimed',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'newPremiumPrice',
+        type: 'uint256',
+      },
+    ],
+    name: 'PremiumPriceUpdated',
     type: 'event',
   },
   {
@@ -123,6 +142,19 @@ export const abiIXProjectSBT = [
       },
     ],
     name: 'URIUpdated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
+    ],
+    name: 'Withdrawed',
     type: 'event',
   },
   {
@@ -195,8 +227,14 @@ export const abiIXProjectSBT = [
       },
     ],
     name: 'claimName',
-    outputs: [],
-    stateMutability: 'nonpayable',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: 'tokenId',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'payable',
     type: 'function',
   },
   {
@@ -334,6 +372,38 @@ export const abiIXProjectSBT = [
         internalType: 'address',
         name: '',
         type: 'address',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'getPremiumPrice',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'userAddress',
+        type: 'address',
+      },
+    ],
+    name: 'getPremiumStatus',
+    outputs: [
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
       },
     ],
     stateMutability: 'view',
@@ -553,6 +623,26 @@ export const abiIXProjectSBT = [
       },
     ],
     name: 'updateBaseURI',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: 'newPremiumPrice',
+        type: 'uint256',
+      },
+    ],
+    name: 'updatePremiumPrice',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'withdraw',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',

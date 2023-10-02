@@ -12,8 +12,8 @@ import CustomConnectButton from '@/components/common/CustomConnectButton/CustomC
 import PrimaryButton from '@/components/common/ui/PrimaryButton/PrimaryButton';
 import { useAccount } from 'wagmi';
 import { useEffect } from 'react';
-import { getNameByAddress, getReferrals } from '@/core/thunk/user.thunk';
-import { setUserName } from '@/core/state/user.state';
+import { getNameByAddress, getPremiumStatus, getReferrals } from '@/core/thunk/user.thunk';
+import { setPremiumStatus, setUserName } from '@/core/state/user.state';
 
 const navLinks = [
   {
@@ -42,9 +42,11 @@ const Header = () => {
   useEffect(() => {
     if (address && isAuth) {
       dispatch(getNameByAddress(address));
+      dispatch(getPremiumStatus(address));
     }
     if (!isAuth) {
       dispatch(setUserName(null));
+      dispatch(setPremiumStatus(false));
     }
   }, [address, isAuth]);
   return (

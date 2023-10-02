@@ -36,6 +36,7 @@ const Profile = () => {
   const dispatch = useAppDispatch();
   const { address } = useAccount();
   const isAuth = useAppSelector(state => state.authState.isAuth);
+  const premiumStatus = useAppSelector(state => state.userState.premiumStatus);
   const userName = useAppSelector(state => state.userState.userName);
   useEffect(() => {
     if (address && isAuth) {
@@ -64,7 +65,7 @@ const Profile = () => {
           >
             <MyLevelSection breakpoints={breakpointsConfig} initSlidePerPage={4.4} />
             {!userName && <ClaimProfile />}
-            <Benefits />
+            {!premiumStatus && userName && <Benefits />}
             <ScoreSection />
             <DailyActivity />
             <StreakDays />

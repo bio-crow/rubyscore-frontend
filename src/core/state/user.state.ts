@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { claimProfile, getNameByAddress, getReferrals } from '@/core/thunk/user.thunk';
+import { claimProfile, getNameByAddress, getPremiumStatus, getReferrals } from '@/core/thunk/user.thunk';
 import { IReferral } from '@/types/index';
-import { toast } from 'react-toastify';
 
 interface IAuthState {
   referrals: IReferral[];
@@ -9,6 +8,7 @@ interface IAuthState {
   loading: boolean;
   claimProfileLoading: boolean;
   userName: string | null;
+  premiumStatus: boolean;
 }
 
 const initialState: IAuthState = {
@@ -17,6 +17,7 @@ const initialState: IAuthState = {
   loading: false,
   claimProfileLoading: false,
   userName: null,
+  premiumStatus: false,
 };
 
 export const userSlice = createSlice({
@@ -25,6 +26,9 @@ export const userSlice = createSlice({
   reducers: {
     setUserName: (state, action: PayloadAction<string | null>) => {
       state.userName = action.payload;
+    },
+    setPremiumStatus: (state, action: PayloadAction<boolean>) => {
+      state.premiumStatus = action.payload;
     },
   },
   extraReducers: builder => {
@@ -49,10 +53,15 @@ export const userSlice = createSlice({
         if (action.payload) {
           state.userName = action.payload;
         }
+      })
+      .addCase(getPremiumStatus.fulfilled, (state, action) => {
+        if (action.payload) {
+          state.premiumStatus = action.payload;
+        }
       });
   },
 });
 
 export default userSlice.reducer;
 
-export const { setUserName } = userSlice.actions;
+export const { setUserName, setPremiumStatus } = userSlice.actions;
