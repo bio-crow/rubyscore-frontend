@@ -12,6 +12,7 @@ const Footer = () => {
         display: 'flex',
         justifyContent: 'center',
         background: theme.palette.black,
+        zIndex: '10',
       }}
     >
       <Box

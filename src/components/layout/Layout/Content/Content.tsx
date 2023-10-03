@@ -15,6 +15,7 @@ const Content: FC<Props> = ({ children }) => {
         display: 'flex',
         minHeight: '100vh',
         gap: '20px',
+        overflow: 'hidden',
         flex: 1,
         paddingTop: { xs: '90px', md: '120px' },
         paddingBottom: { xs: '30px', md: '60px' },
@@ -26,6 +27,7 @@ const Content: FC<Props> = ({ children }) => {
         sx={{
           display: 'flex',
           maxWidth: '1392px',
+          overflow: 'visible',
           width: '100%',
           flex: 1,
         }}
