@@ -17,6 +17,10 @@ import { setPremiumStatus, setUserName } from '@/core/state/user.state';
 
 const navLinks = [
   {
+    label: 'Home',
+    route: appRoutes.LANDING,
+  },
+  {
     label: 'Dashboard',
     route: appRoutes.DASHBOARD,
   },

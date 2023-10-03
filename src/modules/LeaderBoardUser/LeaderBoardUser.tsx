@@ -30,6 +30,7 @@ const LeaderBoardUser = () => {
           flexDirection: 'column',
           gap: '56px',
           width: '100%',
+          padding: { xs: '0px 15px 0px 15px', xl: 0 },
         }}
       >
         <UserInfoSection />
