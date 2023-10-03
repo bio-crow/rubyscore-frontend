@@ -65,7 +65,7 @@ const Header = () => {
       <Box
         sx={{
           maxWidth: '1392px',
-          width: '110%',
+          width: '100%',
           display: 'flex',
           gap: '20px',
           alignItems: 'center',

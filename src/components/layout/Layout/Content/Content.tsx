@@ -13,6 +13,7 @@ const Content: FC<Props> = ({ children }) => {
       sx={{
         width: '100%',
         display: 'flex',
+        minHeight: '100vh',
         gap: '20px',
         flex: 1,
         paddingTop: { xs: '90px', md: '120px' },
