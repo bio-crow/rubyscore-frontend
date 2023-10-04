@@ -6,7 +6,7 @@ import { appRoutes } from '@/constants/routes';
 import NavLink from '@/components/layout/Layout/Header/NavLink/NavLink';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import CustomConnectButton from '@/components/common/CustomConnectButton/CustomConnectButton';
 import PrimaryButton from '@/components/common/ui/PrimaryButton/PrimaryButton';
@@ -43,6 +43,7 @@ const Header = () => {
   const isAuth = useAppSelector(state => state.authState.isAuth);
   const { address } = useAccount();
   const userName = useAppSelector(state => state.userState.userName);
+  const pathname = usePathname();
   useEffect(() => {
     if (address && isAuth) {
       dispatch(getNameByAddress(address));
@@ -93,11 +94,10 @@ const Header = () => {
             alignItems: 'center',
           }}
         >
-          {navLinks.map(item => (
-            <NavLink key={item.route} route={item.route} label={item.label} />
-          ))}
+          {pathname !== '/' &&
+            navLinks.map(item => <NavLink key={item.route} route={item.route} label={item.label} />)}
         </Box>
-        <ThemeSwitch />
+        {/*<ThemeSwitch/>*/}
         {isAuth || isLowerLg ? (
           <UserAccount navLinks={navLinks} />
         ) : (

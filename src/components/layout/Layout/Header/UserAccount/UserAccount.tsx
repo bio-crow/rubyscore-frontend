@@ -8,7 +8,7 @@ import MenuIcon from '@/components/common/Icons/MenuIcon';
 import { useAccount, useDisconnect } from 'wagmi';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import CustomConnectButton from '@/components/common/CustomConnectButton/CustomConnectButton';
 import PrimaryButton from '@/components/common/ui/PrimaryButton/PrimaryButton';
@@ -40,6 +40,7 @@ const UserAccount: FC<Props> = ({ navLinks }) => {
   const maskedAddress = address && address.slice(0, 6) + '...' + address.slice(-6);
   const isAuth = useAppSelector(state => state.authState.isAuth);
   const userName = useAppSelector(state => state.userState.userName);
+  const pathname = usePathname();
   return (
     <Box
       sx={{
@@ -124,6 +125,7 @@ const UserAccount: FC<Props> = ({ navLinks }) => {
           </Box>
         )}
         {isLowerLg &&
+          pathname !== '/' &&
           navLinks.map((item: any) => (
             <MenuItem key={item.label} onClick={() => router.push(item.route)}>
               {item.label}

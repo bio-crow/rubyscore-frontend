@@ -53,8 +53,8 @@ const Section1 = () => {
         Provide users with insights into their engagement and value on Web3 and explore new opportunities
       </Box>
       <Box>
-        <PrimaryButton variant='contained' size='large' onClick={() => router.push(appRoutes.DASHBOARD)}>
-          Launch App
+        <PrimaryButton variant='contained' size='large'>
+          Coming soon
         </PrimaryButton>
       </Box>
       <Box
