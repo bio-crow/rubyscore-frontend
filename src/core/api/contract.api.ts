@@ -8,13 +8,13 @@ import { parseEther } from 'viem';
 import * as process from 'process';
 const address: any = process.env.NEXT_PUBLIC_SMART_CONTRACT;
 export const wagmiClaimName = async (data: IClaimPayload): Promise<any> => {
-  const action = async ({ account, name, payable }: IClaimPayload) => {
+  const action = async ({ account, name, payable, price }: IClaimPayload) => {
     const { hash } = await writeContract({
       address: '0x295954Ed3A7BDd3bbe875926adea5e5d7ab65571',
       abi: abiIXProjectSBT,
       functionName: 'claimName',
       account: account,
-      value: parseEther(payable ? '0.000001' : '0'),
+      value: payable ? parseEther(price) : parseEther('0'),
       args: [name],
     });
     return await waitForTransaction({
@@ -55,5 +55,35 @@ export const wagmiGetPremiumStatus = async (address: any): Promise<any> => {
     return await action(address);
   } catch (error) {
     //console.error(error);
+  }
+};
+export const wagmiGetPremiumPrice = async (): Promise<any> => {
+  const action = async () => {
+    return await readContract({
+      address: '0x295954Ed3A7BDd3bbe875926adea5e5d7ab65571',
+      abi: abiIXProjectSBT,
+      functionName: 'getPremiumPrice',
+    });
+  };
+  try {
+    return await action();
+  } catch (error) {
+    //console.error(error);
+  }
+};
+
+export const wagmiCheckName = async (name: string): Promise<any> => {
+  const action = async () => {
+    return await readContract({
+      address: '0x295954Ed3A7BDd3bbe875926adea5e5d7ab65571',
+      abi: abiIXProjectSBT,
+      functionName: 'checkName',
+      args: [name],
+    });
+  };
+  try {
+    return await action();
+  } catch (error: any) {
+    toast(error.shortMessage, { position: 'top-right' });
   }
 };

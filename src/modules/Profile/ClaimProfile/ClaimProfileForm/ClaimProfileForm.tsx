@@ -9,13 +9,12 @@ import { FormInputText } from '@/components/common/fields/InputField';
 import { CLAIM_PROFILE_FIELDS } from '@/constants/formFields';
 
 interface Props {
-  activePrefix: string;
   onSubmit: Function;
   onError: Function;
   isLoading: boolean;
 }
 
-const ClaimProfileForm: FC<Props> = ({ activePrefix, onSubmit, onError, isLoading }) => {
+const ClaimProfileForm: FC<Props> = ({ onSubmit, onError, isLoading }) => {
   const theme = useCustomTheme();
   const isSm = useMediaQuery(theme.breakpoints.up('sm'));
   const { control, handleSubmit, errors } = useContext(ClaimProfileFormContext);
@@ -31,14 +30,7 @@ const ClaimProfileForm: FC<Props> = ({ activePrefix, onSubmit, onError, isLoadin
       }}
       onSubmit={handleSubmit(onSubmit, onError)}
     >
-      <FormInputText
-        name={CLAIM_PROFILE_FIELDS.NAME}
-        control={control}
-        placeholder='Search for your name'
-        InputProps={{
-          endAdornment: <Box>{activePrefix}</Box>,
-        }}
-      />
+      <FormInputText name={CLAIM_PROFILE_FIELDS.NAME} control={control} placeholder='Search for your name' />
       <PrimaryButton
         variant='contained'
         size='large'

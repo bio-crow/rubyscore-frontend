@@ -5,6 +5,7 @@ import { useAccount } from 'wagmi';
 import ThirdlyButton from '@/components/common/ui/ThirdlyButton/ThirdlyButton';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { claimProfile } from '@/core/thunk/user.thunk';
+import ClaimNameModal from '@/components/common/ClaimNameModal/ClaimNameModal';
 
 const UserInfo = () => {
   const userName = useAppSelector(state => state.userState.userName);
@@ -14,18 +15,7 @@ const UserInfo = () => {
   const theme = useCustomTheme();
   const { address } = useAccount();
   const maskedAddress = address && address.slice(0, 6) + '...' + address.slice(-6);
-  const dispatch = useAppDispatch();
   const claimProfileLoading = useAppSelector(state => state.userState.claimProfileLoading);
-  const handleUpgrade = () => {
-    if (userName && address) {
-      const data = {
-        account: address,
-        name: userName,
-        payable: true,
-      };
-      dispatch(claimProfile(data));
-    }
-  };
   return (
     <Box
       sx={{
@@ -53,17 +43,20 @@ const UserInfo = () => {
       {isClaimed && (
         <Box flex='1' display='flex' flexDirection='column' gap='10px'>
           <Box className='profile-Lato-fw-700-fs-20'>{userName}</Box>
-          <ThirdlyButton
-            style={{ padding: '12px 12px 12px 12px' }}
-            variant='contained'
-            size='large'
-            startIcon={<Image src='/asserts/crownBlack.png' alt='icon' height='24' width='24' />}
-            fullWidth
-            loading={claimProfileLoading}
-            onClick={handleUpgrade}
-          >
-            Upgrade Profile
-          </ThirdlyButton>
+          <ClaimNameModal
+            Trigger={
+              <ThirdlyButton
+                style={{ padding: '12px 12px 12px 12px' }}
+                variant='contained'
+                size='large'
+                startIcon={<Image src='/asserts/crownBlack.png' alt='icon' height='24' width='24' />}
+                fullWidth
+                loading={claimProfileLoading}
+              >
+                Upgrade Profile
+              </ThirdlyButton>
+            }
+          />
         </Box>
       )}
       {premiumStatus && (

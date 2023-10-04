@@ -13,7 +13,6 @@ export const mokeChartData = [
     name: '6<Volume<10',
     shortName: '6<V<10',
     uv: 25000,
-    amt: 2290,
   },
   {
     name: '10<Volume<50',

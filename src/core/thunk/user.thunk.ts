@@ -1,8 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchReferrals } from '@/core/api/user.api';
-import { wagmiClaimName, wagmiGetNameByOwner, wagmiGetPremiumStatus } from '@/core/api/contract.api';
+import {
+  wagmiClaimName,
+  wagmiGetNameByOwner,
+  wagmiGetPremiumPrice,
+  wagmiGetPremiumStatus,
+} from '@/core/api/contract.api';
 import { IClaimPayload } from '@/core/types';
-import { disconnect } from '@wagmi/core';
+import { formatEther } from 'viem';
+import { setPremiumPrice } from '@/core/state/user.state';
 export const getReferrals = createAsyncThunk('userSlice/fetchReferrals', async () => {
   return await fetchReferrals();
 });
@@ -20,4 +26,8 @@ export const getNameByAddress = createAsyncThunk('userSlice/getNameByAddress', a
 });
 export const getPremiumStatus = createAsyncThunk('userSlice/getPremiumStatus', async (address: any) => {
   return await wagmiGetPremiumStatus(address);
+});
+export const getPremiumSPrice = createAsyncThunk('userSlice/getPremiumPrice', async (arg, { dispatch }) => {
+  const result = await wagmiGetPremiumPrice();
+  dispatch(setPremiumPrice(formatEther(result)));
 });

@@ -4,23 +4,24 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect, useState } from 'react';
 import ClaimProfileForm from '@/modules/Profile/ClaimProfile/ClaimProfileForm/ClaimProfileForm';
-import ProfilePrefixSelect from '@/modules/Profile/ClaimProfile/ProfilePrefixSelect/ProfilePrefixSelect';
 import { claimProfileSchema } from '@/utils/validationConfig';
 import { ClaimProfileFormContext } from '@/context/index';
 import { CLAIM_PROFILE_FIELDS } from '@/constants/formFields';
-import { wagmiClaimName } from '@/core/api/contract.api';
 import { useAccount } from 'wagmi';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { claimProfile } from '@/core/thunk/user.thunk';
+import { wagmiCheckName } from '@/core/api/contract.api';
+import * as process from 'process';
 
 const ClaimProfile = () => {
   const theme = useCustomTheme();
   const dispatch = useAppDispatch();
   const claimProfileLoading = useAppSelector(state => state.userState.claimProfileLoading);
+  const premiumPrice = useAppSelector(state => state.userState.premiumPrice);
   const { address } = useAccount();
   const [isLoading, setIsLoading] = useState(false);
+  const [errorText, setErrorText] = useState(false);
   const [isPaid, setIsPaid] = useState(false);
-  const [activePrefix, setActivePrefix] = useState('.x');
   const {
     register,
     handleSubmit,
@@ -36,14 +37,21 @@ const ClaimProfile = () => {
   } = useForm({
     resolver: yupResolver<any>(claimProfileSchema),
   });
-  const onSubmit = (data: any) => {
-    const name = data[CLAIM_PROFILE_FIELDS.NAME] + activePrefix;
-    data = {
-      account: address,
-      name: name,
-      payable: isPaid,
-    };
-    dispatch(claimProfile(data));
+  const onSubmit = async (data: any) => {
+    setErrorText(false);
+    const name = data[CLAIM_PROFILE_FIELDS.NAME];
+    const isValid = await wagmiCheckName(name);
+    if (isValid) {
+      data = {
+        account: address,
+        name: name,
+        payable: isPaid,
+        price: premiumPrice,
+      };
+      dispatch(claimProfile(data));
+    } else {
+      setErrorText(true);
+    }
   };
   const onError = (data: any) => {
     // console.log(data)
@@ -51,8 +59,9 @@ const ClaimProfile = () => {
   useEffect(() => {
     const subscription = watch((value: any, { name, type }: any) => {
       if (name === CLAIM_PROFILE_FIELDS.NAME) {
-        setIsPaid(value[CLAIM_PROFILE_FIELDS.NAME].length < 6);
+        setIsPaid(value[CLAIM_PROFILE_FIELDS.NAME].length < 7);
       }
+      setErrorText(false);
     });
     return () => subscription.unsubscribe();
   }, [watch]);
@@ -86,16 +95,22 @@ const ClaimProfile = () => {
         <Box color={theme.palette.powderWhite} className='H2-Lato-fw-700-fs-24'>
           Claim Profile
         </Box>
-        <Box color={theme.palette.white50} className='Body-Lato-fw-500-fs-18'>
-          Own your identity in the digital world. Get started with a Web3 domain. {isPaid ? 'PAID' : 'FREE'}
+        <Box
+          sx={{
+            color: theme.palette.white50,
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+          className='Body-Lato-fw-500-fs-18'
+        >
+          <Box>Own your identity in the digital world. Get started with a Web3 domain.</Box>
+          <Box>
+            3-6 symbols - Paid name ({`${premiumPrice} ${process.env.NEXT_PUBLIC_CHAIN_CURRENCY}`}), premium
+            design (200 points); 7-20 symbols - Free name (10 points).
+          </Box>
         </Box>
-        <ClaimProfileForm
-          activePrefix={activePrefix}
-          onSubmit={onSubmit}
-          onError={onError}
-          isLoading={claimProfileLoading}
-        />
-        <ProfilePrefixSelect activePrefix={activePrefix} setActivePrefix={setActivePrefix} />
+        <ClaimProfileForm onSubmit={onSubmit} onError={onError} isLoading={claimProfileLoading} />
+        {errorText && <Box color='red'>Invalid name</Box>}
       </Box>
     </ClaimProfileFormContext.Provider>
   );

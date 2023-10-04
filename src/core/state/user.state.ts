@@ -9,6 +9,7 @@ interface IAuthState {
   claimProfileLoading: boolean;
   userName: string | null;
   premiumStatus: boolean;
+  premiumPrice: string;
 }
 
 const initialState: IAuthState = {
@@ -18,6 +19,7 @@ const initialState: IAuthState = {
   claimProfileLoading: false,
   userName: null,
   premiumStatus: false,
+  premiumPrice: '0',
 };
 
 export const userSlice = createSlice({
@@ -29,6 +31,9 @@ export const userSlice = createSlice({
     },
     setPremiumStatus: (state, action: PayloadAction<boolean>) => {
       state.premiumStatus = action.payload;
+    },
+    setPremiumPrice: (state, action: PayloadAction<string>) => {
+      state.premiumPrice = action.payload;
     },
   },
   extraReducers: builder => {
@@ -64,4 +69,4 @@ export const userSlice = createSlice({
 
 export default userSlice.reducer;
 
-export const { setUserName, setPremiumStatus } = userSlice.actions;
+export const { setUserName, setPremiumStatus, setPremiumPrice } = userSlice.actions;

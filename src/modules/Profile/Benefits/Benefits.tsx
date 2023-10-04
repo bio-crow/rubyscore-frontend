@@ -6,6 +6,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { claimProfile } from '@/core/thunk/user.thunk';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { useAccount } from 'wagmi';
+import ClaimNameModal from '@/components/common/ClaimNameModal/ClaimNameModal';
 
 const benefitsConfig = [
   {
@@ -24,20 +25,7 @@ const benefitsConfig = [
 const Benefits = () => {
   const theme = useCustomTheme();
   const isSm = useMediaQuery(theme.breakpoints.up('sm'));
-  const dispatch = useAppDispatch();
-  const userName = useAppSelector(state => state.userState.userName);
   const claimProfileLoading = useAppSelector(state => state.userState.claimProfileLoading);
-  const { address } = useAccount();
-  const handleUpgrade = () => {
-    if (userName && address) {
-      const data = {
-        account: address,
-        name: userName,
-        payable: true,
-      };
-      dispatch(claimProfile(data));
-    }
-  };
   return (
     <Box
       sx={{
@@ -85,16 +73,19 @@ const Benefits = () => {
             </Box>
           ))}
         </Box>
-        <ThirdlyButton
-          variant='contained'
-          size='large'
-          loading={claimProfileLoading}
-          onClick={handleUpgrade}
-          startIcon={<Image src='/asserts/crownBlack.png' alt='icon' height='24' width='24' />}
-          fullWidth={!isSm}
-        >
-          Upgrade Profile
-        </ThirdlyButton>
+        <ClaimNameModal
+          Trigger={
+            <ThirdlyButton
+              variant='contained'
+              size='large'
+              loading={claimProfileLoading}
+              startIcon={<Image src='/asserts/crownBlack.png' alt='icon' height='24' width='24' />}
+              fullWidth={!isSm}
+            >
+              Upgrade Profile
+            </ThirdlyButton>
+          }
+        />
       </Box>
     </Box>
   );
