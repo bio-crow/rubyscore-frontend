@@ -40,7 +40,7 @@ const Section1 = () => {
           alignSelf: 'start',
         }}
       >
-        {/*  <Box
+        <Box
           sx={{
             paddingBottom: '4px',
             color: theme.palette.white50,
@@ -50,10 +50,10 @@ const Section1 = () => {
         >
           Community
         </Box>
-          <CustomLink title='Community Hub' url={appRoutes.DASHBOARD} />
+        <CustomLink title='Community Hub' url={appRoutes.DASHBOARD} />
         <CustomLink title='Community Initiativies' url='#' />
         <CustomLink title='Governance Forum' url='#' />
-        <CustomLink title='Merch Store' url='#' />*/}
+        <CustomLink title='Merch Store' url='#' />
       </Box>
       <Box
         sx={{
@@ -64,7 +64,7 @@ const Section1 = () => {
           alignSelf: 'start',
         }}
       >
-        {/* <Box
+        <Box
           sx={{
             paddingBottom: '4px',
             color: theme.palette.white50,
@@ -74,10 +74,10 @@ const Section1 = () => {
         >
           Learn
         </Box>
-            <CustomLink title='Blog' url='#' />
+        <CustomLink title='Blog' url='#' />
         <CustomLink title='Manager Toolkit' url='#' />
         <CustomLink title='WTF is QF' url='#' />
-        <CustomLink title='Support' url='#' /> */}
+        <CustomLink title='Support' url='#' />
       </Box>
       <Box
         sx={{
@@ -88,7 +88,7 @@ const Section1 = () => {
           alignSelf: 'start',
         }}
       >
-        {/* <Box
+        <Box
           sx={{
             paddingBottom: '4px',
             color: theme.palette.white50,
@@ -98,10 +98,10 @@ const Section1 = () => {
         >
           More
         </Box>
-           <CustomLink title='Impact Report' url='#' />
+        <CustomLink title='Impact Report' url='#' />
         <CustomLink title='Press & Media' url='#' />
         <CustomLink title='Hackatons' url='#' />
-        <CustomLink title='Bounties' url='#' /> */}
+        <CustomLink title='Bounties' url='#' />
       </Box>
       <Box
         sx={{

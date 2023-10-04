@@ -15,7 +15,7 @@ const Section1 = () => {
         flexDirection: 'column',
         gap: { xs: '20px', md: '40px' },
         alignItems: 'center',
-        padding: { xs: '0px 15px 0px 15px', xl: 0 },
+        padding: { xs: '0px 15px 0px 15px', sm: '0px 30px 0px 30px', xl: 0 },
         position: 'relative',
         zIndex: 5,
       }}
@@ -53,8 +53,8 @@ const Section1 = () => {
         Follow your progress on your favourite projects and rise to the top by actively participating.
       </Box>
       <Box>
-        <PrimaryButton variant='contained' size='large'>
-          Coming soon
+        <PrimaryButton variant='contained' size='large' onClick={() => router.push(appRoutes.DASHBOARD)}>
+          Get Started!
         </PrimaryButton>
       </Box>
       <Box

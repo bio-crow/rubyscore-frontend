@@ -11,7 +11,7 @@ const Section3 = () => {
         gap: '40px',
         alignItems: 'center',
         flexDirection: { xs: 'column', lg: 'row' },
-        padding: { xs: '0px 15px 0px 15px', xl: 0 },
+        padding: { xs: '0px 15px 0px 15px', sm: '0px 30px 0px 30px', xl: 0 },
       }}
     >
       <Box

@@ -43,7 +43,6 @@ const Header = () => {
   const isAuth = useAppSelector(state => state.authState.isAuth);
   const { address } = useAccount();
   const userName = useAppSelector(state => state.userState.userName);
-  const pathname = usePathname();
   useEffect(() => {
     if (address && isAuth) {
       dispatch(getNameByAddress(address));
@@ -95,8 +94,9 @@ const Header = () => {
             alignItems: 'center',
           }}
         >
-          {pathname !== '/' &&
-            navLinks.map(item => <NavLink key={item.route} route={item.route} label={item.label} />)}
+          {navLinks.map(item => (
+            <NavLink key={item.route} route={item.route} label={item.label} />
+          ))}
         </Box>
         {/*<ThemeSwitch/>*/}
         {isAuth || isLowerLg ? (

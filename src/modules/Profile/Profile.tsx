@@ -51,7 +51,7 @@ const Profile = () => {
             display: 'grid',
             gap: '20px',
             width: '100%',
-            padding: { xs: '0px 15px 0px 15px', xl: 0 },
+            padding: { xs: '0px 15px 0px 15px', sm: '0px 30px 0px 30px', xl: 0 },
             gridTemplateColumns: { xs: '1fr', xl: '1fr 333px' },
           }}
         >
