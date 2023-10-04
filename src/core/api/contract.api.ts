@@ -73,7 +73,7 @@ export const wagmiGetPremiumPrice = async (): Promise<any> => {
 };
 
 export const wagmiCheckName = async (name: string): Promise<any> => {
-  const action = async () => {
+  const action = async (name: string) => {
     return await readContract({
       address: '0x295954Ed3A7BDd3bbe875926adea5e5d7ab65571',
       abi: abiIXProjectSBT,
@@ -82,7 +82,7 @@ export const wagmiCheckName = async (name: string): Promise<any> => {
     });
   };
   try {
-    return await action();
+    return await action(name);
   } catch (error: any) {
     toast(error.shortMessage, { position: 'top-right' });
   }
