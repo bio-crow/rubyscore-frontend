@@ -21,7 +21,7 @@ const Footer = () => {
           width: '100%',
           display: 'flex',
           flexDirection: 'column',
-          padding: { xs: '0px 15px 0px 15px', xl: 0 },
+            padding: { xs: '0px 15px 0px 15px', sm: '0px 30px 0px 30px', xl: 0 },
         }}
       >
         <Section1 />

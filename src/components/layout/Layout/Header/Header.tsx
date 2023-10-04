@@ -74,7 +74,7 @@ const Header = () => {
           display: 'flex',
           gap: '20px',
           alignItems: 'center',
-          padding: { xs: '0px 15px 0px 15px', xl: 0 },
+          padding: { xs: '0px 15px 0px 15px', sm: '0px 30px 0px 30px', xl: 0 },
         }}
       >
         <Box flex='1' display='flex' alignItems='center'>
