@@ -1,5 +1,6 @@
 import { Box } from '@mui/system';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
+import Image from 'next/image';
 
 const Section2 = () => {
   const theme = useCustomTheme();
@@ -11,6 +12,8 @@ const Section2 = () => {
         gap: '25px',
         alignItems: 'center',
         padding: { xs: '0px 15px 0px 15px', xl: 0 },
+        position: 'relative',
+        zIndex: 5,
       }}
     >
       <Box
@@ -45,6 +48,18 @@ const Section2 = () => {
       >
         Raise it by being active, and watch your SBT level rise with it! After all, the higher your ranking,
         the closer you are to your goals and new opportunities.
+      </Box>
+      <Box
+        sx={{
+          position: 'absolute',
+          top: '-20vw',
+          right: 'calc((100% - 100vw) / 2)',
+          zIndex: '-1',
+          width: '40vw',
+          aspectRatio: '7/10',
+        }}
+      >
+        <Image src='/asserts/landing/landing-section2-bg1.png' alt='bg' fill />
       </Box>
     </Box>
   );

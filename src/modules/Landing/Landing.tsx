@@ -19,7 +19,7 @@ const Landing = () => {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          gap: { xs: '80px', md: '200px' },
+          gap: { xs: '150px', md: '200px' },
           padding: { xs: '0px 0px 80px 0px', md: '40px 0px 180px 0px' },
           width: '100%',
           position: 'relative',

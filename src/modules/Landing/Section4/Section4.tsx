@@ -20,9 +20,23 @@ const Section4 = () => {
           aspectRatio: '786/441',
           maxWidth: { xs: '1000px', lg: '786px' },
           position: 'relative',
+          zIndex: 5,
         }}
       >
         <Image src='/asserts/landing/landing-section3-img.svg' alt='img' fill />
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '0',
+            left: '-50%',
+            zIndex: '-1',
+            width: '40vw',
+            aspectRatio: '10/6',
+            borderRadius: '60vw',
+            background: '#92FD9D',
+            filter: 'blur(15vw)',
+          }}
+        />
       </Box>
       <Box
         sx={{

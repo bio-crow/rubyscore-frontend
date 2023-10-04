@@ -16,6 +16,8 @@ const Section1 = () => {
         gap: { xs: '20px', md: '40px' },
         alignItems: 'center',
         padding: { xs: '0px 15px 0px 15px', xl: 0 },
+        position: 'relative',
+        zIndex: 5,
       }}
     >
       <Box
@@ -64,6 +66,33 @@ const Section1 = () => {
         }}
       >
         <Image src='/asserts/landing/landing-section1-img.svg' alt='img' fill />
+      </Box>
+      <Box
+        sx={{
+          position: 'absolute',
+          top: '50px',
+          left: 'calc((100% - 100vw) / 2)',
+          zIndex: '-1',
+          width: '20vw',
+          aspectRatio: '1/2',
+        }}
+      >
+        <Image src='/asserts/landing/landing-section1-bg1.png' alt='bg' fill />
+      </Box>
+      <Box
+        sx={{
+          position: 'absolute',
+          top: '15vw',
+          right: '-30vw',
+          zIndex: '-1',
+          width: '60vw',
+          aspectRatio: '10/6',
+          borderRadius: '60vw',
+          background: '#92FD9D',
+          filter: 'blur(15vw)',
+        }}
+      >
+        <Image src='/asserts/landing/landing-section1-bg2.png' alt='bg' fill />
       </Box>
     </Box>
   );
