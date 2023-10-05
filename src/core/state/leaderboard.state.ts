@@ -51,6 +51,9 @@ export const leaderboardSlice = createSlice({
               wallet: state.leaderboardUser.wallet,
               name: state.leaderboardUser.name,
               score: state.leaderboardUser.score,
+              level: state.leaderboardUser.level,
+              activeReferrals: state.leaderboardUser.activeReferrals,
+              maxStreak: state.leaderboardUser.maxStreak,
             },
           ];
         }
@@ -87,6 +90,9 @@ export const leaderboardSlice = createSlice({
                 wallet: initUser.wallet,
                 name: initUser.name,
                 score: initUser.score,
+                level: initUser.level,
+                activeReferrals: initUser.activeReferrals,
+                maxStreak: initUser.maxStreak,
               },
             ];
           }

@@ -3,7 +3,6 @@ import React, { FC, ReactNode } from 'react';
 import merge from 'lodash.merge';
 import {
   RainbowKitProvider,
-  getDefaultWallets,
   connectorsForWallets,
   darkTheme,
   lightTheme,

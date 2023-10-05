@@ -48,12 +48,18 @@ export interface ILeaderboardData {
   name: string;
   score: number;
   rank?: number;
+  level: number;
+  activeReferrals: number;
+  maxStreak: number;
 }
 export interface ILeaderboardUser {
   position: number;
   wallet: string;
   name: string;
   score: number;
+  level: number;
+  activeReferrals: number;
+  maxStreak: number;
 }
 export interface INFTCard {
   image: string;

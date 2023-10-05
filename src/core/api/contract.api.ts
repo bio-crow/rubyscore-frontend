@@ -6,17 +6,22 @@ import { readContract } from '@wagmi/core';
 import { toast } from 'react-toastify';
 import { parseEther } from 'viem';
 import * as process from 'process';
-const address: any = process.env.NEXT_PUBLIC_SMART_CONTRACT;
+const baseConfig = {
+  address: process.env.NEXT_PUBLIC_SMART_CONTRACT,
+  abi: abiIXProjectSBT,
+};
 export const wagmiClaimName = async (data: IClaimPayload): Promise<any> => {
   const action = async ({ account, name, payable, price }: IClaimPayload) => {
-    const { hash } = await writeContract({
-      address: '0x295954Ed3A7BDd3bbe875926adea5e5d7ab65571',
-      abi: abiIXProjectSBT,
+    let config: any = {
+      ...baseConfig,
       functionName: 'claimName',
       account: account,
-      value: payable ? parseEther(price) : parseEther('0'),
-      args: [name],
-    });
+      args: [`${name}`],
+    };
+    if (payable) {
+      config.value = parseEther(price);
+    }
+    const { hash } = await writeContract(config);
     return await waitForTransaction({
       hash: hash,
     });
@@ -29,12 +34,12 @@ export const wagmiClaimName = async (data: IClaimPayload): Promise<any> => {
 };
 export const wagmiGetNameByOwner = async (address: any): Promise<any> => {
   const action = async (address: any) => {
-    return await readContract({
-      address: '0x295954Ed3A7BDd3bbe875926adea5e5d7ab65571',
-      abi: abiIXProjectSBT,
+    let config: any = {
+      ...baseConfig,
       functionName: 'getNameByOwner',
       args: [address],
-    });
+    };
+    return await readContract(config);
   };
   try {
     return await action(address);
@@ -44,12 +49,12 @@ export const wagmiGetNameByOwner = async (address: any): Promise<any> => {
 };
 export const wagmiGetPremiumStatus = async (address: any): Promise<any> => {
   const action = async (address: any) => {
-    return await readContract({
-      address: '0x295954Ed3A7BDd3bbe875926adea5e5d7ab65571',
-      abi: abiIXProjectSBT,
+    let config: any = {
+      ...baseConfig,
       functionName: 'getPremiumStatus',
       args: [address],
-    });
+    };
+    return await readContract(config);
   };
   try {
     return await action(address);
@@ -59,11 +64,11 @@ export const wagmiGetPremiumStatus = async (address: any): Promise<any> => {
 };
 export const wagmiGetPremiumPrice = async (): Promise<any> => {
   const action = async () => {
-    return await readContract({
-      address: '0x295954Ed3A7BDd3bbe875926adea5e5d7ab65571',
-      abi: abiIXProjectSBT,
+    let config: any = {
+      ...baseConfig,
       functionName: 'getPremiumPrice',
-    });
+    };
+    return await readContract(config);
   };
   try {
     return await action();
@@ -74,12 +79,12 @@ export const wagmiGetPremiumPrice = async (): Promise<any> => {
 
 export const wagmiCheckName = async (name: string): Promise<any> => {
   const action = async (name: string) => {
-    return await readContract({
-      address: '0x295954Ed3A7BDd3bbe875926adea5e5d7ab65571',
-      abi: abiIXProjectSBT,
+    let config: any = {
+      ...baseConfig,
       functionName: 'checkName',
-      args: [name],
-    });
+      args: [`${name}`],
+    };
+    return await readContract(config);
   };
   try {
     return await action(name);

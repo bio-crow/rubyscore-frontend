@@ -48,7 +48,7 @@ export const leaderBoardBaseColumns: GridColDef[] = [
     width: 150,
   },
   {
-    field: 'lvl',
+    field: 'level',
     headerName: 'Level',
     sortable: false,
     width: 150,
@@ -60,7 +60,7 @@ export const leaderBoardBaseColumns: GridColDef[] = [
     width: 200,
   },
   {
-    field: 'maxSteak',
+    field: 'maxStreak',
     headerName: 'Max Steak',
     sortable: false,
     width: 150,

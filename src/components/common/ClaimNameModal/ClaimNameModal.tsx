@@ -15,9 +15,11 @@ import { CLAIM_PROFILE_FIELDS } from '@/constants/formFields';
 import { wagmiCheckName } from '@/core/api/contract.api';
 import { claimProfile } from '@/core/thunk/user.thunk';
 import { useAccount } from 'wagmi';
+
 interface Props {
   Trigger: any;
 }
+
 const ClaimNameModal: FC<Props> = ({ Trigger }) => {
   const claimProfileLoading = useAppSelector(state => state.userState.claimProfileLoading);
   const premiumPrice = useAppSelector(state => state.userState.premiumPrice);
@@ -67,7 +69,7 @@ const ClaimNameModal: FC<Props> = ({ Trigger }) => {
         price: premiumPrice,
       };
       dispatch(claimProfile(data));
-    } else {
+    } else if (isValid !== undefined) {
       setErrorText(true);
     }
   };
