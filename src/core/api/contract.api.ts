@@ -16,10 +16,13 @@ export const wagmiClaimName = async (data: IClaimPayload): Promise<any> => {
       ...baseConfig,
       functionName: 'claimName',
       account: account,
-      args: [`${name}`],
+      args: [''],
     };
     if (payable) {
       config.value = parseEther(price);
+    }
+    if (name) {
+      config.args = [`${name}`];
     }
     const { hash } = await writeContract(config);
     return await waitForTransaction({
@@ -89,6 +92,6 @@ export const wagmiCheckName = async (name: string): Promise<any> => {
   try {
     return await action(name);
   } catch (error: any) {
-    toast(error.shortMessage, { position: 'top-right' });
+    //console.error(error);
   }
 };

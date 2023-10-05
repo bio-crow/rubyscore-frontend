@@ -37,7 +37,7 @@ export interface ILeaderBoardResponse {
 }
 export interface IClaimPayload {
   account: any;
-  name: string;
+  name?: string;
   price: string;
   payable?: boolean;
 }

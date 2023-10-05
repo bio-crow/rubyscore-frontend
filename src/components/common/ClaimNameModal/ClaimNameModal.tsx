@@ -57,20 +57,26 @@ const ClaimNameModal: FC<Props> = ({ Trigger }) => {
   const onSubmit = async (data: any) => {
     setErrorText(false);
     const name = data[CLAIM_PROFILE_FIELDS.NAME];
-    let isValid = true;
     if (name !== userName) {
-      isValid = await wagmiCheckName(name);
-    }
-    if (isValid) {
+      const isValid = await wagmiCheckName(name);
+      if (isValid) {
+        data = {
+          account: address,
+          payable: true,
+          name: name,
+          price: premiumPrice,
+        };
+        dispatch(claimProfile(data));
+      } else {
+        setErrorText(true);
+      }
+    } else {
       data = {
         account: address,
         payable: true,
-        name: name,
         price: premiumPrice,
       };
       dispatch(claimProfile(data));
-    } else if (isValid !== undefined) {
-      setErrorText(true);
     }
   };
   const onError = (data: any) => {
