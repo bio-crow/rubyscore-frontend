@@ -7,32 +7,29 @@ const CustomInput = styled(TextField)(({ theme }: { theme: CustomTheme | any }) 
     '&.MuiTextField-root': {
       '.MuiOutlinedInput-root': {
         background: theme.palette.white10,
-        border: `none`,
+        border: `1px solid ${theme.palette.white10}`,
         fontSize: '16px',
         fontStyle: 'normal',
         fontWeight: '700',
         lineHeight: '23px',
         borderRadius: '10px',
-        paddingRight: '0px',
+        padding: '12px 24px 12px 24px',
+        '&:hover': {
+          border: `1px solid ${theme.palette.white50}`,
+        },
+        '&:focus': {
+          border: `1px solid ${theme.palette.lightGreen}`,
+        },
         input: {
           borderRadius: '10px',
-          padding: '12px 24px 12px 24px',
-          paddingRight: '90px',
-          border: `1px solid ${theme.palette.white10}`,
+          padding: 0,
+          border: `none`,
           '&:hover': {
-            border: `1px solid ${theme.palette.white50}`,
+            border: `none`,
           },
           '&:focus': {
-            border: `1px solid ${theme.palette.lightGreen}`,
+            border: `none`,
           },
-        },
-        '.MuiBox-root': {
-          position: 'absolute',
-          width: '60px',
-          display: 'flex',
-          justifyContent: 'flex-end',
-          textAlign: 'right',
-          right: '24px',
         },
         fieldset: {
           border: 'none',

@@ -35,6 +35,15 @@ export interface ILeaderBoardResponse {
     user: ILeaderboardUser;
   };
 }
+export interface ISearchUserPayload {
+  project: string;
+  wallet: string;
+}
+export interface ISearchUserResponse {
+  result: {
+    user: ILeaderboardUser;
+  };
+}
 export interface IClaimPayload {
   account: any;
   name?: string;

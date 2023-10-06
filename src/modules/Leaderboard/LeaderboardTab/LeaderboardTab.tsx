@@ -5,6 +5,7 @@ import { FC } from 'react';
 import { ILeaderboardData } from '@/types/index';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { useAppSelector } from '@/core/store';
+import LeaderBoardSearch from '@/modules/Leaderboard/LeaderBoardSearch/LeaderBoardSearch';
 
 interface Props {
   activeTab: any;
@@ -20,16 +21,38 @@ const LeaderboardTab: FC<Props> = ({ tableData, activeTab }) => {
       <Box
         sx={{
           display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
+          flexDirection: 'column',
           gap: '20px',
         }}
       >
-        <Box color={theme.palette.powderWhite} className='H1-Lato-fw-700-fs-32'>
-          {`Leaderboard - ${activeTab.label}`}
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '20px',
+          }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              gap: '20px',
+              width: '100%',
+              justifyContent: 'space-between',
+              alignItems: { xs: 'unset', md: 'center' },
+              flexDirection: { xs: 'column', md: 'row' },
+            }}
+          >
+            <Box flex='1' color={theme.palette.powderWhite} className='H1-Lato-fw-700-fs-32'>
+              {`Leaderboard - ${activeTab.label}`}
+            </Box>
+            <Box minWidth='250px'>
+              <LeaderBoardSearch activeTab={activeTab} />
+            </Box>
+          </Box>
         </Box>
+        <LeaderboardTabTable tableData={tableData} />
       </Box>
-      <LeaderboardTabTable tableData={tableData} />
     </>
   );
 };
