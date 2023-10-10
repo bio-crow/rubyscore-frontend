@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from '@/core/store';
 import { claimProfile } from '@/core/thunk/user.thunk';
 import { wagmiCheckName } from '@/core/api/contract.api';
 import * as process from 'process';
+import WarningIcon from '@/components/common/Icons/WarningIcon';
 
 const ClaimProfile = () => {
   const theme = useCustomTheme();
@@ -110,7 +111,21 @@ const ClaimProfile = () => {
           </Box>
         </Box>
         <ClaimProfileForm onSubmit={onSubmit} onError={onError} isLoading={claimProfileLoading} />
-        {errorText && <Box color='red'>Invalid name</Box>}
+        {errorText && (
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              color: theme.palette.red,
+              gap: '10px',
+              padding: '10px 10px 10px 10px',
+            }}
+            className='Body-Lato-fw-700-fs-16'
+          >
+            <WarningIcon fill={theme.palette.red} />
+            <Box>Invalid name</Box>
+          </Box>
+        )}
       </Box>
     </ClaimProfileFormContext.Provider>
   );

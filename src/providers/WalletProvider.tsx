@@ -21,36 +21,12 @@ import { store } from '@/core/store';
 import { Provider } from 'react-redux';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import * as process from 'process';
+import { appInfo, chains, wagmiConfig } from '@/providers/walletConfig';
 
 type Props = {
   children: ReactNode;
 };
-const { chains, publicClient, webSocketPublicClient } = configureChains([polygonMumbai], [publicProvider()]);
 
-const projectId = process.env.NEXT_PUBLIC_WC_PROJECT_ID || '';
-
-const demoAppInfo = {
-  appName: 'Rainbowkit Demo',
-};
-
-const connectors = connectorsForWallets([
-  {
-    groupName: 'Recommended',
-    wallets: [
-      metaMaskWallet({ projectId, chains }),
-      trustWallet({ projectId, chains }),
-      walletConnectWallet({ projectId, chains }),
-      coinbaseWallet({ appName: 'RubyScore', chains }),
-    ],
-  },
-]);
-
-const wagmiConfig = createConfig({
-  autoConnect: true,
-  connectors,
-  publicClient,
-  webSocketPublicClient,
-});
 const customDarkTheme = merge(darkTheme(), {
   colors: {
     accentColor: '#92fe9d',
@@ -67,7 +43,7 @@ const WalletProvider: FC<Props> = ({ children }) => {
   return (
     <Provider store={store}>
       <WagmiConfig config={wagmiConfig}>
-        <RainbowKitProvider appInfo={demoAppInfo} chains={chains} theme={currentTheme}>
+        <RainbowKitProvider appInfo={appInfo} chains={chains} theme={currentTheme}>
           {children}
         </RainbowKitProvider>
       </WagmiConfig>

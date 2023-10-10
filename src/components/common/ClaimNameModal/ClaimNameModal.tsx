@@ -15,6 +15,7 @@ import { CLAIM_PROFILE_FIELDS } from '@/constants/formFields';
 import { wagmiCheckName } from '@/core/api/contract.api';
 import { claimProfile } from '@/core/thunk/user.thunk';
 import { useAccount } from 'wagmi';
+import WarningIcon from '@/components/common/Icons/WarningIcon';
 
 interface Props {
   Trigger: any;
@@ -183,7 +184,21 @@ const ClaimNameModal: FC<Props> = ({ Trigger }) => {
                 control={control}
                 placeholder='Search for your name'
               />
-              {errorText && <Box color='red'>Invalid name</Box>}
+              {errorText && (
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    color: theme.palette.red,
+                    gap: '10px',
+                    padding: '10px 10px 10px 10px',
+                  }}
+                  className='Body-Lato-fw-700-fs-16'
+                >
+                  <WarningIcon fill={theme.palette.red} />
+                  <Box>Invalid name</Box>
+                </Box>
+              )}
             </Box>
             <Box
               sx={{

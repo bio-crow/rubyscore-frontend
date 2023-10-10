@@ -5,6 +5,7 @@ export interface CustomTheme {
     mode: string;
     black: string;
     gray: string;
+    red: string;
     white10: string;
     white50: string;
     backgroundColor: string;
@@ -59,6 +60,7 @@ export const getDesignTokens = (mode: PaletteMode) => ({
       ? {
           black: '#1c1e25',
           gray: '#484C5B',
+          red: '#F53C28',
           white10: '#f5f7f31a',
           white50: '#f5f7f380',
           backgroundColor: '#121317',
@@ -96,6 +98,7 @@ export const getDesignTokens = (mode: PaletteMode) => ({
       : {
           black: '#FFFFFF',
           gray: '#484C5B',
+          red: '#F53C28',
           white10: '#333333',
           white50: '#333333',
           backgroundColor: '#FFFFFF',
