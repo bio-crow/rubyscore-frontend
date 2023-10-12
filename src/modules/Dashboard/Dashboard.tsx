@@ -54,7 +54,7 @@ const Dashboard = () => {
           variant={isMd ? 'fullWidth' : 'scrollable'}
         >
           {panelTabs.map(item => (
-            <Tab key={item.label} label={item.label} {...a11yProps(item.index)} />
+            <Tab key={item.index} label={item.label} {...a11yProps(item.index)} value={item.index} />
           ))}
         </DashboardTabs>
         <DashboardTab activeTab={activeTab} />
