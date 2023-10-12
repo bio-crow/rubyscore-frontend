@@ -4,12 +4,13 @@ import MyLevelSection from '@/components/common/sections/MyLevelSection/MyLevelS
 import MainInfo from '@/modules/Dashboard/DashboardTab/MainInfo/MainInfo';
 import Achievements from '@/modules/Dashboard/DashboardTab/Achievements/Achievements';
 import Transactions from '@/modules/Dashboard/DashboardTab/Transactions/Transactions';
+import { DashboardTabIndexType } from '@/types/index';
 
 interface Props {
-  title: string;
+  activeTab: { index: DashboardTabIndexType; label: string };
 }
 
-const DashboardTab: FC<Props> = () => {
+const DashboardTab: FC<Props> = ({ activeTab }) => {
   return (
     <Box
       sx={{
@@ -20,7 +21,7 @@ const DashboardTab: FC<Props> = () => {
     >
       <MainInfo />
       <MyLevelSection />
-      <Transactions />
+      <Transactions activeTab={activeTab} />
       <Achievements />
     </Box>
   );

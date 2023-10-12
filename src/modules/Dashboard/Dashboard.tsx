@@ -5,43 +5,37 @@ import { SyntheticEvent, useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import DashboardTab from '@/modules/Dashboard/DashboardTab/DashboardTab';
 import DashboardTabs from '@/components/common/ui/DashboardTabs/DashboardTabs';
-type TabIndexType = 0 | 1 | 2 | 3 | 4;
-const panelTabs = [
+import { DashboardTabIndexType } from '@/types/index';
+
+const panelTabs: { index: DashboardTabIndexType; label: string }[] = [
   {
-    index: 0,
+    index: 'zk_era',
     label: 'ZkSync',
   },
   {
-    index: 1,
+    index: 'linea',
     label: 'Linea',
   },
   {
-    index: 2,
+    index: 'base',
     label: 'Base',
   },
   {
-    index: 3,
+    index: 'zora',
     label: 'Zora',
   },
   {
-    index: 4,
+    index: 'zk_evm',
     label: 'ZkEvm',
   },
 ];
 const Dashboard = () => {
   const theme = useCustomTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'));
-  const [activeTabIndex, setActiveTabIndex] = useState<TabIndexType>(0);
-  const handleChange = (event: SyntheticEvent, newValue: TabIndexType) => {
-    setActiveTabIndex(newValue);
-  };
-  const dashboardTabs = {
-    0: <DashboardTab title='RubyScore' />,
-    1: <DashboardTab title='ZkSync' />,
-    2: <DashboardTab title='Linea' />,
-    3: <DashboardTab title='Base' />,
-    4: <DashboardTab title='Zora' />,
-    5: <DashboardTab title='ZkEvm' />,
+  const [activeTab, setActiveTab] = useState<{ index: DashboardTabIndexType; label: string }>(panelTabs[0]);
+  const handleChange = (event: SyntheticEvent, newValue: DashboardTabIndexType) => {
+    const tab = panelTabs.find(item => item.index === newValue);
+    tab && setActiveTab(tab);
   };
   return (
     <Layout>
@@ -55,7 +49,7 @@ const Dashboard = () => {
         }}
       >
         <DashboardTabs
-          value={activeTabIndex}
+          value={activeTab.index}
           onChange={handleChange}
           variant={isMd ? 'fullWidth' : 'scrollable'}
         >
@@ -63,14 +57,14 @@ const Dashboard = () => {
             <Tab key={item.label} label={item.label} {...a11yProps(item.index)} />
           ))}
         </DashboardTabs>
-        {dashboardTabs[activeTabIndex]}
+        <DashboardTab activeTab={activeTab} />
       </Box>
     </Layout>
   );
 };
 export default Dashboard;
 
-function a11yProps(index: number) {
+function a11yProps(index: string) {
   return {
     id: `leaderboard-tab-${index}`,
     'aria-controls': `leaderboard-tabpanel-${index}`,

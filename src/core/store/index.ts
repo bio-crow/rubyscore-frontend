@@ -3,11 +3,13 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import authReducer from '@/core/state/auth.state';
 import userReducer from '@/core/state/user.state';
 import leaderboardReducer from '@/core/state/leaderboard.state';
+import dashboardReducer from '@/core/state/dashboard.state';
 export const store = configureStore({
   reducer: {
     authState: authReducer,
     userState: userReducer,
     leaderboardState: leaderboardReducer,
+    dashboardState: dashboardReducer,
   },
 });
 export type RootState = ReturnType<typeof store.getState>;

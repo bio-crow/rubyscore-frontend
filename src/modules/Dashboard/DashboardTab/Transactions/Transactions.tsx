@@ -2,52 +2,66 @@ import { Box } from '@mui/system';
 import TransactionInfo from '@/modules/Dashboard/DashboardTab/Transactions/TransactionInfo/TransactionInfo';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { SyntheticEvent, useState } from 'react';
+import { FC, SyntheticEvent, useEffect, useState } from 'react';
 import TransactionChart from '@/modules/Dashboard/DashboardTab/Transactions/TransactionChart/TransactionChart';
 import { Tab } from '@mui/material';
 import ChartTabs from '@/components/common/ui/ChartTabs/ChartTabs';
-type TabIndexType = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
-const panelTabs = [
+import { ChartIndexType, DashboardTabIndexType } from '@/types/index';
+import { useAppDispatch, useAppSelector } from '@/core/store';
+import { getDashboardChartData } from '@/core/thunk/dashboard.thunk';
+const panelTabs: { index: ChartIndexType; label: string }[] = [
   {
-    index: 0,
+    index: 'transactions',
     label: 'On-chain transactions',
   },
   {
-    index: 1,
+    index: 'contracts',
     label: 'On-chain contracts',
   },
   {
-    index: 2,
+    index: 'days',
     label: 'Days on chain',
   },
   {
-    index: 3,
+    index: 'weeks',
     label: 'Weeks on chain',
   },
   {
-    index: 4,
+    index: 'months',
     label: 'Month on chain',
   },
   {
-    index: 5,
-    label: 'Balance',
-  },
-  {
-    index: 6,
+    index: 'gas',
     label: 'Gas spent',
   },
   {
-    index: 7,
+    index: 'volume',
     label: 'On-chain volume',
   },
+  {
+    index: 'balance',
+    label: 'Balance',
+  },
 ];
-const Transactions = () => {
+interface Props {
+  activeTab: { index: DashboardTabIndexType; label: string };
+}
+const Transactions: FC<Props> = ({ activeTab }) => {
   const theme = useCustomTheme();
+  const dispatch = useAppDispatch();
+  const loading = useAppSelector(state => state.dashboardState.loading);
+  const chartData = useAppSelector(state => state.dashboardState.chartData);
   const isXLg = useMediaQuery(theme.breakpoints.up('xlg'));
-  const [activeTabIndex, setActiveTabIndex] = useState<TabIndexType>(0);
-  const handleChange = (event: SyntheticEvent, newValue: TabIndexType) => {
-    setActiveTabIndex(newValue);
+  const [activeChartTab, setActiveChartTab] = useState<{ index: ChartIndexType; label: string }>(
+    panelTabs[0]
+  );
+  const handleChange = (event: SyntheticEvent, newValue: ChartIndexType) => {
+    const tab = panelTabs.find(item => item.index === newValue);
+    tab && setActiveChartTab(tab);
   };
+  useEffect(() => {
+    dispatch(getDashboardChartData({ projectName: 'linea', type: activeChartTab.index }));
+  }, [activeTab, activeChartTab]);
   return (
     <Box
       sx={{
@@ -69,22 +83,22 @@ const Transactions = () => {
         }}
       >
         <ChartTabs
-          value={activeTabIndex}
+          value={activeChartTab.index}
           onChange={handleChange}
           variant={isXLg ? 'fullWidth' : 'scrollable'}
         >
           {panelTabs.map(item => (
-            <Tab key={item.label} label={item.label} {...a11yProps(item.index)} />
+            <Tab key={item.index} label={item.label} {...a11yProps(item.index)} value={item.index} />
           ))}
         </ChartTabs>
-        <TransactionChart index={activeTabIndex} />
+        <TransactionChart data={chartData} loading={loading} />
       </Box>
     </Box>
   );
 };
 export default Transactions;
 
-function a11yProps(index: number) {
+function a11yProps(index: string) {
   return {
     id: `leaderboard-tab-${index}`,
     'aria-controls': `leaderboard-tabpanel-${index}`,
