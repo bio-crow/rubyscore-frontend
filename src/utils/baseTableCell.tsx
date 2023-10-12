@@ -21,7 +21,15 @@ export const ReferralUserCell = (params: GridRenderCellParams<any>) => {
         gap: '10px',
       }}
     >
-      <Image src='/asserts/emptyUserIcon.svg' alt='icon' width='32' height='32' />
+      <Image
+        src='/asserts/FreeAvatar.svg'
+        alt='icon'
+        width='32'
+        height='32'
+        style={{
+          borderRadius: '5px',
+        }}
+      />
       {isYou ? (
         <Box>You</Box>
       ) : (

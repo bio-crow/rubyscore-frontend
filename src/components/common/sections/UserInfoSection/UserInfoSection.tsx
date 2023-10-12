@@ -43,7 +43,15 @@ const UserInfoSection = () => {
           alignItems: 'center',
         }}
       >
-        <Image src='/asserts/emptyUserIcon.svg' alt='icon' width='64' height='64' />
+        <Image
+          src='/asserts/FreeAvatar.svg'
+          alt='icon'
+          width='64'
+          height='64'
+          style={{
+            borderRadius: '5px',
+          }}
+        />
         <Box
           sx={{
             display: 'flex',

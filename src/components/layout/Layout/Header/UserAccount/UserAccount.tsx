@@ -37,6 +37,7 @@ const UserAccount: FC<Props> = ({ navLinks }) => {
     setAnchorEl(null);
     dispatch(logout());
   };
+  const premiumStatus = useAppSelector(state => state.userState.premiumStatus);
   const maskedAddress = address && address.slice(0, 6) + '...' + address.slice(-6);
   const isAuth = useAppSelector(state => state.authState.isAuth);
   const userName = useAppSelector(state => state.userState.userName);
@@ -56,7 +57,15 @@ const UserAccount: FC<Props> = ({ navLinks }) => {
       }}
     >
       <Box display='flex' alignItems='center' gap='5px'>
-        <Image src='/asserts/emptyUserIcon.svg' alt='icon' width='32' height='32' />
+        <Image
+          src={premiumStatus ? '/asserts/PremiumAvatar.svg' : '/asserts/FreeAvatar.svg'}
+          alt='icon'
+          width='32'
+          height='32'
+          style={{
+            borderRadius: '5px',
+          }}
+        />
         <Box
           sx={{
             display: { xs: 'none', sm: 'flex' },

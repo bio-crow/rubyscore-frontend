@@ -30,10 +30,13 @@ const UserInfo = () => {
       }}
     >
       <Image
-        src='/asserts/emptyUserIcon.svg'
+        src={premiumStatus ? '/asserts/PremiumAvatar.svg' : '/asserts/FreeAvatar.svg'}
         width={isClaimed ? '90' : '40'}
         height={isClaimed ? '90' : '40'}
         alt='icon'
+        style={{
+          borderRadius: '5px',
+        }}
       />
       {isNew && (
         <Box flex='1' className='profile-Lato-fw-700-fs-20'>
