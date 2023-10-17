@@ -37,7 +37,9 @@ const LeaderboardTabTable: FC<Props> = ({ tableData }) => {
         slots={{
           noRowsOverlay: CustomNoRows,
         }}
-        onRowClick={() => router.push(appRoutes.LEADERBOARD_USER)}
+        onRowClick={(data: any) => {
+          router.push(`${appRoutes.LEADERBOARD_USER}/${data.row.wallet}`);
+        }}
         initialState={{
           pagination: {
             paginationModel: {

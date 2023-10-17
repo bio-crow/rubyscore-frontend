@@ -22,7 +22,7 @@ export const ReferralUserCell = (params: GridRenderCellParams<any>) => {
       }}
     >
       <Image
-        src='/asserts/FreeAvatar.svg'
+        src={params.row.isPremium ? '/asserts/PremiumAvatar.svg' : '/asserts/FreeAvatar.svg'}
         alt='icon'
         width='32'
         height='32'

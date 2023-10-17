@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchPrivateLeaderboard, fetchPublicLeaderboard } from '@/core/api/leaderboard.api';
-import { initLeaderBoard } from '@/core/state/leaderboard.state';
+import { fetchPrivateLeaderboard, fetchPublicLeaderboard, searchUser } from '@/core/api/leaderboard.api';
+import { initLeaderBoard, setUserStatistics } from '@/core/state/leaderboard.state';
 
 export const getPublicLeaderboardData = createAsyncThunk(
   'leaderboardSlice/getPublicLeaderBoardData',
@@ -15,5 +15,25 @@ export const getPrivateLeaderboardData = createAsyncThunk(
   async (projectName: string, { dispatch }) => {
     const data = await fetchPrivateLeaderboard(projectName);
     dispatch(initLeaderBoard(data));
+    return;
+  }
+);
+
+export const getUserStatistics = createAsyncThunk(
+  'leaderboardSlice/getUserStatistics',
+  async (
+    params: {
+      wallet: string;
+      project: string;
+    },
+    { dispatch }
+  ) => {
+    const data: any = await searchUser(params);
+    if (data.data.result) {
+      dispatch(setUserStatistics(data.data.result.user));
+    } else {
+      dispatch(setUserStatistics(null));
+    }
+    return;
   }
 );

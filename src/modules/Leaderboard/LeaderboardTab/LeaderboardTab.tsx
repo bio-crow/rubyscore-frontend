@@ -14,10 +14,11 @@ interface Props {
 
 const LeaderboardTab: FC<Props> = ({ tableData, activeTab }) => {
   const theme = useCustomTheme();
+  const leaderboardUser = useAppSelector(state => state.leaderboardState.leaderboardUser);
   const isAuth = useAppSelector(state => state.authState.isAuth);
   return (
     <>
-      {isAuth && <UserInfoSection />}
+      {isAuth && <UserInfoSection user={leaderboardUser} />}
       <Box
         sx={{
           display: 'flex',

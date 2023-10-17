@@ -4,24 +4,30 @@ import Image from 'next/image';
 import CopyIcon from '@/components/common/Icons/CopyIcon';
 import { useAccount } from 'wagmi';
 import { copyToClickBoard } from '@/utils/helpers';
-const options = [
-  {
-    label: 'Points',
-    value: 1,
-  },
-  {
-    label: 'Max Steak',
-    value: 2,
-  },
-  {
-    label: 'Active referrals',
-    value: 3,
-  },
-];
-const UserInfoSection = () => {
+import { ILeaderboardUser } from '@/types/index';
+import { FC } from 'react';
+
+interface Props {
+  user: ILeaderboardUser | null;
+}
+const UserInfoSection: FC<Props> = ({ user }) => {
   const theme = useCustomTheme();
   const { address } = useAccount();
-  const maskedAddress = address && address.slice(0, 6) + '...' + address.slice(-6);
+  const maskedAddress = user && user.wallet.slice(0, 6) + '...' + user.wallet.slice(-6);
+  const options = [
+    {
+      label: 'Points',
+      value: user?.score,
+    },
+    {
+      label: 'Max Steak',
+      value: user?.maxStreak,
+    },
+    {
+      label: 'Active referrals',
+      value: user?.activeReferrals,
+    },
+  ];
   return (
     <Box
       sx={{
@@ -44,7 +50,7 @@ const UserInfoSection = () => {
         }}
       >
         <Image
-          src='/asserts/FreeAvatar.svg'
+          src={user?.isPremium ? '/asserts/PremiumAvatar.svg' : '/asserts/FreeAvatar.svg'}
           alt='icon'
           width='64'
           height='64'
@@ -73,7 +79,7 @@ const UserInfoSection = () => {
               }}
               className='Body-Inter-fw-700-fs-16'
             >
-              {maskedAddress}
+              {user?.name || maskedAddress}
             </Box>
             <Box
               sx={{
@@ -96,7 +102,7 @@ const UserInfoSection = () => {
             }}
             className='Body-Inter-fw-700-fs-16'
           >
-            0 Level
+            {user?.level} Level
           </Box>
         </Box>
       </Box>
@@ -161,10 +167,10 @@ const UserInfoSection = () => {
             }}
           >
             <Box className='Body-Inter-fw-700-fs-18' color={theme.palette.lightGreen}>
-              3 456 556
+              {user?.position}
             </Box>
             <Box className='Body-Inter-fw-700-fs-18' color={theme.palette.white50}>
-              of 3 456 556
+              of {user?.maxPosition}
             </Box>
           </Box>
         </Box>

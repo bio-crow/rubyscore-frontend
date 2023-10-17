@@ -7,6 +7,7 @@ import { ILeaderBoardResponse } from '@/core/types';
 interface ILeaderboardState {
   leaderboard: ILeaderboardData[];
   leaderboardUser: ILeaderboardUser | null;
+  userStatistics: ILeaderboardUser | null;
   refCode: string | null;
   loading: boolean;
   currentPage: number;
@@ -18,6 +19,7 @@ interface ILeaderboardState {
 const initialState: ILeaderboardState = {
   leaderboard: [],
   leaderboardUser: null,
+  userStatistics: null,
   refCode: null,
   loading: false,
   currentPage: 1,
@@ -30,6 +32,9 @@ export const leaderboardSlice = createSlice({
   initialState,
   name: 'leaderboardSlice',
   reducers: {
+    setUserStatistics: (state, action: PayloadAction<ILeaderboardUser | null>) => {
+      state.userStatistics = action.payload;
+    },
     setCurrentPage: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload;
       const lastIndex = state.currentPage * state.onPage;
@@ -54,6 +59,7 @@ export const leaderboardSlice = createSlice({
               level: state.leaderboardUser.level,
               activeReferrals: state.leaderboardUser.activeReferrals,
               maxStreak: state.leaderboardUser.maxStreak,
+              isPremium: state.leaderboardUser.isPremium,
             },
           ];
         }
@@ -93,6 +99,7 @@ export const leaderboardSlice = createSlice({
                 level: initUser.level,
                 activeReferrals: initUser.activeReferrals,
                 maxStreak: initUser.maxStreak,
+                isPremium: initUser.isPremium,
               },
             ];
           }
@@ -107,4 +114,4 @@ export const leaderboardSlice = createSlice({
 
 export default leaderboardSlice.reducer;
 
-export const { setCurrentPage, initLeaderBoard } = leaderboardSlice.actions;
+export const { setCurrentPage, initLeaderBoard, setUserStatistics } = leaderboardSlice.actions;

@@ -63,6 +63,8 @@ export interface ILeaderboardData {
 }
 export interface ILeaderboardUser {
   position: number;
+  isPremium: boolean;
+  maxPosition?: number;
   wallet: string;
   name: string;
   score: number;
