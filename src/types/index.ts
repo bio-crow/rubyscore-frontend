@@ -60,6 +60,7 @@ export interface ILeaderboardData {
   level: number;
   activeReferrals: number;
   maxStreak: number;
+  isPremium: boolean;
 }
 export interface ILeaderboardUser {
   position: number;

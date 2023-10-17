@@ -29,14 +29,14 @@ const breakpointsConfig = {
 };
 const LeaderBoardUser = () => {
   const theme = useCustomTheme();
-  const { wallet } = useParams();
+  const params: any = useParams();
   const userStatistics = useAppSelector(state => state.leaderboardState.userStatistics);
   const dispatch = useAppDispatch();
   useEffect(() => {
-    if (wallet) {
+    if (params.wallet) {
       const data = {
         project: 'rubyscore',
-        wallet: wallet,
+        wallet: params.wallet,
       };
       dispatch(getUserStatistics(data));
     } else {
