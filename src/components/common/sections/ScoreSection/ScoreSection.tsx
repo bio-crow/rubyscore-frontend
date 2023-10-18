@@ -8,6 +8,7 @@ import NextIcon from '@/components/common/Icons/NextIcon';
 import { v4 as uuidv4 } from 'uuid';
 import { IScoreNetwork } from '@/types/index';
 import NetworkCard from '@/components/common/sections/ScoreSection/NetworkCard/NetworkCard';
+import { networkStaticData } from '@/constants/index';
 interface btnProps {
   hasNext?: boolean;
   onClick: Function;
@@ -15,31 +16,31 @@ interface btnProps {
 const networks: IScoreNetwork[] = [
   {
     title: 'zkSync',
-    icon: '/asserts/net/zkSync.svg',
+    icon: networkStaticData['zk_era'].icon,
     lvl: 2,
     points: 345,
   },
   {
     title: 'Linea',
-    icon: '/asserts/net/Linea.svg',
+    icon: networkStaticData['linea'].icon,
     lvl: 6,
     points: 345567,
   },
   {
     title: 'Base',
-    icon: '/asserts/net/Base.svg',
+    icon: networkStaticData['base'].icon,
     lvl: 0,
     points: 0,
   },
   {
     title: 'Zora',
-    icon: '/asserts/net/Zora.svg',
+    icon: networkStaticData['zora'].icon,
     lvl: 10,
     points: 678678,
   },
   {
     title: 'zkEvm',
-    icon: '/asserts/net/zkEvm.svg',
+    icon: networkStaticData['zk_evm'].icon,
     lvl: 10,
     points: 123456,
   },

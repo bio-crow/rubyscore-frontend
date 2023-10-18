@@ -8,6 +8,7 @@ interface ILeaderboardState {
   leaderboard: ILeaderboardData[];
   leaderboardUser: ILeaderboardUser | null;
   userStatistics: ILeaderboardUser | null;
+  userStatisticsLoading: boolean;
   refCode: string | null;
   loading: boolean;
   currentPage: number;
@@ -19,6 +20,7 @@ interface ILeaderboardState {
 const initialState: ILeaderboardState = {
   leaderboard: [],
   leaderboardUser: null,
+  userStatisticsLoading: false,
   userStatistics: null,
   refCode: null,
   loading: false,
@@ -34,6 +36,9 @@ export const leaderboardSlice = createSlice({
   reducers: {
     setUserStatistics: (state, action: PayloadAction<ILeaderboardUser | null>) => {
       state.userStatistics = action.payload;
+    },
+    setUserStatisticsLoading: (state, action: PayloadAction<boolean>) => {
+      state.userStatisticsLoading = action.payload;
     },
     setCurrentPage: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload;
@@ -114,4 +119,5 @@ export const leaderboardSlice = createSlice({
 
 export default leaderboardSlice.reducer;
 
-export const { setCurrentPage, initLeaderBoard, setUserStatistics } = leaderboardSlice.actions;
+export const { setCurrentPage, setUserStatisticsLoading, initLeaderBoard, setUserStatistics } =
+  leaderboardSlice.actions;

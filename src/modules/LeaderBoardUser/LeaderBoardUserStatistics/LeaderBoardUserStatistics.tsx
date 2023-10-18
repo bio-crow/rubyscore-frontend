@@ -7,23 +7,14 @@ import { SyntheticEvent, useState } from 'react';
 import DashboardTab from '@/modules/Dashboard/DashboardTab/DashboardTab';
 import LeaderBoardAchievementTab from '@/modules/LeaderBoardUser/LeaderBoardUserStatistics/LeaderBoardAchievementTab/LeaderBoardAchievementTab';
 import LeaderBoardNFTTab from '@/modules/LeaderBoardUser/LeaderBoardUserStatistics/LeaderBoardNFTTab/LeaderBoardNFTTab';
+import { useAppSelector } from '@/core/store';
 
 type TabIndexType = 0 | 1;
-const panelTabs = [
-  {
-    index: 0,
-    label: 'Quests completed',
-    value: 278,
-  },
-  {
-    index: 1,
-    label: 'NFTs unlocked',
-    value: 3,
-  },
-];
+
 const LeaderBoardUserStatistics = () => {
   const theme = useCustomTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'));
+  const userNFTList = useAppSelector(state => state.userState.userNFTList);
   const [activeTabIndex, setActiveTabIndex] = useState<TabIndexType>(0);
   const handleChange = (event: SyntheticEvent, newValue: TabIndexType) => {
     setActiveTabIndex(newValue);
@@ -32,6 +23,18 @@ const LeaderBoardUserStatistics = () => {
     0: <LeaderBoardAchievementTab />,
     1: <LeaderBoardNFTTab />,
   };
+  const panelTabs = [
+    {
+      index: 0,
+      label: 'Quests completed',
+      value: 278,
+    },
+    {
+      index: 1,
+      label: 'NFTs unlocked',
+      value: userNFTList.length,
+    },
+  ];
   return (
     <Box
       sx={{

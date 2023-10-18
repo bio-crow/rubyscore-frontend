@@ -1,4 +1,4 @@
-import { ILeaderboardData, ILeaderboardUser } from '@/types/index';
+import { ILeaderboardData, ILeaderboardUser, INFTData } from '@/types/index';
 import {
   fetchDashboardBalance,
   fetchDashboardContracts,
@@ -27,6 +27,9 @@ export interface IReferralsResponse {
     referrals: any[];
     refCode: string;
   };
+}
+export interface INFTListResponse {
+  result: INFTData[];
 }
 export interface ILoginResponse {
   result: {

@@ -60,7 +60,7 @@ const Transactions: FC<Props> = ({ activeTab }) => {
     tab && setActiveChartTab(tab);
   };
   useEffect(() => {
-    dispatch(getDashboardChartData({ projectName: 'linea', type: activeChartTab.index }));
+    dispatch(getDashboardChartData({ projectName: activeTab.index, type: activeChartTab.index }));
   }, [activeTab, activeChartTab]);
   return (
     <Box

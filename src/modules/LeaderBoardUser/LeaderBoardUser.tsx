@@ -3,12 +3,13 @@ import { Box } from '@mui/material';
 import ScoreSection from '@/components/common/sections/ScoreSection/ScoreSection';
 import UserInfoSection from '@/components/common/sections/UserInfoSection/UserInfoSection';
 import LeaderBoardUserStatistics from '@/modules/LeaderBoardUser/LeaderBoardUserStatistics/LeaderBoardUserStatistics';
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import { getUserStatistics } from '@/core/thunk/leaderboard.thunk';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { setUserStatistics } from '@/core/state/leaderboard.state';
 import { useRouter, useParams } from 'next/navigation';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
+import { getUserNFTList } from '@/core/thunk/user.thunk';
 
 const breakpointsConfig = {
   0: {
@@ -31,14 +32,18 @@ const LeaderBoardUser = () => {
   const theme = useCustomTheme();
   const params: any = useParams();
   const userStatistics = useAppSelector(state => state.leaderboardState.userStatistics);
+  const userStatisticsLoading = useAppSelector(state => state.leaderboardState.userStatisticsLoading);
   const dispatch = useAppDispatch();
-  useEffect(() => {
+  const showNotFound = !userStatistics && !userStatisticsLoading;
+  const showStatistics = !!userStatistics && !userStatisticsLoading;
+  useLayoutEffect(() => {
     if (params.wallet) {
       const data = {
         project: 'rubyscore',
         wallet: params.wallet,
       };
       dispatch(getUserStatistics(data));
+      dispatch(getUserNFTList(params.wallet));
     } else {
       dispatch(setUserStatistics(null));
     }
@@ -48,7 +53,7 @@ const LeaderBoardUser = () => {
   }, []);
   return (
     <Layout>
-      {!userStatistics ? (
+      {showNotFound && (
         <Box
           sx={{
             display: 'flex',
@@ -62,7 +67,8 @@ const LeaderBoardUser = () => {
         >
           User not found
         </Box>
-      ) : (
+      )}
+      {showStatistics && (
         <Box
           sx={{
             display: 'flex',

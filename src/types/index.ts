@@ -1,5 +1,6 @@
 import DailyActivityCard from '@/modules/Profile/DailyActivity/DailyActivityCard/DailyActivityCard';
 import AchievementCard from '@/modules/Dashboard/DashboardTab/Achievements/AchievementCard/AchievementCard';
+import { INFTListResponse } from '@/core/types';
 export type ChartIndexType =
   | 'transactions'
   | 'contracts'
@@ -9,6 +10,7 @@ export type ChartIndexType =
   | 'gas'
   | 'volume'
   | 'balance';
+export type NetworksType = 'zk_era' | 'linea' | 'base' | 'zora' | 'zk_evm';
 export type DashboardTabIndexType = 'zk_era' | 'linea' | 'base' | 'zora' | 'zk_evm';
 export interface IQuestCard {
   net: {
@@ -73,16 +75,22 @@ export interface ILeaderboardUser {
   activeReferrals: number;
   maxStreak: number;
 }
-export interface INFTCard {
-  image: string;
-  net: {
-    icon: string;
-    title: string;
-  };
-  description: string;
-}
 export interface IChartDot {
   name: string;
   shortName: string;
   uv: number;
+}
+export interface INFTData {
+  title: string;
+  properties: {
+    name: {
+      description: string;
+    };
+    description: {
+      description: string;
+    };
+    image: {
+      description: string;
+    };
+  };
 }
