@@ -17,7 +17,6 @@ export const getUserNFTList = createAsyncThunk(
   async (wallet: string, { dispatch }) => {
     const data: any = await fetchUserNftList(wallet);
     if (data.data.result) {
-      console.log(data.data.result);
       dispatch(setUserNFTList(data.data.result));
     } else {
       dispatch(setUserNFTList([]));

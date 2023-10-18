@@ -8,7 +8,6 @@ import { useAppSelector } from '@/core/store';
 
 const LeaderBoardNFTTab = () => {
   const userNFTList = useAppSelector(state => state.userState.userNFTList);
-  console.log(userNFTList);
   return (
     <Box
       sx={{
@@ -49,7 +48,7 @@ const LeaderBoardNFTTab = () => {
             justifyContent: 'center',
           }}
         >
-          No NFT's unloacked
+          {`No NFT's unloacked`}
         </Box>
       )}
     </Box>
