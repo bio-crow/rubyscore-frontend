@@ -66,3 +66,31 @@ export const leaderBoardBaseColumns: GridColDef[] = [
     width: 150,
   },
 ];
+export const leaderBoardBaseColumnsShort: GridColDef[] = [
+  {
+    field: 'rank',
+    headerName: 'Rank',
+    sortable: false,
+    width: 150,
+  },
+  {
+    field: 'name',
+    headerName: 'Name',
+    sortable: false,
+    flex: 1,
+    minWidth: 250,
+    renderCell: ReferralUserCell,
+  },
+  {
+    field: 'score',
+    headerName: 'Points',
+    sortable: false,
+    width: 150,
+  },
+  {
+    field: 'level',
+    headerName: 'Level',
+    sortable: false,
+    width: 150,
+  },
+];

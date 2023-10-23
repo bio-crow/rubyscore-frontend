@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { mokeChartData } from '@/modules/Dashboard/DashboardTab/Transactions/TransactionChart/mokeChartData';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { Box } from '@mui/system';
 import useMediaQuery from '@mui/material/useMediaQuery';

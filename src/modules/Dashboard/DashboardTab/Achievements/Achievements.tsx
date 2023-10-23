@@ -43,9 +43,6 @@ const Achievements = () => {
           >
             Refresh
           </SecondaryButton>
-          <SecondaryButton variant='contained' size='large' fullWidth={!isSm}>
-            Claim all
-          </SecondaryButton>
         </Box>
       </Box>
       <Box

@@ -31,6 +31,38 @@ export interface IReferralsResponse {
 export interface INFTListResponse {
   result: INFTData[];
 }
+export interface IScoreListResponse {
+  result: {
+    rubyscore: {
+      score: 110;
+      level: 2;
+    };
+    linea: {
+      score: 0;
+      level: 1;
+    };
+    zk_era: {
+      score: 0;
+      level: 1;
+    };
+    zora: {
+      score: 0;
+      level: 1;
+    };
+    zk_evm: {
+      score: 0;
+      level: 1;
+    };
+    base: {
+      score: 0;
+      level: 1;
+    };
+    scroll: {
+      score: 0;
+      level: 1;
+    };
+  };
+}
 export interface ILoginResponse {
   result: {
     token: string;

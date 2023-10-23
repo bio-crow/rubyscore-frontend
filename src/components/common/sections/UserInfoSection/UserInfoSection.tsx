@@ -9,25 +9,32 @@ import { FC } from 'react';
 
 interface Props {
   user: ILeaderboardUser | null;
+  withUntilNextLevel?: boolean;
 }
-const UserInfoSection: FC<Props> = ({ user }) => {
+const UserInfoSection: FC<Props> = ({ user, withUntilNextLevel = false }) => {
   const theme = useCustomTheme();
   const { address } = useAccount();
-  const maskedAddress = user && user.wallet.slice(0, 6) + '...' + user.wallet.slice(-6);
+  const maskedAddress = user && user.profile.wallet.slice(0, 6) + '...' + user.profile.wallet.slice(-6);
   const options = [
     {
-      label: 'Points',
-      value: user?.score,
-    },
-    {
-      label: 'Max Steak',
-      value: user?.maxStreak,
-    },
-    {
-      label: 'Active referrals',
-      value: user?.activeReferrals,
+      label: withUntilNextLevel ? 'Points until next level' : 'Points',
+      value: withUntilNextLevel
+        ? `${user?.profile.rank.score} of ${user?.profile.rank.levelUp}`
+        : `${user?.profile.rank.score}`,
     },
   ];
+  if (user?.additional.maxStreak !== null) {
+    options.push({
+      label: 'Max Steak',
+      value: `${user?.additional.maxStreak}`,
+    });
+  }
+  if (user?.additional.activeReferrals !== null) {
+    options.push({
+      label: 'Active referrals',
+      value: `${user?.additional.activeReferrals}`,
+    });
+  }
   return (
     <Box
       sx={{
@@ -50,7 +57,7 @@ const UserInfoSection: FC<Props> = ({ user }) => {
         }}
       >
         <Image
-          src={user?.isPremium ? '/asserts/PremiumAvatar.svg' : '/asserts/FreeAvatar.svg'}
+          src={user?.profile.isPremium ? '/asserts/PremiumAvatar.svg' : '/asserts/FreeAvatar.svg'}
           alt='icon'
           width='64'
           height='64'
@@ -79,7 +86,7 @@ const UserInfoSection: FC<Props> = ({ user }) => {
               }}
               className='Body-Inter-fw-700-fs-16'
             >
-              {user?.name || maskedAddress}
+              {user?.profile.name || maskedAddress}
             </Box>
             <Box
               sx={{
@@ -102,7 +109,7 @@ const UserInfoSection: FC<Props> = ({ user }) => {
             }}
             className='Body-Inter-fw-700-fs-16'
           >
-            {user?.level} Level
+            {user?.profile.rank.level} Level
           </Box>
         </Box>
       </Box>
@@ -167,10 +174,10 @@ const UserInfoSection: FC<Props> = ({ user }) => {
             }}
           >
             <Box className='Body-Inter-fw-700-fs-18' color={theme.palette.lightGreen}>
-              {user?.position}
+              {user?.position.current}
             </Box>
             <Box className='Body-Inter-fw-700-fs-18' color={theme.palette.white50}>
-              of {user?.maxPosition}
+              of {user?.position.max}
             </Box>
           </Box>
         </Box>

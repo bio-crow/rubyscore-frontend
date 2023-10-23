@@ -7,7 +7,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import LeaderboardTabs from '@/components/common/ui/LeaderboardTabs/LeaderboardTabs';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { getPrivateLeaderboardData, getPublicLeaderboardData } from '@/core/thunk/leaderboard.thunk';
-type TabIndexType = 'rubyscore' | 'zk_era' | 'linea' | 'base' | 'zora' | 'zk_evm';
+type TabIndexType = 'rubyscore' | 'zk_era' | 'linea' | 'base' | 'zora' | 'zk_evm' | 'scroll';
 const panelTabs: { index: TabIndexType; label: string }[] = [
   {
     index: 'rubyscore',
@@ -32,6 +32,10 @@ const panelTabs: { index: TabIndexType; label: string }[] = [
   {
     index: 'zk_evm',
     label: 'ZkEvm',
+  },
+  {
+    index: 'scroll',
+    label: 'Scroll',
   },
 ];
 const Dashboard = () => {

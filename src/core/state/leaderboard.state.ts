@@ -23,7 +23,7 @@ const initialState: ILeaderboardState = {
   userStatisticsLoading: false,
   userStatistics: null,
   refCode: null,
-  loading: false,
+  loading: true,
   currentPage: 1,
   onPage: 4,
   pageCount: 0,
@@ -34,6 +34,9 @@ export const leaderboardSlice = createSlice({
   initialState,
   name: 'leaderboardSlice',
   reducers: {
+    setLoading: (state, action: PayloadAction<boolean>) => {
+      state.loading = action.payload;
+    },
     setUserStatistics: (state, action: PayloadAction<ILeaderboardUser | null>) => {
       state.userStatistics = action.payload;
     },
@@ -51,20 +54,20 @@ export const leaderboardSlice = createSlice({
       }
       if (state.leaderboardUser) {
         const isUserOnPage = state.shownLeaderBoard.find(
-          item => item.wallet === state.leaderboardUser?.wallet
+          item => item.wallet === state.leaderboardUser?.profile.wallet
         );
         if (!isUserOnPage) {
           state.shownLeaderBoard = [
             ...state.shownLeaderBoard,
             {
-              rank: state.leaderboardUser.position,
-              wallet: state.leaderboardUser.wallet,
-              name: state.leaderboardUser.name,
-              score: state.leaderboardUser.score,
-              level: state.leaderboardUser.level,
-              activeReferrals: state.leaderboardUser.activeReferrals,
-              maxStreak: state.leaderboardUser.maxStreak,
-              isPremium: state.leaderboardUser.isPremium,
+              wallet: state.leaderboardUser.profile.wallet,
+              name: state.leaderboardUser.profile.name,
+              score: state.leaderboardUser.profile.rank.score,
+              level: state.leaderboardUser.profile.rank.level,
+              isPremium: state.leaderboardUser.profile.isPremium,
+              rank: state.leaderboardUser.position.current,
+              activeReferrals: state.leaderboardUser.additional.activeReferrals,
+              maxStreak: state.leaderboardUser.additional.maxStreak,
             },
           ];
         }
@@ -92,19 +95,19 @@ export const leaderboardSlice = createSlice({
         }
         if (initUser) {
           state.leaderboardUser = initUser;
-          const isUserOnPage = state.shownLeaderBoard.find(item => item.wallet === initUser.wallet);
+          const isUserOnPage = state.shownLeaderBoard.find(item => item.wallet === initUser.profile.wallet);
           if (!isUserOnPage) {
             state.shownLeaderBoard = [
               ...state.shownLeaderBoard,
               {
-                rank: initUser.position,
-                wallet: initUser.wallet,
-                name: initUser.name,
-                score: initUser.score,
-                level: initUser.level,
-                activeReferrals: initUser.activeReferrals,
-                maxStreak: initUser.maxStreak,
-                isPremium: initUser.isPremium,
+                wallet: state.leaderboardUser.profile.wallet,
+                name: state.leaderboardUser.profile.name,
+                score: state.leaderboardUser.profile.rank.score,
+                level: state.leaderboardUser.profile.rank.level,
+                isPremium: state.leaderboardUser.profile.isPremium,
+                rank: state.leaderboardUser.position.current,
+                activeReferrals: state.leaderboardUser.additional.activeReferrals,
+                maxStreak: state.leaderboardUser.additional.maxStreak,
               },
             ];
           }
@@ -119,5 +122,5 @@ export const leaderboardSlice = createSlice({
 
 export default leaderboardSlice.reducer;
 
-export const { setCurrentPage, setUserStatisticsLoading, initLeaderBoard, setUserStatistics } =
+export const { setCurrentPage, setUserStatisticsLoading, setLoading, initLeaderBoard, setUserStatistics } =
   leaderboardSlice.actions;

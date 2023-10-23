@@ -67,7 +67,7 @@ const Profile = () => {
             <MyLevelSection breakpoints={breakpointsConfig} initSlidePerPage={4.4} />
             {!userName && <ClaimProfile />}
             {!premiumStatus && userName && <Benefits />}
-            <ScoreSection />
+            <ScoreSection wallet={address} />
             <DailyActivity />
             <StreakDays />
             <ReferralLinks />

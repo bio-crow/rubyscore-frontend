@@ -12,7 +12,7 @@ export const ReferralUserCell = (params: GridRenderCellParams<any>) => {
   const copyValue = params.row.name || params.row.wallet;
   const maskedWallet =
     params.row.wallet && params.row.wallet.slice(0, 6) + '...' + params.row.wallet.slice(-6);
-  const isYou = leaderboardUser && leaderboardUser.wallet === params.row.wallet;
+  const isYou = leaderboardUser && leaderboardUser.profile.wallet === params.row.wallet;
   return (
     <Box
       sx={{

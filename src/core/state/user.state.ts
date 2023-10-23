@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { claimProfile, getNameByAddress, getPremiumStatus, getReferrals } from '@/core/thunk/user.thunk';
-import { INFTData, IReferral } from '@/types/index';
+import { INFTData, IReferral, IScoreList } from '@/types/index';
 
 interface IAuthState {
   referrals: IReferral[];
@@ -11,6 +11,7 @@ interface IAuthState {
   premiumStatus: boolean;
   premiumPrice: string;
   userNFTList: INFTData[];
+  userScoreList: IScoreList | null;
 }
 
 const initialState: IAuthState = {
@@ -22,6 +23,7 @@ const initialState: IAuthState = {
   premiumStatus: false,
   premiumPrice: '0',
   userNFTList: [],
+  userScoreList: null,
 };
 
 export const userSlice = createSlice({
@@ -33,6 +35,9 @@ export const userSlice = createSlice({
     },
     setUserNFTList: (state, action: PayloadAction<INFTData[]>) => {
       state.userNFTList = action.payload;
+    },
+    setUserScoreList: (state, action: PayloadAction<IScoreList | null>) => {
+      state.userScoreList = action.payload;
     },
     setPremiumStatus: (state, action: PayloadAction<boolean>) => {
       state.premiumStatus = action.payload;
@@ -74,4 +79,5 @@ export const userSlice = createSlice({
 
 export default userSlice.reducer;
 
-export const { setUserName, setUserNFTList, setPremiumStatus, setPremiumPrice } = userSlice.actions;
+export const { setUserName, setUserNFTList, setUserScoreList, setPremiumStatus, setPremiumPrice } =
+  userSlice.actions;

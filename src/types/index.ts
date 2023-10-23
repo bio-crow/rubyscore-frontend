@@ -1,6 +1,3 @@
-import DailyActivityCard from '@/modules/Profile/DailyActivity/DailyActivityCard/DailyActivityCard';
-import AchievementCard from '@/modules/Dashboard/DashboardTab/Achievements/AchievementCard/AchievementCard';
-import { INFTListResponse } from '@/core/types';
 export type ChartIndexType =
   | 'transactions'
   | 'contracts'
@@ -10,8 +7,8 @@ export type ChartIndexType =
   | 'gas'
   | 'volume'
   | 'balance';
-export type NetworksType = 'zk_era' | 'linea' | 'base' | 'zora' | 'zk_evm';
-export type DashboardTabIndexType = 'zk_era' | 'linea' | 'base' | 'zora' | 'zk_evm';
+export type NetworksType = 'zk_era' | 'linea' | 'base' | 'zora' | 'zk_evm' | 'scroll';
+export type DashboardTabIndexType = 'zk_era' | 'linea' | 'base' | 'zora' | 'zk_evm' | 'scroll';
 export interface IQuestCard {
   net: {
     icon: string;
@@ -65,15 +62,24 @@ export interface ILeaderboardData {
   isPremium: boolean;
 }
 export interface ILeaderboardUser {
-  position: number;
-  isPremium: boolean;
-  maxPosition?: number;
-  wallet: string;
-  name: string;
-  score: number;
-  level: number;
-  activeReferrals: number;
-  maxStreak: number;
+  profile: {
+    wallet: string;
+    name: string;
+    isPremium: boolean;
+    rank: {
+      level: number;
+      levelUp: number;
+      score: number;
+    };
+  };
+  additional: {
+    activeReferrals: number;
+    maxStreak: number;
+  };
+  position: {
+    current: number;
+    max: number;
+  };
 }
 export interface IChartDot {
   name: string;
@@ -92,5 +98,35 @@ export interface INFTData {
     image: {
       description: string;
     };
+  };
+}
+export interface IScoreList {
+  rubyscore: {
+    score: 110;
+    level: 2;
+  };
+  linea: {
+    score: 0;
+    level: 1;
+  };
+  zk_era: {
+    score: 0;
+    level: 1;
+  };
+  zora: {
+    score: 0;
+    level: 1;
+  };
+  zk_evm: {
+    score: 0;
+    level: 1;
+  };
+  base: {
+    score: 0;
+    level: 1;
+  };
+  scroll: {
+    score: 0;
+    level: 1;
   };
 }

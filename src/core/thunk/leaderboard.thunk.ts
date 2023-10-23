@@ -1,20 +1,30 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchPrivateLeaderboard, fetchPublicLeaderboard, searchUser } from '@/core/api/leaderboard.api';
-import { initLeaderBoard, setUserStatistics, setUserStatisticsLoading } from '@/core/state/leaderboard.state';
+import {
+  initLeaderBoard,
+  setLoading,
+  setUserStatistics,
+  setUserStatisticsLoading,
+} from '@/core/state/leaderboard.state';
+import fa from '@walletconnect/legacy-modal/dist/cjs/browser/languages/fa';
 
 export const getPublicLeaderboardData = createAsyncThunk(
   'leaderboardSlice/getPublicLeaderBoardData',
   async (projectName: string, { dispatch }) => {
+    dispatch(setLoading(true));
     const data = await fetchPublicLeaderboard(projectName);
     dispatch(initLeaderBoard(data));
+    dispatch(setLoading(false));
     return;
   }
 );
 export const getPrivateLeaderboardData = createAsyncThunk(
   'leaderboardSlice/getPrivateLeaderBoardData',
   async (projectName: string, { dispatch }) => {
+    dispatch(setLoading(true));
     const data = await fetchPrivateLeaderboard(projectName);
     dispatch(initLeaderBoard(data));
+    dispatch(setLoading(false));
     return;
   }
 );

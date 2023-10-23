@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchReferrals, fetchUserNftList } from '@/core/api/user.api';
+import { fetchReferrals, fetchUserNftList, fetchUserScoreList } from '@/core/api/user.api';
 import {
   wagmiClaimName,
   wagmiGetNameByOwner,
@@ -8,7 +8,7 @@ import {
 } from '@/core/api/contract.api';
 import { IClaimPayload } from '@/core/types';
 import { formatEther } from 'viem';
-import { setPremiumPrice, setUserNFTList } from '@/core/state/user.state';
+import { setPremiumPrice, setUserNFTList, setUserScoreList } from '@/core/state/user.state';
 export const getReferrals = createAsyncThunk('userSlice/fetchReferrals', async () => {
   return await fetchReferrals();
 });
@@ -20,6 +20,18 @@ export const getUserNFTList = createAsyncThunk(
       dispatch(setUserNFTList(data.data.result));
     } else {
       dispatch(setUserNFTList([]));
+    }
+    return;
+  }
+);
+export const getUserScoreList = createAsyncThunk(
+  'userSlice/getUserScoreList',
+  async (wallet: string, { dispatch }) => {
+    const data: any = await fetchUserScoreList(wallet);
+    if (data.data.result) {
+      dispatch(setUserScoreList(data.data.result));
+    } else {
+      dispatch(setUserScoreList(null));
     }
     return;
   }

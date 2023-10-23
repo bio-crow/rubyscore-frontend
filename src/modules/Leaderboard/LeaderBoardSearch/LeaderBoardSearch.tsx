@@ -35,7 +35,7 @@ const LeaderBoardSearch: FC<Props> = ({ activeTab }) => {
       project: activeTab.index,
     });
     if (result) {
-      const wallet = result.data.result.user.wallet;
+      const wallet = result.data.result.user.profile.wallet;
       router.push(`${appRoutes.LEADERBOARD_USER}/${wallet}`);
     }
     setLoading(false);

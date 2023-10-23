@@ -6,6 +6,7 @@ export const networkStaticData: {
   zora: { icon: string };
   linea: { icon: string };
   base: { icon: string };
+  scroll: { icon: string };
 } = {
   zk_era: {
     icon: '/asserts/net/zkSync.svg',
@@ -20,6 +21,9 @@ export const networkStaticData: {
     icon: '/asserts/net/Zora.svg',
   },
   zk_evm: {
+    icon: '/asserts/net/zkEvm.svg',
+  },
+  scroll: {
     icon: '/asserts/net/zkEvm.svg',
   },
 };

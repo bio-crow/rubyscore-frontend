@@ -28,6 +28,10 @@ const panelTabs: { index: DashboardTabIndexType; label: string }[] = [
     index: 'zk_evm',
     label: 'ZkEvm',
   },
+  {
+    index: 'scroll',
+    label: 'Scroll',
+  },
 ];
 const Dashboard = () => {
   const theme = useCustomTheme();

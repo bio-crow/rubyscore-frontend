@@ -1,5 +1,5 @@
 import { apiPrivateAxios, apiPublicAxios } from '@/core/api/axiosConfig';
-import { INFTListResponse, IReferralsResponse } from '@/core/types';
+import { INFTListResponse, IReferralsResponse, IScoreListResponse } from '@/core/types';
 
 export const fetchReferrals = async () => {
   try {
@@ -11,6 +11,13 @@ export const fetchReferrals = async () => {
 export const fetchUserNftList = async (wallet: string) => {
   try {
     return await apiPublicAxios.get<INFTListResponse>(`/profile/${wallet}/nft`);
+  } catch (error) {
+    //console.error(error);
+  }
+};
+export const fetchUserScoreList = async (wallet: string) => {
+  try {
+    return await apiPublicAxios.get<IScoreListResponse>(`/profile/${wallet}/score`);
   } catch (error) {
     //console.error(error);
   }
