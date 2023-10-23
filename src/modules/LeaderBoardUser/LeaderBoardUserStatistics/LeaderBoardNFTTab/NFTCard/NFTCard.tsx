@@ -15,33 +15,20 @@ const NFTCard: FC<Props> = ({ data }) => {
         display: 'flex',
         flexDirection: 'column',
         gap: '20px',
-        padding: '20px',
         borderRadius: '10px',
         border: `1px solid ${theme.palette.white10}`,
         background: theme.palette.black,
+        position: 'relative',
       }}
     >
       <Box
         sx={{
           width: '100%',
           borderRadius: '10px',
-          position: 'relative',
-          paddingTop: '128%',
+          aspectRatio: '1/1.4',
         }}
       >
         <Image src={data.properties.image.description} alt='image' fill />
-      </Box>
-      <Box
-        sx={{
-          color: theme.palette.powderWhite,
-          whiteSpace: 'nowrap',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          maxWidth: '200px',
-        }}
-        className='Body-Lato-fw-700-fs-18'
-      >
-        {data.properties.description.description}
       </Box>
     </Box>
   );

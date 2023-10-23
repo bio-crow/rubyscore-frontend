@@ -2,11 +2,18 @@ import { Box } from '@mui/system';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import Image from 'next/image';
 import { FC } from 'react';
+import { useAppSelector } from '@/core/store';
+import { INFTData } from '@/types/index';
+import NFTCard from '@/modules/LeaderBoardUser/LeaderBoardUserStatistics/LeaderBoardNFTTab/NFTCard/NFTCard';
+import { v4 as uuidv4 } from 'uuid';
+
 interface Props {
   nft: any[];
 }
+
 const NFTInfo: FC<Props> = ({ nft }) => {
   const theme = useCustomTheme();
+  const userNFTList = useAppSelector(state => state.userState.userNFTList);
   return (
     <Box
       sx={{
@@ -31,7 +38,7 @@ const NFTInfo: FC<Props> = ({ nft }) => {
         </Box>
         <Box display='flex' alignItems='center' gap='10px'>
           <Box className='Body-Lato-fw-700-fs-16' color={theme.palette.lightGreen}>
-            {nft.length}
+            {userNFTList.length}
           </Box>
           <Box className='Body-Lato-fw-700-fs-16' color={theme.palette.powderWhite}>
             NFT
@@ -39,7 +46,18 @@ const NFTInfo: FC<Props> = ({ nft }) => {
         </Box>
       </Box>
       <Box display='flex' flexDirection='column' paddingTop='16px'>
-        {nft.length === 0 ? (
+        {userNFTList.length > 0 ? (
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr 1fr',
+            }}
+          >
+            {userNFTList.map((data: INFTData) => (
+              <NFTCard data={data} key={uuidv4()} />
+            ))}
+          </Box>
+        ) : (
           <Box display='flex' alignItems='center' gap='10px' justifyContent='center' minHeight='84px'>
             <Image src='/asserts/groupIcon.png' alt='icon' width='24' height='24' />
             <Box
@@ -53,8 +71,6 @@ const NFTInfo: FC<Props> = ({ nft }) => {
               You don&apos;t have NFT
             </Box>
           </Box>
-        ) : (
-          <Box>1</Box>
         )}
       </Box>
     </Box>
