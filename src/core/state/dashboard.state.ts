@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IChartDot, ILeaderboardData, ILeaderboardUser } from '@/types/index';
+import { IChartDot, ILeaderboardData, ILeaderboardUser, ILevelInfo } from '@/types/index';
 import { getPrivateLeaderboardData, getPublicLeaderboardData } from '@/core/thunk/leaderboard.thunk';
 import { AxiosResponse } from 'axios';
 import { ILeaderBoardResponse } from '@/core/types';
@@ -7,11 +7,13 @@ import { ILeaderBoardResponse } from '@/core/types';
 interface ILeaderboardState {
   chartData: IChartDot[];
   loading: boolean;
+  myLevelData: ILevelInfo | null;
 }
 
 const initialState: ILeaderboardState = {
   chartData: [],
   loading: false,
+  myLevelData: null,
 };
 
 export const dashboardSlice = createSlice({
@@ -24,9 +26,12 @@ export const dashboardSlice = createSlice({
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
     },
+    setMyLevelData: (state, action: PayloadAction<ILevelInfo | null>) => {
+      state.myLevelData = action.payload;
+    },
   },
 });
 
 export default dashboardSlice.reducer;
 
-export const { setChartData, setLoading } = dashboardSlice.actions;
+export const { setChartData, setMyLevelData, setLoading } = dashboardSlice.actions;

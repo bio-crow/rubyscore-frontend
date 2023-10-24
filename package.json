@@ -11,6 +11,7 @@
     "prettier": "npx prettier \"{app,public,src}/**/*.tsx\" --write",
     "format": "yarn prettier && yarn lint:fix"
   },
+
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
@@ -47,7 +48,7 @@
     "recharts": "^2.8.0",
     "siwe": "^2.1.4",
     "styled-components": "^6.0.8",
-    "swiper": "^9.2.4",
+    "swiper": "^9.4.1",
     "uuid": "^9.0.1",
     "viem": "^1.10.9",
     "wagmi": "^1.4.1",

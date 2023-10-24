@@ -56,16 +56,18 @@ const ScoreSection: FC<Props> = ({ bpConfig = breakpointsConfig, wallet }) => {
   };
   const onSwiper = (value: any) => {
     setSwiperRef(value);
-    setHasNext(value.allowSlideNext);
-    setHasPrev(value.allowSlidePrev);
+    setHasNext(!value.isEnd);
+    setHasPrev(!value.isBeginning);
   };
   const onResize = (value: any) => {
-    setHasNext(value.allowSlideNext);
-    setHasPrev(value.allowSlidePrev);
+    setSwiperRef(value);
+    setHasNext(!value.isEnd);
+    setHasPrev(!value.isBeginning);
   };
   const onSlideChange = (value: any) => {
-    setHasNext(value.allowSlideNext);
-    setHasPrev(value.allowSlidePrev);
+    setSwiperRef(value);
+    setHasNext(!value.isEnd);
+    setHasPrev(!value.isBeginning);
   };
   useEffect(() => {
     dispatch(getUserScoreList(wallet));

@@ -19,8 +19,10 @@ import {
   fetchDashboardVolume,
   fetchDashboardWeeks,
 } from '@/core/api/dashboard.api';
-import { setLoading, setChartData } from '@/core/state/dashboard.state';
+import { setLoading, setChartData, setMyLevelData } from '@/core/state/dashboard.state';
 import { ChartIndexType, DashboardTabIndexType, IChartDot } from '@/types/index';
+import { setUserStatistics, setUserStatisticsLoading } from '@/core/state/leaderboard.state';
+import { searchUser } from '@/core/api/leaderboard.api';
 
 export const getDashboardChartData = createAsyncThunk(
   'dashboardSlice/getDashboardTransactionsData',
@@ -82,5 +84,29 @@ export const getDashboardChartData = createAsyncThunk(
 
     dispatch(setChartData(preparedData));
     dispatch(setLoading(false));
+  }
+);
+export const getUserLevelInfo = createAsyncThunk(
+  'dashboardSlice/getUserLevelInfo',
+  async (
+    params: {
+      wallet: string;
+      project: string;
+    },
+    { dispatch }
+  ) => {
+    const data: any = await searchUser(params);
+    if (data.data.result) {
+      const levelData = {
+        level: data.data.result.user.profile.rank.level,
+        levelUp: data.data.result.user.profile.rank.levelUp,
+        score: data.data.result.user.profile.rank.score,
+        levelStatus: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      };
+      dispatch(setMyLevelData(levelData));
+    } else {
+      dispatch(setMyLevelData(null));
+    }
+    return;
   }
 );

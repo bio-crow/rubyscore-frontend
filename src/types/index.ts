@@ -1,3 +1,5 @@
+import { getUserLevelInfo } from '@/core/thunk/dashboard.thunk';
+
 export type ChartIndexType =
   | 'transactions'
   | 'contracts'
@@ -99,6 +101,12 @@ export interface INFTData {
       description: string;
     };
   };
+}
+export interface ILevelInfo {
+  level: number;
+  levelUp: number;
+  score: number;
+  levelStatus: number[];
 }
 export interface IScoreList {
   rubyscore: {
