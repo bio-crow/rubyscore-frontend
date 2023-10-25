@@ -18,8 +18,15 @@ import {
   fetchDashboardTransactions,
   fetchDashboardVolume,
   fetchDashboardWeeks,
+  fetchProjectStatistics,
 } from '@/core/api/dashboard.api';
-import { setLoading, setChartData, setMyLevelData } from '@/core/state/dashboard.state';
+import {
+  setLoading,
+  setChartData,
+  setMyLevelData,
+  setProjectStatistics,
+  setProjectStatisticsLoading,
+} from '@/core/state/dashboard.state';
 import { ChartIndexType, DashboardTabIndexType, IChartDot } from '@/types/index';
 import { setUserStatistics, setUserStatisticsLoading } from '@/core/state/leaderboard.state';
 import { searchUser } from '@/core/api/leaderboard.api';
@@ -107,6 +114,20 @@ export const getUserLevelInfo = createAsyncThunk(
     } else {
       dispatch(setMyLevelData(null));
     }
+    return;
+  }
+);
+export const getProjectStatistics = createAsyncThunk(
+  'dashboardSlice/getProjectStatistics',
+  async (projectName: string, { dispatch }) => {
+    dispatch(setProjectStatisticsLoading(true));
+    const data: any = await fetchProjectStatistics(projectName);
+    if (data.data.result) {
+      dispatch(setProjectStatistics(data.data.result));
+    } else {
+      dispatch(setProjectStatistics(null));
+    }
+    dispatch(setProjectStatisticsLoading(false));
     return;
   }
 );

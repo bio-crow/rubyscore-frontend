@@ -32,11 +32,8 @@ const MyLevelCard: FC<Props> = ({ data }) => {
           gap: '10px',
         }}
       >
-        <Box color={theme.palette.powderWhite} className='Body-Lato-fw-700-fs-16'>
+        <Box color={theme.palette.powderWhite} className='Body-Lato-fw-700-fs-16' textAlign='center'>
           {`${data.lvl} Lvl`}
-        </Box>
-        <Box color={theme.palette.white50} className='Body-Lato-fw-600-fs-14'>
-          {`${data.points} ${pluralize('Point', data.points)}`}
         </Box>
         <PrimaryButton variant='contained' size='small' disabled={!data.isAvailable || data.isClaimed}>
           {!data.isClaimed ? (

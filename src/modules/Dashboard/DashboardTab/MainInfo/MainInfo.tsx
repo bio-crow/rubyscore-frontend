@@ -3,29 +3,39 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { v4 as uuidv4 } from 'uuid';
 import MainInfoCard from '@/modules/Dashboard/DashboardTab/MainInfo/MainInfoCard/MainInfoCard';
 import 'swiper/css';
-const mainInfoData = [
-  {
-    value: '1 600 000',
-    description: 'Users in the network',
-  },
-  {
-    value: '5 456 345',
-    description: 'Transactions in the network',
-  },
-  {
-    value: '$119,09 m',
-    description: 'Total Value Locked',
-  },
-  {
-    value: '550 000',
-    description: 'Transactions through ether bridge',
-  },
-  {
-    value: '$245.3 m',
-    description: 'Transaction volume',
-  },
-];
+import { FC, useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '@/core/store';
+import { getProjectStatistics } from '@/core/thunk/dashboard.thunk';
+import { CircularProgress } from '@mui/material';
+import { useCustomTheme } from '@/hooks/useCustomTheme';
+import { formatCash } from '@/utils/helpers';
+
 const MainInfo = () => {
+  const projectStatistics = useAppSelector(state => state.dashboardState.projectStatistics);
+  const data = projectStatistics
+    ? [
+        {
+          value: projectStatistics.user_count.toLocaleString(),
+          description: 'Users in the network',
+        },
+        {
+          value: projectStatistics.transaction_count.toLocaleString(),
+          description: 'Transactions in the network',
+        },
+        {
+          value: formatCash(projectStatistics.total_value_locked),
+          description: 'Total Value Locked',
+        },
+        {
+          value: projectStatistics.bridge_transaction_count.toLocaleString(),
+          description: 'Transactions through ether bridge',
+        },
+        {
+          value: formatCash(projectStatistics.total_volume),
+          description: 'Transaction volume',
+        },
+      ]
+    : [];
   return (
     <Box>
       <Swiper
@@ -50,7 +60,7 @@ const MainInfo = () => {
           },
         }}
       >
-        {mainInfoData.map((data: any) => (
+        {data.map((data: any) => (
           <SwiperSlide key={uuidv4()}>
             <MainInfoCard info={data} />
           </SwiperSlide>

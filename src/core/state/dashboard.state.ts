@@ -1,19 +1,23 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IChartDot, ILeaderboardData, ILeaderboardUser, ILevelInfo } from '@/types/index';
+import { IChartDot, ILeaderboardData, ILeaderboardUser, ILevelInfo, IProjectStatistics } from '@/types/index';
 import { getPrivateLeaderboardData, getPublicLeaderboardData } from '@/core/thunk/leaderboard.thunk';
 import { AxiosResponse } from 'axios';
 import { ILeaderBoardResponse } from '@/core/types';
 
-interface ILeaderboardState {
+interface IDashboardState {
   chartData: IChartDot[];
   loading: boolean;
   myLevelData: ILevelInfo | null;
+  projectStatistics: IProjectStatistics | null;
+  loadingProjectStatistics: boolean;
 }
 
-const initialState: ILeaderboardState = {
+const initialState: IDashboardState = {
   chartData: [],
   loading: false,
   myLevelData: null,
+  projectStatistics: null,
+  loadingProjectStatistics: false,
 };
 
 export const dashboardSlice = createSlice({
@@ -29,9 +33,16 @@ export const dashboardSlice = createSlice({
     setMyLevelData: (state, action: PayloadAction<ILevelInfo | null>) => {
       state.myLevelData = action.payload;
     },
+    setProjectStatistics: (state, action: PayloadAction<IProjectStatistics | null>) => {
+      state.projectStatistics = action.payload;
+    },
+    setProjectStatisticsLoading: (state, action: PayloadAction<boolean>) => {
+      state.loadingProjectStatistics = action.payload;
+    },
   },
 });
 
 export default dashboardSlice.reducer;
 
-export const { setChartData, setMyLevelData, setLoading } = dashboardSlice.actions;
+export const { setChartData, setProjectStatistics, setProjectStatisticsLoading, setMyLevelData, setLoading } =
+  dashboardSlice.actions;

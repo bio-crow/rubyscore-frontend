@@ -7,6 +7,7 @@ import {
   IDashboardTransactionsResponse,
   IDashboardVolumeResponse,
   IDashboardWeeksResponse,
+  IProjectStatisticsResponse,
 } from '@/core/types';
 import { apiPrivateAxios, apiPublicAxios } from '@/core/api/axiosConfig';
 export const fetchDashboardTransactions = async (projectName: string) => {
@@ -61,6 +62,13 @@ export const fetchDashboardVolume = async (projectName: string) => {
 export const fetchDashboardBalance = async (projectName: string) => {
   try {
     return await apiPublicAxios.get<IDashboardBalanceResponse>(`/dashboard/${projectName}/balance`);
+  } catch (error) {
+    //console.error(error);
+  }
+};
+export const fetchProjectStatistics = async (projectName: string) => {
+  try {
+    return await apiPublicAxios.get<IProjectStatisticsResponse>(`/dashboard/${projectName}/overview`);
   } catch (error) {
     //console.error(error);
   }

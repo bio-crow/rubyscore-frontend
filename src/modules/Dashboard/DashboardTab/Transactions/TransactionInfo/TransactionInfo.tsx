@@ -1,8 +1,10 @@
 import { Box } from '@mui/system';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
+import { useAppSelector } from '@/core/store';
 
 const TransactionInfo = () => {
   const theme = useCustomTheme();
+  const projectStatistics = useAppSelector(state => state.dashboardState.projectStatistics);
   return (
     <Box
       sx={{
@@ -23,7 +25,8 @@ const TransactionInfo = () => {
         }}
       >
         <Box color={theme.palette.powderWhite} className='Body-Lato-fw-700-fs-18'>
-          21-04-2022
+          {projectStatistics &&
+            new Date(projectStatistics.first_transaction_time * 1000).toISOString().substring(0, 10)}
         </Box>
         <Box color={theme.palette.white50} className='Body-Lato-fw-600-fs-14'>
           First transaction date
@@ -41,7 +44,8 @@ const TransactionInfo = () => {
         }}
       >
         <Box color={theme.palette.powderWhite} className='Body-Lato-fw-700-fs-18'>
-          16-05-2023
+          {projectStatistics &&
+            new Date(projectStatistics.last_transaction_time * 1000).toISOString().substring(0, 10)}
         </Box>
         <Box color={theme.palette.white50} className='Body-Lato-fw-600-fs-14'>
           Last transaction date

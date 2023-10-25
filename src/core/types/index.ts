@@ -16,21 +16,25 @@ export interface ILoginPayload {
   wallet: string;
   referralCode?: string;
 }
+
 export interface ILoginResponse {
   result: {
     token: string;
     isClaimed: boolean;
   };
 }
+
 export interface IReferralsResponse {
   result: {
     referrals: any[];
     refCode: string;
   };
 }
+
 export interface INFTListResponse {
   result: INFTData[];
 }
+
 export interface IScoreListResponse {
   result: {
     rubyscore: {
@@ -63,32 +67,38 @@ export interface IScoreListResponse {
     };
   };
 }
+
 export interface ILoginResponse {
   result: {
     token: string;
     isClaimed: boolean;
   };
 }
+
 export interface IRefreshResponse {
   result: {
     token: string;
   };
 }
+
 export interface ILeaderBoardResponse {
   result: {
     leaderboard: ILeaderboardData[];
     user: ILeaderboardUser;
   };
 }
+
 export interface ISearchUserPayload {
   project: string;
   wallet: string;
 }
+
 export interface ISearchUserResponse {
   result: {
     user: ILeaderboardUser;
   };
 }
+
 export interface IClaimPayload {
   account: any;
   name?: string;
@@ -108,6 +118,7 @@ export interface IDashboardTransactionsResponse {
     tx501_1000: number;
   };
 }
+
 export interface IDashboardContractsResponse {
   result: {
     contracts1: number;
@@ -118,6 +129,7 @@ export interface IDashboardContractsResponse {
     contracts51_100: number;
   };
 }
+
 export interface IDashboardDaysResponse {
   result: {
     days1: number;
@@ -128,6 +140,7 @@ export interface IDashboardDaysResponse {
     days51_100: number;
   };
 }
+
 export interface IDashboardWeeksResponse {
   result: {
     weeks1: number;
@@ -140,6 +153,7 @@ export interface IDashboardWeeksResponse {
     weeks16_20: number;
   };
 }
+
 export interface IDashboardMonthsResponse {
   result: {
     months1: number;
@@ -156,6 +170,7 @@ export interface IDashboardMonthsResponse {
     months12: number;
   };
 }
+
 export interface IDashboardGasResponse {
   result: {
     gas1: number;
@@ -169,6 +184,7 @@ export interface IDashboardGasResponse {
     gas100_200: number;
   };
 }
+
 export interface IDashboardVolumeResponse {
   result: {
     volume1: number;
@@ -181,6 +197,7 @@ export interface IDashboardVolumeResponse {
     volume10000_100000: number;
   };
 }
+
 export interface IDashboardBalanceResponse {
   result: {
     balance1: number;
@@ -191,5 +208,17 @@ export interface IDashboardBalanceResponse {
     balance100_1000: number;
     balance1000_10000: number;
     balance10000_100000: number;
+  };
+}
+
+export interface IProjectStatisticsResponse {
+  result: {
+    user_count: number;
+    transaction_count: number;
+    bridge_transaction_count: number;
+    total_volume: number;
+    first_transaction_time: number;
+    last_transaction_time: number;
+    total_value_locked: number;
   };
 }

@@ -1,31 +1,52 @@
 import { Box } from '@mui/system';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import MyLevelSection from '@/components/common/sections/MyLevelSection/MyLevelSection';
 import MainInfo from '@/modules/Dashboard/DashboardTab/MainInfo/MainInfo';
 import Achievements from '@/modules/Dashboard/DashboardTab/Achievements/Achievements';
 import Transactions from '@/modules/Dashboard/DashboardTab/Transactions/Transactions';
 import { DashboardTabIndexType } from '@/types/index';
-import { useAppSelector } from '@/core/store';
+import { useAppDispatch, useAppSelector } from '@/core/store';
+import { getProjectStatistics } from '@/core/thunk/dashboard.thunk';
+import { CircularProgress } from '@mui/material';
+import { useCustomTheme } from '@/hooks/useCustomTheme';
 
 interface Props {
   activeTab: { index: DashboardTabIndexType; label: string };
 }
 
 const DashboardTab: FC<Props> = ({ activeTab }) => {
+  const theme = useCustomTheme();
+  const dispatch = useAppDispatch();
+  const loadingProjectStatistics = useAppSelector(state => state.dashboardState.loadingProjectStatistics);
   const isAuth = useAppSelector(state => state.authState.isAuth);
+  useEffect(() => {
+    dispatch(getProjectStatistics(activeTab.index));
+  }, [activeTab.index]);
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '60px',
-      }}
-    >
-      <MainInfo />
-      {isAuth && <MyLevelSection project={activeTab.index} />}
-      <Transactions activeTab={activeTab} />
-      <Achievements />
-    </Box>
+    <>
+      {loadingProjectStatistics ? (
+        <Box display='flex' width='100%' alignItems='center' justifyContent='center'>
+          <CircularProgress
+            sx={{
+              color: theme.palette.lightGreen,
+            }}
+          />
+        </Box>
+      ) : (
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '60px',
+          }}
+        >
+          <MainInfo />
+          {isAuth && <MyLevelSection project={activeTab.index} />}
+          <Transactions activeTab={activeTab} />
+          <Achievements />
+        </Box>
+      )}
+    </>
   );
 };
 export default DashboardTab;

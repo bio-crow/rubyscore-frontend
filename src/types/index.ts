@@ -28,7 +28,6 @@ export interface IScoreNetwork {
 export interface ILevelCard {
   lvl: number;
   icon: string;
-  points: number;
   isAvailable: boolean;
   isClaimed: boolean;
 }
@@ -107,6 +106,15 @@ export interface ILevelInfo {
   levelUp: number;
   score: number;
   levelStatus: number[];
+}
+export interface IProjectStatistics {
+  user_count: number;
+  transaction_count: number;
+  bridge_transaction_count: number;
+  total_volume: number;
+  first_transaction_time: number;
+  last_transaction_time: number;
+  total_value_locked: number;
 }
 export interface IScoreList {
   rubyscore: {
