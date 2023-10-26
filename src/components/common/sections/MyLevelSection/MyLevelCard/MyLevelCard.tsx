@@ -37,7 +37,7 @@ const MyLevelCard: FC<Props> = ({ data }) => {
         </Box>
         <PrimaryButton variant='contained' size='small' disabled={!data.isAvailable || data.isClaimed}>
           {!data.isClaimed ? (
-            'Claim'
+            'Get'
           ) : (
             <Image src='/asserts/claimedIcon.svg' alt='icon' width={16} height={16} />
           )}

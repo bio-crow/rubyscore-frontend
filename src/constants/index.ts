@@ -24,6 +24,6 @@ export const networkStaticData: {
     icon: '/asserts/net/zkEvm.svg',
   },
   scroll: {
-    icon: '/asserts/net/zkEvm.svg',
+    icon: '/asserts/net/Scroll.svg',
   },
 };

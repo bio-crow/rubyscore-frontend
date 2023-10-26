@@ -72,7 +72,7 @@ const StreakDays = () => {
           </Box>
         </Box>
         <SecondaryButton variant='contained' size='large' fullWidth={!isSm}>
-          Claim all
+          Get all
         </SecondaryButton>
       </Box>
 

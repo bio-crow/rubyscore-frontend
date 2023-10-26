@@ -57,7 +57,7 @@ const DailyActivity = () => {
           Daily activity
         </Box>
         <SecondaryButton variant='contained' size='large' fullWidth={!isSm}>
-          Claim all
+          Get all
         </SecondaryButton>
       </Box>
       <Box>
