@@ -16,19 +16,29 @@ const MyLevelCard: FC<Props> = ({ data }) => {
     <Box
       sx={{
         display: 'flex',
-        alignItems: 'center',
+        flexDirection: 'column',
         padding: '10px',
-        justifyContent: 'space-between',
+        gap: '10px',
         borderRadius: '10px',
         border: `1px solid ${theme.palette.white10}`,
         background: theme.palette.white10,
       }}
     >
-      <Image src={data.icon} alt='icon' width={81} height={84} />
       <Box
         sx={{
           display: 'flex',
-          flexDirection: 'column',
+          width: '100%',
+          aspectRatio: '191/240',
+          position: 'relative',
+        }}
+      >
+        <Image src={data.icon} alt='icon' fill />
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
           gap: '10px',
         }}
       >
@@ -37,7 +47,7 @@ const MyLevelCard: FC<Props> = ({ data }) => {
         </Box>
         <PrimaryButton variant='contained' size='small' disabled={!data.isAvailable || data.isClaimed}>
           {!data.isClaimed ? (
-            'Get'
+            'Claim'
           ) : (
             <Image src='/asserts/claimedIcon.svg' alt='icon' width={16} height={16} />
           )}

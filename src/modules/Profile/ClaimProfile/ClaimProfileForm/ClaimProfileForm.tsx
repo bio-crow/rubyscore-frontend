@@ -41,7 +41,7 @@ const ClaimProfileForm: FC<Props> = ({ onSubmit, onError, isLoading }) => {
           alignSelf: 'flex-start',
         }}
       >
-        Get
+        Claim
       </PrimaryButton>
     </form>
   );

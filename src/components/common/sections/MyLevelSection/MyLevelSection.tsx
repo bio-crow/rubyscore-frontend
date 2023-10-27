@@ -4,13 +4,14 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { FC, useEffect, useState } from 'react';
 import PrevIcon from '@/components/common/Icons/PrevIcon';
 import NextIcon from '@/components/common/Icons/NextIcon';
-import { ILevelCard, IScoreNetwork } from '@/types/index';
+import { DashboardTabIndexType, ILevelCard, IScoreNetwork } from '@/types/index';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { v4 as uuidv4 } from 'uuid';
 import MyLevelCard from '@/components/common/sections/MyLevelSection/MyLevelCard/MyLevelCard';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { getUserLevelInfo } from '@/core/thunk/dashboard.thunk';
 import { useAccount } from 'wagmi';
+import { myLevelIcons } from '@/constants/index';
 
 const breakpointsConfig = {
   0: {
@@ -29,73 +30,11 @@ const breakpointsConfig = {
     slidesPerView: 5.4,
   },
 };
-const levels: ILevelCard[] = [
-  {
-    lvl: 1,
-    icon: '/asserts/nftDemoImage.png',
-    isAvailable: false,
-    isClaimed: false,
-  },
-  {
-    lvl: 2,
-    icon: '/asserts/nftDemoImage.png',
-    isAvailable: false,
-    isClaimed: false,
-  },
-  {
-    lvl: 3,
-    icon: '/asserts/nftDemoImage.png',
-    isAvailable: true,
-    isClaimed: false,
-  },
-  {
-    lvl: 4,
-    icon: '/asserts/nftDemoImage.png',
-    isAvailable: true,
-    isClaimed: false,
-  },
-  {
-    lvl: 5,
-    icon: '/asserts/nftDemoImage.png',
-    isAvailable: false,
-    isClaimed: false,
-  },
-  {
-    lvl: 6,
-    icon: '/asserts/nftDemoImage.png',
-    isAvailable: false,
-    isClaimed: false,
-  },
-  {
-    lvl: 7,
-    icon: '/asserts/nftDemoImage.png',
-    isAvailable: false,
-    isClaimed: false,
-  },
-  {
-    lvl: 8,
-    icon: '/asserts/nftDemoImage.png',
-    isAvailable: false,
-    isClaimed: false,
-  },
-  {
-    lvl: 9,
-    icon: '/asserts/nftDemoImage.png',
-    isAvailable: false,
-    isClaimed: false,
-  },
-  {
-    lvl: 10,
-    icon: '/asserts/nftDemoImage.png',
-    isAvailable: false,
-    isClaimed: false,
-  },
-];
 
 interface Props {
   breakpoints?: any;
   initSlidePerPage?: any;
-  project?: string;
+  project?: DashboardTabIndexType;
 }
 
 const MyLevelSection: FC<Props> = ({
@@ -141,20 +80,18 @@ const MyLevelSection: FC<Props> = ({
       dispatch(getUserLevelInfo(data));
     }
   }, [address, project]);
-  const prepareLevels = levels.map((item, index) => {
-    if (myLevelData) {
-      return {
-        ...item,
-        isClaimed: myLevelData.levelStatus[index] !== 0,
-        isAvailable: item.lvl <= myLevelData.level,
-      };
-    } else {
-      return item;
-    }
-  });
+  const prepareLevels = myLevelData
+    ? myLevelData.levelStatus.map((item, index) => {
+        return {
+          icon: myLevelIcons[project][index],
+          lvl: index + 1,
+          isClaimed: myLevelData.levelStatus[index] !== 0,
+          isAvailable: index + 1 <= myLevelData.level,
+        };
+      })
+    : [];
   return (
     <>
-      {' '}
       {myLevelData && (
         <Box
           sx={{

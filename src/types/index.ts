@@ -10,7 +10,7 @@ export type ChartIndexType =
   | 'volume'
   | 'balance';
 export type NetworksType = 'zk_era' | 'linea' | 'base' | 'zora' | 'zk_evm' | 'scroll';
-export type DashboardTabIndexType = 'zk_era' | 'linea' | 'base' | 'zora' | 'zk_evm' | 'scroll';
+export type DashboardTabIndexType = 'zk_era' | 'linea' | 'base' | 'zora' | 'zk_evm' | 'scroll' | 'rubyscore';
 export interface IQuestCard {
   net: {
     icon: string;
