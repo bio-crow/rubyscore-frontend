@@ -5,6 +5,7 @@ export const networkStaticData: {
   linea: { icon: string };
   base: { icon: string };
   scroll: { icon: string };
+  rubyscore: { icon: string };
 } = {
   zk_era: {
     icon: '/asserts/net/zkSync.svg',
@@ -23,6 +24,9 @@ export const networkStaticData: {
   },
   scroll: {
     icon: '/asserts/net/Scroll.svg',
+  },
+  rubyscore: {
+    icon: '/asserts/net/rubyscore.svg',
   },
 };
 export const myLevelIcons = {

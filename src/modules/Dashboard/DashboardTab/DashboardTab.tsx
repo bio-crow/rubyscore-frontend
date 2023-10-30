@@ -40,8 +40,8 @@ const DashboardTab: FC<Props> = ({ activeTab }) => {
             gap: '60px',
           }}
         >
-          <MainInfo />
           {isAuth && <MyLevelSection project={activeTab.index} />}
+          <MainInfo />
           <Transactions activeTab={activeTab} />
           <Achievements />
         </Box>
