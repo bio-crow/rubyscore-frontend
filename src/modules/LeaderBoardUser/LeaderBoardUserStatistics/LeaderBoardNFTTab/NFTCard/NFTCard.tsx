@@ -25,7 +25,7 @@ const NFTCard: FC<Props> = ({ data }) => {
         sx={{
           width: '100%',
           borderRadius: '10px',
-          aspectRatio: '1/1.4',
+          aspectRatio: '1/1.5',
         }}
       >
         <Image src={data.properties.image.description} alt='image' fill />

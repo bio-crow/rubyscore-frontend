@@ -6,13 +6,18 @@ import { useAppSelector } from '@/core/store';
 import { INFTData } from '@/types/index';
 import NFTCard from '@/modules/LeaderBoardUser/LeaderBoardUserStatistics/LeaderBoardNFTTab/NFTCard/NFTCard';
 import { v4 as uuidv4 } from 'uuid';
-
+import SecondaryButton from '@/components/common/ui/SecondaryButton/SecondaryButton';
+import { useRouter } from 'next/navigation';
+import { appRoutes } from '@/constants/routes';
+import { useAccount } from 'wagmi';
 interface Props {
   nft: any[];
 }
 
 const NFTInfo: FC<Props> = ({ nft }) => {
   const theme = useCustomTheme();
+  const router = useRouter();
+  const { address } = useAccount();
   const userNFTList = useAppSelector(state => state.userState.userNFTList);
   return (
     <Box
@@ -49,13 +54,29 @@ const NFTInfo: FC<Props> = ({ nft }) => {
         {userNFTList.length > 0 ? (
           <Box
             sx={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr 1fr',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '20px',
             }}
           >
-            {userNFTList.map((data: INFTData) => (
-              <NFTCard data={data} key={uuidv4()} />
-            ))}
+            <Box
+              sx={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+              }}
+            >
+              {userNFTList.map((data: INFTData) => (
+                <NFTCard data={data} key={uuidv4()} />
+              ))}
+            </Box>
+            <SecondaryButton
+              variant='contained'
+              size='large'
+              fullWidth
+              onClick={() => router.push(`${appRoutes.LEADERBOARD_USER}/${address}?tab=NFT`)}
+            >
+              View all
+            </SecondaryButton>
           </Box>
         ) : (
           <Box display='flex' alignItems='center' gap='10px' justifyContent='center' minHeight='84px'>

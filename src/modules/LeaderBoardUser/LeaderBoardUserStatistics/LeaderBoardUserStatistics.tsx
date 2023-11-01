@@ -3,16 +3,19 @@ import { Tab } from '@mui/material';
 import LeaderboardUserTabs from '@/components/common/ui/LeaderboardUserTabs/LeaderboardUserTabs';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { SyntheticEvent, useState } from 'react';
+import { SyntheticEvent, useEffect, useState } from 'react';
 import DashboardTab from '@/modules/Dashboard/DashboardTab/DashboardTab';
 import LeaderBoardAchievementTab from '@/modules/LeaderBoardUser/LeaderBoardUserStatistics/LeaderBoardAchievementTab/LeaderBoardAchievementTab';
 import LeaderBoardNFTTab from '@/modules/LeaderBoardUser/LeaderBoardUserStatistics/LeaderBoardNFTTab/LeaderBoardNFTTab';
 import { useAppSelector } from '@/core/store';
+import { useSearchParams } from 'next/navigation';
 
 type TabIndexType = 0 | 1;
 
 const LeaderBoardUserStatistics = () => {
   const theme = useCustomTheme();
+  const searchParams = useSearchParams();
+  const tab = searchParams.get('tab');
   const isMd = useMediaQuery(theme.breakpoints.up('md'));
   const userNFTList = useAppSelector(state => state.userState.userNFTList);
   const [activeTabIndex, setActiveTabIndex] = useState<TabIndexType>(0);
@@ -35,6 +38,11 @@ const LeaderBoardUserStatistics = () => {
       value: userNFTList.length,
     },
   ];
+  useEffect(() => {
+    if (tab === 'NFT') {
+      setActiveTabIndex(1);
+    }
+  }, [tab]);
   return (
     <Box
       sx={{

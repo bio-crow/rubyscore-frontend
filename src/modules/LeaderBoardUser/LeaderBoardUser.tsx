@@ -7,10 +7,9 @@ import { useEffect, useLayoutEffect } from 'react';
 import { getUserStatistics } from '@/core/thunk/leaderboard.thunk';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { setUserStatistics } from '@/core/state/leaderboard.state';
-import { useRouter, useParams } from 'next/navigation';
+import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { getUserNFTList } from '@/core/thunk/user.thunk';
-
 const breakpointsConfig = {
   0: {
     slidesPerView: 1,
