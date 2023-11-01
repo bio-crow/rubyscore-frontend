@@ -71,7 +71,7 @@ const DailyActivityCard: FC<Props> = ({ activity }) => {
         {activity.description}
       </Box>
       <PrimaryButton variant='contained' size='large' fullWidth>
-        Claim
+        Get
       </PrimaryButton>
     </Box>
   );

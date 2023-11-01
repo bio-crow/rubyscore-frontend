@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import DailyActivityCard from '@/modules/Profile/DailyActivity/DailyActivityCard/DailyActivityCard';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import 'swiper/css';
+import RefreshIcon from '@/components/common/Icons/RefreshIcon';
 const activities: IDailyActivityCard[] = [
   {
     description: 'Welcome Base Mainnet & Onchain Summer',
@@ -56,8 +57,13 @@ const DailyActivity = () => {
         <Box className='H1-Lato-fw-700-fs-32' color={theme.palette.powderWhite}>
           Daily activity
         </Box>
-        <SecondaryButton variant='contained' size='large' fullWidth={!isSm}>
-          Get all
+        <SecondaryButton
+          startIcon={<RefreshIcon fill={theme.palette.powderWhite} />}
+          variant='outlined'
+          size='large'
+          fullWidth={!isSm}
+        >
+          Refresh
         </SecondaryButton>
       </Box>
       <Box>
