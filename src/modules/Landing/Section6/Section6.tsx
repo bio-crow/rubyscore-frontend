@@ -39,10 +39,10 @@ const Section6 = () => {
           gap: { xs: '20px', md: '60px' },
         }}
       >
-        <CustomSocialLink icon='/asserts/social/discord.svg' url='https://www.linkedin.com' />
-        <CustomSocialLink icon='/asserts/social/twitter.svg' url='https://www.linkedin.com' />
-        <CustomSocialLink icon='/asserts/social/linkedin.svg' url='https://www.linkedin.com' />
-        <CustomSocialLink icon='/asserts/social/medium.svg' url='https://www.linkedin.com' />
+        <CustomSocialLink icon='/asserts/social/telegram.svg' url='https://t.me/RubinScore_ann' />
+        <CustomSocialLink icon='/asserts/social/twitter.svg' url='https://twitter.com/rubyscore_io' />
+        <CustomSocialLink icon='/asserts/social/linkedin.svg' url='https://www.linkedin.com/in/rubyscore' />
+        <CustomSocialLink icon='/asserts/social/medium.svg' url='https://medium.com/@rubyscore.io' />
       </Box>
     </Box>
   );

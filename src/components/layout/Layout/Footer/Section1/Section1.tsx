@@ -40,7 +40,7 @@ const Section1 = () => {
           alignSelf: 'start',
         }}
       >
-        <Box
+        {/*   <Box
           sx={{
             paddingBottom: '4px',
             color: theme.palette.white50,
@@ -53,7 +53,7 @@ const Section1 = () => {
         <CustomLink title='Community Hub' url={appRoutes.DASHBOARD} />
         <CustomLink title='Community Initiativies' url='#' />
         <CustomLink title='Governance Forum' url='#' />
-        <CustomLink title='Merch Store' url='#' />
+        <CustomLink title='Merch Store' url='#' /> */}
       </Box>
       <Box
         sx={{
@@ -64,7 +64,7 @@ const Section1 = () => {
           alignSelf: 'start',
         }}
       >
-        <Box
+        {/*  <Box
           sx={{
             paddingBottom: '4px',
             color: theme.palette.white50,
@@ -77,7 +77,7 @@ const Section1 = () => {
         <CustomLink title='Blog' url='#' />
         <CustomLink title='Manager Toolkit' url='#' />
         <CustomLink title='WTF is QF' url='#' />
-        <CustomLink title='Support' url='#' />
+        <CustomLink title='Support' url='#' /> */}
       </Box>
       <Box
         sx={{
@@ -88,7 +88,7 @@ const Section1 = () => {
           alignSelf: 'start',
         }}
       >
-        <Box
+        {/*  <Box
           sx={{
             paddingBottom: '4px',
             color: theme.palette.white50,
@@ -101,7 +101,7 @@ const Section1 = () => {
         <CustomLink title='Impact Report' url='#' />
         <CustomLink title='Press & Media' url='#' />
         <CustomLink title='Hackatons' url='#' />
-        <CustomLink title='Bounties' url='#' />
+        <CustomLink title='Bounties' url='#' /> */}
       </Box>
       <Box
         sx={{
@@ -136,10 +136,13 @@ const Section1 = () => {
               gap: '10px',
             }}
           >
-            <CustomSocialLink icon='/asserts/social/discord.svg' url='https://www.linkedin.com' />
-            <CustomSocialLink icon='/asserts/social/twitter.svg' url='https://www.linkedin.com' />
-            <CustomSocialLink icon='/asserts/social/linkedin.svg' url='https://www.linkedin.com' />
-            <CustomSocialLink icon='/asserts/social/medium.svg' url='https://www.linkedin.com' />
+            <CustomSocialLink icon='/asserts/social/telegram.svg' url='https://t.me/RubinScore_ann' />
+            <CustomSocialLink icon='/asserts/social/twitter.svg' url='https://twitter.com/rubyscore_io' />
+            <CustomSocialLink
+              icon='/asserts/social/linkedin.svg'
+              url='https://www.linkedin.com/in/rubyscore'
+            />
+            <CustomSocialLink icon='/asserts/social/medium.svg' url='https://medium.com/@rubyscore.io' />
           </Box>
         </Box>
         <PrimaryButton variant='contained' size='large' fullWidth>
