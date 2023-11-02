@@ -19,6 +19,7 @@ import {
   fetchDashboardVolume,
   fetchDashboardWeeks,
   fetchProjectStatistics,
+  fetchUserGradation,
 } from '@/core/api/dashboard.api';
 import {
   setLoading,
@@ -26,10 +27,13 @@ import {
   setMyLevelData,
   setProjectStatistics,
   setProjectStatisticsLoading,
+  setUserGradationLoading,
+  setUserGradation,
 } from '@/core/state/dashboard.state';
 import { ChartIndexType, DashboardTabIndexType, IChartDot } from '@/types/index';
 import { setUserStatistics, setUserStatisticsLoading } from '@/core/state/leaderboard.state';
 import { searchUser } from '@/core/api/leaderboard.api';
+import { IUserGradationPayload } from '@/core/types';
 
 export const getDashboardChartData = createAsyncThunk(
   'dashboardSlice/getDashboardTransactionsData',
@@ -128,6 +132,20 @@ export const getProjectStatistics = createAsyncThunk(
       dispatch(setProjectStatistics(null));
     }
     dispatch(setProjectStatisticsLoading(false));
+    return;
+  }
+);
+export const getUserGradation = createAsyncThunk(
+  'dashboardSlice/getUserGradation',
+  async (params: IUserGradationPayload, { dispatch }) => {
+    dispatch(setUserGradationLoading(true));
+    const data: any = await fetchUserGradation(params);
+    if (data.data.result) {
+      dispatch(setUserGradation(data.data.result));
+    } else {
+      dispatch(setUserGradation(null));
+    }
+    dispatch(setUserGradationLoading(false));
     return;
   }
 );

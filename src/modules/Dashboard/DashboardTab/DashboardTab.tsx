@@ -2,13 +2,14 @@ import { Box } from '@mui/system';
 import { FC, useEffect } from 'react';
 import MyLevelSection from '@/components/common/sections/MyLevelSection/MyLevelSection';
 import MainInfo from '@/modules/Dashboard/DashboardTab/MainInfo/MainInfo';
-import Achievements from '@/modules/Dashboard/DashboardTab/Achievements/Achievements';
+import AchievementsSection from '@/components/common/sections/AchievementsSection/AchievementsSection';
 import Transactions from '@/modules/Dashboard/DashboardTab/Transactions/Transactions';
 import { DashboardTabIndexType } from '@/types/index';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { getProjectStatistics } from '@/core/thunk/dashboard.thunk';
 import { CircularProgress } from '@mui/material';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
+import { useAccount } from 'wagmi';
 
 interface Props {
   activeTab: { index: DashboardTabIndexType; label: string };
@@ -16,6 +17,8 @@ interface Props {
 
 const DashboardTab: FC<Props> = ({ activeTab }) => {
   const theme = useCustomTheme();
+  const { address } = useAccount();
+  const userGradation = useAppSelector(state => state.dashboardState.userGradation);
   const dispatch = useAppDispatch();
   const loadingProjectStatistics = useAppSelector(state => state.dashboardState.loadingProjectStatistics);
   const isAuth = useAppSelector(state => state.authState.isAuth);
@@ -43,7 +46,7 @@ const DashboardTab: FC<Props> = ({ activeTab }) => {
           {isAuth && <MyLevelSection project={activeTab.index} />}
           <MainInfo />
           <Transactions activeTab={activeTab} />
-          <Achievements />
+          {userGradation && <AchievementsSection activeTab={activeTab} wallet={address} />}
         </Box>
       )}
     </>

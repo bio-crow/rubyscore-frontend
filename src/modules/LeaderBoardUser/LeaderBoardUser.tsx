@@ -10,6 +10,8 @@ import { setUserStatistics } from '@/core/state/leaderboard.state';
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { getUserNFTList } from '@/core/thunk/user.thunk';
+import AchievementsSection from '@/components/common/sections/AchievementsSection/AchievementsSection';
+import { getUserGradation } from '@/core/thunk/dashboard.thunk';
 const breakpointsConfig = {
   0: {
     slidesPerView: 1,
@@ -30,6 +32,7 @@ const breakpointsConfig = {
 const LeaderBoardUser = () => {
   const theme = useCustomTheme();
   const params: any = useParams();
+  const userGradation = useAppSelector(state => state.dashboardState.userGradation);
   const userStatistics = useAppSelector(state => state.leaderboardState.userStatistics);
   const userStatisticsLoading = useAppSelector(state => state.leaderboardState.userStatisticsLoading);
   const dispatch = useAppDispatch();
@@ -50,6 +53,13 @@ const LeaderBoardUser = () => {
       dispatch(setUserStatistics(null));
     };
   }, []);
+  useEffect(() => {
+    const data = {
+      wallet: `${params.wallet}`,
+      projectName: 'rubyscore',
+    };
+    dispatch(getUserGradation(data));
+  }, [params.wallet]);
   return (
     <Layout>
       {showNotFound && (
@@ -79,6 +89,12 @@ const LeaderBoardUser = () => {
         >
           <UserInfoSection user={userStatistics} withUntilNextLevel />
           <ScoreSection bpConfig={breakpointsConfig} wallet={params.wallet} />
+          {userGradation && (
+            <AchievementsSection
+              activeTab={{ index: 'rubyscore', label: 'rubyscore' }}
+              wallet={params.wallet}
+            />
+          )}
           <LeaderBoardUserStatistics />
         </Box>
       )}

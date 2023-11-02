@@ -45,12 +45,11 @@ export interface IReferral {
   score: number;
 }
 export interface IAchievementCard {
+  value: string;
+  score: number;
+  top: number;
   currency: string;
-  amount: number;
-  pointsAmount: number;
-  maxAmount: number;
-  maxPoints: number;
-  description: string;
+  label: string;
 }
 export interface ILeaderboardData {
   wallet: string;
@@ -144,5 +143,54 @@ export interface IScoreList {
   scroll: {
     score: 0;
     level: 1;
+  };
+}
+export interface IUserGradation {
+  address: string;
+  chain_id: string;
+  total_spent_gas: {
+    value: string;
+    score: number;
+    top: number;
+  };
+  outgoing_txs_count: {
+    value: string;
+    score: number;
+    top: number;
+  };
+  unique_contracts_count: {
+    value: string;
+    score: number;
+    top: number;
+  };
+  unique_days_count: {
+    value: string;
+    score: number;
+    top: number;
+  };
+  unique_weeks_count: {
+    value: string;
+    score: number;
+    top: number;
+  };
+  unique_months_count: {
+    value: string;
+    score: number;
+    top: number;
+  };
+  volume: {
+    value: string;
+    score: number;
+    top: number;
+  };
+  total_balance_usd: {
+    value: string;
+    score: number;
+    top: number;
+  };
+  total_score: string;
+  leaderboard_position: {
+    current: number;
+    max: number;
   };
 }

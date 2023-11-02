@@ -1,7 +1,6 @@
 import { Box } from '@mui/system';
 import { FC, useState } from 'react';
 import { IAchievementCard } from '@/types/index';
-import pluralize from 'pluralize';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import CustomLinearProgress from '@/components/common/ui/CustomLinearProgress/CustomLinearProgress';
 interface Props {
@@ -9,7 +8,7 @@ interface Props {
 }
 const AchievementCard: FC<Props> = ({ data }) => {
   const theme = useCustomTheme();
-  const [progress, setProgress] = useState(Math.round((data.amount / data.maxAmount) * 100));
+  const [progress, setProgress] = useState(data.top);
   return (
     <Box
       sx={{
@@ -35,17 +34,17 @@ const AchievementCard: FC<Props> = ({ data }) => {
         }}
       >
         <Box color={theme.palette.lightGreen} className='H1-Lato-fw-700-fs-32'>
-          {`${data.amount} ${data.currency}`}
+          {`${data.value} ${data.currency}`}
         </Box>
         <Box color={theme.palette.powderWhite} className='menu-Lato-fw-700-fs-12'>
-          {data.description}
+          {data.label}
         </Box>
       </Box>
       <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          gap: '5px',
+          gap: '20px',
           flex: '1',
         }}
       >
@@ -53,14 +52,31 @@ const AchievementCard: FC<Props> = ({ data }) => {
           sx={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-between',
+            justifyContent: 'flex-end',
           }}
         >
-          <Box color={theme.palette.powderWhite} className='menu-Lato-fw-500-fs-14'>
-            {`${data.amount} ${data.currency}`}
-          </Box>
-          <Box color={theme.palette.powderWhite} className='menu-Lato-fw-500-fs-14'>
-            {`${data.maxAmount} ${data.currency}`}
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '5px',
+            }}
+            className='Body-Lato-fw-700-fs-18'
+          >
+            <Box
+              sx={{
+                color: theme.palette.lightGreen,
+              }}
+            >
+              {data.top}%
+            </Box>
+            <Box
+              sx={{
+                color: theme.palette.powderWhite,
+              }}
+            >
+              TOP
+            </Box>
           </Box>
         </Box>
         <Box
@@ -69,20 +85,6 @@ const AchievementCard: FC<Props> = ({ data }) => {
           }}
         >
           <CustomLinearProgress variant='determinate' value={progress} />
-        </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}
-        >
-          <Box color={theme.palette.white50} className='menu-Lato-fw-500-fs-14'>
-            {`${data.pointsAmount} ${pluralize('Point', data.pointsAmount)}`}
-          </Box>
-          <Box color={theme.palette.white50} className='menu-Lato-fw-500-fs-14'>
-            {`${data.maxPoints} ${pluralize('Point', data.maxPoints)}`}
-          </Box>
         </Box>
       </Box>
     </Box>

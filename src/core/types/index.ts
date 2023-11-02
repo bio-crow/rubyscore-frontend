@@ -1,4 +1,10 @@
-import { ILeaderboardData, ILeaderboardUser, INFTData } from '@/types/index';
+import {
+  DashboardTabIndexType,
+  ILeaderboardData,
+  ILeaderboardUser,
+  INFTData,
+  IUserGradation,
+} from '@/types/index';
 import {
   fetchDashboardBalance,
   fetchDashboardContracts,
@@ -8,6 +14,7 @@ import {
   fetchDashboardTransactions,
   fetchDashboardVolume,
   fetchDashboardWeeks,
+  fetchUserGradation,
 } from '@/core/api/dashboard.api';
 
 export interface ILoginPayload {
@@ -221,4 +228,13 @@ export interface IProjectStatisticsResponse {
     last_transaction_time: number;
     total_value_locked: number;
   };
+}
+
+export interface IUserGradationPayload {
+  projectName: DashboardTabIndexType;
+  wallet: string;
+}
+
+export interface IUserGradationResponse {
+  result: IUserGradation;
 }

@@ -1,10 +1,13 @@
 import Layout from '@/components/layout/Layout/Layout';
 import { Box, Tab } from '@mui/material';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DashboardTab from '@/modules/Dashboard/DashboardTab/DashboardTab';
 import { DashboardTabIndexType } from '@/types/index';
 import NetworkTabs from '@/components/common/ui/NetworkTabs/NetworkTabs';
+import { useAppDispatch } from '@/core/store';
+import { getUserGradation } from '@/core/thunk/dashboard.thunk';
+import { useAccount } from 'wagmi';
 
 const panelTabs: { index: DashboardTabIndexType; label: string }[] = [
   {
@@ -34,8 +37,18 @@ const panelTabs: { index: DashboardTabIndexType; label: string }[] = [
 ];
 const Dashboard = () => {
   const theme = useCustomTheme();
+  const { address } = useAccount();
   const [activeTab, setActiveTab] = useState<{ index: DashboardTabIndexType; label: string }>(panelTabs[0]);
-
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (address) {
+      const data = {
+        wallet: `${address}`,
+        projectName: activeTab.index,
+      };
+      dispatch(getUserGradation(data));
+    }
+  }, [activeTab.index, address]);
   return (
     <Layout>
       <Box

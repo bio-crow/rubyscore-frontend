@@ -1,8 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IChartDot, ILeaderboardData, ILeaderboardUser, ILevelInfo, IProjectStatistics } from '@/types/index';
+import {
+  IChartDot,
+  ILeaderboardData,
+  ILeaderboardUser,
+  ILevelInfo,
+  IProjectStatistics,
+  IUserGradation,
+} from '@/types/index';
 import { getPrivateLeaderboardData, getPublicLeaderboardData } from '@/core/thunk/leaderboard.thunk';
 import { AxiosResponse } from 'axios';
 import { ILeaderBoardResponse } from '@/core/types';
+import { getUserGradation } from '@/core/thunk/dashboard.thunk';
 
 interface IDashboardState {
   chartData: IChartDot[];
@@ -10,6 +18,8 @@ interface IDashboardState {
   myLevelData: ILevelInfo | null;
   projectStatistics: IProjectStatistics | null;
   loadingProjectStatistics: boolean;
+  loadingUserGradation: boolean;
+  userGradation: IUserGradation | null;
 }
 
 const initialState: IDashboardState = {
@@ -18,6 +28,8 @@ const initialState: IDashboardState = {
   myLevelData: null,
   projectStatistics: null,
   loadingProjectStatistics: false,
+  loadingUserGradation: false,
+  userGradation: null,
 };
 
 export const dashboardSlice = createSlice({
@@ -39,10 +51,23 @@ export const dashboardSlice = createSlice({
     setProjectStatisticsLoading: (state, action: PayloadAction<boolean>) => {
       state.loadingProjectStatistics = action.payload;
     },
+    setUserGradationLoading: (state, action: PayloadAction<boolean>) => {
+      state.loadingUserGradation = action.payload;
+    },
+    setUserGradation: (state, action: PayloadAction<IUserGradation | null>) => {
+      state.userGradation = action.payload;
+    },
   },
 });
 
 export default dashboardSlice.reducer;
 
-export const { setChartData, setProjectStatistics, setProjectStatisticsLoading, setMyLevelData, setLoading } =
-  dashboardSlice.actions;
+export const {
+  setChartData,
+  setUserGradation,
+  setUserGradationLoading,
+  setProjectStatistics,
+  setProjectStatisticsLoading,
+  setMyLevelData,
+  setLoading,
+} = dashboardSlice.actions;

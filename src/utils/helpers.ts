@@ -1,5 +1,6 @@
 import copy from 'copy-to-clipboard';
 import { toast } from 'react-toastify';
+import pluralize from 'pluralize';
 import {
   IDashboardBalanceResponse,
   IDashboardContractsResponse,
@@ -10,7 +11,7 @@ import {
   IDashboardVolumeResponse,
   IDashboardWeeksResponse,
 } from '@/core/types';
-import { IChartDot } from '@/types/index';
+import { IAchievementCard, IChartDot, IUserGradation } from '@/types/index';
 
 export const copyToClickBoard = (text: string | undefined, message: string = 'Copied to clipboard') => {
   toast(message, { position: 'bottom-center' });
@@ -384,6 +385,67 @@ export const transformApiBalanceResponse = (data: IDashboardBalanceResponse): IC
       name: '10k<Balance<100k',
       shortName: '10k<B<100k',
       uv: data.result.balance10000_100000,
+    },
+  ];
+  return result;
+};
+export const prepareUserGradationToAchievementsCards = (data: IUserGradation): IAchievementCard[] => {
+  const result: IAchievementCard[] = [
+    {
+      label: 'Amount on balance',
+      currency: '$',
+      value: data['total_balance_usd'].value,
+      score: data['total_balance_usd'].score,
+      top: data['total_balance_usd'].top,
+    },
+    {
+      label: 'Transaction volume',
+      currency: '$',
+      value: data['volume'].value,
+      score: data['volume'].score,
+      top: data['volume'].top,
+    },
+    {
+      label: 'Transactions with unique contracts',
+      currency: '',
+      value: data['unique_contracts_count'].value,
+      score: data['unique_contracts_count'].score,
+      top: data['unique_contracts_count'].top,
+    },
+    {
+      label: 'Wallet transactions',
+      currency: '',
+      value: data['outgoing_txs_count'].value,
+      score: data['outgoing_txs_count'].score,
+      top: data['outgoing_txs_count'].top,
+    },
+    {
+      label: 'Transactions on days',
+      currency: pluralize('day', data['unique_days_count'].score),
+      value: data['unique_days_count'].value,
+      score: data['unique_days_count'].score,
+      top: data['unique_days_count'].top,
+    },
+    {
+      label: 'Transactions of weeks',
+      currency: pluralize('week', data['unique_weeks_count'].score),
+      value: data['unique_weeks_count'].value,
+      score: data['unique_weeks_count'].score,
+      top: data['unique_weeks_count'].top,
+    },
+    {
+      label: 'Transactions of months',
+      currency: pluralize('month', data['unique_months_count'].score),
+      value: data['unique_months_count'].value,
+      score: data['unique_months_count'].score,
+      top: data['unique_months_count'].top,
+    },
+    {
+      label: 'Gas Spended',
+      currency: '$',
+      value: data['total_spent_gas'].value,
+      score: data['total_spent_gas'].score,
+      top: data['total_spent_gas'].top,
     },
   ];
   return result;
