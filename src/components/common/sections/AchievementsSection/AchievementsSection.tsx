@@ -3,12 +3,10 @@ import SecondaryButton from '@/components/common/ui/SecondaryButton/SecondaryBut
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import RefreshIcon from '@/components/common/Icons/RefreshIcon';
-import { mokeAchievements } from '@/modules/Dashboard/DashboardTab/mokeAchievements';
 import AchievementCard from '@/components/common/sections/AchievementsSection/AchievementCard/AchievementCard';
 import { getUserGradation } from '@/core/thunk/dashboard.thunk';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { FC, useEffect, useState } from 'react';
-import { useAccount } from 'wagmi';
 import { DashboardTabIndexType, IAchievementCard } from '@/types/index';
 import { prepareUserGradationToAchievementsCards } from '@/utils/helpers';
 import { CircularProgress } from '@mui/material';

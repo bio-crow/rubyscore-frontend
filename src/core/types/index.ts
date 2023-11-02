@@ -231,7 +231,7 @@ export interface IProjectStatisticsResponse {
 }
 
 export interface IUserGradationPayload {
-  projectName: DashboardTabIndexType;
+  projectName: string;
   wallet: string;
 }
 
