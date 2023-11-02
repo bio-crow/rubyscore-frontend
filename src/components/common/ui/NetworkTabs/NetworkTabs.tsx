@@ -13,13 +13,16 @@ const bpConfig = {
     slidesPerView: 1,
   },
   500: {
-    slidesPerView: 2,
+    slidesPerView: 1,
   },
   767: {
-    slidesPerView: 3,
+    slidesPerView: 2,
   },
   992: {
-    slidesPerView: 4,
+    slidesPerView: 3,
+  },
+  1200: {
+    slidesPerView: 3,
   },
   1392: {
     slidesPerView: 5,

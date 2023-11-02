@@ -394,14 +394,14 @@ export const prepareUserGradationToAchievementsCards = (data: IUserGradation): I
     {
       label: 'Amount on balance',
       currency: '$',
-      value: data['total_balance_usd'].value,
+      value: Number.parseFloat(data['total_balance_usd'].value).toFixed(2),
       score: data['total_balance_usd'].score,
       top: data['total_balance_usd'].top,
     },
     {
       label: 'Transaction volume',
       currency: '$',
-      value: data['volume'].value,
+      value: Number.parseFloat(data['volume'].value).toFixed(2),
       score: data['volume'].score,
       top: data['volume'].top,
     },
@@ -443,7 +443,7 @@ export const prepareUserGradationToAchievementsCards = (data: IUserGradation): I
     {
       label: 'Gas Spended',
       currency: '$',
-      value: data['total_spent_gas'].value,
+      value: Number.parseFloat(data['total_spent_gas'].value).toFixed(2),
       score: data['total_spent_gas'].score,
       top: data['total_spent_gas'].top,
     },

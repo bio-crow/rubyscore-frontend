@@ -16,6 +16,7 @@ const Section2 = () => {
       }}
     >
       <Box className='menu-Lato-fw-500-fs-14'>RubyScore © 2023</Box>
+      {/*
       <Box
         sx={{
           display: 'flex',
@@ -39,7 +40,7 @@ const Section2 = () => {
         >
           Privacy Policy
         </Box>
-      </Box>
+      </Box>*/}
     </Box>
   );
 };

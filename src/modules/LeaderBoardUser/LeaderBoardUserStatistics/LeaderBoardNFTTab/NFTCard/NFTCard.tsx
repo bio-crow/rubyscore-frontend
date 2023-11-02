@@ -16,7 +16,6 @@ const NFTCard: FC<Props> = ({ data }) => {
         flexDirection: 'column',
         gap: '20px',
         borderRadius: '10px',
-        border: `1px solid ${theme.palette.white10}`,
         background: theme.palette.black,
         position: 'relative',
       }}
