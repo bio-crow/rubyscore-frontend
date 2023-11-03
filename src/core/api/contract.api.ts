@@ -5,9 +5,9 @@ import { IClaimPayload } from '@/core/types';
 import { readContract } from '@wagmi/core';
 import { toast } from 'react-toastify';
 import { parseEther } from 'viem';
-import * as process from 'process';
+import { testContracts } from '@/providers/chains';
 const baseConfig = {
-  address: process.env.NEXT_PUBLIC_SMART_CONTRACT,
+  address: testContracts.optimism,
   abi: abiIXProjectSBT,
 };
 export const wagmiClaimName = async (data: IClaimPayload): Promise<any> => {
@@ -57,6 +57,7 @@ export const wagmiGetPremiumStatus = async (address: any): Promise<any> => {
       functionName: 'getPremiumStatus',
       args: [address],
     };
+    console.log(config)
     return await readContract(config);
   };
   try {
@@ -76,7 +77,7 @@ export const wagmiGetPremiumPrice = async (): Promise<any> => {
   try {
     return await action();
   } catch (error) {
-    //console.error(error);
+    console.error(error);
   }
 };
 
