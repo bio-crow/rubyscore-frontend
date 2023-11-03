@@ -37,7 +37,7 @@ const Section5 = () => {
             lineHeight: { xs: '36px', md: '48px', xlg: '72px' },
           }}
         >
-          Raise your RUBYSCORE and reach the top!
+          Increase your RubyScore and aim for the top!
         </Box>
         <Box
           sx={{
@@ -54,8 +54,8 @@ const Section5 = () => {
             color: theme.palette.white50,
           }}
         >
-          Participate in daily tasks, invite your friends and get a free project profile to raise your rating
-          in RUBYSCORE!
+          Participate in daily tasks, invite your friends, and receive a free project profile to boost your
+          RubyScore rating
         </Box>
       </Box>
       <Box

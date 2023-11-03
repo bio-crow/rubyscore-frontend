@@ -30,7 +30,7 @@ const Section2 = () => {
           lineHeight: { xs: '36px', md: '48px', xlg: '72px' },
         }}
       >
-        Your ranking is your map to success
+        Your ranking is the roadmap to success
       </Box>
       <Box
         sx={{
@@ -46,8 +46,8 @@ const Section2 = () => {
           color: theme.palette.white50,
         }}
       >
-        Raise it by being active, and watch your SBT level rise with it! After all, the higher your ranking,
-        the closer you are to your goals and new opportunities.
+        Boost it by remaining active, and see your SBT level rise in unison! The higher your ranking, the
+        nearer you are to reaching your goals and encountering new opportunities
       </Box>
       <Box
         sx={{

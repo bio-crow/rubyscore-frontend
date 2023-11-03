@@ -61,7 +61,7 @@ const Section4 = () => {
             lineHeight: { xs: '36px', md: '48px', xlg: '72px' },
           }}
         >
-          Follow the rankings and successes of other wallets with us!
+          Join us to stay updated on the rankings and achievements of other wallets!
         </Box>
         <Box
           sx={{
@@ -78,8 +78,8 @@ const Section4 = () => {
             color: theme.palette.white50,
           }}
         >
-          Our unique ranking allows you to follow wallets on our leaderboard and compare their progress in our
-          project and beyond!
+          Our unique ranking system enables you to track wallets on our leaderboard and compare their progress
+          within our project and beyond!
         </Box>
       </Box>
     </Box>

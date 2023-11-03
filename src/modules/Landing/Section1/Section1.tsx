@@ -34,7 +34,7 @@ const Section1 = () => {
           lineHeight: { xs: '48px', md: '72px', xlg: '72px' },
         }}
       >
-        Your score and ranking in popular Web3 projects
+        Your ranking and score in popular Web3 projects
       </Box>
       <Box
         sx={{
@@ -50,7 +50,7 @@ const Section1 = () => {
           lineHeight: { xs: '24px', md: '27px', xlg: '32px' },
         }}
       >
-        Follow your progress on your favourite projects and rise to the top by actively participating.
+        Track your progress in your favorite projects and rise to the top by actively participating
       </Box>
       <Box>
         <PrimaryButton variant='contained' size='large' onClick={() => router.push(appRoutes.DASHBOARD)}>
