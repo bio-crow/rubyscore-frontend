@@ -11,7 +11,7 @@ const Section1 = () => {
     <Box
       sx={{
         display: 'grid',
-        gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', xlg: '1fr 210px 170px 170px 210px' },
+        gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', xlg: '1fr 210px 170px 170px 260px' },
         gap: '20px',
         gridTemplateAreas: {
           xs: "'logo' 'community' 'learn' 'more' 'social'",
