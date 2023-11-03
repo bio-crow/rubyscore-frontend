@@ -136,18 +136,20 @@ const Section1 = () => {
               gap: '10px',
             }}
           >
-            <CustomSocialLink icon='/asserts/social/telegram.svg' url='https://t.me/RubinScore_ann' />
+            <CustomSocialLink icon='/asserts/social/telegram.svg' url='https://t.me/RubyScore_ann' />
             <CustomSocialLink icon='/asserts/social/twitter.svg' url='https://twitter.com/rubyscore_io' />
             <CustomSocialLink
               icon='/asserts/social/linkedin.svg'
               url='https://www.linkedin.com/in/rubyscore'
             />
             <CustomSocialLink icon='/asserts/social/medium.svg' url='https://medium.com/@rubyscore.io' />
+            <CustomSocialLink icon='/asserts/social/mail.svg' url='mailto:Partnerships@rubyscore.io' />
           </Box>
         </Box>
+        {/*
         <PrimaryButton variant='contained' size='large' fullWidth>
           Get Updates
-        </PrimaryButton>
+        </PrimaryButton> */}
       </Box>
     </Box>
   );

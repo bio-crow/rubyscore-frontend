@@ -25,7 +25,7 @@ const initialState: ILeaderboardState = {
   refCode: null,
   loading: true,
   currentPage: 1,
-  onPage: 4,
+  onPage: 15,
   pageCount: 0,
   shownLeaderBoard: [],
 };
