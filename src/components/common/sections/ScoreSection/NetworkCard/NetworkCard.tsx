@@ -1,26 +1,33 @@
 import { Box } from '@mui/system';
-import { IScoreNetwork } from '@/types/index';
+import { DashboardTabIndexType, IScoreNetwork } from '@/types/index';
 import { FC } from 'react';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import pluralize from 'pluralize';
 import Image from 'next/image';
 interface Props {
   network: IScoreNetwork;
+  selectable?: boolean;
+  activeTab?: { index: DashboardTabIndexType; label: string };
+  onSelect?: Function;
 }
 
-const NetworkCard: FC<Props> = ({ network }) => {
+const NetworkCard: FC<Props> = ({ network, selectable, activeTab, onSelect }) => {
   const theme = useCustomTheme();
   return (
     <Box
       sx={{
         borderRadius: '10px 50px 10px 10px',
-        border: `1px solid ${theme.palette.white10}`,
+        border: `1px solid ${
+          network.index === activeTab?.index ? theme.palette.lightGreen : theme.palette.white10
+        }`,
         background: theme.palette.black,
         padding: '20px',
         display: 'flex',
         flexDirection: 'column',
         gap: '16px',
+        cursor: selectable ? 'pointer' : 'unset',
       }}
+      onClick={() => onSelect && onSelect(network.index)}
     >
       <Box
         sx={{
@@ -84,7 +91,7 @@ const NetworkCard: FC<Props> = ({ network }) => {
             }}
             className='Body-Lato-fw-700-fs-16'
           >
-            {network.points}
+            {Math.round(network.points)}
           </Box>
           <Box
             sx={{

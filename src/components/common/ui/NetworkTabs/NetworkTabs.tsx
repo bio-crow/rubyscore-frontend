@@ -70,10 +70,11 @@ const NetworkTabs: FC<Props> = ({ networks, activeTab, setActiveTab }) => {
         display: 'flex',
         alignItems: 'center',
         gap: '20px',
+        width: '100%',
       }}
     >
       <PrevButton onClick={handlePrevious} hasNext={hasPrev} />
-      <Box flex='1' overflow='clip'>
+      <Box flex='1' overflow='hidden'>
         <Swiper
           onSwiper={onSwiper}
           onResize={onResize}

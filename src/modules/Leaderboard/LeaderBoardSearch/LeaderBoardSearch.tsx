@@ -7,12 +7,14 @@ import { searchUser } from '@/core/api/leaderboard.api';
 import { FC, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { appRoutes } from '@/constants/routes';
+import { useAppDispatch, useAppSelector } from '@/core/store';
+import { getFilteredUser } from '@/core/thunk/leaderboard.thunk';
 interface Props {
   activeTab: any;
 }
 const LeaderBoardSearch: FC<Props> = ({ activeTab }) => {
-  const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const dispatch = useAppDispatch();
+  const filteredUserLoading = useAppSelector(state => state.leaderboardState.filteredUserLoading);
   const {
     register,
     handleSubmit,
@@ -29,20 +31,16 @@ const LeaderBoardSearch: FC<Props> = ({ activeTab }) => {
     resolver: yupResolver<any>(searchWalletSchema),
   });
   const onSubmit = async (data: any) => {
-    setLoading(true);
-    const result = await searchUser({
+    data = {
       wallet: data.wallet,
       project: activeTab.index,
-    });
-    if (result) {
-      const wallet = result.data.result.user.profile.wallet;
-      router.push(`${appRoutes.LEADERBOARD_USER}/${wallet}`);
-    }
-    setLoading(false);
+    };
+    dispatch(getFilteredUser(data));
   };
   const onError = (data: any) => {
     // console.log(data)
   };
+
   return (
     <SearchWalletFormContext.Provider
       value={{
@@ -60,7 +58,7 @@ const LeaderBoardSearch: FC<Props> = ({ activeTab }) => {
         isValid,
       }}
     >
-      <LeaderBoardSearchForm onSubmit={onSubmit} onError={onError} isLoading={loading} />
+      <LeaderBoardSearchForm onSubmit={onSubmit} onError={onError} isLoading={filteredUserLoading} />
     </SearchWalletFormContext.Provider>
   );
 };

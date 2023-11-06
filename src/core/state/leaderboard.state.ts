@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ILeaderboardData, ILeaderboardUser } from '@/types/index';
-import { getPrivateLeaderboardData, getPublicLeaderboardData } from '@/core/thunk/leaderboard.thunk';
 import { AxiosResponse } from 'axios';
 import { ILeaderBoardResponse } from '@/core/types';
 
@@ -9,18 +8,22 @@ interface ILeaderboardState {
   leaderboardUser: ILeaderboardUser | null;
   userStatistics: ILeaderboardUser | null;
   userStatisticsLoading: boolean;
+  userNotFound: boolean;
   refCode: string | null;
   loading: boolean;
   currentPage: number;
   onPage: number;
   pageCount: number;
   shownLeaderBoard: ILeaderboardData[];
+  filteredUser: ILeaderboardData | null;
+  filteredUserLoading: boolean;
 }
 
 const initialState: ILeaderboardState = {
   leaderboard: [],
   leaderboardUser: null,
   userStatisticsLoading: false,
+  userNotFound: false,
   userStatistics: null,
   refCode: null,
   loading: true,
@@ -28,6 +31,8 @@ const initialState: ILeaderboardState = {
   onPage: 15,
   pageCount: 0,
   shownLeaderBoard: [],
+  filteredUser: null,
+  filteredUserLoading: false,
 };
 
 export const leaderboardSlice = createSlice({
@@ -36,6 +41,15 @@ export const leaderboardSlice = createSlice({
   reducers: {
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
+    },
+    setFilteredUser: (state, action: PayloadAction<ILeaderboardData | null>) => {
+      state.filteredUser = action.payload;
+    },
+    setFilteredUserLoading: (state, action: PayloadAction<boolean>) => {
+      state.filteredUserLoading = action.payload;
+    },
+    setUserNotFound: (state, action: PayloadAction<boolean>) => {
+      state.userNotFound = action.payload;
     },
     setUserStatistics: (state, action: PayloadAction<ILeaderboardUser | null>) => {
       state.userStatistics = action.payload;
@@ -122,5 +136,13 @@ export const leaderboardSlice = createSlice({
 
 export default leaderboardSlice.reducer;
 
-export const { setCurrentPage, setUserStatisticsLoading, setLoading, initLeaderBoard, setUserStatistics } =
-  leaderboardSlice.actions;
+export const {
+  setCurrentPage,
+  setFilteredUserLoading,
+  setFilteredUser,
+  setUserNotFound,
+  setUserStatisticsLoading,
+  setLoading,
+  initLeaderBoard,
+  setUserStatistics,
+} = leaderboardSlice.actions;

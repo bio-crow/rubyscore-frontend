@@ -10,10 +10,12 @@ import { FC, useEffect, useState } from 'react';
 import { DashboardTabIndexType, IAchievementCard } from '@/types/index';
 import { prepareUserGradationToAchievementsCards } from '@/utils/helpers';
 import { CircularProgress } from '@mui/material';
+
 interface Props {
   wallet: any;
   activeTab: { index: DashboardTabIndexType; label: string };
 }
+
 const AchievementsSection: FC<Props> = ({ activeTab, wallet }) => {
   const dispatch = useAppDispatch();
   const userGradation = useAppSelector(state => state.dashboardState.userGradation);
@@ -56,15 +58,17 @@ const AchievementsSection: FC<Props> = ({ activeTab, wallet }) => {
             gap: '20px',
           }}
         >
-          <SecondaryButton
-            startIcon={<RefreshIcon fill={theme.palette.powderWhite} />}
-            variant='outlined'
-            size='large'
-            onClick={refreshGradation}
-            fullWidth={!isSm}
-          >
-            Refresh
-          </SecondaryButton>
+          {userGradation && (
+            <SecondaryButton
+              startIcon={<RefreshIcon fill={theme.palette.powderWhite} />}
+              variant='outlined'
+              size='large'
+              onClick={refreshGradation}
+              fullWidth={!isSm}
+            >
+              Refresh
+            </SecondaryButton>
+          )}
         </Box>
       </Box>
       <>
@@ -77,18 +81,35 @@ const AchievementsSection: FC<Props> = ({ activeTab, wallet }) => {
             />
           </Box>
         ) : (
-          <Box
-            sx={{
-              display: 'grid',
-              gridTemplateColumns: { xs: '1fr', lg: '1fr 1fr' },
-              gap: '20px',
-            }}
-          >
-            {userGradation &&
-              prepareUserGradationToAchievementsCards(userGradation).map(item => (
-                <AchievementCard key={item.label} data={item} />
-              ))}
-          </Box>
+          <>
+            {userGradation ? (
+              <Box
+                sx={{
+                  display: 'grid',
+                  gridTemplateColumns: { xs: '1fr', lg: '1fr 1fr' },
+                  gap: '20px',
+                }}
+              >
+                {prepareUserGradationToAchievementsCards(userGradation).map(item => (
+                  <AchievementCard key={item.key} data={item} />
+                ))}
+              </Box>
+            ) : (
+              <Box
+                sx={{
+                  display: 'flex',
+                  width: '100%',
+                  flex: '1',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: theme.palette.powderWhite,
+                }}
+                className='Body-Lato-fw-600-fs-24'
+              >
+                No Data
+              </Box>
+            )}
+          </>
         )}
       </>
     </Box>

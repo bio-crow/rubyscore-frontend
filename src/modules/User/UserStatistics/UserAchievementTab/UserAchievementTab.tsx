@@ -2,9 +2,9 @@ import { Box } from '@mui/system';
 import PrimaryPagination from '@/components/common/ui/PrimaryPagination/PrimaryPagination';
 import { v4 as uuidv4 } from 'uuid';
 import { IDailyActivityCard } from '@/types/index';
-import { mokeAchievementsData } from '@/modules/LeaderBoardUser/LeaderBoardUserStatistics/LeaderBoardAchievementTab/mokeAchievementsData';
-import AchievementCard from '@/modules/LeaderBoardUser/LeaderBoardUserStatistics/LeaderBoardAchievementTab/AchievementCard/AchievementCard';
-const LeaderBoardAchievementTab = () => {
+import { mokeAchievementsData } from '@/modules/User/UserStatistics/UserAchievementTab/mokeAchievementsData';
+import AchievementCard from '@/modules/User/UserStatistics/UserAchievementTab/AchievementCard/AchievementCard';
+const UserAchievementTab = () => {
   return (
     <Box
       sx={{
@@ -35,4 +35,4 @@ const LeaderBoardAchievementTab = () => {
     </Box>
   );
 };
-export default LeaderBoardAchievementTab;
+export default UserAchievementTab;

@@ -5,14 +5,14 @@ import { useCustomTheme } from '@/hooks/useCustomTheme';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { SyntheticEvent, useEffect, useState } from 'react';
 import DashboardTab from '@/modules/Dashboard/DashboardTab/DashboardTab';
-import LeaderBoardAchievementTab from '@/modules/LeaderBoardUser/LeaderBoardUserStatistics/LeaderBoardAchievementTab/LeaderBoardAchievementTab';
-import LeaderBoardNFTTab from '@/modules/LeaderBoardUser/LeaderBoardUserStatistics/LeaderBoardNFTTab/LeaderBoardNFTTab';
+import UserAchievementTab from '@/modules/User/UserStatistics/UserAchievementTab/UserAchievementTab';
+import UserNFTTab from '@/modules/User/UserStatistics/UserNFTTab/UserNFTTab';
 import { useAppSelector } from '@/core/store';
 import { useSearchParams } from 'next/navigation';
 
 type TabIndexType = 0 | 1;
 
-const LeaderBoardUserStatistics = () => {
+const UserStatistics = () => {
   const theme = useCustomTheme();
   const searchParams = useSearchParams();
   const tab = searchParams.get('tab');
@@ -23,8 +23,8 @@ const LeaderBoardUserStatistics = () => {
     setActiveTabIndex(newValue);
   };
   const dashboardTabs = {
-    0: <LeaderBoardAchievementTab />,
-    1: <LeaderBoardNFTTab />,
+    0: <UserAchievementTab />,
+    1: <UserNFTTab />,
   };
   const panelTabs = [
     {
@@ -79,7 +79,7 @@ const LeaderBoardUserStatistics = () => {
     </Box>
   );
 };
-export default LeaderBoardUserStatistics;
+export default UserStatistics;
 
 function a11yProps(index: number) {
   return {

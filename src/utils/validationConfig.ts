@@ -8,5 +8,5 @@ export const claimProfileSchema = yup.object().shape({
     .min(3, 'Min name length is 3'),
 });
 export const searchWalletSchema = yup.object().shape({
-  [SEARCH_WALLET_FIELD.WALLET]: yup.string().trim().required('Please enter wallet'),
+  [SEARCH_WALLET_FIELD.WALLET]: yup.string().trim(),
 });

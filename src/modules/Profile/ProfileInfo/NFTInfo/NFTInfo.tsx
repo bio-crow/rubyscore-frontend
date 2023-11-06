@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { FC } from 'react';
 import { useAppSelector } from '@/core/store';
 import { INFTData } from '@/types/index';
-import NFTCard from '@/modules/LeaderBoardUser/LeaderBoardUserStatistics/LeaderBoardNFTTab/NFTCard/NFTCard';
+import NFTCard from '@/modules/User/UserStatistics/UserNFTTab/NFTCard/NFTCard';
 import { v4 as uuidv4 } from 'uuid';
 import SecondaryButton from '@/components/common/ui/SecondaryButton/SecondaryButton';
 import { useRouter } from 'next/navigation';

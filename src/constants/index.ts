@@ -1,3 +1,5 @@
+import { DashboardTabIndexType } from '@/types/index';
+
 export const networkStaticData: {
   zk_evm: { icon: string };
   zk_era: { icon: string };
@@ -115,3 +117,29 @@ export const myLevelIcons = {
     '/asserts/box/rubyscore/rubyscore10.png',
   ],
 };
+export const dashboardPanelTabs: { index: DashboardTabIndexType; label: string }[] = [
+  {
+    index: 'zk_era',
+    label: 'ZkSync',
+  },
+  {
+    index: 'linea',
+    label: 'Linea',
+  },
+  {
+    index: 'base',
+    label: 'Base',
+  },
+  {
+    index: 'zora',
+    label: 'Zora',
+  },
+  {
+    index: 'zk_evm',
+    label: 'ZkEvm',
+  },
+  {
+    index: 'scroll',
+    label: 'Scroll',
+  },
+];

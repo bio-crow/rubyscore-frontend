@@ -19,6 +19,7 @@ interface Props {
 const LeaderboardTabTable: FC<Props> = ({ tableData, activeTab }) => {
   const router = useRouter();
   const leaderboardUser = useAppSelector(state => state.leaderboardState.leaderboardUser);
+  const filteredUser = useAppSelector(state => state.leaderboardState.filteredUser);
   return (
     <Box
       sx={{
@@ -52,7 +53,7 @@ const LeaderboardTabTable: FC<Props> = ({ tableData, activeTab }) => {
         disableColumnMenu
         disableRowSelectionOnClick
       />
-      <LeaderBoardPagination />
+      {!filteredUser && <LeaderBoardPagination />}
     </Box>
   );
 };
