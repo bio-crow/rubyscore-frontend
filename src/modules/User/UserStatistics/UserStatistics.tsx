@@ -3,7 +3,7 @@ import { Tab } from '@mui/material';
 import LeaderboardUserTabs from '@/components/common/ui/LeaderboardUserTabs/LeaderboardUserTabs';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { SyntheticEvent, useEffect, useState } from 'react';
+import { SyntheticEvent, useEffect, useRef, useState } from 'react';
 import DashboardTab from '@/modules/Dashboard/DashboardTab/DashboardTab';
 import UserAchievementTab from '@/modules/User/UserStatistics/UserAchievementTab/UserAchievementTab';
 import UserNFTTab from '@/modules/User/UserStatistics/UserNFTTab/UserNFTTab';
@@ -13,6 +13,7 @@ import { useSearchParams } from 'next/navigation';
 type TabIndexType = 0 | 1;
 
 const UserStatistics = () => {
+  const statRef = useRef<any>(null);
   const theme = useCustomTheme();
   const searchParams = useSearchParams();
   const tab = searchParams.get('tab');
@@ -41,6 +42,7 @@ const UserStatistics = () => {
   useEffect(() => {
     if (tab === 'NFT') {
       setActiveTabIndex(1);
+      statRef.current.scrollIntoView();
     }
   }, [tab]);
   return (
@@ -50,6 +52,7 @@ const UserStatistics = () => {
         flexDirection: 'column',
         gap: '56px',
       }}
+      ref={statRef}
     >
       <LeaderboardUserTabs
         value={activeTabIndex}
