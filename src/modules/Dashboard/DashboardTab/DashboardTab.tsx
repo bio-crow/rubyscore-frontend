@@ -46,7 +46,7 @@ const DashboardTab: FC<Props> = ({ activeTab }) => {
           {isAuth && <MyLevelSection project={activeTab.index} />}
           <MainInfo />
           <Transactions activeTab={activeTab} />
-          {userGradation && <AchievementsSection activeTab={activeTab} wallet={address} />}
+          <AchievementsSection activeTab={activeTab} wallet={address} />
         </Box>
       )}
     </>

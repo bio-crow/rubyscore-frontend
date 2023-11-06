@@ -8,7 +8,12 @@ import {
 } from '@/core/api/contract.api';
 import { IClaimPayload } from '@/core/types';
 import { formatEther } from 'viem';
-import { setPremiumPrice, setUserNFTList, setUserScoreList } from '@/core/state/user.state';
+import {
+  setPremiumPrice,
+  setUserNFTList,
+  setUserScoreList,
+  setUserScoreListLoading,
+} from '@/core/state/user.state';
 export const getReferrals = createAsyncThunk('userSlice/fetchReferrals', async () => {
   return await fetchReferrals();
 });
@@ -27,12 +32,14 @@ export const getUserNFTList = createAsyncThunk(
 export const getUserScoreList = createAsyncThunk(
   'userSlice/getUserScoreList',
   async (wallet: string, { dispatch }) => {
+    dispatch(setUserScoreListLoading(true));
     const data: any = await fetchUserScoreList(wallet);
     if (data.data.result) {
       dispatch(setUserScoreList(data.data.result));
     } else {
       dispatch(setUserScoreList(null));
     }
+    dispatch(setUserScoreListLoading(false));
     return;
   }
 );

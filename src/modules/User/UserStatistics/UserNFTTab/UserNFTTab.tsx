@@ -3,10 +3,10 @@ import PrimaryPagination from '@/components/common/ui/PrimaryPagination/PrimaryP
 import { INFTData } from '@/types/index';
 
 import { v4 as uuidv4 } from 'uuid';
-import NFTCard from '@/modules/LeaderBoardUser/LeaderBoardUserStatistics/LeaderBoardNFTTab/NFTCard/NFTCard';
+import NFTCard from '@/modules/User/UserStatistics/UserNFTTab/NFTCard/NFTCard';
 import { useAppSelector } from '@/core/store';
 
-const LeaderBoardNFTTab = () => {
+const UserNFTTab = () => {
   const userNFTList = useAppSelector(state => state.userState.userNFTList);
   return (
     <Box
@@ -54,4 +54,4 @@ const LeaderBoardNFTTab = () => {
     </Box>
   );
 };
-export default LeaderBoardNFTTab;
+export default UserNFTTab;

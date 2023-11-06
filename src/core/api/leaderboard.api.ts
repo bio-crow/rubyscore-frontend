@@ -23,4 +23,5 @@ export const searchUser = async (params: ISearchUserPayload) => {
   } catch (error) {
     toast('Wallet not found', { position: 'top-right' });
   }
+  return;
 };

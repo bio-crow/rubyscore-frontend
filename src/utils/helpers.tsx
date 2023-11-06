@@ -392,56 +392,69 @@ export const transformApiBalanceResponse = (data: IDashboardBalanceResponse): IC
 export const prepareUserGradationToAchievementsCards = (data: IUserGradation): IAchievementCard[] => {
   const result: IAchievementCard[] = [
     {
-      label: 'Amount on balance',
+      key: 'total_balance_usd',
+      label: <div>Amount on balance</div>,
       currency: '$',
       value: Number.parseFloat(data['total_balance_usd'].value).toFixed(2),
       score: data['total_balance_usd'].score,
       top: data['total_balance_usd'].top,
     },
     {
-      label: 'Transaction volume',
+      key: 'volume',
+      label: <div>Transaction volume</div>,
       currency: '$',
       value: Number.parseFloat(data['volume'].value).toFixed(2),
       score: data['volume'].score,
       top: data['volume'].top,
     },
     {
-      label: 'Transactions with unique contracts',
+      key: 'unique_contracts_count',
+      label: (
+        <div>
+          Transactions with unique <br />
+          contracts
+        </div>
+      ),
       currency: '',
       value: data['unique_contracts_count'].value,
       score: data['unique_contracts_count'].score,
       top: data['unique_contracts_count'].top,
     },
     {
-      label: 'Wallet transactions',
+      key: 'outgoing_txs_count',
+      label: <div>Wallet transactions</div>,
       currency: '',
       value: data['outgoing_txs_count'].value,
       score: data['outgoing_txs_count'].score,
       top: data['outgoing_txs_count'].top,
     },
     {
-      label: 'Transactions on days',
+      key: 'unique_days_count',
+      label: <div>Transactions on days</div>,
       currency: pluralize('day', data['unique_days_count'].score),
       value: data['unique_days_count'].value,
       score: data['unique_days_count'].score,
       top: data['unique_days_count'].top,
     },
     {
-      label: 'Transactions of weeks',
+      key: 'unique_weeks_count',
+      label: <div>Transactions of weeks</div>,
       currency: pluralize('week', data['unique_weeks_count'].score),
       value: data['unique_weeks_count'].value,
       score: data['unique_weeks_count'].score,
       top: data['unique_weeks_count'].top,
     },
     {
-      label: 'Transactions of months',
+      key: 'unique_months_count',
+      label: <div>Transactions of months</div>,
       currency: pluralize('month', data['unique_months_count'].score),
       value: data['unique_months_count'].value,
       score: data['unique_months_count'].score,
       top: data['unique_months_count'].top,
     },
     {
-      label: 'Gas Spended',
+      key: 'total_spent_gas',
+      label: <div>Gas Spended</div>,
       currency: '$',
       value: Number.parseFloat(data['total_spent_gas'].value).toFixed(2),
       score: data['total_spent_gas'].score,

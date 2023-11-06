@@ -11,7 +11,7 @@ import MyLevelSection from '@/components/common/sections/MyLevelSection/MyLevelS
 import StreakDays from '@/modules/Profile/StreakDays/StreakDays';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import PrivatePageLayout from '@/components/layout/PrivatePageLayout/PrivatePageLayout';
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import { getNameByAddress, getReferrals, getUserNFTList } from '@/core/thunk/user.thunk';
 import { useAccount } from 'wagmi';
 const breakpointsConfig = {
@@ -38,7 +38,7 @@ const Profile = () => {
   const isAuth = useAppSelector(state => state.authState.isAuth);
   const premiumStatus = useAppSelector(state => state.userState.premiumStatus);
   const userName = useAppSelector(state => state.userState.userName);
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (address && isAuth) {
       dispatch(getReferrals());
       dispatch(getUserNFTList(address));

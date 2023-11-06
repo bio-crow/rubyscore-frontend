@@ -1,17 +1,18 @@
 import { Box } from '@mui/system';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useLayoutEffect, useState } from 'react';
 import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import PrevIcon from '@/components/common/Icons/PrevIcon';
 import NextIcon from '@/components/common/Icons/NextIcon';
 import { v4 as uuidv4 } from 'uuid';
-import { IScoreNetwork } from '@/types/index';
+import { DashboardTabIndexType, IScoreNetwork } from '@/types/index';
 import NetworkCard from '@/components/common/sections/ScoreSection/NetworkCard/NetworkCard';
 import { networkStaticData } from '@/constants/index';
 import { getUserScoreList } from '@/core/thunk/user.thunk';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { setUserScoreList } from '@/core/state/user.state';
+import { CircularProgress } from '@mui/material';
 
 interface btnProps {
   hasNext?: boolean;
@@ -39,10 +40,20 @@ const breakpointsConfig = {
 interface Props {
   bpConfig?: any;
   wallet: any;
+  selectable?: boolean;
+  activeTab?: { index: DashboardTabIndexType; label: string };
+  onSelect?: Function;
 }
 
-const ScoreSection: FC<Props> = ({ bpConfig = breakpointsConfig, wallet }) => {
+const ScoreSection: FC<Props> = ({
+  bpConfig = breakpointsConfig,
+  wallet,
+  selectable,
+  activeTab,
+  onSelect,
+}) => {
   const dispatch = useAppDispatch();
+  const userScoreListLoading = useAppSelector(state => state.userState.userScoreListLoading);
   const userScoreList = useAppSelector(state => state.userState.userScoreList);
   const theme = useCustomTheme();
   const [swiperRef, setSwiperRef] = useState<any>();
@@ -69,7 +80,7 @@ const ScoreSection: FC<Props> = ({ bpConfig = breakpointsConfig, wallet }) => {
     setHasNext(!value.isEnd);
     setHasPrev(!value.isBeginning);
   };
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(getUserScoreList(wallet));
     return () => {
       dispatch(setUserScoreList(null));
@@ -77,36 +88,42 @@ const ScoreSection: FC<Props> = ({ bpConfig = breakpointsConfig, wallet }) => {
   }, []);
   const networks: IScoreNetwork[] | null = userScoreList && [
     {
+      index: 'zk_era',
       title: 'zkSync',
       icon: networkStaticData['zk_era'].icon,
       lvl: userScoreList['zk_era'].level,
       points: userScoreList['zk_era'].score,
     },
     {
+      index: 'linea',
       title: 'Linea',
       icon: networkStaticData['linea'].icon,
       lvl: userScoreList['linea'].level,
       points: userScoreList['linea'].score,
     },
     {
+      index: 'base',
       title: 'Base',
       icon: networkStaticData['base'].icon,
       lvl: userScoreList['base'].level,
       points: userScoreList['base'].score,
     },
     {
+      index: 'zora',
       title: 'Zora',
       icon: networkStaticData['zora'].icon,
       lvl: userScoreList['zora'].level,
       points: userScoreList['zora'].score,
     },
     {
+      index: 'zk_evm',
       title: 'zkEvm',
       icon: networkStaticData['zk_evm'].icon,
       lvl: userScoreList['zk_evm'].level,
       points: userScoreList['zk_evm'].score,
     },
     {
+      index: 'scroll',
       title: 'Scroll',
       icon: networkStaticData['scroll'].icon,
       lvl: userScoreList['scroll'].level,
@@ -114,61 +131,90 @@ const ScoreSection: FC<Props> = ({ bpConfig = breakpointsConfig, wallet }) => {
     },
   ];
   return (
-    <>
-      {userScoreList && (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '32px',
+        width: '100%',
+      }}
+    >
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        <Box className='H1-Lato-fw-700-fs-32' color={theme.palette.powderWhite}>
+          Score
+        </Box>
         <Box
           sx={{
             display: 'flex',
-            flexDirection: 'column',
-            gap: '32px',
-            width: '100%',
+            alignItems: 'center',
+            gap: '16px',
           }}
         >
-          <Box
+          {(hasPrev || hasNext) && userScoreList && (
+            <>
+              <PrevButton onClick={handlePrevious} hasNext={hasPrev} />
+              <NextButton onClick={handleNext} hasNext={hasNext} />
+            </>
+          )}
+        </Box>
+      </Box>
+      {userScoreListLoading ? (
+        <Box display='flex' width='100%' height='100%' alignItems='center' justifyContent='center'>
+          <CircularProgress
             sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
+              color: theme.palette.lightGreen,
             }}
-          >
-            <Box className='H1-Lato-fw-700-fs-32' color={theme.palette.powderWhite}>
-              Score
+          />
+        </Box>
+      ) : (
+        <>
+          {userScoreList ? (
+            <Box>
+              <Swiper
+                onSwiper={onSwiper}
+                onResize={onResize}
+                onSlideChange={onSlideChange}
+                slidesPerView={4}
+                loop={false}
+                spaceBetween={20}
+                breakpoints={bpConfig}
+              >
+                {networks?.map((data: IScoreNetwork) => (
+                  <SwiperSlide key={uuidv4()}>
+                    <NetworkCard
+                      network={data}
+                      selectable={selectable}
+                      activeTab={activeTab}
+                      onSelect={onSelect}
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
             </Box>
+          ) : (
             <Box
               sx={{
                 display: 'flex',
+                width: '100%',
+                flex: '1',
                 alignItems: 'center',
-                gap: '16px',
+                justifyContent: 'center',
+                color: theme.palette.powderWhite,
               }}
+              className='Body-Lato-fw-600-fs-24'
             >
-              {(hasPrev || hasNext) && (
-                <>
-                  <PrevButton onClick={handlePrevious} hasNext={hasPrev} />
-                  <NextButton onClick={handleNext} hasNext={hasNext} />
-                </>
-              )}
+              No Data
             </Box>
-          </Box>
-          <Box>
-            <Swiper
-              onSwiper={onSwiper}
-              onResize={onResize}
-              onSlideChange={onSlideChange}
-              slidesPerView={4}
-              loop={false}
-              spaceBetween={20}
-              breakpoints={bpConfig}
-            >
-              {networks?.map((data: IScoreNetwork) => (
-                <SwiperSlide key={uuidv4()}>
-                  <NetworkCard network={data} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </Box>
-        </Box>
+          )}
+        </>
       )}
-    </>
+    </Box>
   );
 };
 export default ScoreSection;

@@ -23,6 +23,7 @@ export const referralBaseColumns: GridColDef[] = [
     field: 'score',
     headerName: 'Points',
     sortable: false,
+    renderCell: (params: any) => <Box>{Math.round(params.row.score)}</Box>,
     width: 150,
   },
 ];
@@ -45,6 +46,7 @@ export const leaderBoardBaseColumns: GridColDef[] = [
     field: 'score',
     headerName: 'Points',
     sortable: false,
+    renderCell: (params: any) => <Box>{Math.round(params.row.score)}</Box>,
     width: 150,
   },
   {
@@ -85,6 +87,7 @@ export const leaderBoardBaseColumnsShort: GridColDef[] = [
     field: 'score',
     headerName: 'Points',
     sortable: false,
+    renderCell: (params: any) => <Box>{Math.round(params.row.score)}</Box>,
     width: 150,
   },
   {

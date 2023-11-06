@@ -1,4 +1,5 @@
 import { getUserLevelInfo } from '@/core/thunk/dashboard.thunk';
+import { ReactElement, ReactNode } from 'react';
 
 export type ChartIndexType =
   | 'transactions'
@@ -20,6 +21,7 @@ export interface IQuestCard {
   questTitle: string;
 }
 export interface IScoreNetwork {
+  index: DashboardTabIndexType;
   title: string;
   icon: string;
   lvl: number;
@@ -45,11 +47,12 @@ export interface IReferral {
   score: number;
 }
 export interface IAchievementCard {
+  key: string;
   value: string;
   score: number;
   top: number;
   currency: string;
-  label: string;
+  label: ReactElement;
 }
 export interface ILeaderboardData {
   wallet: string;

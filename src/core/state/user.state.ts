@@ -12,6 +12,7 @@ interface IAuthState {
   premiumPrice: string;
   userNFTList: INFTData[];
   userScoreList: IScoreList | null;
+  userScoreListLoading: boolean;
 }
 
 const initialState: IAuthState = {
@@ -24,6 +25,7 @@ const initialState: IAuthState = {
   premiumPrice: '0',
   userNFTList: [],
   userScoreList: null,
+  userScoreListLoading: false,
 };
 
 export const userSlice = createSlice({
@@ -38,6 +40,9 @@ export const userSlice = createSlice({
     },
     setUserScoreList: (state, action: PayloadAction<IScoreList | null>) => {
       state.userScoreList = action.payload;
+    },
+    setUserScoreListLoading: (state, action: PayloadAction<boolean>) => {
+      state.userScoreListLoading = action.payload;
     },
     setPremiumStatus: (state, action: PayloadAction<boolean>) => {
       state.premiumStatus = action.payload;
@@ -79,5 +84,11 @@ export const userSlice = createSlice({
 
 export default userSlice.reducer;
 
-export const { setUserName, setUserNFTList, setUserScoreList, setPremiumStatus, setPremiumPrice } =
-  userSlice.actions;
+export const {
+  setUserName,
+  setUserScoreListLoading,
+  setUserNFTList,
+  setUserScoreList,
+  setPremiumStatus,
+  setPremiumPrice,
+} = userSlice.actions;

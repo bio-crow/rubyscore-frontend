@@ -4,9 +4,14 @@ import { useCustomTheme } from '@/hooks/useCustomTheme';
 import LeaderboardTab from '@/modules/Leaderboard/LeaderboardTab/LeaderboardTab';
 import { SyntheticEvent, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/core/store';
-import { getPrivateLeaderboardData, getPublicLeaderboardData } from '@/core/thunk/leaderboard.thunk';
+import {
+  getFilteredUser,
+  getPrivateLeaderboardData,
+  getPublicLeaderboardData,
+} from '@/core/thunk/leaderboard.thunk';
 import NetworkTabs from '@/components/common/ui/NetworkTabs/NetworkTabs';
 import { DashboardTabIndexType } from '@/types/index';
+import { setFilteredUser } from '@/core/state/leaderboard.state';
 const panelTabs: { index: DashboardTabIndexType; label: string }[] = [
   {
     index: 'rubyscore',
@@ -43,12 +48,23 @@ const Dashboard = () => {
   const dispatch = useAppDispatch();
   const [activeTab, setActiveTab] = useState<{ index: DashboardTabIndexType; label: string }>(panelTabs[0]);
   const shownLeaderBoard = useAppSelector(state => state.leaderboardState.shownLeaderBoard);
+  const filteredUser = useAppSelector(state => state.leaderboardState.filteredUser);
   useEffect(() => {
     if (isAuth) {
       dispatch(getPrivateLeaderboardData(activeTab.index));
     } else {
       dispatch(getPublicLeaderboardData(activeTab.index));
     }
+    if (filteredUser) {
+      const data = {
+        wallet: filteredUser.wallet,
+        project: activeTab.index,
+      };
+      dispatch(getFilteredUser(data));
+    }
+    return () => {
+      dispatch(setFilteredUser(null));
+    };
   }, [isAuth, activeTab]);
   return (
     <Layout>
@@ -62,7 +78,7 @@ const Dashboard = () => {
         }}
       >
         <NetworkTabs networks={panelTabs} activeTab={activeTab} setActiveTab={setActiveTab} />
-        <LeaderboardTab tableData={shownLeaderBoard} activeTab={activeTab} />
+        <LeaderboardTab tableData={filteredUser ? [filteredUser] : shownLeaderBoard} activeTab={activeTab} />
       </Box>
     </Layout>
   );
