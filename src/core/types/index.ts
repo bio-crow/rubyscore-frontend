@@ -16,6 +16,7 @@ import {
   fetchDashboardWeeks,
   fetchUserGradation,
 } from '@/core/api/dashboard.api';
+import { fetchClaimLevelSignature } from '@/core/api/contract.achievements.api';
 
 export interface ILoginPayload {
   signature: string;
@@ -237,4 +238,28 @@ export interface IUserGradationPayload {
 
 export interface IUserGradationResponse {
   result: IUserGradation;
+}
+export interface IClaimLevelSignaturePayload {
+  project: string;
+  nftId: string;
+}
+export interface IClaimLevelSignatureResponse {
+  result: {
+    mintParams: {
+      userAddress: string;
+      userNonce: string;
+      nftIds: string[];
+    },
+    signature: string;
+  }
+}
+export interface IClaimLevelPayload {
+  project: string;
+  account: any;
+  mintParams: {
+    userAddress: string;
+    userNonce: string;
+    nftIds: string[];
+  },
+  signature: string;
 }

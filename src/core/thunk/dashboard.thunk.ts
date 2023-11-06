@@ -33,7 +33,13 @@ import {
 import { ChartIndexType, DashboardTabIndexType, IChartDot } from '@/types/index';
 import { setUserStatistics, setUserStatisticsLoading } from '@/core/state/leaderboard.state';
 import { searchUser } from '@/core/api/leaderboard.api';
-import { IUserGradationPayload } from '@/core/types';
+import { IClaimLevelPayload, IUserGradationPayload } from '@/core/types';
+import {
+  fetchClaimLevelSignature,
+  wagmiClaimLevel,
+  wagmiLevels,
+  wagmiOptimismLevels,
+} from '@/core/api/contract.achievements.api';
 
 export const getDashboardChartData = createAsyncThunk(
   'dashboardSlice/getDashboardTransactionsData',
@@ -107,6 +113,7 @@ export const getUserLevelInfo = createAsyncThunk(
     { dispatch }
   ) => {
     const data: any = await searchUser(params);
+    const result: any = await wagmiLevels(params)
     if (data.data.result) {
       const levelData = {
         level: data.data.result.user.profile.rank.level,
@@ -117,6 +124,31 @@ export const getUserLevelInfo = createAsyncThunk(
       dispatch(setMyLevelData(levelData));
     } else {
       dispatch(setMyLevelData(null));
+    }
+    return;
+  }
+);
+export const claimLevel = createAsyncThunk(
+  'dashboardSlice/claimLevel',
+  async (
+    params: {
+      nftId: string;
+      project: string;
+      account: string;
+    },
+    { dispatch }
+  ) => {
+    const data: any = await fetchClaimLevelSignature(params);
+    if (data?.data?.result?.mintParams && data?.data?.result?.signature) {
+      console.log(data.data.result)
+      const claimParams:IClaimLevelPayload = {
+        signature: data?.data?.result?.signature,
+        mintParams: data?.data?.result?.mintParams,
+        account: params.account,
+        project: params.project,
+      }
+      const result = await  wagmiClaimLevel(claimParams)
+      console.log(result)
     }
     return;
   }

@@ -48,7 +48,7 @@ export const testChains: Chain[] = [
         url: 'https://goerli.basescan.org',
       },
     },
-    testnet: true,
+    testnet: false,
   },
   {
     id: 999,
@@ -73,7 +73,7 @@ export const testChains: Chain[] = [
         url: 'https://testnet.explorer.zora.energy',
       },
     },
-    testnet: true,
+    testnet: false,
   },
   {
     id: 59140,
@@ -98,7 +98,7 @@ export const testChains: Chain[] = [
         url: 'https://explorer.goerli.linea.build',
       },
     },
-    testnet: true,
+    testnet: false,
   },
   {
     id: 1442,
@@ -123,7 +123,7 @@ export const testChains: Chain[] = [
         url: 'https://testnet-zkevm.polygonscan.com',
       },
     },
-    testnet: true,
+    testnet: false,
   },
   {
     id: 280,
@@ -148,7 +148,7 @@ export const testChains: Chain[] = [
         url: 'https://explorer.zksync.io',
       },
     },
-    testnet: true,
+    testnet: false,
   },
   {
     id: 534351,
@@ -173,15 +173,16 @@ export const testChains: Chain[] = [
         url: 'https://sepolia-blockscout.scroll.io',
       },
     },
-    testnet: true,
+    testnet: false,
   },
 ];
 export const testContracts = {
-  optimism: '0x0aA98B4FAE9DB1e6152730B68082CC0D7E892342',
-  base: '0x0A1B739ea1230dB33B7F6dce9f77Fcc0901a49f0',
-  zora: '0xc35C6497D6eDEf0D288236Ca5aDf63299e3AAD3b',
-  linea: '0x2A1000293467a221F5d4cA98F4b7912c4c9c22b3',
-  zkEVM: '0x81C55bbA5d5D05a0C02f4B561B560194f34a6D07',
-  zkSync: '0xDA0F79DB2F00e93aBE1AB6FfA51bbd9043605917',
-  scroll: '0x81C55bbA5d5D05a0C02f4B561B560194f34a6D07',
+  app: { contract: '0x0aA98B4FAE9DB1e6152730B68082CC0D7E892342', chainId: 420 },
+  optimism: { contract: '0x7df062f728d19923EbD5C6CBcbDE32109772718b', chainId: 420 },
+  base: { contract: '0x0A1B739ea1230dB33B7F6dce9f77Fcc0901a49f0', chainId: 84531 },
+  zora: { contract: '0xc35C6497D6eDEf0D288236Ca5aDf63299e3AAD3b', chainId: 999 },
+  linea: { contract: '0x2A1000293467a221F5d4cA98F4b7912c4c9c22b3', chainId: 59140 },
+  zkEVM: { contract: '0x81C55bbA5d5D05a0C02f4B561B560194f34a6D07', chainId: 1442 },
+  zkSync: { contract: '0xDA0F79DB2F00e93aBE1AB6FfA51bbd9043605917', chainId: 280 },
+  scroll: { contract: '0x81C55bbA5d5D05a0C02f4B561B560194f34a6D07', chainId: 534351 },
 };

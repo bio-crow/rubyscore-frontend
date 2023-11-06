@@ -1,4 +1,4 @@
-import { writeContract } from '@wagmi/core';
+import { switchNetwork, writeContract } from '@wagmi/core';
 import { abiIXProjectSBT } from '@/constants/abiIXProjectSBT';
 import { waitForTransaction } from '@wagmi/core';
 import { IClaimPayload } from '@/core/types';
@@ -6,9 +6,11 @@ import { readContract } from '@wagmi/core';
 import { toast } from 'react-toastify';
 import { parseEther } from 'viem';
 import { testContracts } from '@/providers/chains';
+const appNet =testContracts.app
 const baseConfig = {
-  address: testContracts.optimism,
+  address: appNet.contract,
   abi: abiIXProjectSBT,
+  chainId: appNet.chainId,
 };
 export const wagmiClaimName = async (data: IClaimPayload): Promise<any> => {
   const action = async ({ account, name, payable, price }: IClaimPayload) => {
@@ -24,6 +26,9 @@ export const wagmiClaimName = async (data: IClaimPayload): Promise<any> => {
     if (name) {
       config.args = [`${name}`];
     }
+    await switchNetwork({
+      chainId: appNet.chainId,
+    })
     const { hash } = await writeContract(config);
     return await waitForTransaction({
       hash: hash,
@@ -42,6 +47,7 @@ export const wagmiGetNameByOwner = async (address: any): Promise<any> => {
       functionName: 'getNameByOwner',
       args: [address],
     };
+
     return await readContract(config);
   };
   try {
@@ -57,7 +63,7 @@ export const wagmiGetPremiumStatus = async (address: any): Promise<any> => {
       functionName: 'getPremiumStatus',
       args: [address],
     };
-    console.log(config)
+
     return await readContract(config);
   };
   try {
@@ -72,6 +78,7 @@ export const wagmiGetPremiumPrice = async (): Promise<any> => {
       ...baseConfig,
       functionName: 'getPremiumPrice',
     };
+
     return await readContract(config);
   };
   try {

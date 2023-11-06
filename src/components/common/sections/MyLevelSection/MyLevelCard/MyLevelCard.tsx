@@ -1,17 +1,31 @@
 import { Box } from '@mui/system';
-import { ILevelCard } from '@/types/index';
+import { DashboardTabIndexType, ILevelCard } from '@/types/index';
 import { FC } from 'react';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import Image from 'next/image';
 import pluralize from 'pluralize';
 import PrimaryButton from '@/components/common/ui/PrimaryButton/PrimaryButton';
+import { useAppDispatch } from '@/core/store';
+import { claimLevel } from '@/core/thunk/dashboard.thunk';
+import { useAccount } from 'wagmi';
 
 interface Props {
   data: ILevelCard;
+  project: DashboardTabIndexType;
 }
 
-const MyLevelCard: FC<Props> = ({ data }) => {
+const MyLevelCard: FC<Props> = ({ data, project }) => {
   const theme = useCustomTheme();
+  const { address } = useAccount();
+  const dispatch = useAppDispatch();
+  const claimCurrentLevel = () => {
+    const params = {
+      nftId: data.lvl,
+      project: project,
+      account: address
+    }
+    dispatch(claimLevel(params))
+  }
   return (
     <Box
       sx={{
@@ -45,7 +59,7 @@ const MyLevelCard: FC<Props> = ({ data }) => {
         <Box color={theme.palette.powderWhite} className='Body-Lato-fw-700-fs-16' textAlign='center'>
           {`${data.lvl} Lvl`}
         </Box>
-        <PrimaryButton variant='contained' size='small' disabled={!data.isAvailable || data.isClaimed}>
+        <PrimaryButton variant='contained' size='small' disabled={!data.isAvailable || data.isClaimed} onClick={claimCurrentLevel}>
           {!data.isClaimed ? (
             'Claim'
           ) : (

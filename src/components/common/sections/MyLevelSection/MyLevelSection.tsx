@@ -195,7 +195,7 @@ const MyLevelSection: FC<Props> = ({
             >
               {prepareLevels.map((data: ILevelCard) => (
                 <SwiperSlide key={uuidv4()}>
-                  <MyLevelCard data={data} />
+                  <MyLevelCard data={data} project={project}/>
                 </SwiperSlide>
               ))}
             </Swiper>
