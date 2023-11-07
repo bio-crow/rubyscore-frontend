@@ -61,10 +61,10 @@ export const testChains: Chain[] = [
     },
     rpcUrls: {
       public: {
-        http: ['https://testnet.rpc.zora.energy'],
+        http: ['https://testnet.rpc.zora.energy/'],
       },
       default: {
-        http: ['https://testnet.rpc.zora.energy'],
+        http: ['https://testnet.rpc.zora.energy/'],
       },
     },
     blockExplorers: {
@@ -136,10 +136,10 @@ export const testChains: Chain[] = [
     },
     rpcUrls: {
       public: {
-        http: ['https://zksync2-mainnet.zksync.io'],
+        http: ['https://testnet.era.zksync.dev'],
       },
       default: {
-        http: ['https://zksync2-mainnet.zksync.io'],
+        http: ['https://testnet.era.zksync.dev'],
       },
     },
     blockExplorers: {

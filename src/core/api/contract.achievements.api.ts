@@ -2,6 +2,7 @@ import { testContracts } from '@/providers/chains';
 import { readContract, switchNetwork, waitForTransaction, writeContract } from '@wagmi/core';
 import { abiAchievements } from '@/constants/abiAchievements';
 import { apiPrivateAxios } from '@/core/api/axiosConfig';
+import { getNetwork } from '@wagmi/core'
 import {
   IClaimLevelPayload,
   IClaimLevelSignaturePayload,
@@ -9,7 +10,7 @@ import {
   ILoginPayload,
   IRefreshResponse,
 } from '@/core/types';
-import { parseEther } from 'viem';
+import { parseEther, parseGwei,formatEther } from 'viem';
 import { toast } from 'react-toastify';
 import { getAchievementsBaseContractConfig } from '@/utils/helpers';
 const contractInfo = testContracts
@@ -43,19 +44,25 @@ export const wagmiLevels = async (params: {
 };
 export const wagmiClaimLevel = async (data: IClaimLevelPayload): Promise<any> => {
   const action = async ({ signature, mintParams,project,account }: IClaimLevelPayload) => {
+    const { chain, chains } = await getNetwork()
     const baseConfig = getAchievementsBaseContractConfig(project, contractInfo);
+    console.log(chain)
     console.log(baseConfig)
+    if (chain && chain.id !== baseConfig.chainId) {
+      await switchNetwork({
+        chainId: baseConfig.chainId,
+      })
+    }
+    console.log(formatEther(parseGwei('100', 'wei')))
     let config: any = {
       ...baseConfig,
+      abi: abiAchievements,
       functionName: 'safeMint',
-      account: account,
-      args: [mintParams, signature],
+      value: formatEther(parseGwei('100', 'wei')),
+      args: [[mintParams.userAddress, 0, [1]], signature],
     };
-
-    await switchNetwork({
-      chainId: baseConfig.chainId,
-    })
     const { hash } = await writeContract(config);
+    console.log(hash)
     return await waitForTransaction({
       hash: hash,
     });
@@ -63,6 +70,8 @@ export const wagmiClaimLevel = async (data: IClaimLevelPayload): Promise<any> =>
   try {
     return await action(data);
   } catch (error: any) {
+    console.log('*')
+    console.log(error)
     toast(error.shortMessage, { position: 'top-right' });
   }
   return;

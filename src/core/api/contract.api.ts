@@ -1,4 +1,4 @@
-import { switchNetwork, writeContract } from '@wagmi/core';
+import { getNetwork, switchNetwork, writeContract } from '@wagmi/core';
 import { abiIXProjectSBT } from '@/constants/abiIXProjectSBT';
 import { waitForTransaction } from '@wagmi/core';
 import { IClaimPayload } from '@/core/types';
@@ -14,6 +14,12 @@ const baseConfig = {
 };
 export const wagmiClaimName = async (data: IClaimPayload): Promise<any> => {
   const action = async ({ account, name, payable, price }: IClaimPayload) => {
+    const { chain, chains } = await getNetwork()
+    if (chain && chain.id !== appNet.chainId) {
+      await switchNetwork({
+        chainId: appNet.chainId,
+      })
+    }
     let config: any = {
       ...baseConfig,
       functionName: 'claimName',
@@ -26,9 +32,6 @@ export const wagmiClaimName = async (data: IClaimPayload): Promise<any> => {
     if (name) {
       config.args = [`${name}`];
     }
-    await switchNetwork({
-      chainId: appNet.chainId,
-    })
     const { hash } = await writeContract(config);
     return await waitForTransaction({
       hash: hash,
