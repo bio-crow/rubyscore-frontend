@@ -12,7 +12,7 @@ import StreakDays from '@/modules/Profile/StreakDays/StreakDays';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import PrivatePageLayout from '@/components/layout/PrivatePageLayout/PrivatePageLayout';
 import { useEffect, useLayoutEffect } from 'react';
-import { getNameByAddress, getReferrals, getUserNFTList } from '@/core/thunk/user.thunk';
+import { getReferrals, getUserNFTList } from '@/core/thunk/user.thunk';
 import { useAccount } from 'wagmi';
 const breakpointsConfig = {
   0: {

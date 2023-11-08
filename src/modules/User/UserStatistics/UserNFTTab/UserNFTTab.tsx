@@ -1,13 +1,14 @@
 import { Box } from '@mui/system';
-import PrimaryPagination from '@/components/common/ui/PrimaryPagination/PrimaryPagination';
-import { INFTData } from '@/types/index';
-
 import { v4 as uuidv4 } from 'uuid';
 import NFTCard from '@/modules/User/UserStatistics/UserNFTTab/NFTCard/NFTCard';
 import { useAppSelector } from '@/core/store';
+import { mapUserLevelInfoToNFTList } from '@/utils/helpers';
 
 const UserNFTTab = () => {
+  const userLevelsInfo = useAppSelector(state => state.userState.userLevelsInfo);
   const userNFTList = useAppSelector(state => state.userState.userNFTList);
+  const levelNfts = mapUserLevelInfoToNFTList(userLevelsInfo);
+  const list = [...userNFTList, ...levelNfts];
   return (
     <Box
       sx={{
@@ -26,7 +27,7 @@ const UserNFTTab = () => {
               gridTemplateColumns: { xs: '1fr', md: '1fr 1fr', lg: '1fr 1fr 1fr', xlg: '1fr 1fr 1fr 1fr' },
             }}
           >
-            {userNFTList.map((data: INFTData) => (
+            {list.map((data: string) => (
               <NFTCard data={data} key={uuidv4()} />
             ))}
           </Box>

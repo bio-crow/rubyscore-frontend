@@ -1,11 +1,9 @@
 import { Box } from '@mui/system';
-import { INFTData } from '@/types/index';
 import { FC } from 'react';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import Image from 'next/image';
-import { networkStaticData } from '@/constants/index';
 interface Props {
-  data: INFTData;
+  data: string;
 }
 const NFTCard: FC<Props> = ({ data }) => {
   const theme = useCustomTheme();
@@ -27,7 +25,7 @@ const NFTCard: FC<Props> = ({ data }) => {
           aspectRatio: '1/1.5',
         }}
       >
-        <Image src={data.properties.image.description} alt='image' fill />
+        <Image src={data} alt='image' fill />
       </Box>
     </Box>
   );

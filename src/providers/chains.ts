@@ -1,26 +1,26 @@
 import { Chain } from '@rainbow-me/rainbowkit';
 export const testChains: Chain[] = [
   {
-    id: 420,
-    name: 'Optimism Goerli Testnet',
-    network: 'Optimism Goerli Testnet',
+    id: 80001,
+    name: 'Mumbai',
+    network: 'Mumbai',
     nativeCurrency: {
       decimals: 18,
-      name: 'Optimism Goerli Testnet',
-      symbol: 'ETH',
+      name: 'Mumbai',
+      symbol: 'MATIC',
     },
     rpcUrls: {
       public: {
-        http: ['https://optimism-goerli.public.blastapi.io'],
+        http: ['https://endpoints.omniatech.io/v1/matic/mumbai/public'],
       },
       default: {
-        http: ['https://optimism-goerli.public.blastapi.io'],
+        http: ['https://endpoints.omniatech.io/v1/matic/mumbai/public'],
       },
     },
     blockExplorers: {
       default: {
-        name: 'Optimism Goerli Testnet',
-        url: 'https://goerli-optimism.etherscan.io/',
+        name: 'Mumbai',
+        url: 'https://mumbai.polygonscan.com/',
       },
     },
     testnet: false,
@@ -177,8 +177,8 @@ export const testChains: Chain[] = [
   },
 ];
 export const testContracts = {
-  app: { contract: '0x0aA98B4FAE9DB1e6152730B68082CC0D7E892342', chainId: 420 },
-  optimism: { contract: '0x7df062f728d19923EbD5C6CBcbDE32109772718b', chainId: 420 },
+  app: { contract: '0x37C3837a0C37C002894BB035f5dD73933523B66d', chainId: 80001 },
+  mumbai: { contract: '0x3eEfE6F34Ab7DB9c37De5246959C8409d5F96CDB', chainId: 80001 },
   base: { contract: '0x0A1B739ea1230dB33B7F6dce9f77Fcc0901a49f0', chainId: 84531 },
   zora: { contract: '0xc35C6497D6eDEf0D288236Ca5aDf63299e3AAD3b', chainId: 999 },
   linea: { contract: '0x2A1000293467a221F5d4cA98F4b7912c4c9c22b3', chainId: 59140 },

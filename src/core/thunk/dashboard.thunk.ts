@@ -29,6 +29,8 @@ import {
   setProjectStatisticsLoading,
   setUserGradationLoading,
   setUserGradation,
+  setLevelLoading,
+  setMyLevelDataLoading,
 } from '@/core/state/dashboard.state';
 import { ChartIndexType, DashboardTabIndexType, IChartDot } from '@/types/index';
 import { setUserStatistics, setUserStatisticsLoading } from '@/core/state/leaderboard.state';
@@ -37,9 +39,10 @@ import { IClaimLevelPayload, IUserGradationPayload } from '@/core/types';
 import {
   fetchClaimLevelSignature,
   wagmiClaimLevel,
+  wagmiInitUserDataFromContract,
   wagmiLevels,
-  wagmiOptimismLevels,
 } from '@/core/api/contract.achievements.api';
+import { initUserDataFromContract } from '@/core/thunk/user.thunk';
 
 export const getDashboardChartData = createAsyncThunk(
   'dashboardSlice/getDashboardTransactionsData',
@@ -112,19 +115,22 @@ export const getUserLevelInfo = createAsyncThunk(
     },
     { dispatch }
   ) => {
+    dispatch(setLevelLoading(null));
+    dispatch(setMyLevelDataLoading(true));
     const data: any = await searchUser(params);
-    const result: any = await wagmiLevels(params)
+    const levelStatus: any = await wagmiLevels(params);
     if (data.data.result) {
       const levelData = {
         level: data.data.result.user.profile.rank.level,
         levelUp: data.data.result.user.profile.rank.levelUp,
         score: data.data.result.user.profile.rank.score,
-        levelStatus: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        levelStatus: levelStatus || [2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
       };
       dispatch(setMyLevelData(levelData));
     } else {
       dispatch(setMyLevelData(null));
     }
+    dispatch(setMyLevelDataLoading(false));
     return;
   }
 );
@@ -134,22 +140,31 @@ export const claimLevel = createAsyncThunk(
     params: {
       nftId: string;
       project: string;
-      account: string;
+      account: any;
     },
     { dispatch }
   ) => {
+    dispatch(setLevelLoading(params.nftId));
     const data: any = await fetchClaimLevelSignature(params);
     if (data?.data?.result?.mintParams && data?.data?.result?.signature) {
-      console.log(data.data.result)
-      const claimParams:IClaimLevelPayload = {
+      const claimParams: IClaimLevelPayload = {
         signature: data?.data?.result?.signature,
         mintParams: data?.data?.result?.mintParams,
         account: params.account,
         project: params.project,
+      };
+      const result = await wagmiClaimLevel(claimParams);
+      if (result) {
+        dispatch(
+          getUserLevelInfo({
+            wallet: params.account,
+            project: params.project,
+          })
+        );
+        dispatch(initUserDataFromContract(params.account));
       }
-      const result = await  wagmiClaimLevel(claimParams)
-      console.log(result)
     }
+    dispatch(setLevelLoading(null));
     return;
   }
 );

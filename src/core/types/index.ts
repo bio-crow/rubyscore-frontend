@@ -1,10 +1,4 @@
-import {
-  DashboardTabIndexType,
-  ILeaderboardData,
-  ILeaderboardUser,
-  INFTData,
-  IUserGradation,
-} from '@/types/index';
+import { DashboardTabIndexType, ILeaderboardData, ILeaderboardUser, IUserGradation } from '@/types/index';
 import {
   fetchDashboardBalance,
   fetchDashboardContracts,
@@ -40,7 +34,7 @@ export interface IReferralsResponse {
 }
 
 export interface INFTListResponse {
-  result: INFTData[];
+  result: any;
 }
 
 export interface IScoreListResponse {
@@ -249,9 +243,9 @@ export interface IClaimLevelSignatureResponse {
       userAddress: string;
       userNonce: string;
       nftIds: string[];
-    },
+    };
     signature: string;
-  }
+  };
 }
 export interface IClaimLevelPayload {
   project: string;
@@ -260,6 +254,6 @@ export interface IClaimLevelPayload {
     userAddress: string;
     userNonce: string;
     nftIds: string[];
-  },
+  };
   signature: string;
 }

@@ -1,19 +1,18 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchReferrals, fetchUserNftList, fetchUserScoreList } from '@/core/api/user.api';
-import {
-  wagmiClaimName,
-  wagmiGetNameByOwner,
-  wagmiGetPremiumPrice,
-  wagmiGetPremiumStatus,
-} from '@/core/api/contract.api';
+import { wagmiClaimName } from '@/core/api/contract.api';
 import { IClaimPayload } from '@/core/types';
 import { formatEther } from 'viem';
 import {
   setPremiumPrice,
+  setPremiumStatus,
+  setUserLevelsInfo,
+  setUserName,
   setUserNFTList,
   setUserScoreList,
   setUserScoreListLoading,
 } from '@/core/state/user.state';
+import { wagmiInitUserDataFromContract } from '@/core/api/contract.achievements.api';
 export const getReferrals = createAsyncThunk('userSlice/fetchReferrals', async () => {
   return await fetchReferrals();
 });
@@ -21,8 +20,8 @@ export const getUserNFTList = createAsyncThunk(
   'userSlice/getUserNFTList',
   async (wallet: string, { dispatch }) => {
     const data: any = await fetchUserNftList(wallet);
-    if (data.data.result) {
-      dispatch(setUserNFTList(data.data.result));
+    if (data?.data?.result) {
+      dispatch(setUserNFTList(data.data.result.map((item: any) => item.properties.image.description)));
     } else {
       dispatch(setUserNFTList([]));
     }
@@ -47,18 +46,18 @@ export const claimProfile = createAsyncThunk(
   'userSlice/claimProfile',
   async (data: IClaimPayload, { dispatch }) => {
     const result = await wagmiClaimName(data);
-    dispatch(getNameByAddress(data.account));
-    dispatch(getPremiumStatus(data.account));
+    dispatch(initUserDataFromContract(data.account));
     return result;
   }
 );
-export const getNameByAddress = createAsyncThunk('userSlice/getNameByAddress', async (address: any) => {
-  return await wagmiGetNameByOwner(address);
-});
-export const getPremiumStatus = createAsyncThunk('userSlice/getPremiumStatus', async (address: any) => {
-  return await wagmiGetPremiumStatus(address);
-});
-export const getPremiumSPrice = createAsyncThunk('userSlice/getPremiumPrice', async (arg, { dispatch }) => {
-  const result = await wagmiGetPremiumPrice();
-  dispatch(setPremiumPrice(formatEther(result)));
-});
+
+export const initUserDataFromContract = createAsyncThunk(
+  'userSlice/initUserDataFromContract',
+  async (address: any, { dispatch }) => {
+    const result = await wagmiInitUserDataFromContract(address);
+    dispatch(setUserName(result.userName));
+    dispatch(setUserLevelsInfo(result.levelsInfo));
+    dispatch(setPremiumStatus(result.userStatus));
+    dispatch(setPremiumPrice(formatEther(result.premiumPrice)));
+  }
+);

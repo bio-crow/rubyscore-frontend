@@ -11,7 +11,7 @@ import {
   IDashboardVolumeResponse,
   IDashboardWeeksResponse,
 } from '@/core/types';
-import { IAchievementCard, IChartDot, IUserGradation } from '@/types/index';
+import { IAchievementCard, IChartDot, ILevelsInfo, IUserGradation } from '@/types/index';
 
 export const copyToClickBoard = (text: string | undefined, message: string = 'Copied to clipboard') => {
   toast(message, { position: 'bottom-center' });
@@ -463,7 +463,7 @@ export const prepareUserGradationToAchievementsCards = (data: IUserGradation): I
   ];
   return result;
 };
-export const getAchievementsBaseContractConfig = (project:string, contractInfo: any) => {
+export const getAchievementsBaseContractConfig = (project: string, contractInfo: any) => {
   switch (project) {
     case 'base':
       return {
@@ -471,7 +471,7 @@ export const getAchievementsBaseContractConfig = (project:string, contractInfo: 
         chainId: contractInfo.base.chainId,
       };
     case 'zora':
-      return{
+      return {
         address: contractInfo.zora.contract,
         chainId: contractInfo.zora.chainId,
       };
@@ -497,8 +497,34 @@ export const getAchievementsBaseContractConfig = (project:string, contractInfo: 
       };
     default:
       return {
-        address: contractInfo.optimism.contract,
-        chainId: contractInfo.optimism.chainId,
+        address: contractInfo.mumbai.contract,
+        chainId: contractInfo.mumbai.chainId,
       };
   }
-}
+};
+export const mapUserLevelInfoToNFTList = (data: ILevelsInfo | null) => {
+  if (data) {
+    const result: any[] = [];
+    Object.entries(data).forEach(el => {
+      el[1].forEach((item: number, index: number) => {
+        if (item === 1) {
+          result.push({
+            lvl: index + 1,
+            icon: `/asserts/levelNFT/${el[0]}/${index + 1}.png`,
+            project: el[0],
+          });
+        }
+      });
+    });
+    return result
+      .sort((a: any, b: any) => {
+        if (a.lvl > b.lvl) {
+          return -1;
+        } else {
+          return 1;
+        }
+      })
+      .map(item => item.icon);
+  }
+  return [];
+};
