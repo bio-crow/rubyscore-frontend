@@ -9,6 +9,7 @@ import UserAchievementTab from '@/modules/User/UserStatistics/UserAchievementTab
 import UserNFTTab from '@/modules/User/UserStatistics/UserNFTTab/UserNFTTab';
 import { useAppSelector } from '@/core/store';
 import { useSearchParams } from 'next/navigation';
+import { mapUserLevelInfoToNFTList } from '@/utils/helpers';
 
 type TabIndexType = 0 | 1;
 
@@ -18,7 +19,10 @@ const UserStatistics = () => {
   const searchParams = useSearchParams();
   const tab = searchParams.get('tab');
   const isMd = useMediaQuery(theme.breakpoints.up('md'));
+  const userLevelsInfo = useAppSelector(state => state.userState.userLevelsInfo);
   const userNFTList = useAppSelector(state => state.userState.userNFTList);
+  const levelNfts = mapUserLevelInfoToNFTList(userLevelsInfo);
+  const list = [...userNFTList, ...levelNfts];
   const [activeTabIndex, setActiveTabIndex] = useState<TabIndexType>(0);
   const handleChange = (event: SyntheticEvent, newValue: TabIndexType) => {
     setActiveTabIndex(newValue);
@@ -36,7 +40,7 @@ const UserStatistics = () => {
     {
       index: 1,
       label: 'NFTs unlocked',
-      value: userNFTList.length,
+      value: list.length,
     },
   ];
   useEffect(() => {

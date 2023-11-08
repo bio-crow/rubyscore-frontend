@@ -3,13 +3,13 @@ import { useCustomTheme } from '@/hooks/useCustomTheme';
 import Image from 'next/image';
 import { FC } from 'react';
 import { useAppSelector } from '@/core/store';
-import { INFTData } from '@/types/index';
 import NFTCard from '@/modules/User/UserStatistics/UserNFTTab/NFTCard/NFTCard';
 import { v4 as uuidv4 } from 'uuid';
 import SecondaryButton from '@/components/common/ui/SecondaryButton/SecondaryButton';
 import { useRouter } from 'next/navigation';
 import { appRoutes } from '@/constants/routes';
 import { useAccount } from 'wagmi';
+import { mapUserLevelInfoToNFTList } from '@/utils/helpers';
 interface Props {
   nft: any[];
 }
@@ -18,7 +18,10 @@ const NFTInfo: FC<Props> = ({ nft }) => {
   const theme = useCustomTheme();
   const router = useRouter();
   const { address } = useAccount();
+  const userLevelsInfo = useAppSelector(state => state.userState.userLevelsInfo);
   const userNFTList = useAppSelector(state => state.userState.userNFTList);
+  const levelNfts = mapUserLevelInfoToNFTList(userLevelsInfo);
+  const list = [...userNFTList, ...levelNfts];
   return (
     <Box
       sx={{
@@ -43,7 +46,7 @@ const NFTInfo: FC<Props> = ({ nft }) => {
         </Box>
         <Box display='flex' alignItems='center' gap='10px'>
           <Box className='Body-Lato-fw-700-fs-16' color={theme.palette.lightGreen}>
-            {userNFTList.length}
+            {list.length}
           </Box>
           <Box className='Body-Lato-fw-700-fs-16' color={theme.palette.powderWhite}>
             NFT
@@ -51,7 +54,7 @@ const NFTInfo: FC<Props> = ({ nft }) => {
         </Box>
       </Box>
       <Box display='flex' flexDirection='column' paddingTop='16px'>
-        {userNFTList.length > 0 ? (
+        {list.length > 0 ? (
           <Box
             sx={{
               display: 'flex',
@@ -63,20 +66,23 @@ const NFTInfo: FC<Props> = ({ nft }) => {
               sx={{
                 display: 'grid',
                 gridTemplateColumns: '1fr 1fr',
+                gap: '10px',
               }}
             >
-              {userNFTList.map((data: INFTData) => (
+              {list.slice(0, 2).map((data: string) => (
                 <NFTCard data={data} key={uuidv4()} />
               ))}
             </Box>
-            <SecondaryButton
-              variant='contained'
-              size='large'
-              fullWidth
-              onClick={() => router.push(`${appRoutes.LEADERBOARD_USER}/${address}?tab=NFT`)}
-            >
-              View all
-            </SecondaryButton>
+            {list.length > 2 && (
+              <SecondaryButton
+                variant='contained'
+                size='large'
+                fullWidth
+                onClick={() => router.push(`${appRoutes.LEADERBOARD_USER}/${address}?tab=NFT`)}
+              >
+                View all
+              </SecondaryButton>
+            )}
           </Box>
         ) : (
           <Box display='flex' alignItems='center' gap='10px' justifyContent='center' minHeight='84px'>

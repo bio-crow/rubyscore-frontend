@@ -5,8 +5,8 @@ import NFTInfo from '@/modules/Profile/ProfileInfo/NFTInfo/NFTInfo';
 import { IQuestCard } from '@/types/index';
 import { useAppDispatch } from '@/core/store';
 import { useEffect } from 'react';
-import { getNameByAddress, getReferrals } from '@/core/thunk/user.thunk';
 import { useAccount } from 'wagmi';
+import { initUserDataFromContract } from '@/core/thunk/user.thunk';
 
 const quests: IQuestCard[] = [
   {
@@ -31,7 +31,7 @@ const ProfileInfo = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     if (address) {
-      dispatch(getNameByAddress(address));
+      dispatch(initUserDataFromContract(address));
     }
   }, [address]);
   return (

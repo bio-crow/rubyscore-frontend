@@ -1,17 +1,25 @@
-import { writeContract } from '@wagmi/core';
+import { getNetwork, switchNetwork, writeContract } from '@wagmi/core';
 import { abiIXProjectSBT } from '@/constants/abiIXProjectSBT';
 import { waitForTransaction } from '@wagmi/core';
 import { IClaimPayload } from '@/core/types';
 import { readContract } from '@wagmi/core';
 import { toast } from 'react-toastify';
 import { parseEther } from 'viem';
-import * as process from 'process';
+import { testContracts } from '@/providers/chains';
+const appNet = testContracts.app;
 const baseConfig = {
-  address: process.env.NEXT_PUBLIC_SMART_CONTRACT,
+  address: appNet.contract,
   abi: abiIXProjectSBT,
+  chainId: appNet.chainId,
 };
 export const wagmiClaimName = async (data: IClaimPayload): Promise<any> => {
   const action = async ({ account, name, payable, price }: IClaimPayload) => {
+    const { chain, chains } = await getNetwork();
+    if (chain && chain.id !== appNet.chainId) {
+      await switchNetwork({
+        chainId: appNet.chainId,
+      });
+    }
     let config: any = {
       ...baseConfig,
       functionName: 'claimName',
@@ -33,50 +41,6 @@ export const wagmiClaimName = async (data: IClaimPayload): Promise<any> => {
     return await action(data);
   } catch (error: any) {
     toast(error.shortMessage, { position: 'top-right' });
-  }
-};
-export const wagmiGetNameByOwner = async (address: any): Promise<any> => {
-  const action = async (address: any) => {
-    let config: any = {
-      ...baseConfig,
-      functionName: 'getNameByOwner',
-      args: [address],
-    };
-    return await readContract(config);
-  };
-  try {
-    return await action(address);
-  } catch (error) {
-    //console.error(error);
-  }
-};
-export const wagmiGetPremiumStatus = async (address: any): Promise<any> => {
-  const action = async (address: any) => {
-    let config: any = {
-      ...baseConfig,
-      functionName: 'getPremiumStatus',
-      args: [address],
-    };
-    return await readContract(config);
-  };
-  try {
-    return await action(address);
-  } catch (error) {
-    //console.error(error);
-  }
-};
-export const wagmiGetPremiumPrice = async (): Promise<any> => {
-  const action = async () => {
-    let config: any = {
-      ...baseConfig,
-      functionName: 'getPremiumPrice',
-    };
-    return await readContract(config);
-  };
-  try {
-    return await action();
-  } catch (error) {
-    //console.error(error);
   }
 };
 

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { claimProfile, getNameByAddress, getPremiumStatus, getReferrals } from '@/core/thunk/user.thunk';
-import { INFTData, IReferral, IScoreList } from '@/types/index';
+import { claimProfile, getReferrals } from '@/core/thunk/user.thunk';
+import { ILevelsInfo, IReferral, IScoreList } from '@/types/index';
 
 interface IAuthState {
   referrals: IReferral[];
@@ -10,9 +10,10 @@ interface IAuthState {
   userName: string | null;
   premiumStatus: boolean;
   premiumPrice: string;
-  userNFTList: INFTData[];
+  userNFTList: string[];
   userScoreList: IScoreList | null;
   userScoreListLoading: boolean;
+  userLevelsInfo: ILevelsInfo | null;
 }
 
 const initialState: IAuthState = {
@@ -26,6 +27,7 @@ const initialState: IAuthState = {
   userNFTList: [],
   userScoreList: null,
   userScoreListLoading: false,
+  userLevelsInfo: null,
 };
 
 export const userSlice = createSlice({
@@ -35,7 +37,7 @@ export const userSlice = createSlice({
     setUserName: (state, action: PayloadAction<string | null>) => {
       state.userName = action.payload;
     },
-    setUserNFTList: (state, action: PayloadAction<INFTData[]>) => {
+    setUserNFTList: (state, action: PayloadAction<string[]>) => {
       state.userNFTList = action.payload;
     },
     setUserScoreList: (state, action: PayloadAction<IScoreList | null>) => {
@@ -49,6 +51,9 @@ export const userSlice = createSlice({
     },
     setPremiumPrice: (state, action: PayloadAction<string>) => {
       state.premiumPrice = action.payload;
+    },
+    setUserLevelsInfo: (state, action: PayloadAction<ILevelsInfo | null>) => {
+      state.userLevelsInfo = action.payload;
     },
   },
   extraReducers: builder => {
@@ -68,16 +73,6 @@ export const userSlice = createSlice({
       })
       .addCase(claimProfile.fulfilled, (state, action) => {
         state.claimProfileLoading = false;
-      })
-      .addCase(getNameByAddress.fulfilled, (state, action) => {
-        if (action.payload) {
-          state.userName = action.payload;
-        }
-      })
-      .addCase(getPremiumStatus.fulfilled, (state, action) => {
-        if (action.payload) {
-          state.premiumStatus = action.payload;
-        }
       });
   },
 });
@@ -91,4 +86,5 @@ export const {
   setUserScoreList,
   setPremiumStatus,
   setPremiumPrice,
+  setUserLevelsInfo,
 } = userSlice.actions;

@@ -32,6 +32,7 @@ export interface ILevelCard {
   icon: string;
   isAvailable: boolean;
   isClaimed: boolean;
+  isError: boolean;
 }
 export interface IDailyActivityCard {
   description: string;
@@ -89,20 +90,6 @@ export interface IChartDot {
   shortName: string;
   uv: number;
 }
-export interface INFTData {
-  title: string;
-  properties: {
-    name: {
-      description: string;
-    };
-    description: {
-      description: string;
-    };
-    image: {
-      description: string;
-    };
-  };
-}
 export interface ILevelInfo {
   level: number;
   levelUp: number;
@@ -120,32 +107,32 @@ export interface IProjectStatistics {
 }
 export interface IScoreList {
   rubyscore: {
-    score: 110;
-    level: 2;
+    score: number;
+    level: number;
   };
   linea: {
-    score: 0;
-    level: 1;
+    score: number;
+    level: number;
   };
   zk_era: {
-    score: 0;
-    level: 1;
+    score: number;
+    level: number;
   };
   zora: {
-    score: 0;
-    level: 1;
+    score: number;
+    level: number;
   };
   zk_evm: {
-    score: 0;
-    level: 1;
+    score: number;
+    level: number;
   };
   base: {
-    score: 0;
-    level: 1;
+    score: number;
+    level: number;
   };
   scroll: {
-    score: 0;
-    level: 1;
+    score: number;
+    level: number;
   };
 }
 export interface IUserGradation {
@@ -196,4 +183,13 @@ export interface IUserGradation {
     current: number;
     max: number;
   };
+}
+export interface ILevelsInfo {
+  rubyscore: [];
+  linea: [];
+  zk_era: [];
+  zora: [];
+  zk_evm: [];
+  base: [];
+  scroll: [];
 }

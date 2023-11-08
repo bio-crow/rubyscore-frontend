@@ -12,6 +12,8 @@ import { useAppDispatch, useAppSelector } from '@/core/store';
 import { getUserLevelInfo } from '@/core/thunk/dashboard.thunk';
 import { useAccount } from 'wagmi';
 import { myLevelIcons } from '@/constants/index';
+import { setMyLevelData } from '@/core/state/dashboard.state';
+import { CircularProgress } from '@mui/material';
 
 const breakpointsConfig = {
   0: {
@@ -44,6 +46,8 @@ const MyLevelSection: FC<Props> = ({
 }) => {
   const dispatch = useAppDispatch();
   const myLevelData = useAppSelector(state => state.dashboardState.myLevelData);
+  const isAuth = useAppSelector(state => state.authState.isAuth);
+  const myLevelDataLoading = useAppSelector(state => state.dashboardState.myLevelDataLoading);
   const { address } = useAccount();
   const theme = useCustomTheme();
   const isSm = useMediaQuery(theme.breakpoints.up('sm'));
@@ -72,137 +76,153 @@ const MyLevelSection: FC<Props> = ({
     setHasPrev(!value.isBeginning);
   };
   useEffect(() => {
-    if (address && project) {
+    if (address && project && isAuth) {
       const data = {
         wallet: address,
         project: project,
       };
       dispatch(getUserLevelInfo(data));
     }
-  }, [address, project]);
+    return () => {
+      dispatch(setMyLevelData(null));
+    };
+  }, [address, project, isAuth]);
   const prepareLevels = myLevelData
     ? myLevelData.levelStatus.map((item, index) => {
         return {
           icon: myLevelIcons[project][index],
           lvl: index + 1,
-          isClaimed: myLevelData.levelStatus[index] !== 0,
+          isClaimed: myLevelData.levelStatus[index] === 1,
           isAvailable: index + 1 <= myLevelData.level,
+          isError: myLevelData.levelStatus[index] === 2,
         };
       })
     : [];
   return (
-    <>
-      {myLevelData && (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        padding: '40px 32px',
+        borderRadius: '10px',
+        gap: '40px',
+        border: `1px solid ${theme.palette.white10}`,
+        background: theme.palette.black,
+      }}
+    >
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: { xs: 'column', sm: 'row' },
+          alignItems: { xs: 'unset', sm: 'flex-start' },
+          justifyContent: 'space-between',
+          gap: '20px',
+        }}
+      >
         <Box
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            padding: '40px 32px',
-            borderRadius: '10px',
-            gap: '40px',
-            border: `1px solid ${theme.palette.white10}`,
-            background: theme.palette.black,
           }}
         >
           <Box
             sx={{
               display: 'flex',
-              flexDirection: { xs: 'column', sm: 'row' },
-              alignItems: { xs: 'unset', sm: 'flex-start' },
-              justifyContent: 'space-between',
-              gap: '20px',
+              alignItems: 'center',
+              gap: '10px',
             }}
           >
             <Box
               sx={{
-                display: 'flex',
-                flexDirection: 'column',
+                color: theme.palette.powderWhite,
               }}
+              className='H2-Lato-fw-700-fs-24'
             >
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                }}
-              >
-                <Box
-                  sx={{
-                    color: theme.palette.powderWhite,
-                  }}
-                  className='H2-Lato-fw-700-fs-24'
-                >
-                  My Level
-                </Box>
-                <Box
-                  sx={{
-                    color: theme.palette.lightGreen,
-                  }}
-                  className='H2-Lato-fw-700-fs-24'
-                >
-                  {myLevelData.level}
-                </Box>
-              </Box>
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                }}
-              >
-                <Box
-                  sx={{
-                    color: theme.palette.white50,
-                  }}
-                  className='Body-Lato-fw-500-fs-18'
-                >
-                  Up to the next level
-                </Box>
-                <Box
-                  sx={{
-                    color: theme.palette.lightGreen,
-                  }}
-                  className='Body-Lato-fw-500-fs-18'
-                >
-                  {`${myLevelData.score} / ${myLevelData.levelUp} Points`}
-                </Box>
-              </Box>
+              My Level
             </Box>
+            <Box
+              sx={{
+                color: theme.palette.lightGreen,
+              }}
+              className='H2-Lato-fw-700-fs-24'
+            >
+              {myLevelData?.level}
+            </Box>
+          </Box>
+          {myLevelData && (
             <Box
               sx={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '16px',
+                gap: '10px',
               }}
             >
-              {(hasPrev || hasNext) && (
-                <>
-                  <PrevButton onClick={handlePrevious} hasNext={hasPrev} />
-                  <NextButton onClick={handleNext} hasNext={hasNext} />
-                </>
-              )}
+              <Box
+                sx={{
+                  color: theme.palette.white50,
+                }}
+                className='Body-Lato-fw-500-fs-18'
+              >
+                Up to the next level
+              </Box>
+              <Box
+                sx={{
+                  color: theme.palette.lightGreen,
+                }}
+                className='Body-Lato-fw-500-fs-18'
+              >
+                {`${myLevelData.score} / ${myLevelData.levelUp} Points`}
+              </Box>
             </Box>
-          </Box>
-          <Box>
-            <Swiper
-              onSwiper={onSwiper}
-              onResize={onResize}
-              onSlideChange={onSlideChange}
-              slidesPerView={initSlidePerPage}
-              loop={false}
-              spaceBetween={20}
-              breakpoints={breakpoints}
-            >
-              {prepareLevels.map((data: ILevelCard) => (
-                <SwiperSlide key={uuidv4()}>
-                  <MyLevelCard data={data} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </Box>
+          )}
         </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '16px',
+          }}
+        >
+          {(hasPrev || hasNext) && myLevelData && (
+            <>
+              <PrevButton onClick={handlePrevious} hasNext={hasPrev} />
+              <NextButton onClick={handleNext} hasNext={hasNext} />
+            </>
+          )}
+        </Box>
+      </Box>
+      {myLevelDataLoading ? (
+        <Box display='flex' width='100%' height='100%' alignItems='center' justifyContent='center'>
+          <CircularProgress
+            sx={{
+              color: theme.palette.lightGreen,
+            }}
+          />
+        </Box>
+      ) : (
+        <>
+          {prepareLevels && (
+            <Box>
+              <Swiper
+                onSwiper={onSwiper}
+                onResize={onResize}
+                onSlideChange={onSlideChange}
+                slidesPerView={initSlidePerPage}
+                loop={false}
+                spaceBetween={20}
+                breakpoints={breakpoints}
+              >
+                {prepareLevels.map((data: ILevelCard) => (
+                  <SwiperSlide key={uuidv4()}>
+                    <MyLevelCard data={data} project={project} />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </Box>
+          )}
+        </>
       )}
-    </>
+    </Box>
   );
 };
 export default MyLevelSection;
