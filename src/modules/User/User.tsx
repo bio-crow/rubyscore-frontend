@@ -15,6 +15,7 @@ import { getUserGradation } from '@/core/thunk/dashboard.thunk';
 import { DashboardTabIndexType } from '@/types/index';
 import { dashboardPanelTabs } from '@/constants/index';
 import { setActiveUserLevelsInfo } from '@/core/state/user.state';
+import { getCompletedTasks } from '@/core/thunk/task.thunk';
 
 const breakpointsConfig = {
   0: {
@@ -56,6 +57,7 @@ const User = () => {
       dispatch(getUserStatistics(data));
       dispatch(getUserNFTList(params.wallet));
       dispatch(activeUserDataFromContract(params.wallet));
+      dispatch(getCompletedTasks(params.wallet));
     } else {
       dispatch(setUserStatistics(null));
       dispatch(setActiveUserLevelsInfo(null));

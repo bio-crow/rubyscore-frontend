@@ -16,6 +16,7 @@ type TabIndexType = 0 | 1;
 const UserStatistics = () => {
   const statRef = useRef<any>(null);
   const theme = useCustomTheme();
+  const completedTasks = useAppSelector(state => state.taskState.completedTasks);
   const searchParams = useSearchParams();
   const tab = searchParams.get('tab');
   const isMd = useMediaQuery(theme.breakpoints.up('md'));
@@ -35,7 +36,7 @@ const UserStatistics = () => {
     {
       index: 0,
       label: 'Quests completed',
-      value: 278,
+      value: completedTasks.length,
     },
     {
       index: 1,
@@ -46,6 +47,10 @@ const UserStatistics = () => {
   useEffect(() => {
     if (tab === 'NFT') {
       setActiveTabIndex(1);
+      statRef.current.scrollIntoView();
+    }
+    if (tab === 'Task') {
+      setActiveTabIndex(0);
       statRef.current.scrollIntoView();
     }
   }, [tab]);

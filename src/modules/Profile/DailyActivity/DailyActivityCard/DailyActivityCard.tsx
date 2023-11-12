@@ -1,55 +1,74 @@
 import { Box } from '@mui/system';
-import { FC } from 'react';
-import { IDailyActivityCard } from '@/types/index';
+import { FC, useState } from 'react';
+import { ITask } from '@/types/index';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import PrimaryButton from '@/components/common/ui/PrimaryButton/PrimaryButton';
 import Image from 'next/image';
+import pluralize from 'pluralize';
+import { networkStaticData } from '@/constants/index';
+import { useAppDispatch, useAppSelector } from '@/core/store';
+import { claimTask } from '@/core/thunk/task.thunk';
+import { useAccount } from 'wagmi';
 
 interface Props {
-  activity: IDailyActivityCard;
+  task: ITask;
 }
 
-const DailyActivityCard: FC<Props> = ({ activity }) => {
+const DailyActivityCard: FC<Props> = ({ task }) => {
   const theme = useCustomTheme();
+  const [open, setOpen] = useState(false);
+  const { address } = useAccount();
+  const dispatch = useAppDispatch();
+  const claimingTaskId = useAppSelector(state => state.taskState.claimingTaskId);
+  const claim = (e: any) => {
+    e.stopPropagation();
+    const params = {
+      taskId: task.id,
+      wallet: address,
+    };
+    dispatch(claimTask(params));
+  };
   return (
     <Box
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '20px',
-        padding: '20px',
-        borderRadius: '10px',
-        border: `1px solid ${theme.palette.white10}`,
-        background: theme.palette.black,
+        position: 'relative',
+        width: '100%',
+        height: '210px',
       }}
     >
       <Box
         sx={{
           display: 'flex',
-          alignItems: 'center',
-          gap: '10px',
-          flewWrap: 'wrap',
+          flexDirection: 'column',
+          position: 'absolute',
+          transition: '0.5s',
+          gap: '20px',
+          padding: '20px',
+          borderRadius: '10px',
+          cursor: 'pointer',
+          border: `1px solid ${theme.palette.white10}`,
+          background: theme.palette.black,
         }}
+        onClick={() => setOpen(!open)}
       >
         <Box
           sx={{
             display: 'flex',
             alignItems: 'center',
-            gap: '6px',
-            borderRadius: '20px',
-            padding: '0px 10px 0px 10px',
-            border: `1px solid ${theme.palette.white10}`,
-            background: theme.palette.white10,
+            gap: '10px',
+            flewWrap: 'wrap',
           }}
         >
-          <Image src={activity.net.icon} alt='icon' width='16' height='16' />
-          <Box className='Body-Lato-fw-500-fs-12-h-24' color={theme.palette.powderWhite}>
-            {activity.net.title}
-          </Box>
-        </Box>
-        {activity.badges.map(item => (
+          {task.projects.map(project => (
+            <Image
+              src={networkStaticData[project].icon}
+              alt='icon'
+              width='24'
+              height='24'
+              key={`img/${project}`}
+            />
+          ))}
           <Box
-            key={item}
             sx={{
               color: theme.palette.lightGreen,
               borderRadius: '16px',
@@ -58,21 +77,33 @@ const DailyActivityCard: FC<Props> = ({ activity }) => {
             }}
             className='Body-Lato-fw-500-fs-10'
           >
-            {item}
+            {`${task.score} ${pluralize('point', task.score)}`}
           </Box>
-        ))}
+        </Box>
+        <Box
+          sx={{
+            color: theme.palette.powderWhite,
+            height: open ? 'unset' : '64px',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            display: '-webkit-box',
+            WebkitLineClamp: open ? 'unset' : '2',
+            WebkitBoxOrient: open ? 'unset' : 'vertical',
+          }}
+          className='Body-Lato-fw-600-fs-24'
+        >
+          {task.description}
+        </Box>
+        <PrimaryButton
+          onClick={claim}
+          variant='contained'
+          size='large'
+          fullWidth
+          loading={claimingTaskId === task.id}
+        >
+          Get
+        </PrimaryButton>
       </Box>
-      <Box
-        sx={{
-          color: theme.palette.powderWhite,
-        }}
-        className='Body-Lato-fw-600-fs-24'
-      >
-        {activity.description}
-      </Box>
-      <PrimaryButton variant='contained' size='large' fullWidth>
-        Get
-      </PrimaryButton>
     </Box>
   );
 };

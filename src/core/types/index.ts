@@ -3,6 +3,7 @@ import {
   ILeaderboardData,
   ILeaderboardUser,
   IStreakDays,
+  ITask,
   IUserGradation,
 } from '@/types/index';
 import {
@@ -268,4 +269,14 @@ export interface IGetCurrentStreakDays {
 }
 export interface IClaimCurrentStreakDays {
   result: boolean;
+}
+export interface ITasksResponse {
+  result: {
+    tasks: ITask[];
+  };
+}
+export interface ITasksCompletedResponse {
+  result: {
+    tasks: ITask[];
+  };
 }

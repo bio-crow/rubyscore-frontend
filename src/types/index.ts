@@ -1,5 +1,4 @@
-import { getUserLevelInfo } from '@/core/thunk/dashboard.thunk';
-import { ReactElement, ReactNode } from 'react';
+import { ReactElement } from 'react';
 
 export type ChartIndexType =
   | 'transactions'
@@ -10,16 +9,7 @@ export type ChartIndexType =
   | 'gas'
   | 'volume'
   | 'balance';
-export type NetworksType = 'zk_era' | 'linea' | 'base' | 'zora' | 'zk_evm' | 'scroll';
 export type DashboardTabIndexType = 'zk_era' | 'linea' | 'base' | 'zora' | 'zk_evm' | 'scroll' | 'rubyscore';
-export interface IQuestCard {
-  net: {
-    icon: string;
-    title: string;
-  };
-  points: number;
-  questTitle: string;
-}
 export interface IScoreNetwork {
   index: DashboardTabIndexType;
   title: string;
@@ -33,14 +23,6 @@ export interface ILevelCard {
   isAvailable: boolean;
   isClaimed: boolean;
   isError: boolean;
-}
-export interface IDailyActivityCard {
-  description: string;
-  net: {
-    title: string;
-    icon: string;
-  };
-  badges: string[];
 }
 export interface IReferral {
   wallet: string;
@@ -195,4 +177,11 @@ export interface ILevelsInfo {
   zk_evm: [];
   base: [];
   scroll: [];
+}
+
+export interface ITask {
+  id: number;
+  score: number;
+  projects: DashboardTabIndexType[];
+  description: string;
 }

@@ -13,11 +13,13 @@ import {
 } from '@/core/state/user.state';
 import { formatEther } from 'viem';
 import { searchUser } from '@/core/api/leaderboard.api';
+import { getCompletedTasks } from '@/core/thunk/task.thunk';
 
 export const login = createAsyncThunk('authSlice/fetchLogin', async (params: ILoginPayload, { dispatch }) => {
   dispatch(setAuthLoading(true));
   const loginData = await fetchLogin(params);
   if (loginData?.data?.result) {
+    dispatch(getCompletedTasks(params.wallet));
     dispatch(setToken(loginData.data.result.token));
     dispatch(setIsClaimed(loginData.data.result.isClaimed));
     if (typeof window !== 'undefined') {

@@ -2,15 +2,22 @@ import { Box } from '@mui/system';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { FC } from 'react';
 import Image from 'next/image';
-import { IQuestCard } from '@/types/index';
-import QuestsCard from '@/modules/Profile/ProfileInfo/QuestsInfo/QuestCard/QuestCard';
+import { ITask } from '@/types/index';
+import { v4 as uuidv4 } from 'uuid';
+import TaskCard from '@/modules/Profile/ProfileInfo/TaskInfo/TaskCard/TaskCard';
+import SecondaryButton from '@/components/common/ui/SecondaryButton/SecondaryButton';
+import { appRoutes } from '@/constants/routes';
+import { useRouter } from 'next/navigation';
+import { useAccount } from 'wagmi';
 
 interface Props {
-  quests: IQuestCard[];
+  tasks: ITask[];
 }
 
-const QuestsInfo: FC<Props> = ({ quests }) => {
+const TaskInfo: FC<Props> = ({ tasks }) => {
   const theme = useCustomTheme();
+  const router = useRouter();
+  const { address } = useAccount();
   return (
     <Box
       sx={{
@@ -35,7 +42,7 @@ const QuestsInfo: FC<Props> = ({ quests }) => {
         </Box>
         <Box display='flex' alignItems='center' gap='10px'>
           <Box className='Body-Lato-fw-700-fs-16' color={theme.palette.lightGreen}>
-            {quests.length}
+            {tasks.length}
           </Box>
           <Box className='Body-Lato-fw-700-fs-16' color={theme.palette.powderWhite}>
             Quests
@@ -43,7 +50,7 @@ const QuestsInfo: FC<Props> = ({ quests }) => {
         </Box>
       </Box>
       <Box display='flex' flexDirection='column' paddingTop='16px' gap='10px'>
-        {quests.length === 0 ? (
+        {tasks.length === 0 ? (
           <Box display='flex' alignItems='center' gap='10px' justifyContent='center' minHeight='84px'>
             <Image src='/asserts/groupIcon.png' alt='icon' width='24' height='24' />
             <Box
@@ -59,13 +66,23 @@ const QuestsInfo: FC<Props> = ({ quests }) => {
           </Box>
         ) : (
           <>
-            {quests.map(item => (
-              <QuestsCard key={item.questTitle} quest={item} />
+            {tasks.slice(0, 2).map((item: ITask, index: number) => (
+              <TaskCard key={uuidv4()} task={item} zIndex={3 - index} />
             ))}
           </>
+        )}
+        {tasks.length > 2 && (
+          <SecondaryButton
+            variant='contained'
+            size='large'
+            fullWidth
+            onClick={() => router.push(`${appRoutes.LEADERBOARD_USER}/${address}?tab=Task`)}
+          >
+            View all
+          </SecondaryButton>
         )}
       </Box>
     </Box>
   );
 };
-export default QuestsInfo;
+export default TaskInfo;

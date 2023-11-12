@@ -14,6 +14,7 @@ import PrivatePageLayout from '@/components/layout/PrivatePageLayout/PrivatePage
 import { useEffect, useLayoutEffect } from 'react';
 import { getReferrals, getUserNFTList } from '@/core/thunk/user.thunk';
 import { useAccount } from 'wagmi';
+import { getCompletedTasks, getTasks } from '@/core/thunk/task.thunk';
 const breakpointsConfig = {
   0: {
     slidesPerView: 1.4,
@@ -42,6 +43,8 @@ const Profile = () => {
     if (address && isAuth) {
       dispatch(getReferrals());
       dispatch(getUserNFTList(address));
+      dispatch(getTasks());
+      dispatch(getCompletedTasks(address));
     }
   }, [address, isAuth]);
   return (

@@ -1,10 +1,13 @@
 import { Box } from '@mui/system';
 import PrimaryPagination from '@/components/common/ui/PrimaryPagination/PrimaryPagination';
 import { v4 as uuidv4 } from 'uuid';
-import { IDailyActivityCard } from '@/types/index';
-import { mokeAchievementsData } from '@/modules/User/UserStatistics/UserAchievementTab/mokeAchievementsData';
+import { ITask } from '@/types/index';
+
 import AchievementCard from '@/modules/User/UserStatistics/UserAchievementTab/AchievementCard/AchievementCard';
+import { useAppSelector } from '@/core/store';
+
 const UserAchievementTab = () => {
+  const completedTasks = useAppSelector(state => state.taskState.completedTasks);
   return (
     <Box
       sx={{
@@ -21,17 +24,18 @@ const UserAchievementTab = () => {
           gridTemplateColumns: { xs: '1fr', md: '1fr 1fr', lg: '1fr 1fr 1fr', xlg: '1fr 1fr 1fr 1fr' },
         }}
       >
-        {mokeAchievementsData.map((data: IDailyActivityCard) => (
-          <AchievementCard activity={data} key={uuidv4()} />
+        {completedTasks.map((data: ITask, index: number) => (
+          <AchievementCard task={data} key={uuidv4()} zIndex={completedTasks.length - index} />
         ))}
       </Box>
+      {/*
       <Box
         sx={{
           alignSelf: 'flex-end',
         }}
       >
         <PrimaryPagination count={5} variant='outlined' shape='rounded' />
-      </Box>
+      </Box>*/}
     </Box>
   );
 };
