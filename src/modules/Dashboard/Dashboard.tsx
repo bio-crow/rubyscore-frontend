@@ -26,7 +26,7 @@ const Dashboard = () => {
       };
       dispatch(getUserGradation(data));
     } else {
-      dispatch(setUserGradation(null))
+      dispatch(setUserGradation(null));
     }
   }, [activeTab.index, address]);
   return (

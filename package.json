@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "eslint --fix",
-    "prettier": "npx prettier \"{app,public,src}/**/*.ts\" --write",
+    "prettier": "npx prettier \"{app,public,src}/**/*.tsx\" --write",
     "format": "yarn prettier && yarn lint:fix"
   },
 

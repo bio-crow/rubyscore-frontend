@@ -1,5 +1,11 @@
 import { apiPrivateAxios, apiPublicAxios } from '@/core/api/axiosConfig';
-import { INFTListResponse, IReferralsResponse, IScoreListResponse } from '@/core/types';
+import {
+  IClaimCurrentStreakDays,
+  IGetCurrentStreakDays,
+  INFTListResponse,
+  IReferralsResponse,
+  IScoreListResponse,
+} from '@/core/types';
 
 export const fetchReferrals = async () => {
   try {
@@ -18,6 +24,20 @@ export const fetchUserNftList = async (wallet: string) => {
 export const fetchUserScoreList = async (wallet: string) => {
   try {
     return await apiPublicAxios.get<IScoreListResponse>(`/profile/${wallet}/score`);
+  } catch (error) {
+    //console.error(error);
+  }
+};
+export const fetchGetCurrentStreakDays = async () => {
+  try {
+    return await apiPrivateAxios.get<IGetCurrentStreakDays>('/profile/streak');
+  } catch (error) {
+    //console.error(error);
+  }
+};
+export const fetchClaimCurrentStreakDays = async () => {
+  try {
+    return await apiPrivateAxios.get<IClaimCurrentStreakDays>('/task/streak');
   } catch (error) {
     //console.error(error);
   }

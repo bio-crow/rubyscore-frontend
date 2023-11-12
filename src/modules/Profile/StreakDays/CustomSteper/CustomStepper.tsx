@@ -5,14 +5,18 @@ import { useCustomTheme } from '@/hooks/useCustomTheme';
 import pluralize from 'pluralize';
 
 interface Props {
-  steps: { day: number; points: number }[];
+  steps: { day: number; points: number; percent: number }[];
   currentDay: number;
-  maxDay: number;
 }
 
-const CustomStepper: FC<Props> = ({ currentDay, maxDay, steps }) => {
+const CustomStepper: FC<Props> = ({ currentDay, steps }) => {
   const theme = useCustomTheme();
-  const progress = Math.round((currentDay / maxDay) * 100);
+  let progress;
+  if (currentDay < 15) {
+    progress = Math.round((currentDay / steps[2].day) * 100);
+  } else {
+    progress = Math.round(33 + ((10 - (steps[2].day - currentDay)) / 10) * 67);
+  }
   return (
     <Box
       sx={{
@@ -21,7 +25,7 @@ const CustomStepper: FC<Props> = ({ currentDay, maxDay, steps }) => {
       }}
     >
       <CustomLinearProgress variant='determinate' value={progress} />
-      {steps.map(step => (
+      {steps.map((step, index) => (
         <Box
           key={step.day + step.points}
           sx={{
@@ -32,7 +36,7 @@ const CustomStepper: FC<Props> = ({ currentDay, maxDay, steps }) => {
             borderRadius: '6px',
             position: 'absolute',
             top: '-6px',
-            left: `calc(${(step.day / maxDay) * 100}% - 10px)`,
+            left: `calc(${step.percent}% - 10px)`,
           }}
         >
           <Box

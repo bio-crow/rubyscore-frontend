@@ -55,7 +55,7 @@ const User = () => {
       };
       dispatch(getUserStatistics(data));
       dispatch(getUserNFTList(params.wallet));
-      dispatch(activeUserDataFromContract(params.wallet))
+      dispatch(activeUserDataFromContract(params.wallet));
     } else {
       dispatch(setUserStatistics(null));
       dispatch(setActiveUserLevelsInfo(null));

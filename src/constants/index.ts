@@ -131,10 +131,6 @@ export const dashboardPanelTabs: { index: DashboardTabIndexType; label: string }
     label: 'Base',
   },
   {
-    index: 'zora',
-    label: 'Zora',
-  },
-  {
     index: 'zk_evm',
     label: 'ZkEvm',
   },

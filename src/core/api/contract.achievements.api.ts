@@ -159,19 +159,18 @@ export const wagmiInitUserDataFromContract = async (wallet: string): Promise<any
       rubyscore:
         result[0].status === 'success' ? result[0].result.map((item: string) => parseInt(item)) : errData,
       base: result[1].status === 'success' ? result[1].result.map((item: string) => parseInt(item)) : errData,
-      zora: result[2].status === 'success' ? result[2].result.map((item: string) => parseInt(item)) : errData,
       linea:
-        result[3].status === 'success' ? result[3].result.map((item: string) => parseInt(item)) : errData,
+        result[2].status === 'success' ? result[2].result.map((item: string) => parseInt(item)) : errData,
       zk_evm:
-        result[4].status === 'success' ? result[4].result.map((item: string) => parseInt(item)) : errData,
+        result[3].status === 'success' ? result[3].result.map((item: string) => parseInt(item)) : errData,
       zk_era:
-        result[5].status === 'success' ? result[5].result.map((item: string) => parseInt(item)) : errData,
+        result[4].status === 'success' ? result[4].result.map((item: string) => parseInt(item)) : errData,
       scroll:
-        result[6].status === 'success' ? result[6].result.map((item: string) => parseInt(item)) : errData,
+        result[5].status === 'success' ? result[5].result.map((item: string) => parseInt(item)) : errData,
     };
-    const userName = result[7].status === 'success' ? result[7].result : null;
-    const userStatus = result[8].status === 'success' ? result[8].result : null;
-    const premiumPrice = result[9].status === 'success' ? result[9].result : null;
+    const userName = result[6].status === 'success' ? result[6].result : null;
+    const userStatus = result[7].status === 'success' ? result[7].result : null;
+    const premiumPrice = result[8].status === 'success' ? result[8].result : null;
     return { levelsInfo, userName, userStatus, premiumPrice };
   };
   try {

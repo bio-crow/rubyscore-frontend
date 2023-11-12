@@ -3,28 +3,23 @@ import { useCustomTheme } from '@/hooks/useCustomTheme';
 import SecondaryButton from '@/components/common/ui/SecondaryButton/SecondaryButton';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import CustomStepper from '@/modules/Profile/StreakDays/CustomSteper/CustomStepper';
+import { getStreakDays } from '@/core/thunk/user.thunk';
+import { useAppDispatch, useAppSelector } from '@/core/store';
+import { useEffect } from 'react';
+import { getStreakDaysSteps } from '@/utils/helpers';
 
-const daySteps = [
-  {
-    day: 5,
-    points: 1,
-  },
-  {
-    day: 10,
-    points: 5,
-  },
-  {
-    day: 15,
-    points: 10,
-  },
-];
 const StreakDays = () => {
   const theme = useCustomTheme();
+  const dispatch = useAppDispatch();
+  const streakDays = useAppSelector(state => state.userState.streakDays);
   const isSm = useMediaQuery(theme.breakpoints.up('sm'));
-  const currentDay = 7;
-  const lastDay = 15;
+  const currentDay = streakDays.current || 0;
+  const daySteps = getStreakDaysSteps(currentDay);
   const currentStep = daySteps.find(step => step.day > currentDay);
   const nextDay = currentStep ? currentStep.day : null;
+  useEffect(() => {
+    dispatch(getStreakDays());
+  }, []);
   return (
     <Box
       sx={{
@@ -71,12 +66,17 @@ const StreakDays = () => {
               : `Max level achieved. Claim it`}
           </Box>
         </Box>
-        <SecondaryButton variant='contained' size='large' fullWidth={!isSm}>
+        <SecondaryButton
+          variant='contained'
+          size='large'
+          fullWidth={!isSm}
+          disabled={!streakDays.isClaimable}
+        >
           Get all
         </SecondaryButton>
       </Box>
 
-      <CustomStepper currentDay={currentDay} maxDay={lastDay} steps={daySteps} />
+      <CustomStepper currentDay={currentDay} steps={daySteps} />
     </Box>
   );
 };

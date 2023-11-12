@@ -109,13 +109,6 @@ const ScoreSection: FC<Props> = ({
       points: userScoreList['base'].score,
     },
     {
-      index: 'zora',
-      title: 'Zora',
-      icon: networkStaticData['zora'].icon,
-      lvl: userScoreList['zora'].level,
-      points: userScoreList['zora'].score,
-    },
-    {
       index: 'zk_evm',
       title: 'zkEvm',
       icon: networkStaticData['zk_evm'].icon,

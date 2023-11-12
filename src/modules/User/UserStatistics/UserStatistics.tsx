@@ -19,9 +19,9 @@ const UserStatistics = () => {
   const searchParams = useSearchParams();
   const tab = searchParams.get('tab');
   const isMd = useMediaQuery(theme.breakpoints.up('md'));
-  const userLevelsInfo = useAppSelector(state => state.userState.userLevelsInfo);
+  const activeUserLevelsInfo = useAppSelector(state => state.userState.activeUserLevelsInfo);
   const userNFTList = useAppSelector(state => state.userState.userNFTList);
-  const levelNfts = mapUserLevelInfoToNFTList(userLevelsInfo);
+  const levelNfts = mapUserLevelInfoToNFTList(activeUserLevelsInfo);
   const list = [...userNFTList, ...levelNfts];
   const [activeTabIndex, setActiveTabIndex] = useState<TabIndexType>(0);
   const handleChange = (event: SyntheticEvent, newValue: TabIndexType) => {

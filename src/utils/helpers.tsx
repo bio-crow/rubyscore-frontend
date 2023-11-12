@@ -528,3 +528,28 @@ export const mapUserLevelInfoToNFTList = (data: ILevelsInfo | null) => {
   }
   return [];
 };
+
+export const getStreakDaysSteps = (current: number) => {
+  let arr = [];
+  let a3;
+  const a1 = current - (current % 5);
+  const a2 = a1 + 5;
+  if ((a1 / 5) % 2 === 0) {
+    a3 = a1 - 5;
+  } else {
+    a3 = a2 + 5;
+  }
+  if (current < 5) {
+    arr = [5, 10, 15];
+  } else {
+    arr = [a1, a2, a3].sort((a: number, b: number) => a - b);
+  }
+
+  return arr.map((item, index) => {
+    return {
+      day: item,
+      points: item * 2,
+      percent: (index + 1) * 33,
+    };
+  });
+};
