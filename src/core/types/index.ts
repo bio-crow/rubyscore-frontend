@@ -1,4 +1,10 @@
-import { DashboardTabIndexType, ILeaderboardData, ILeaderboardUser, IUserGradation } from '@/types/index';
+import {
+  DashboardTabIndexType,
+  ILeaderboardData,
+  ILeaderboardUser,
+  IStreakDays,
+  IUserGradation,
+} from '@/types/index';
 import {
   fetchDashboardBalance,
   fetchDashboardContracts,
@@ -256,4 +262,10 @@ export interface IClaimLevelPayload {
     nftIds: string[];
   };
   signature: string;
+}
+export interface IGetCurrentStreakDays {
+  result: IStreakDays;
+}
+export interface IClaimCurrentStreakDays {
+  result: boolean;
 }

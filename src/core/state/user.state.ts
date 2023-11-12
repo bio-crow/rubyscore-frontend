@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { claimProfile, getReferrals } from '@/core/thunk/user.thunk';
-import { ILevelsInfo, IReferral, IScoreList } from '@/types/index';
+import { ILeaderboardUser, ILevelsInfo, IReferral, IScoreList, IStreakDays } from '@/types/index';
 
 interface IAuthState {
   referrals: IReferral[];
@@ -8,12 +8,14 @@ interface IAuthState {
   loading: boolean;
   claimProfileLoading: boolean;
   userName: string | null;
+  userProjectInfo: ILeaderboardUser | null;
   premiumStatus: boolean;
   premiumPrice: string;
   userNFTList: string[];
   userScoreList: IScoreList | null;
   userScoreListLoading: boolean;
   userLevelsInfo: ILevelsInfo | null;
+  streakDays: IStreakDays;
 }
 
 const initialState: IAuthState = {
@@ -22,12 +24,17 @@ const initialState: IAuthState = {
   loading: false,
   claimProfileLoading: false,
   userName: null,
+  userProjectInfo: null,
   premiumStatus: false,
   premiumPrice: '0',
   userNFTList: [],
   userScoreList: null,
   userScoreListLoading: false,
   userLevelsInfo: null,
+  streakDays: {
+    current: 0,
+    isClaimable: false,
+  },
 };
 
 export const userSlice = createSlice({
@@ -54,6 +61,12 @@ export const userSlice = createSlice({
     },
     setUserLevelsInfo: (state, action: PayloadAction<ILevelsInfo | null>) => {
       state.userLevelsInfo = action.payload;
+    },
+    setStreakDays: (state, action: PayloadAction<IStreakDays>) => {
+      state.streakDays = action.payload;
+    },
+    setUserProjectInfo: (state, action: PayloadAction<ILeaderboardUser | null>) => {
+      state.userProjectInfo = action.payload;
     },
   },
   extraReducers: builder => {
@@ -87,4 +100,6 @@ export const {
   setPremiumStatus,
   setPremiumPrice,
   setUserLevelsInfo,
+  setStreakDays,
+  setUserProjectInfo,
 } = userSlice.actions;
