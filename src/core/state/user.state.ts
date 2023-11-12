@@ -14,6 +14,7 @@ interface IAuthState {
   userScoreList: IScoreList | null;
   userScoreListLoading: boolean;
   userLevelsInfo: ILevelsInfo | null;
+  activeUserLevelsInfo: ILevelsInfo | null;
 }
 
 const initialState: IAuthState = {
@@ -28,6 +29,7 @@ const initialState: IAuthState = {
   userScoreList: null,
   userScoreListLoading: false,
   userLevelsInfo: null,
+  activeUserLevelsInfo: null
 };
 
 export const userSlice = createSlice({
@@ -54,6 +56,9 @@ export const userSlice = createSlice({
     },
     setUserLevelsInfo: (state, action: PayloadAction<ILevelsInfo | null>) => {
       state.userLevelsInfo = action.payload;
+    },
+    setActiveUserLevelsInfo: (state, action: PayloadAction<ILevelsInfo | null>) => {
+      state.activeUserLevelsInfo = action.payload;
     },
   },
   extraReducers: builder => {
@@ -87,4 +92,5 @@ export const {
   setPremiumStatus,
   setPremiumPrice,
   setUserLevelsInfo,
+  setActiveUserLevelsInfo
 } = userSlice.actions;

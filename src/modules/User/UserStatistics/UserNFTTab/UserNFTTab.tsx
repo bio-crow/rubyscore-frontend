@@ -5,9 +5,9 @@ import { useAppSelector } from '@/core/store';
 import { mapUserLevelInfoToNFTList } from '@/utils/helpers';
 
 const UserNFTTab = () => {
-  const userLevelsInfo = useAppSelector(state => state.userState.userLevelsInfo);
+  const activeUserLevelsInfo = useAppSelector(state => state.userState.userLevelsInfo);
   const userNFTList = useAppSelector(state => state.userState.userNFTList);
-  const levelNfts = mapUserLevelInfoToNFTList(userLevelsInfo);
+  const levelNfts = mapUserLevelInfoToNFTList(activeUserLevelsInfo);
   const list = [...userNFTList, ...levelNfts];
   return (
     <Box

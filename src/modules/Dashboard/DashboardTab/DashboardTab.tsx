@@ -18,7 +18,6 @@ interface Props {
 const DashboardTab: FC<Props> = ({ activeTab }) => {
   const theme = useCustomTheme();
   const { address } = useAccount();
-  const userGradation = useAppSelector(state => state.dashboardState.userGradation);
   const dispatch = useAppDispatch();
   const loadingProjectStatistics = useAppSelector(state => state.dashboardState.loadingProjectStatistics);
   const isAuth = useAppSelector(state => state.authState.isAuth);

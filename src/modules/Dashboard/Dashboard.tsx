@@ -9,6 +9,7 @@ import { useAppDispatch } from '@/core/store';
 import { getUserGradation } from '@/core/thunk/dashboard.thunk';
 import { useAccount } from 'wagmi';
 import { dashboardPanelTabs } from '@/constants/index';
+import { setUserGradation } from '@/core/state/dashboard.state';
 
 const Dashboard = () => {
   const theme = useCustomTheme();
@@ -24,6 +25,8 @@ const Dashboard = () => {
         projectName: activeTab.index,
       };
       dispatch(getUserGradation(data));
+    } else {
+      dispatch(setUserGradation(null))
     }
   }, [activeTab.index, address]);
   return (

@@ -9,11 +9,12 @@ import { useAppDispatch, useAppSelector } from '@/core/store';
 import { setUserStatistics } from '@/core/state/leaderboard.state';
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
-import { getUserNFTList } from '@/core/thunk/user.thunk';
+import { activeUserDataFromContract, getUserNFTList } from '@/core/thunk/user.thunk';
 import AchievementsSection from '@/components/common/sections/AchievementsSection/AchievementsSection';
 import { getUserGradation } from '@/core/thunk/dashboard.thunk';
 import { DashboardTabIndexType } from '@/types/index';
 import { dashboardPanelTabs } from '@/constants/index';
+import { setActiveUserLevelsInfo } from '@/core/state/user.state';
 
 const breakpointsConfig = {
   0: {
@@ -54,11 +55,14 @@ const User = () => {
       };
       dispatch(getUserStatistics(data));
       dispatch(getUserNFTList(params.wallet));
+      dispatch(activeUserDataFromContract(params.wallet))
     } else {
       dispatch(setUserStatistics(null));
+      dispatch(setActiveUserLevelsInfo(null));
     }
     return () => {
       dispatch(setUserStatistics(null));
+      dispatch(setActiveUserLevelsInfo(null));
     };
   }, []);
   useLayoutEffect(() => {

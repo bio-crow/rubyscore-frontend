@@ -4,6 +4,7 @@ import { wagmiClaimName } from '@/core/api/contract.api';
 import { IClaimPayload } from '@/core/types';
 import { formatEther } from 'viem';
 import {
+  setActiveUserLevelsInfo,
   setPremiumPrice,
   setPremiumStatus,
   setUserLevelsInfo,
@@ -59,5 +60,12 @@ export const initUserDataFromContract = createAsyncThunk(
     dispatch(setUserLevelsInfo(result.levelsInfo));
     dispatch(setPremiumStatus(result.userStatus));
     dispatch(setPremiumPrice(formatEther(result.premiumPrice)));
+  }
+);
+export const activeUserDataFromContract = createAsyncThunk(
+  'userSlice/activeUserDataFromContract',
+  async (address: any, { dispatch }) => {
+    const result = await wagmiInitUserDataFromContract(address);
+    dispatch(setActiveUserLevelsInfo(result.levelsInfo));
   }
 );
