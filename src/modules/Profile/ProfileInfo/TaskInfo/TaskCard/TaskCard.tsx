@@ -35,6 +35,7 @@ const TaskCard: FC<Props> = ({ task, zIndex }) => {
           zIndex: zIndex,
           border: `1px solid ${theme.palette.white10}`,
           background: theme.palette.backgroundColor,
+          height: '100%',
         }}
         onClick={() => setOpen(!open)}
       >

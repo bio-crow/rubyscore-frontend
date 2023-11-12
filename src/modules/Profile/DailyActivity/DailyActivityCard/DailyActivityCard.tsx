@@ -74,6 +74,7 @@ const DailyActivityCard: FC<Props> = ({ task }) => {
               borderRadius: '16px',
               border: `1px solid ${theme.palette.lightGreen}`,
               padding: '4px 12px 4px 12px',
+              textWrap: 'nowrap',
             }}
             className='Body-Lato-fw-500-fs-10'
           >
