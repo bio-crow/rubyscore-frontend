@@ -36,23 +36,11 @@ const navLinks = [
 
 const Header = () => {
   const theme = useCustomTheme();
-  const dispatch = useAppDispatch();
   const router = useRouter();
   const isLowerLg = useMediaQuery(theme.breakpoints.down('lg'));
   const loading = useAppSelector(state => state.authState.loading);
   const isAuth = useAppSelector(state => state.authState.isAuth);
-  const { address } = useAccount();
-  const userName = useAppSelector(state => state.userState.userName);
-  useEffect(() => {
-    if (address && isAuth) {
-      dispatch(initUserDataFromContract(address));
-    }
-    if (!isAuth) {
-      dispatch(setUserName(null));
-      dispatch(setPremiumStatus(false));
-      dispatch(setUserLevelsInfo(null));
-    }
-  }, [address, isAuth]);
+
   return (
     <Box
       width='100%'

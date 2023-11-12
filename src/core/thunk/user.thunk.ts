@@ -1,11 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchReferrals, fetchUserNftList, fetchUserScoreList } from '@/core/api/user.api';
+import {
+  fetchGetCurrentStreakDays,
+  fetchReferrals,
+  fetchUserNftList,
+  fetchUserScoreList,
+} from '@/core/api/user.api';
 import { wagmiClaimName } from '@/core/api/contract.api';
 import { IClaimPayload } from '@/core/types';
 import { formatEther } from 'viem';
 import {
   setPremiumPrice,
   setPremiumStatus,
+  setStreakDays,
   setUserLevelsInfo,
   setUserName,
   setUserNFTList,
@@ -61,3 +67,10 @@ export const initUserDataFromContract = createAsyncThunk(
     dispatch(setPremiumPrice(formatEther(result.premiumPrice)));
   }
 );
+
+export const getStreakDays = createAsyncThunk('userSlice/getStreakDays', async (args, { dispatch }) => {
+  const result: any = await fetchGetCurrentStreakDays();
+  if (result?.data?.result) {
+    dispatch(setStreakDays(result.data.result));
+  }
+});

@@ -47,6 +47,10 @@ export interface IReferral {
   name: string;
   score: number;
 }
+export interface IStreakDays {
+  current: number;
+  isClaimable: boolean;
+}
 export interface IAchievementCard {
   key: string;
   value: string;
@@ -188,7 +192,6 @@ export interface ILevelsInfo {
   rubyscore: [];
   linea: [];
   zk_era: [];
-  zora: [];
   zk_evm: [];
   base: [];
   scroll: [];
