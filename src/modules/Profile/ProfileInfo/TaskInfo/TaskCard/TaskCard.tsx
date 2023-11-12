@@ -19,7 +19,7 @@ const TaskCard: FC<Props> = ({ task, zIndex }) => {
       sx={{
         position: 'relative',
         width: '100%',
-        height: '130px',
+        height: '150px',
       }}
     >
       <Box
@@ -38,7 +38,7 @@ const TaskCard: FC<Props> = ({ task, zIndex }) => {
         }}
         onClick={() => setOpen(!open)}
       >
-        <Box display='flex' alignItems='center' gap='10px'>
+        <Box display='flex' alignItems='center' gap='10px' flexWrap='wrap'>
           {task.projects.map(project => (
             <Image
               src={networkStaticData[project].icon}

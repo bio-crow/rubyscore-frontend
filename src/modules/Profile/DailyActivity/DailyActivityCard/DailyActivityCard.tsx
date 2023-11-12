@@ -33,7 +33,7 @@ const DailyActivityCard: FC<Props> = ({ task }) => {
       sx={{
         position: 'relative',
         width: '100%',
-        height: '210px',
+        height: '230px',
       }}
     >
       <Box
