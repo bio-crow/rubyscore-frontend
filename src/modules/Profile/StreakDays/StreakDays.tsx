@@ -63,7 +63,7 @@ const StreakDays = () => {
           >
             {nextDay
               ? `Till the next achievement: ${currentDay} of ${nextDay} days`
-              : `Max level achieved. Claim it`}
+              : ``}
           </Box>
         </Box>
         <SecondaryButton

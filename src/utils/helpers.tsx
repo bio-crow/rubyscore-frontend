@@ -12,6 +12,7 @@ import {
   IDashboardWeeksResponse,
 } from '@/core/types';
 import { IAchievementCard, IChartDot, ILevelsInfo, IUserGradation } from '@/types/index';
+import { steps } from '@motionone/easing';
 
 export const copyToClickBoard = (text: string | undefined, message: string = 'Copied to clipboard') => {
   toast(message, { position: 'bottom-center' });
@@ -530,25 +531,24 @@ export const mapUserLevelInfoToNFTList = (data: ILevelsInfo | null) => {
 };
 
 export const getStreakDaysSteps = (current: number) => {
-  let arr = [];
-  let a3;
-  const a1 = current - (current % 5);
-  const a2 = a1 + 5;
-  if ((a1 / 5) % 2 === 0) {
-    a3 = a1 - 5;
-  } else {
-    a3 = a2 + 5;
-  }
-  if (current < 5) {
-    arr = [5, 10, 15];
-  } else {
-    arr = [a1, a2, a3].sort((a: number, b: number) => a - b);
+  const scores: number[] = [5, 20, 50];
+  let streakPassed: number = 0;
+  let days: number[];
+
+  if (current > 15) {
+    streakPassed = Math.floor(current/15);
   }
 
-  return arr.map((item, index) => {
+  if (streakPassed > 0) {
+    days = [(15 * streakPassed) + 5, (15 * streakPassed) + 10, (15 * streakPassed) + 15]
+  } else {
+    days = [5, 10, 15];
+  }
+
+  return scores.map((score, index) => {
     return {
-      day: item,
-      points: item * 2,
+      day: days[index],
+      points: score,
       percent: (index + 1) * 33,
     };
   });
