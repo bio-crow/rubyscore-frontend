@@ -54,6 +54,9 @@ const MyLevelSection: FC<Props> = ({
   const [hasNext, setHasNext] = useState(false);
   const [hasPrev, setHasPrev] = useState(false);
   const [swiperRef, setSwiperRef] = useState<any>();
+  const percent =
+    myLevelData &&
+    Number.parseFloat(`${(myLevelData.position.current / myLevelData.position.max) * 100}`).toFixed(0);
   const handlePrevious = () => {
     swiperRef?.slidePrev();
   };
@@ -105,7 +108,7 @@ const MyLevelSection: FC<Props> = ({
         flexDirection: 'column',
         padding: '40px 32px',
         borderRadius: '10px',
-        gap: '40px',
+        gap: '20px',
         border: `1px solid ${theme.palette.white10}`,
         background: theme.palette.black,
       }}
@@ -113,8 +116,8 @@ const MyLevelSection: FC<Props> = ({
       <Box
         sx={{
           display: 'flex',
-          flexDirection: { xs: 'column', sm: 'row' },
-          alignItems: { xs: 'unset', sm: 'flex-start' },
+          flexDirection: { xs: 'column', md: 'row' },
+          alignItems: { xs: 'unset', md: 'flex-start' },
           justifyContent: 'space-between',
           gap: '20px',
         }}
@@ -176,20 +179,58 @@ const MyLevelSection: FC<Props> = ({
             </Box>
           )}
         </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '16px',
-          }}
-        >
-          {(hasPrev || hasNext) && myLevelData && (
-            <>
-              <PrevButton onClick={handlePrevious} hasNext={hasPrev} />
-              <NextButton onClick={handleNext} hasNext={hasNext} />
-            </>
-          )}
-        </Box>
+        {myLevelData && (
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: { xs: 'space-between', md: 'unset' },
+              gap: '16px',
+            }}
+          >
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                paddingRight: { xs: 'none', lg: `20px` },
+                borderRight: { xs: 'none', lg: `1px solid ${theme.palette.white10}` },
+                alignItems: { xs: 'unset', md: 'flex-end' },
+              }}
+            >
+              <Box color={theme.palette.powderWhite} className='Body-Inter-fw-700-fs-16'>
+                Current Rank
+              </Box>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
+                  gap: '5px',
+                }}
+              >
+                <Box className='Body-Inter-fw-700-fs-18' color={theme.palette.lightGreen}>
+                  {myLevelData.position.current}
+                </Box>
+                <Box className='Body-Inter-fw-700-fs-18' color={theme.palette.white50}>
+                  of {myLevelData.position.max}
+                </Box>
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <Box color={theme.palette.powderWhite} className='Body-Inter-fw-700-fs-16'>
+                TOP
+              </Box>
+              <Box className='Body-Inter-fw-700-fs-18' color={theme.palette.lightGreen}>
+                {percent}%
+              </Box>
+            </Box>
+          </Box>
+        )}
       </Box>
       {myLevelDataLoading ? (
         <Box display='flex' width='100%' height='100%' alignItems='center' justifyContent='center'>
@@ -202,23 +243,40 @@ const MyLevelSection: FC<Props> = ({
       ) : (
         <>
           {prepareLevels && (
-            <Box>
-              <Swiper
-                onSwiper={onSwiper}
-                onResize={onResize}
-                onSlideChange={onSlideChange}
-                slidesPerView={initSlidePerPage}
-                loop={false}
-                spaceBetween={20}
-                breakpoints={breakpoints}
+            <>
+              <Box>
+                <Swiper
+                  onSwiper={onSwiper}
+                  onResize={onResize}
+                  onSlideChange={onSlideChange}
+                  slidesPerView={initSlidePerPage}
+                  loop={false}
+                  spaceBetween={20}
+                  breakpoints={breakpoints}
+                >
+                  {prepareLevels.map((data: ILevelCard) => (
+                    <SwiperSlide key={uuidv4()}>
+                      <MyLevelCard data={data} project={project} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </Box>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
+                  gap: '16px',
+                }}
               >
-                {prepareLevels.map((data: ILevelCard) => (
-                  <SwiperSlide key={uuidv4()}>
-                    <MyLevelCard data={data} project={project} />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </Box>
+                {(hasPrev || hasNext) && myLevelData && (
+                  <>
+                    <PrevButton onClick={handlePrevious} hasNext={hasPrev} />
+                    <NextButton onClick={handleNext} hasNext={hasNext} />
+                  </>
+                )}
+              </Box>
+            </>
           )}
         </>
       )}

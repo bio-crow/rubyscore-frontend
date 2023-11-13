@@ -60,37 +60,55 @@ const DailyActivity = () => {
           />
         </Box>
       ) : (
-        <Box>
-          <Swiper
-            slidesPerView={3}
-            loop={false}
-            spaceBetween={20}
-            breakpoints={{
-              0: {
-                slidesPerView: 1,
-              },
-              500: {
-                slidesPerView: 1,
-              },
-              767: {
-                slidesPerView: 2,
-              },
-              992: {
-                slidesPerView: 3,
-              },
-              1392: {
-                slidesPerView: 3,
-              },
-            }}
-            style={{ overflowY: 'visible', overflowX: 'clip' }}
-          >
-            {tasks.map((data: ITask) => (
-              <SwiperSlide key={uuidv4()}>
-                <DailyActivityCard task={data} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </Box>
+        <>
+          {tasks.length > 0 ? (
+            <Box>
+              <Swiper
+                slidesPerView={3}
+                loop={false}
+                spaceBetween={20}
+                breakpoints={{
+                  0: {
+                    slidesPerView: 1,
+                  },
+                  500: {
+                    slidesPerView: 1,
+                  },
+                  767: {
+                    slidesPerView: 2,
+                  },
+                  992: {
+                    slidesPerView: 3,
+                  },
+                  1392: {
+                    slidesPerView: 3,
+                  },
+                }}
+                style={{ overflowY: 'visible', overflowX: 'clip' }}
+              >
+                {tasks.map((data: ITask) => (
+                  <SwiperSlide key={uuidv4()}>
+                    <DailyActivityCard task={data} />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </Box>
+          ) : (
+            <Box
+              sx={{
+                display: 'flex',
+                width: '100%',
+                flex: '1',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: theme.palette.powderWhite,
+              }}
+              className='Body-Lato-fw-600-fs-24'
+            >
+              No available tasks
+            </Box>
+          )}
+        </>
       )}
     </Box>
   );

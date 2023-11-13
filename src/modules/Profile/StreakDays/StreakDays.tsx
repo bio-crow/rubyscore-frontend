@@ -3,7 +3,7 @@ import { useCustomTheme } from '@/hooks/useCustomTheme';
 import SecondaryButton from '@/components/common/ui/SecondaryButton/SecondaryButton';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import CustomStepper from '@/modules/Profile/StreakDays/CustomSteper/CustomStepper';
-import { getStreakDays } from '@/core/thunk/user.thunk';
+import { claimStreakDays, getStreakDays } from '@/core/thunk/user.thunk';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { useEffect } from 'react';
 import { getStreakDaysSteps } from '@/utils/helpers';
@@ -17,6 +17,9 @@ const StreakDays = () => {
   const daySteps = getStreakDaysSteps(currentDay);
   const currentStep = daySteps.find(step => step.day > currentDay);
   const nextDay = currentStep ? currentStep.day : null;
+  const claimStreak = () => {
+    dispatch(claimStreakDays());
+  };
   useEffect(() => {
     dispatch(getStreakDays());
   }, []);
@@ -61,15 +64,14 @@ const StreakDays = () => {
             }}
             className='Body-Lato-fw-500-fs-18'
           >
-            {nextDay
-              ? `Till the next achievement: ${currentDay} of ${nextDay} days`
-              : ``}
+            {nextDay ? `Till the next achievement: ${currentDay} of ${nextDay} days` : ``}
           </Box>
         </Box>
         <SecondaryButton
           variant='contained'
           size='large'
           fullWidth={!isSm}
+          onClick={claimStreak}
           disabled={!streakDays.isClaimable}
         >
           Get all

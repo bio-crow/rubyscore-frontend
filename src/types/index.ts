@@ -80,6 +80,10 @@ export interface ILevelInfo {
   level: number;
   levelUp: number;
   score: number;
+  position: {
+    current: number;
+    max: number;
+  };
   levelStatus: number[];
 }
 export interface IProjectStatistics {

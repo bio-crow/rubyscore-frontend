@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
+  fetchClaimCurrentStreakDays,
   fetchGetCurrentStreakDays,
   fetchReferrals,
   fetchUserNftList,
@@ -20,6 +21,7 @@ import {
   setUserScoreListLoading,
 } from '@/core/state/user.state';
 import { wagmiInitUserDataFromContract } from '@/core/api/contract.achievements.api';
+import { toast } from 'react-toastify';
 export const getReferrals = createAsyncThunk('userSlice/fetchReferrals', async () => {
   return await fetchReferrals();
 });
@@ -80,5 +82,12 @@ export const getStreakDays = createAsyncThunk('userSlice/getStreakDays', async (
   const result: any = await fetchGetCurrentStreakDays();
   if (result?.data?.result) {
     dispatch(setStreakDays(result.data.result));
+  }
+});
+export const claimStreakDays = createAsyncThunk('userSlice/claimStreakDays', async (args, { dispatch }) => {
+  const result: any = await fetchClaimCurrentStreakDays();
+  if (result?.data?.result) {
+    toast(`You get ${result?.data?.result?.score} points`, { position: 'top-right' });
+    dispatch(getStreakDays());
   }
 });

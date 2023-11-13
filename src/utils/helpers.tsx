@@ -536,11 +536,11 @@ export const getStreakDaysSteps = (current: number) => {
   let days: number[];
 
   if (current > 15) {
-    streakPassed = Math.floor(current/15);
+    streakPassed = Math.floor(current / 15);
   }
 
   if (streakPassed > 0) {
-    days = [(15 * streakPassed) + 5, (15 * streakPassed) + 10, (15 * streakPassed) + 15]
+    days = [15 * streakPassed + 5, 15 * streakPassed + 10, 15 * streakPassed + 15];
   } else {
     days = [5, 10, 15];
   }

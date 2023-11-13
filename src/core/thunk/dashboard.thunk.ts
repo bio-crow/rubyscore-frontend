@@ -124,6 +124,10 @@ export const getUserLevelInfo = createAsyncThunk(
         level: data.data.result.user.profile.rank.level,
         levelUp: data.data.result.user.profile.rank.levelUp,
         score: data.data.result.user.profile.rank.score,
+        position: {
+          current: data.data.result.user.position.current,
+          max: data.data.result.user.position.max,
+        },
         levelStatus: levelStatus || [2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
       };
       dispatch(setMyLevelData(levelData));
