@@ -160,8 +160,15 @@ const ClaimNameModal: FC<Props> = ({ Trigger }) => {
               }}
               className='Body-Lato-fw-700-fs-16'
             >
-              <Box>You are going to pay for account</Box>
-              <Box>You can leave the same name or choose any other.</Box>
+              <Box
+                sx={{
+                  display: 'flex',
+                }}
+              >
+                <Box sx={{ color: theme.palette.powderWhite }}>3 - 6 symbols&nbsp;</Box>
+                <Box>- Paid name, premium design (200 points)</Box>
+              </Box>
+              <Box>Extrapolation in scoring</Box>
             </Box>
           </Box>
           <form

@@ -10,16 +10,12 @@ import ClaimNameModal from '@/components/common/ClaimNameModal/ClaimNameModal';
 
 const benefitsConfig = [
   {
-    title: 'Benefits',
-    content: `Profile upgrade gives\n exclusive bonuses`,
+    title: '200 points',
+    content: `The user receives 200 points for a paid profile`,
   },
   {
-    title: '1.2',
-    content: 'Increased\n point multiplier',
-  },
-  {
-    title: 'x5',
-    content: 'Number of\n points received',
+    title: 'Unique avatar',
+    content: 'The user receives unique\n golden avatar and nickname',
   },
 ];
 const Benefits = () => {
@@ -63,7 +59,7 @@ const Benefits = () => {
           }}
         >
           {benefitsConfig.map(item => (
-            <Box key={item.title} display='flex' flexDirection='column'>
+            <Box key={item.title} display='flex' flexDirection='column' maxWidth='230px'>
               <Box color={theme.palette.powderWhite} className='benefit-title-Lato-fw-800-fs-32'>
                 {item.title}
               </Box>

@@ -8,7 +8,7 @@ interface Props {
 }
 const AchievementCard: FC<Props> = ({ data }) => {
   const theme = useCustomTheme();
-  const [progress, setProgress] = useState(data.top);
+  const [progress, setProgress] = useState(100 - data.top);
   return (
     <Box
       sx={{

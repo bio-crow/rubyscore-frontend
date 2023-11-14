@@ -1,8 +1,5 @@
-import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
+import { GridColDef } from '@mui/x-data-grid';
 import { Box } from '@mui/system';
-import Image from 'next/image';
-import CopyIcon from '@/components/common/Icons/CopyIcon';
-import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { ReferralUserCell } from '@/utils/baseTableCell';
 export const referralBaseColumns: GridColDef[] = [
   {
@@ -42,13 +39,13 @@ export const leaderBoardBaseColumns: GridColDef[] = [
     minWidth: 250,
     renderCell: ReferralUserCell,
   },
-  {
+  /*  {
     field: 'score',
     headerName: 'Points',
     sortable: false,
     renderCell: (params: any) => <Box>{Math.round(params.row.score)}</Box>,
     width: 150,
-  },
+  },*/
   {
     field: 'level',
     headerName: 'Level',
@@ -83,13 +80,13 @@ export const leaderBoardBaseColumnsShort: GridColDef[] = [
     minWidth: 250,
     renderCell: ReferralUserCell,
   },
-  {
+  /* {
     field: 'score',
     headerName: 'Points',
     sortable: false,
     renderCell: (params: any) => <Box>{Math.round(params.row.score)}</Box>,
     width: 150,
-  },
+  },*/
   {
     field: 'level',
     headerName: 'Level',

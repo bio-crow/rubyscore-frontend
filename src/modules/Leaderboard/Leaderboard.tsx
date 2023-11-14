@@ -14,10 +14,6 @@ import { DashboardTabIndexType } from '@/types/index';
 import { setFilteredUser } from '@/core/state/leaderboard.state';
 const panelTabs: { index: DashboardTabIndexType; label: string }[] = [
   {
-    index: 'rubyscore',
-    label: 'RubyScore',
-  },
-  {
     index: 'zk_era',
     label: 'ZkSync',
   },

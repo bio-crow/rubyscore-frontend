@@ -5,7 +5,10 @@ export const fetchLogin = async (params: ILoginPayload) => {
   try {
     return await apiPublicAxios.post<ILoginResponse>('/auth/login', null, { params });
   } catch (error) {
-    //console.error(error);
+    if (error.response.status === 422) {
+      localStorage.removeItem('signature');
+      localStorage.removeItem('isAuth');
+    }
   }
 };
 export const fetchRefreshToken = async () => {

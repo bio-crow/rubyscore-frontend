@@ -174,12 +174,12 @@ const MyLevelSection: FC<Props> = ({
                 }}
                 className='Body-Lato-fw-500-fs-18'
               >
-                {`${myLevelData.score} / ${myLevelData.levelUp} Points`}
+                {`${Math.floor(myLevelData.score)} / ${myLevelData.levelUp} Points`}
               </Box>
             </Box>
           )}
         </Box>
-        {myLevelData && (
+        {myLevelData && myLevelData.position.max !== 0 && (
           <Box
             sx={{
               display: 'flex',
