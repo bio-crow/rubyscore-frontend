@@ -6,7 +6,7 @@ const config = {
   withCredentials: true,
   baseURL: typeof window !== 'undefined' ? `${process.env.NEXT_PUBLIC_BACK_END_API}` : '',
   headers: {
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': 'https://dev.rubyscore.io, https://dev-fe.rubyscore.io',
     'Access-Control-Allow-Headers': '*',
     'Access-Control-Allow-Credentials': 'true',
   },
