@@ -4,7 +4,7 @@ import { refreshToken } from '@/core/thunk/auth.thunk';
 
 const config = {
   withCredentials: true,
-  baseURL: typeof window !== 'undefined' ? `${process.env.NEXT_PUBLIC_BACK_END_API}/api` : '',
+  baseURL: typeof window !== 'undefined' ? `${process.env.NEXT_PUBLIC_BACK_END_API}` : '',
 };
 export const apiPublicAxios = axios.create(config);
 export const apiPrivateAxios = axios.create(config);
