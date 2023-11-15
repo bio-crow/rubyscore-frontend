@@ -20,6 +20,7 @@ import {
   fetchDashboardWeeks,
   fetchProjectStatistics,
   fetchUserGradation,
+  fetchUserTransactionsDates,
 } from '@/core/api/dashboard.api';
 import {
   setLoading,
@@ -31,11 +32,12 @@ import {
   setUserGradation,
   setLevelLoading,
   setMyLevelDataLoading,
+  setUserTransactionsDates,
 } from '@/core/state/dashboard.state';
 import { ChartIndexType, DashboardTabIndexType, IChartDot } from '@/types/index';
 import { setUserStatistics, setUserStatisticsLoading } from '@/core/state/leaderboard.state';
 import { searchUser } from '@/core/api/leaderboard.api';
-import { IClaimLevelPayload, IUserGradationPayload } from '@/core/types';
+import { IClaimLevelPayload, IUserGradationPayload, IUserTransactionsDatesPayload } from '@/core/types';
 import {
   fetchClaimLevelSignature,
   wagmiClaimLevel,
@@ -197,6 +199,18 @@ export const getUserGradation = createAsyncThunk(
       dispatch(setUserGradation(null));
     }
     dispatch(setUserGradationLoading(false));
+    return;
+  }
+);
+export const getUserTransactionsDates = createAsyncThunk(
+  'dashboardSlice/getUserTransactionsDates',
+  async (params: IUserTransactionsDatesPayload, { dispatch }) => {
+    const data: any = await fetchUserTransactionsDates(params);
+    if (data.data.result) {
+      dispatch(setUserTransactionsDates(data.data.result));
+    } else {
+      dispatch(setUserTransactionsDates(null));
+    }
     return;
   }
 );

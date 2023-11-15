@@ -139,3 +139,37 @@ export const dashboardPanelTabs: { index: DashboardTabIndexType; label: string }
     label: 'Scroll',
   },
 ];
+export const axisLabelMap = {
+  transactions: {
+    x: 'TX',
+    y: 'USD',
+  },
+  contracts: {
+    x: 'Contracts',
+    y: 'USD',
+  },
+  days: {
+    x: 'Days',
+    y: 'Wallets',
+  },
+  weeks: {
+    x: 'Weeks',
+    y: 'Wallets',
+  },
+  months: {
+    x: 'Months',
+    y: 'Wallets',
+  },
+  gas: {
+    x: 'Gas',
+    y: 'USD',
+  },
+  volume: {
+    x: 'Volume',
+    y: 'USD',
+  },
+  balance: {
+    x: 'Balance',
+    y: 'USD',
+  },
+};

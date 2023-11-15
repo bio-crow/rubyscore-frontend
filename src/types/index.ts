@@ -1,4 +1,5 @@
 import { ReactElement } from 'react';
+import { IUserTransactionsDatesResponse } from '@/core/types';
 
 export type ChartIndexType =
   | 'transactions'
@@ -188,4 +189,8 @@ export interface ITask {
   score: number;
   projects: DashboardTabIndexType[];
   description: string;
+}
+export interface IUserTransactionsDates {
+  first_transaction_time: number;
+  last_transaction_time: number;
 }

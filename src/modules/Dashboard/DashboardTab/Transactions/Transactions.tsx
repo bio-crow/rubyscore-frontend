@@ -9,6 +9,7 @@ import ChartTabs from '@/components/common/ui/ChartTabs/ChartTabs';
 import { ChartIndexType, DashboardTabIndexType } from '@/types/index';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { getDashboardChartData } from '@/core/thunk/dashboard.thunk';
+import { axisLabelMap } from '@/constants/index';
 const panelTabs: { index: ChartIndexType; label: string }[] = [
   {
     index: 'transactions',
@@ -48,6 +49,7 @@ interface Props {
 }
 const Transactions: FC<Props> = ({ activeTab }) => {
   const theme = useCustomTheme();
+  const isAuth = useAppSelector(state => state.authState.isAuth);
   const dispatch = useAppDispatch();
   const loading = useAppSelector(state => state.dashboardState.loading);
   const chartData = useAppSelector(state => state.dashboardState.chartData);
@@ -70,7 +72,7 @@ const Transactions: FC<Props> = ({ activeTab }) => {
         gap: '20px',
       }}
     >
-      <TransactionInfo />
+      {isAuth && <TransactionInfo activeTab={activeTab} />}
       <Box
         sx={{
           display: 'flex',
@@ -91,7 +93,7 @@ const Transactions: FC<Props> = ({ activeTab }) => {
             <Tab key={item.index} label={item.label} {...a11yProps(item.index)} value={item.index} />
           ))}
         </ChartTabs>
-        <TransactionChart data={chartData} loading={loading} />
+        <TransactionChart data={chartData} loading={loading} axisLabel={axisLabelMap[activeChartTab.index]} />
       </Box>
     </Box>
   );

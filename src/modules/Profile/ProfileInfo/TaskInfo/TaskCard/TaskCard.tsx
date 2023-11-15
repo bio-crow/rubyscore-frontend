@@ -35,9 +35,10 @@ const TaskCard: FC<Props> = ({ task, zIndex }) => {
           zIndex: zIndex,
           border: `1px solid ${theme.palette.white10}`,
           background: theme.palette.backgroundColor,
-          height: '100%',
         }}
         onClick={() => setOpen(!open)}
+        onMouseEnter={() => setOpen(true)}
+        onMouseLeave={() => setOpen(false)}
       >
         <Box display='flex' alignItems='center' gap='10px' flexWrap='wrap'>
           {task.projects.map(project => (
@@ -76,6 +77,15 @@ const TaskCard: FC<Props> = ({ task, zIndex }) => {
             WebkitBoxOrient: open ? 'unset' : 'vertical',
           }}
           className='Body-Lato-fw-700-fs-16'
+        >
+          {task.description}
+        </Box>
+        <Box
+          sx={{
+            color: theme.palette.white50,
+            display: open ? 'flex' : 'none',
+          }}
+          className='Body-Lato-fw-600-fs-14'
         >
           {task.description}
         </Box>

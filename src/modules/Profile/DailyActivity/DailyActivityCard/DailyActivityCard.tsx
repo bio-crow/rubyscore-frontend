@@ -50,6 +50,8 @@ const DailyActivityCard: FC<Props> = ({ task }) => {
           background: theme.palette.black,
         }}
         onClick={() => setOpen(!open)}
+        onMouseEnter={() => setOpen(true)}
+        onMouseLeave={() => setOpen(false)}
       >
         <Box
           sx={{
@@ -92,6 +94,15 @@ const DailyActivityCard: FC<Props> = ({ task }) => {
             WebkitBoxOrient: open ? 'unset' : 'vertical',
           }}
           className='Body-Lato-fw-600-fs-24'
+        >
+          {task.description}
+        </Box>
+        <Box
+          sx={{
+            color: theme.palette.white50,
+            display: open ? 'flex' : 'none',
+          }}
+          className='Body-Lato-fw-600-fs-14'
         >
           {task.description}
         </Box>

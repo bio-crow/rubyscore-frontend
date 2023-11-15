@@ -8,10 +8,14 @@ import { CircularProgress } from '@mui/material';
 
 interface Props {
   data: IChartDot[];
+  axisLabel: {
+    x: string;
+    y: string;
+  };
   loading: boolean;
 }
 
-const TransactionChart: FC<Props> = ({ data, loading }) => {
+const TransactionChart: FC<Props> = ({ data, loading, axisLabel }) => {
   const theme = useCustomTheme();
   const isLg = useMediaQuery(theme.breakpoints.up('lg'));
   const isMd = useMediaQuery(theme.breakpoints.up('md'));
@@ -29,10 +33,10 @@ const TransactionChart: FC<Props> = ({ data, loading }) => {
         <AreaChart
           data={data}
           margin={{
-            top: 10,
+            top: 30,
             right: 30,
             left: 0,
-            bottom: 0,
+            bottom: 30,
           }}
         >
           <defs>
@@ -50,6 +54,7 @@ const TransactionChart: FC<Props> = ({ data, loading }) => {
             </linearGradient>
           </defs>
           <XAxis
+            label={{ value: axisLabel.x, angle: 0, position: 'insideBottomRight', dx: 30, dy: -5 }}
             dataKey={isLg ? 'name' : 'shortName'}
             stroke={theme.palette.gray}
             axisLine={{ display: 'none' }}
@@ -59,10 +64,11 @@ const TransactionChart: FC<Props> = ({ data, loading }) => {
               fontFamily: 'var(--font-lato)',
               fontWeight: 500,
             }}
-            dy={10}
+            dy={25}
           />
           <YAxis
             tickCount={9}
+            label={{ value: axisLabel.y, angle: 0, position: 'insideTopRight', dx: 0, dy: -30 }}
             tickFormatter={value =>
               new Intl.NumberFormat('en-US', {
                 notation: 'compact',

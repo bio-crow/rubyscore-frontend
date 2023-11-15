@@ -6,6 +6,7 @@ import {
   ILevelInfo,
   IProjectStatistics,
   IUserGradation,
+  IUserTransactionsDates,
 } from '@/types/index';
 import { getPrivateLeaderboardData, getPublicLeaderboardData } from '@/core/thunk/leaderboard.thunk';
 import { AxiosResponse } from 'axios';
@@ -22,6 +23,7 @@ interface IDashboardState {
   loadingUserGradation: boolean;
   userGradation: IUserGradation | null;
   levelLoading: string | null;
+  userTransactionsDates: IUserTransactionsDates | null;
 }
 
 const initialState: IDashboardState = {
@@ -34,6 +36,7 @@ const initialState: IDashboardState = {
   loadingUserGradation: false,
   userGradation: null,
   levelLoading: null,
+  userTransactionsDates: null,
 };
 
 export const dashboardSlice = createSlice({
@@ -67,6 +70,9 @@ export const dashboardSlice = createSlice({
     setLevelLoading: (state, action: PayloadAction<string | null>) => {
       state.levelLoading = action.payload;
     },
+    setUserTransactionsDates: (state, action: PayloadAction<IUserTransactionsDates | null>) => {
+      state.userTransactionsDates = action.payload;
+    },
   },
 });
 
@@ -82,4 +88,5 @@ export const {
   setMyLevelData,
   setLoading,
   setLevelLoading,
+  setUserTransactionsDates,
 } = dashboardSlice.actions;

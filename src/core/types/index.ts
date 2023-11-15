@@ -5,6 +5,7 @@ import {
   IStreakDays,
   ITask,
   IUserGradation,
+  IUserTransactionsDates,
 } from '@/types/index';
 import {
   fetchDashboardBalance,
@@ -120,10 +121,12 @@ export interface IDashboardTransactionsResponse {
     tx1: number;
     tx2_5: number;
     tx6_10: number;
-    tx11_25: number;
-    tx26_50: number;
+    tx11_20: number;
+    tx21_30: number;
+    tx31_50: number;
     tx51_100: number;
-    tx101_500: number;
+    tx101_200: number;
+    tx201_500: number;
     tx501_1000: number;
   };
 }
@@ -160,6 +163,8 @@ export interface IDashboardWeeksResponse {
     weeks8_10: number;
     weeks11_15: number;
     weeks16_20: number;
+    weeks21_30: number;
+    weeks31_50: number;
   };
 }
 
@@ -198,12 +203,15 @@ export interface IDashboardVolumeResponse {
   result: {
     volume1: number;
     volume1_5: number;
-    volume6_10: number;
-    volume10_50: number;
+    volume5_10: number;
+    volume10_20: number;
+    volume20_50: number;
     volume50_100: number;
-    volume100_1000: number;
+    volume100_500: number;
+    volume500_1000: number;
     volume1000_10000: number;
     volume10000_100000: number;
+    volume100000_1000000: number;
   };
 }
 
@@ -236,14 +244,20 @@ export interface IUserGradationPayload {
   projectName: string;
   wallet: string;
 }
-
+export interface IUserTransactionsDatesPayload {
+  projectName: string;
+}
 export interface IUserGradationResponse {
   result: IUserGradation;
+}
+export interface IUserTransactionsDatesResponse {
+  result: IUserTransactionsDates;
 }
 export interface IClaimLevelSignaturePayload {
   project: string;
   nftId: string;
 }
+
 export interface IClaimLevelSignatureResponse {
   result: {
     mintParams: {
@@ -254,6 +268,7 @@ export interface IClaimLevelSignatureResponse {
     signature: string;
   };
 }
+
 export interface IClaimLevelPayload {
   project: string;
   account: any;
@@ -264,17 +279,21 @@ export interface IClaimLevelPayload {
   };
   signature: string;
 }
+
 export interface IGetCurrentStreakDays {
   result: IStreakDays;
 }
+
 export interface IClaimCurrentStreakDays {
   result: boolean;
 }
+
 export interface ITasksResponse {
   result: {
     tasks: ITask[];
   };
 }
+
 export interface ITasksCompletedResponse {
   result: {
     tasks: ITask[];

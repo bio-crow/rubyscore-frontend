@@ -23,6 +23,12 @@ const UserInfoSection: FC<Props> = ({ user, withUntilNextLevel = false }) => {
         : `${user?.profile.rank.score}`,
     },
   ];
+  if (user?.position.max) {
+    options.unshift({
+      label: 'Top',
+      value: `${Math.floor((user?.position.current / user?.position.max) * 100)}%`,
+    });
+  }
   if (user?.additional.maxStreak !== null) {
     options.push({
       label: 'Max Steak',

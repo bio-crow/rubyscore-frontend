@@ -10,6 +10,8 @@ import {
   IProjectStatisticsResponse,
   IUserGradationPayload,
   IUserGradationResponse,
+  IUserTransactionsDatesPayload,
+  IUserTransactionsDatesResponse,
 } from '@/core/types';
 import { apiPrivateAxios, apiPublicAxios } from '@/core/api/axiosConfig';
 export const fetchDashboardTransactions = async (projectName: string) => {
@@ -79,6 +81,16 @@ export const fetchUserGradation = async (params: IUserGradationPayload) => {
   const { projectName, wallet } = params;
   try {
     return await apiPublicAxios.get<IUserGradationResponse>(`/dashboard/${projectName}/${wallet}`);
+  } catch (error) {
+    //console.error(error);
+  }
+};
+export const fetchUserTransactionsDates = async (params: IUserTransactionsDatesPayload) => {
+  const { projectName } = params;
+  try {
+    return await apiPrivateAxios.get<IUserTransactionsDatesResponse>(
+      `/dashboard/${projectName}/user-transactions`
+    );
   } catch (error) {
     //console.error(error);
   }

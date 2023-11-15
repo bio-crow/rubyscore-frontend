@@ -1,10 +1,25 @@
 import { Box } from '@mui/system';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
-import { useAppSelector } from '@/core/store';
-
-const TransactionInfo = () => {
+import { useAppDispatch, useAppSelector } from '@/core/store';
+import { FC, useEffect } from 'react';
+import { getUserTransactionsDates } from '@/core/thunk/dashboard.thunk';
+import { DashboardTabIndexType } from '@/types/index';
+interface Props {
+  activeTab: { index: DashboardTabIndexType; label: string };
+}
+const TransactionInfo: FC<Props> = ({ activeTab }) => {
   const theme = useCustomTheme();
-  const projectStatistics = useAppSelector(state => state.dashboardState.projectStatistics);
+  const dispatch = useAppDispatch();
+  const isAuth = useAppSelector(state => state.authState.isAuth);
+  const userTransactionsDates = useAppSelector(state => state.dashboardState.userTransactionsDates);
+  useEffect(() => {
+    if (isAuth) {
+      const data = {
+        projectName: activeTab.index,
+      };
+      dispatch(getUserTransactionsDates(data));
+    }
+  }, [isAuth, activeTab.index]);
   return (
     <Box
       sx={{
@@ -25,8 +40,9 @@ const TransactionInfo = () => {
         }}
       >
         <Box color={theme.palette.powderWhite} className='Body-Lato-fw-700-fs-18'>
-          {projectStatistics &&
-            new Date(projectStatistics.first_transaction_time * 1000).toISOString().substring(0, 10)}
+          {userTransactionsDates
+            ? new Date(userTransactionsDates.first_transaction_time * 1000).toISOString().substring(0, 10)
+            : 'No transactions'}
         </Box>
         <Box color={theme.palette.white50} className='Body-Lato-fw-600-fs-14'>
           First transaction date
@@ -44,8 +60,9 @@ const TransactionInfo = () => {
         }}
       >
         <Box color={theme.palette.powderWhite} className='Body-Lato-fw-700-fs-18'>
-          {projectStatistics &&
-            new Date(projectStatistics.last_transaction_time * 1000).toISOString().substring(0, 10)}
+          {userTransactionsDates
+            ? new Date(userTransactionsDates.last_transaction_time * 1000).toISOString().substring(0, 10)
+            : 'No transactions'}
         </Box>
         <Box color={theme.palette.white50} className='Body-Lato-fw-600-fs-14'>
           Last transaction date

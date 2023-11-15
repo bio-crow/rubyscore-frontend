@@ -4,7 +4,7 @@ import { useCustomTheme } from '@/hooks/useCustomTheme';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import RefreshIcon from '@/components/common/Icons/RefreshIcon';
 import AchievementCard from '@/components/common/sections/AchievementsSection/AchievementCard/AchievementCard';
-import { getUserGradation } from '@/core/thunk/dashboard.thunk';
+import { getUserGradation, getUserTransactionsDates } from '@/core/thunk/dashboard.thunk';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { FC, useEffect, useState } from 'react';
 import { DashboardTabIndexType, IAchievementCard } from '@/types/index';
@@ -28,6 +28,12 @@ const AchievementsSection: FC<Props> = ({ activeTab, wallet }) => {
         wallet: `${wallet}`,
         projectName: activeTab.index,
       };
+      dispatch(getUserGradation(data));
+      dispatch(
+        getUserTransactionsDates({
+          projectName: activeTab.index,
+        })
+      );
       dispatch(getUserGradation(data));
     }
   };
