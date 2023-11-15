@@ -9,6 +9,7 @@ import { networkStaticData } from '@/constants/index';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { claimTask } from '@/core/thunk/task.thunk';
 import { useAccount } from 'wagmi';
+import CardTimer from '@/components/common/CardTimer/CardTimer';
 
 interface Props {
   task: ITask;
@@ -33,7 +34,7 @@ const DailyActivityCard: FC<Props> = ({ task }) => {
       sx={{
         position: 'relative',
         width: '100%',
-        height: '230px',
+        height: '260px',
       }}
     >
       <Box
@@ -53,6 +54,7 @@ const DailyActivityCard: FC<Props> = ({ task }) => {
         onMouseEnter={() => setOpen(true)}
         onMouseLeave={() => setOpen(false)}
       >
+        <CardTimer />
         <Box
           sx={{
             display: 'flex',
