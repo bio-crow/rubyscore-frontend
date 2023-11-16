@@ -3,6 +3,8 @@ import { FC, useState } from 'react';
 import { IAchievementCard } from '@/types/index';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import CustomLinearProgress from '@/components/common/ui/CustomLinearProgress/CustomLinearProgress';
+import InfoIcon from '@/components/common/Icons/InfoIcon';
+import CustomTooltip from '@/components/common/CustomTooltip/CustomTooltip';
 interface Props {
   data: IAchievementCard;
 }
@@ -44,7 +46,7 @@ const AchievementCard: FC<Props> = ({ data }) => {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          gap: '20px',
+          gap: '10px',
           flex: '1',
         }}
       >
@@ -52,7 +54,7 @@ const AchievementCard: FC<Props> = ({ data }) => {
           sx={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'flex-end',
+            justifyContent: 'space-between',
           }}
         >
           <Box
@@ -78,6 +80,17 @@ const AchievementCard: FC<Props> = ({ data }) => {
               TOP
             </Box>
           </Box>
+          <CustomTooltip title={<TooltipContent />}>
+            <Box
+              sx={{
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <InfoIcon fill={theme.palette.white50} />
+            </Box>
+          </CustomTooltip>
         </Box>
         <Box
           sx={{
@@ -91,3 +104,24 @@ const AchievementCard: FC<Props> = ({ data }) => {
   );
 };
 export default AchievementCard;
+
+const TooltipContent = () => {
+  const theme = useCustomTheme();
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+      }}
+    >
+      <Box className='Body-Inter-fw-700-fs-18' color={theme.palette.powderWhite}>
+        Amount on balance
+      </Box>
+      <Box className='Body-Lato-fw-600-fs-14' color={theme.palette.white50}>
+        The balance amount of the ETH coin and the main stablecoins
+      </Box>
+    </Box>
+  );
+};

@@ -14,6 +14,8 @@ import { useAccount } from 'wagmi';
 import { myLevelIcons } from '@/constants/index';
 import { setMyLevelData } from '@/core/state/dashboard.state';
 import { CircularProgress } from '@mui/material';
+import InfoIcon from '@/components/common/Icons/InfoIcon';
+import CustomTooltip from '@/components/common/CustomTooltip/CustomTooltip';
 
 const breakpointsConfig = {
   0: {
@@ -151,6 +153,17 @@ const MyLevelSection: FC<Props> = ({
             >
               {myLevelData?.level}
             </Box>
+            <CustomTooltip title={<TooltipContent />}>
+              <Box
+                sx={{
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <InfoIcon fill={theme.palette.white50} />
+              </Box>
+            </CustomTooltip>
           </Box>
           {myLevelData && (
             <Box
@@ -335,6 +348,26 @@ const NextButton: FC<btnProps> = ({ hasNext, onClick }) => {
       onClick={handleClick}
     >
       <NextIcon fill={fillColor} />
+    </Box>
+  );
+};
+const TooltipContent = () => {
+  const theme = useCustomTheme();
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+      }}
+    >
+      <Box className='Body-Inter-fw-700-fs-18' color={theme.palette.powderWhite}>
+        Amount on balance
+      </Box>
+      <Box className='Body-Lato-fw-600-fs-14' color={theme.palette.white50}>
+        The balance amount of the ETH coin and the main stablecoins
+      </Box>
     </Box>
   );
 };

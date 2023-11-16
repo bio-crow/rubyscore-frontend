@@ -51,7 +51,7 @@ const ReferralLinks = () => {
             }}
             className='Body-Lato-fw-800-fs-18'
           >
-            Points are only awarded for active users
+            10 points are awarded only for active referrals that have a minimum of 1 level
           </Box>
         </Box>
         <SecondaryButton variant='outlined' size='large' onClick={copyReferralLink}>
