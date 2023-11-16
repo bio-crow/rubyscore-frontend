@@ -16,6 +16,7 @@ import { wagmiCheckName } from '@/core/api/contract.api';
 import { claimProfile } from '@/core/thunk/user.thunk';
 import { useAccount } from 'wagmi';
 import WarningIcon from '@/components/common/Icons/WarningIcon';
+import CurrencyIcon from '@/components/common/Icons/CurrencyIcon';
 
 interface Props {
   Trigger: any;
@@ -222,8 +223,11 @@ const ClaimNameModal: FC<Props> = ({ Trigger }) => {
                 }}
                 className='Body-Lato-fw-600-fs-24'
               >
-                <Box>Price</Box>
-                <Box>{`${process.env.NEXT_PUBLIC_CHAIN_CURRENCY} ${premiumPrice}`}</Box>
+                <Box>Total</Box>
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <CurrencyIcon fill={theme.palette.powderWhite} />
+                  <Box>{premiumPrice}</Box>
+                </Box>
               </Box>
               <ThirdlyButton
                 variant='contained'

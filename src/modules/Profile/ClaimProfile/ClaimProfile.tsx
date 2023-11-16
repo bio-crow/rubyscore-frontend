@@ -106,8 +106,18 @@ const ClaimProfile = () => {
         >
           <Box>Own your identity in the digital world. Get started with a Web3 domain.</Box>
           <Box>
-            3-6 symbols - Paid name ({`${premiumPrice} ${process.env.NEXT_PUBLIC_CHAIN_CURRENCY}`}), premium
-            design (200 points); 7-20 symbols - Free name (10 points).
+            <Box color={theme.palette.powderWhite} component='span'>
+              3-6 symbols
+            </Box>{' '}
+            - Paid name{' '}
+            <Box color={theme.palette.lightGreen} component='span'>
+              ({`${premiumPrice} ${process.env.NEXT_PUBLIC_CHAIN_CURRENCY}`})
+            </Box>
+            , premium design (200 points);{' '}
+            <Box color={theme.palette.powderWhite} component='span'>
+              7-20 symbols
+            </Box>{' '}
+            - Free name (15 points).
           </Box>
         </Box>
         <ClaimProfileForm onSubmit={onSubmit} onError={onError} isLoading={claimProfileLoading} />
@@ -123,7 +133,7 @@ const ClaimProfile = () => {
             className='Body-Lato-fw-700-fs-16'
           >
             <WarningIcon fill={theme.palette.red} />
-            <Box>Invalid name</Box>
+            <Box>{`That name's already taken`}</Box>
           </Box>
         )}
       </Box>
