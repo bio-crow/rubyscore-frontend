@@ -8,7 +8,7 @@ import { Tab } from '@mui/material';
 import ChartTabs from '@/components/common/ui/ChartTabs/ChartTabs';
 import { ChartIndexType, DashboardTabIndexType } from '@/types/index';
 import { useAppDispatch, useAppSelector } from '@/core/store';
-import { getDashboardChartData } from '@/core/thunk/dashboard.thunk';
+import { getDashboardChartData, getUserTransactionsDates } from '@/core/thunk/dashboard.thunk';
 import { axisLabelMap } from '@/constants/index';
 const panelTabs: { index: ChartIndexType; label: string }[] = [
   {
@@ -49,6 +49,7 @@ interface Props {
 }
 const Transactions: FC<Props> = ({ activeTab }) => {
   const theme = useCustomTheme();
+  const userTransactionsDates = useAppSelector(state => state.dashboardState.userTransactionsDates);
   const isAuth = useAppSelector(state => state.authState.isAuth);
   const dispatch = useAppDispatch();
   const loading = useAppSelector(state => state.dashboardState.loading);
@@ -57,6 +58,10 @@ const Transactions: FC<Props> = ({ activeTab }) => {
   const [activeChartTab, setActiveChartTab] = useState<{ index: ChartIndexType; label: string }>(
     panelTabs[0]
   );
+  const showTransactionsInfo =
+    userTransactionsDates &&
+    !!userTransactionsDates.first_transaction_time &&
+    !!userTransactionsDates.last_transaction_time;
   const handleChange = (event: SyntheticEvent, newValue: ChartIndexType) => {
     const tab = panelTabs.find(item => item.index === newValue);
     tab && setActiveChartTab(tab);
@@ -64,6 +69,14 @@ const Transactions: FC<Props> = ({ activeTab }) => {
   useEffect(() => {
     dispatch(getDashboardChartData({ projectName: activeTab.index, type: activeChartTab.index }));
   }, [activeTab, activeChartTab]);
+  useEffect(() => {
+    if (isAuth) {
+      const data = {
+        projectName: activeTab.index,
+      };
+      dispatch(getUserTransactionsDates(data));
+    }
+  }, [isAuth, activeTab.index]);
   return (
     <Box
       sx={{
@@ -72,7 +85,7 @@ const Transactions: FC<Props> = ({ activeTab }) => {
         gap: '20px',
       }}
     >
-      {isAuth && <TransactionInfo activeTab={activeTab} />}
+      {isAuth && showTransactionsInfo && <TransactionInfo activeTab={activeTab} />}
       <Box
         sx={{
           display: 'flex',

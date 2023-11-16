@@ -9,17 +9,7 @@ interface Props {
 }
 const TransactionInfo: FC<Props> = ({ activeTab }) => {
   const theme = useCustomTheme();
-  const dispatch = useAppDispatch();
-  const isAuth = useAppSelector(state => state.authState.isAuth);
   const userTransactionsDates = useAppSelector(state => state.dashboardState.userTransactionsDates);
-  useEffect(() => {
-    if (isAuth) {
-      const data = {
-        projectName: activeTab.index,
-      };
-      dispatch(getUserTransactionsDates(data));
-    }
-  }, [isAuth, activeTab.index]);
   return (
     <Box
       sx={{

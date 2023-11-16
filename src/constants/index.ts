@@ -142,11 +142,11 @@ export const dashboardPanelTabs: { index: DashboardTabIndexType; label: string }
 export const axisLabelMap = {
   transactions: {
     x: 'TX',
-    y: 'USD',
+    y: 'Wallets',
   },
   contracts: {
     x: 'Contracts',
-    y: 'USD',
+    y: 'Wallets',
   },
   days: {
     x: 'Days',
@@ -161,15 +161,15 @@ export const axisLabelMap = {
     y: 'Wallets',
   },
   gas: {
-    x: 'Gas',
-    y: 'USD',
+    x: 'Spent usd',
+    y: 'Wallets',
   },
   volume: {
-    x: 'Volume',
-    y: 'USD',
+    x: 'Volume usd',
+    y: 'Wallets',
   },
   balance: {
-    x: 'Balance',
-    y: 'USD',
+    x: 'Balance usd',
+    y: 'Wallets',
   },
 };

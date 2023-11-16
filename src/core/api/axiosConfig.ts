@@ -4,12 +4,7 @@ import { refreshToken } from '@/core/thunk/auth.thunk';
 
 const config = {
   withCredentials: true,
-  baseURL: typeof window !== 'undefined' ? `${process.env.NEXT_PUBLIC_BACK_END_API}` : '',
-  headers: {
-    'Access-Control-Allow-Origin': 'https://dev.rubyscore.io, https://dev-fe.rubyscore.io',
-    'Access-Control-Allow-Headers': '*',
-    'Access-Control-Allow-Credentials': 'true',
-  },
+  baseURL: typeof window !== 'undefined' ? `${window.location.origin}/api` : '',
 };
 export const apiPublicAxios = axios.create(config);
 export const apiPrivateAxios = axios.create(config);
