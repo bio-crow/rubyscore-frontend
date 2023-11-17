@@ -80,17 +80,19 @@ const AchievementCard: FC<Props> = ({ data }) => {
               TOP
             </Box>
           </Box>
-          <CustomTooltip title={<TooltipContent />}>
-            <Box
-              sx={{
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              <InfoIcon fill={theme.palette.white50} />
-            </Box>
-          </CustomTooltip>
+          {data.ToolTip && (
+            <CustomTooltip title={data.ToolTip}>
+              <Box
+                sx={{
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <InfoIcon fill={theme.palette.white50} />
+              </Box>
+            </CustomTooltip>
+          )}
         </Box>
         <Box
           sx={{

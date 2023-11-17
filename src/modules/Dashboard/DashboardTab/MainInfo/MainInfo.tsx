@@ -9,6 +9,7 @@ import { getProjectStatistics } from '@/core/thunk/dashboard.thunk';
 import { CircularProgress } from '@mui/material';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { formatCash } from '@/utils/helpers';
+import { TooltipMainInfoTransactionVolume, TooltipMainInfoUser } from '@/utils/tooltipsContent';
 
 const MainInfo = () => {
   const projectStatistics = useAppSelector(state => state.dashboardState.projectStatistics);
@@ -16,7 +17,8 @@ const MainInfo = () => {
     ? [
         {
           value: projectStatistics.user_count.toLocaleString(),
-          description: 'Users in the network',
+          description: 'Wallets in the network',
+          ToolTip: <TooltipMainInfoUser />,
         },
         {
           value: projectStatistics.transaction_count.toLocaleString(),
@@ -28,11 +30,12 @@ const MainInfo = () => {
         },
         {
           value: projectStatistics.bridge_transaction_count.toLocaleString(),
-          description: 'Transactions through ether bridge',
+          description: 'Transactions through bridge',
         },
         {
           value: formatCash(projectStatistics.total_volume),
           description: 'Transaction volume',
+          ToolTip: <TooltipMainInfoTransactionVolume />,
         },
       ]
     : [];

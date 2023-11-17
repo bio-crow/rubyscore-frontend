@@ -1,10 +1,10 @@
 import { Box } from '@mui/system';
-import { FC } from 'react';
+import { FC, ReactElement } from 'react';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import InfoIcon from '@/components/common/Icons/InfoIcon';
 import CustomTooltip from '@/components/common/CustomTooltip/CustomTooltip';
 interface Props {
-  info: { value: string; description: string };
+  info: { value: string; description: string; ToolTip?: ReactElement };
 }
 const MainInfoCard: FC<Props> = ({ info }) => {
   const theme = useCustomTheme();
@@ -29,17 +29,19 @@ const MainInfoCard: FC<Props> = ({ info }) => {
         <Box color={theme.palette.lightGreen} className='Body-Lato-fw-800-fs-24'>
           {info.value}
         </Box>
-        <CustomTooltip title={<TooltipContent />}>
-          <Box
-            sx={{
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-            }}
-          >
-            <InfoIcon fill={theme.palette.white50} />
-          </Box>
-        </CustomTooltip>
+        {info.ToolTip && (
+          <CustomTooltip title={info.ToolTip}>
+            <Box
+              sx={{
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <InfoIcon fill={theme.palette.white50} />
+            </Box>
+          </CustomTooltip>
+        )}
       </Box>
 
       <Box color={theme.palette.white50} className='Body-Lato-fw-600-fs-14'>

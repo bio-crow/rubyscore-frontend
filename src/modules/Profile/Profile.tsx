@@ -15,6 +15,7 @@ import { useEffect, useLayoutEffect } from 'react';
 import { getReferrals, getUserNFTList } from '@/core/thunk/user.thunk';
 import { useAccount } from 'wagmi';
 import { getCompletedTasks, getTasks } from '@/core/thunk/task.thunk';
+import { TooltipMyLevelProfile1, TooltipMyLevelProfile2 } from '@/utils/tooltipsContent';
 const breakpointsConfig = {
   0: {
     slidesPerView: 1.4,
@@ -68,7 +69,12 @@ const Profile = () => {
               overflow: 'hidden',
             }}
           >
-            <MyLevelSection breakpoints={breakpointsConfig} initSlidePerPage={4.4} />
+            <MyLevelSection
+              breakpoints={breakpointsConfig}
+              initSlidePerPage={4.4}
+              ToolTip1={<TooltipMyLevelProfile1 />}
+              ToolTip2={<TooltipMyLevelProfile2 />}
+            />
             {!userName && <ClaimProfile />}
             {!premiumStatus && userName && <Benefits />}
             <ScoreSection wallet={address} />

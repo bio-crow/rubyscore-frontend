@@ -10,6 +10,7 @@ import { getProjectStatistics } from '@/core/thunk/dashboard.thunk';
 import { CircularProgress } from '@mui/material';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { useAccount } from 'wagmi';
+import { TooltipMyLevelDashboard1, TooltipMyLevelDashboard2 } from '@/utils/tooltipsContent';
 
 interface Props {
   activeTab: { index: DashboardTabIndexType; label: string };
@@ -42,7 +43,13 @@ const DashboardTab: FC<Props> = ({ activeTab }) => {
             gap: '60px',
           }}
         >
-          {isAuth && <MyLevelSection project={activeTab.index} />}
+          {isAuth && (
+            <MyLevelSection
+              project={activeTab.index}
+              ToolTip1={<TooltipMyLevelDashboard1 />}
+              ToolTip2={<TooltipMyLevelDashboard2 />}
+            />
+          )}
           <MainInfo />
           <Transactions activeTab={activeTab} />
           <AchievementsSection activeTab={activeTab} wallet={address} />

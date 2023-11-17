@@ -13,6 +13,16 @@ import {
 } from '@/core/types';
 import { IAchievementCard, IChartDot, ILevelsInfo, IUserGradation } from '@/types/index';
 import { steps } from '@motionone/easing';
+import {
+  TooltipAchievementsBalance,
+  TooltipAchievementsDays,
+  TooltipAchievementsGas,
+  TooltipAchievementsMonths,
+  TooltipAchievementsTransactionContract,
+  TooltipAchievementsTransactionVolume,
+  TooltipAchievementsWallet,
+  TooltipAchievementsWeeks,
+} from '@/utils/tooltipsContent';
 
 export const copyToClickBoard = (text: string | undefined, message: string = 'Copied to clipboard') => {
   toast(message, { position: 'bottom-center' });
@@ -435,14 +445,7 @@ export const prepareUserGradationToAchievementsCards = (data: IUserGradation): I
       value: Number.parseFloat(data['total_balance_usd'].value).toFixed(2),
       score: data['total_balance_usd'].score,
       top: data['total_balance_usd'].top,
-    },
-    {
-      key: 'volume',
-      label: <div>Transaction volume</div>,
-      currency: '$',
-      value: Number.parseFloat(data['volume'].value).toFixed(2),
-      score: data['volume'].score,
-      top: data['volume'].top,
+      ToolTip: <TooltipAchievementsBalance />,
     },
     {
       key: 'unique_contracts_count',
@@ -456,46 +459,63 @@ export const prepareUserGradationToAchievementsCards = (data: IUserGradation): I
       value: data['unique_contracts_count'].value,
       score: data['unique_contracts_count'].score,
       top: data['unique_contracts_count'].top,
-    },
-    {
-      key: 'outgoing_txs_count',
-      label: <div>Wallet transactions</div>,
-      currency: '',
-      value: data['outgoing_txs_count'].value,
-      score: data['outgoing_txs_count'].score,
-      top: data['outgoing_txs_count'].top,
+      ToolTip: <TooltipAchievementsTransactionContract />,
     },
     {
       key: 'unique_days_count',
-      label: <div>Transactions on days</div>,
+      label: <div>Transactions on different days</div>,
       currency: pluralize('day', data['unique_days_count'].score),
       value: data['unique_days_count'].value,
       score: data['unique_days_count'].score,
       top: data['unique_days_count'].top,
+      ToolTip: <TooltipAchievementsDays />,
     },
     {
       key: 'unique_weeks_count',
-      label: <div>Transactions of weeks</div>,
+      label: <div>Transactions on different weeks</div>,
       currency: pluralize('week', data['unique_weeks_count'].score),
       value: data['unique_weeks_count'].value,
       score: data['unique_weeks_count'].score,
       top: data['unique_weeks_count'].top,
+      ToolTip: <TooltipAchievementsWeeks />,
     },
     {
       key: 'unique_months_count',
-      label: <div>Transactions of months</div>,
+      label: <div>Transactions on different months</div>,
       currency: pluralize('month', data['unique_months_count'].score),
       value: data['unique_months_count'].value,
       score: data['unique_months_count'].score,
       top: data['unique_months_count'].top,
+      ToolTip: <TooltipAchievementsMonths />,
     },
     {
+      key: 'volume',
+      label: <div>Transaction volume</div>,
+      currency: '$',
+      value: Number.parseFloat(data['volume'].value).toFixed(2),
+      score: data['volume'].score,
+      top: data['volume'].top,
+      ToolTip: <TooltipAchievementsTransactionVolume />,
+    },
+
+    {
+      key: 'outgoing_txs_count',
+      label: <div>Number of transactions</div>,
+      currency: '',
+      value: data['outgoing_txs_count'].value,
+      score: data['outgoing_txs_count'].score,
+      top: data['outgoing_txs_count'].top,
+      ToolTip: <TooltipAchievementsWallet />,
+    },
+
+    {
       key: 'total_spent_gas',
-      label: <div>Gas Spended</div>,
+      label: <div>Gas spent</div>,
       currency: '$',
       value: Number.parseFloat(data['total_spent_gas'].value).toFixed(2),
       score: data['total_spent_gas'].score,
       top: data['total_spent_gas'].top,
+      ToolTip: <TooltipAchievementsGas />,
     },
   ];
   return result;

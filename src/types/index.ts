@@ -41,6 +41,7 @@ export interface IAchievementCard {
   top: number;
   currency: string;
   label: ReactElement;
+  ToolTip?: ReactElement;
 }
 export interface ILeaderboardData {
   wallet: string;

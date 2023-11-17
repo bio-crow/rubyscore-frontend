@@ -13,23 +13,23 @@ import { axisLabelMap } from '@/constants/index';
 const panelTabs: { index: ChartIndexType; label: string }[] = [
   {
     index: 'transactions',
-    label: 'On-chain transactions',
+    label: 'Transactions',
   },
   {
     index: 'contracts',
-    label: 'On-chain contracts',
+    label: 'Unique contracts',
   },
   {
     index: 'days',
-    label: 'Days on chain',
+    label: 'Unique days',
   },
   {
     index: 'weeks',
-    label: 'Weeks on chain',
+    label: 'Unique weeks',
   },
   {
     index: 'months',
-    label: 'Month on chain',
+    label: 'Unique months',
   },
   {
     index: 'gas',
@@ -37,11 +37,11 @@ const panelTabs: { index: ChartIndexType; label: string }[] = [
   },
   {
     index: 'volume',
-    label: 'On-chain volume',
+    label: 'Volume',
   },
   {
     index: 'balance',
-    label: 'Balance',
+    label: 'Amount on balance',
   },
 ];
 interface Props {
