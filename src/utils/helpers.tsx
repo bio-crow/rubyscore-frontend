@@ -609,3 +609,15 @@ export const getStreakDaysSteps = (current: number) => {
     };
   });
 };
+export const mapMayLevelDataFromResult = (result: any, levelStatus: any) => {
+  return {
+    level: result.user.profile.rank.level,
+    levelUp: result.user.profile.rank.levelUp,
+    score: result.user.profile.rank.score,
+    position: {
+      current: result.user.position.current,
+      max: result.user.position.max,
+    },
+    levelStatus: levelStatus || [2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+  };
+};

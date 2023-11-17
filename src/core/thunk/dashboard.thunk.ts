@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
+  mapMayLevelDataFromResult,
   transformApiBalanceResponse,
   transformApiContractsResponse,
   transformApiDaysResponse,
@@ -122,21 +123,32 @@ export const getUserLevelInfo = createAsyncThunk(
     const data: any = await searchUser(params);
     const levelStatus: any = await wagmiLevels(params);
     if (data.data.result) {
-      const levelData = {
-        level: data.data.result.user.profile.rank.level,
-        levelUp: data.data.result.user.profile.rank.levelUp,
-        score: data.data.result.user.profile.rank.score,
-        position: {
-          current: data.data.result.user.position.current,
-          max: data.data.result.user.position.max,
-        },
-        levelStatus: levelStatus || [2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-      };
+      const levelData = mapMayLevelDataFromResult(data.data.result, levelStatus);
       dispatch(setMyLevelData(levelData));
     } else {
       dispatch(setMyLevelData(null));
     }
     dispatch(setMyLevelDataLoading(false));
+    return;
+  }
+);
+export const updateUserLevelInfo = createAsyncThunk(
+  'dashboardSlice/updateUserLevelInfo',
+  async (
+    params: {
+      wallet: string;
+      project: string;
+    },
+    { dispatch }
+  ) => {
+    const data: any = await searchUser(params);
+    const levelStatus: any = await wagmiLevels(params);
+    if (data.data.result) {
+      const levelData = mapMayLevelDataFromResult(data.data.result, levelStatus);
+      dispatch(setMyLevelData(levelData));
+    } else {
+      dispatch(setMyLevelData(null));
+    }
     return;
   }
 );

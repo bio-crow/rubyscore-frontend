@@ -2,6 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchCompletedTasks, fetchTasks, loadClaimTask } from '@/core/api/task.api';
 import { setClaimingTaskId, setCompletedTasks, setTasks, setTasksLoading } from '@/core/state/task.state';
 import { toast } from 'react-toastify';
+import { updateUserLevelInfo } from '@/core/thunk/dashboard.thunk';
+import { loadUserProjectInfo } from '@/core/thunk/user.thunk';
 
 export const getTasks = createAsyncThunk('taskSlice/getTasks', async (args, { dispatch }) => {
   dispatch(setTasksLoading(true));
@@ -28,7 +30,7 @@ export const getCompletedTasks = createAsyncThunk(
 );
 export const claimTask = createAsyncThunk(
   'taskSlice/claimTask',
-  async (params: { taskId: number; wallet: any }, { dispatch }) => {
+  async (params: { taskId: number; wallet: any; project: string }, { dispatch }) => {
     dispatch(setClaimingTaskId(params.taskId));
     const data = await loadClaimTask(params.taskId);
     if (data?.data?.result) {
@@ -37,6 +39,13 @@ export const claimTask = createAsyncThunk(
       if (res?.data?.result) {
         dispatch(setTasks(res?.data?.result.tasks));
       }
+      dispatch(
+        updateUserLevelInfo({
+          wallet: params.wallet,
+          project: params.project,
+        })
+      );
+      dispatch(loadUserProjectInfo(params.wallet));
       toast('Task completed successfully', { position: 'top-right' });
     } else {
       toast('The condition is not met to complete the task', { position: 'top-right' });

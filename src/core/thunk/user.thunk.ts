@@ -17,11 +17,14 @@ import {
   setUserLevelsInfo,
   setUserName,
   setUserNFTList,
+  setUserProjectInfo,
   setUserScoreList,
   setUserScoreListLoading,
 } from '@/core/state/user.state';
 import { wagmiInitUserDataFromContract } from '@/core/api/contract.achievements.api';
 import { toast } from 'react-toastify';
+import { searchUser } from '@/core/api/leaderboard.api';
+
 export const getReferrals = createAsyncThunk('userSlice/fetchReferrals', async () => {
   return await fetchReferrals();
 });
@@ -68,6 +71,18 @@ export const initUserDataFromContract = createAsyncThunk(
     dispatch(setUserLevelsInfo(result.levelsInfo));
     dispatch(setPremiumStatus(result.userStatus));
     dispatch(setPremiumPrice(formatEther(result.premiumPrice)));
+  }
+);
+export const loadUserProjectInfo = createAsyncThunk(
+  'userSlice/loadUserProjectInfo',
+  async (wallet: any, { dispatch }) => {
+    const result: any = await searchUser({
+      project: 'rubyscore',
+      wallet: wallet,
+    });
+    if (result?.data?.result) {
+      dispatch(setUserProjectInfo(result.data.result.user));
+    }
   }
 );
 export const activeUserDataFromContract = createAsyncThunk(

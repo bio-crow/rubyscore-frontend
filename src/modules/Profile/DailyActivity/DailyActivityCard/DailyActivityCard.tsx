@@ -26,6 +26,7 @@ const DailyActivityCard: FC<Props> = ({ task }) => {
     const params = {
       taskId: task.id,
       wallet: address,
+      project: 'rubyscore',
     };
     dispatch(claimTask(params));
   };
