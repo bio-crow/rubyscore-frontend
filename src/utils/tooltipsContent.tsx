@@ -25,15 +25,13 @@ export const TooltipMyLevelProfile2 = () => {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
-        textAlign: 'left!important',
       }}
     >
       <Box className='Body-Lato-fw-600-fs-14' color={theme.palette.white50}>
         Time for points update: every 2 minutes Points can increase through various activities:
       </Box>
       <Box className='Body-Lato-fw-600-fs-14' color={theme.palette.white50}>
-        <ul style={{ padding: '0!important', listStyle: 'inside' }}>
+        <ul style={{ padding: '0 !important', listStyle: 'inside' }}>
           <li>By completing daily tasks</li>
           <li>By purchasing a free and gold profile</li>
           <li>By completing daily and receiving additional points</li>
@@ -67,15 +65,13 @@ export const TooltipMyLevelDashboard2 = () => {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
-        textAlign: 'left!important',
       }}
     >
       <Box className='Body-Lato-fw-600-fs-14' color={theme.palette.white50}>
         Time for points update: every 2 minutes Points can increase through various activities:
       </Box>
       <Box className='Body-Lato-fw-600-fs-14' color={theme.palette.white50}>
-        <ul style={{ padding: '0!important', listStyle: 'inside' }}>
+        <ul style={{ padding: '0 !important', listStyle: 'inside' }}>
           <li>Amount on balance</li>
           <li>Transactions with unique contracts</li>
           <li>Transactions on different days</li>
