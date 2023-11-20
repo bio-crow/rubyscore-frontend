@@ -30,7 +30,7 @@ const MainInfo = () => {
         },
         {
           value: projectStatistics.bridge_transaction_count.toLocaleString(),
-          description: 'Transactions through bridge',
+          description: 'Transactions through eth bridge',
         },
         {
           value: formatCash(projectStatistics.total_volume),
