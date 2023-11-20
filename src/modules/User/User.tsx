@@ -50,11 +50,13 @@ const User = () => {
   };
   useLayoutEffect(() => {
     if (params.wallet) {
-      const data = {
-        project: 'rubyscore',
-        wallet: params.wallet,
-      };
-      dispatch(getUserStatistics(data));
+      dispatch(
+        getUserStatistics({
+          project: activeProject.index,
+          wallet: `${params.wallet}`,
+          withLoad: true,
+        })
+      );
       dispatch(getUserNFTList(params.wallet));
       dispatch(activeUserDataFromContract(params.wallet));
       dispatch(getCompletedTasks(params.wallet));
@@ -68,11 +70,19 @@ const User = () => {
     };
   }, []);
   useLayoutEffect(() => {
-    const data = {
-      wallet: `${params.wallet}`,
-      projectName: activeProject.index,
-    };
-    dispatch(getUserGradation(data));
+    dispatch(
+      getUserGradation({
+        wallet: `${params.wallet}`,
+        projectName: activeProject.index,
+      })
+    );
+    dispatch(
+      getUserStatistics({
+        project: activeProject.index,
+        wallet: `${params.wallet}`,
+        withLoad: false,
+      })
+    );
   }, [params.wallet, activeProject.index]);
   return (
     <Layout>

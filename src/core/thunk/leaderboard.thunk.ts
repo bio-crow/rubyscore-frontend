@@ -38,10 +38,11 @@ export const getUserStatistics = createAsyncThunk(
     params: {
       wallet: string;
       project: string;
+      withLoad: boolean;
     },
     { dispatch }
   ) => {
-    dispatch(setUserStatisticsLoading(true));
+    params.withLoad && dispatch(setUserStatisticsLoading(true));
     dispatch(setUserNotFound(false));
     const data: any = await searchUser(params);
     if (data?.data?.result) {
@@ -50,7 +51,7 @@ export const getUserStatistics = createAsyncThunk(
       dispatch(setUserStatistics(null));
       dispatch(setUserNotFound(true));
     }
-    dispatch(setUserStatisticsLoading(false));
+    params.withLoad && dispatch(setUserStatisticsLoading(false));
     return;
   }
 );
