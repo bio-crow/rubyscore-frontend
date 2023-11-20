@@ -18,10 +18,11 @@ import { loadUserProjectInfo } from '@/core/thunk/user.thunk';
 
 interface Props {
   wallet: any;
+  onRefresh?: Function;
   activeTab: { index: DashboardTabIndexType; label: string };
 }
 
-const AchievementsSection: FC<Props> = ({ activeTab, wallet }) => {
+const AchievementsSection: FC<Props> = ({ activeTab, wallet, onRefresh }) => {
   const dispatch = useAppDispatch();
   const userGradation = useAppSelector(state => state.dashboardState.userGradation);
   const loadingUserGradation = useAppSelector(state => state.dashboardState.loadingUserGradation);
@@ -34,19 +35,7 @@ const AchievementsSection: FC<Props> = ({ activeTab, wallet }) => {
         projectName: activeTab.index,
       };
       dispatch(getUserGradation(data));
-      dispatch(loadUserProjectInfo(wallet));
-      dispatch(
-        getUserTransactionsDates({
-          projectName: activeTab.index,
-        })
-      );
-      dispatch(
-        updateUserLevelInfo({
-          wallet: wallet,
-          project: activeTab.index,
-        })
-      );
-      dispatch(getUserGradation(data));
+      onRefresh && onRefresh();
     }
   };
   return (

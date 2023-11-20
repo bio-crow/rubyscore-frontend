@@ -6,11 +6,16 @@ import AchievementsSection from '@/components/common/sections/AchievementsSectio
 import Transactions from '@/modules/Dashboard/DashboardTab/Transactions/Transactions';
 import { DashboardTabIndexType } from '@/types/index';
 import { useAppDispatch, useAppSelector } from '@/core/store';
-import { getProjectStatistics } from '@/core/thunk/dashboard.thunk';
+import {
+  getProjectStatistics,
+  getUserTransactionsDates,
+  updateUserLevelInfo,
+} from '@/core/thunk/dashboard.thunk';
 import { CircularProgress } from '@mui/material';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { useAccount } from 'wagmi';
 import { TooltipMyLevelDashboard1, TooltipMyLevelDashboard2 } from '@/utils/tooltipsContent';
+import { loadUserProjectInfo } from '@/core/thunk/user.thunk';
 
 interface Props {
   activeTab: { index: DashboardTabIndexType; label: string };
@@ -25,6 +30,20 @@ const DashboardTab: FC<Props> = ({ activeTab }) => {
   useEffect(() => {
     dispatch(getProjectStatistics(activeTab.index));
   }, [activeTab.index]);
+  const onRefresh = () => {
+    dispatch(loadUserProjectInfo(`${address}`));
+    dispatch(
+      getUserTransactionsDates({
+        projectName: activeTab.index,
+      })
+    );
+    dispatch(
+      updateUserLevelInfo({
+        wallet: `${address}`,
+        project: activeTab.index,
+      })
+    );
+  };
   return (
     <>
       {loadingProjectStatistics ? (
@@ -52,7 +71,7 @@ const DashboardTab: FC<Props> = ({ activeTab }) => {
           )}
           <MainInfo />
           <Transactions activeTab={activeTab} />
-          <AchievementsSection activeTab={activeTab} wallet={address} />
+          <AchievementsSection activeTab={activeTab} wallet={address} onRefresh={onRefresh} />
         </Box>
       )}
     </>

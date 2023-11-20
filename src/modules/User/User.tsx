@@ -9,9 +9,18 @@ import { useAppDispatch, useAppSelector } from '@/core/store';
 import { setUserStatistics } from '@/core/state/leaderboard.state';
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
-import { activeUserDataFromContract, getUserNFTList } from '@/core/thunk/user.thunk';
+import {
+  activeUserDataFromContract,
+  getUserNFTList,
+  getUserScoreList,
+  loadUserProjectInfo,
+} from '@/core/thunk/user.thunk';
 import AchievementsSection from '@/components/common/sections/AchievementsSection/AchievementsSection';
-import { getUserGradation } from '@/core/thunk/dashboard.thunk';
+import {
+  getUserGradation,
+  getUserTransactionsDates,
+  updateUserLevelInfo,
+} from '@/core/thunk/dashboard.thunk';
 import { DashboardTabIndexType } from '@/types/index';
 import { dashboardPanelTabs } from '@/constants/index';
 import { setActiveUserLevelsInfo } from '@/core/state/user.state';
@@ -84,6 +93,18 @@ const User = () => {
       })
     );
   }, [params.wallet, activeProject.index]);
+  const onRefresh = () => {
+    dispatch(
+      getUserStatistics({
+        project: activeProject.index,
+        wallet: `${params.wallet}`,
+        withLoad: false,
+      })
+    );
+    dispatch(getCompletedTasks(params.wallet));
+    dispatch(getUserNFTList(params.wallet));
+    dispatch(getUserScoreList(params.wallet));
+  };
   return (
     <Layout>
       {userStatisticsLoading ? (
@@ -128,7 +149,7 @@ const User = () => {
                 activeTab={activeProject}
                 onSelect={changeTab}
               />
-              <AchievementsSection activeTab={activeProject} wallet={params.wallet} />
+              <AchievementsSection activeTab={activeProject} wallet={params.wallet} onRefresh={onRefresh} />
               {userStatistics && <UserStatistics />}
             </Box>
           )}
