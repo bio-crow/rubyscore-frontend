@@ -19,8 +19,8 @@ const UserInfoSection: FC<Props> = ({ user, withUntilNextLevel = false }) => {
     {
       label: withUntilNextLevel ? 'Points until next level' : 'Points',
       value: withUntilNextLevel
-        ? `${user?.profile.rank.score} of ${user?.profile.rank.levelUp}`
-        : `${user?.profile.rank.score}`,
+        ? `${Math.floor(user?.profile.rank.score || 0)} of ${user?.profile.rank.levelUp}`
+        : `${Math.floor(user?.profile.rank.score || 0)}`,
     },
   ];
   if (user?.position.max) {
