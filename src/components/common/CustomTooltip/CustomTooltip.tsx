@@ -29,7 +29,7 @@ const CustomTooltip: FC<Props> = ({ children, title }) => {
     },
   };
   return (
-    <Tooltip title={title} placement='top' arrow PopperProps={{ sx: tooltipTop }}>
+    <Tooltip title={title} placement='top' arrow PopperProps={{ sx: tooltipTop }} open={true}>
       {children}
     </Tooltip>
   );
