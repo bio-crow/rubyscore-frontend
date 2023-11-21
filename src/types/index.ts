@@ -22,6 +22,7 @@ export interface ILevelCard {
   lvl: number;
   icon: string;
   isAvailable: boolean;
+  isPefWaiting: boolean;
   isClaimed: boolean;
   isError: boolean;
 }

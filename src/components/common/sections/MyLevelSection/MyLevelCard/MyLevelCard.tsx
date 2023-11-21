@@ -8,6 +8,8 @@ import PrimaryButton from '@/components/common/ui/PrimaryButton/PrimaryButton';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { claimLevel } from '@/core/thunk/dashboard.thunk';
 import { useAccount } from 'wagmi';
+import { TooltipMyLevelCard } from '@/utils/tooltipsContent';
+import CustomTooltip from '@/components/common/CustomTooltip/CustomTooltip';
 
 interface Props {
   data: ILevelCard;
@@ -27,6 +29,15 @@ const MyLevelCard: FC<Props> = ({ data, project }) => {
     };
     dispatch(claimLevel(params));
   };
+  const waitingPrefStyle = {
+    color: `${theme.palette.powderWhite} !important`,
+    cursor: 'pointer !important',
+  };
+  const claimedStyle = {
+    background: `${theme.palette.lightGreen} !important`,
+  };
+  const style =
+    (!data.isAvailable && data.isPefWaiting && waitingPrefStyle) || (data.isClaimed && claimedStyle) || {};
   return (
     <Box
       sx={{
@@ -60,21 +71,26 @@ const MyLevelCard: FC<Props> = ({ data, project }) => {
         <Box color={theme.palette.powderWhite} className='Body-Lato-fw-700-fs-16' textAlign='center'>
           {`${data.lvl} Lvl`}
         </Box>
-        <PrimaryButton
-          loading={levelLoading === data.lvl.toString()}
-          variant='contained'
-          size='small'
-          disabled={!data.isAvailable || data.isClaimed || data.isError}
-          onClick={claimCurrentLevel}
-        >
-          {data.isError ? (
-            'Net err'
-          ) : !data.isClaimed ? (
-            'Claim'
-          ) : (
-            <Image src='/asserts/claimedIcon.svg' alt='icon' width={16} height={16} />
-          )}
-        </PrimaryButton>
+        <CustomTooltip title={!data.isAvailable && data.isPefWaiting ? <TooltipMyLevelCard /> : ''}>
+          <Box>
+            <PrimaryButton
+              loading={levelLoading === data.lvl.toString()}
+              variant='contained'
+              size='small'
+              sx={style}
+              disabled={!data.isAvailable || data.isClaimed || data.isError || !data.isPefWaiting}
+              onClick={claimCurrentLevel}
+            >
+              {data.isError ? (
+                'Net err'
+              ) : !data.isClaimed ? (
+                'Claim'
+              ) : (
+                <Image src='/asserts/claimedIcon.svg' alt='icon' width={16} height={16} />
+              )}
+            </PrimaryButton>
+          </Box>
+        </CustomTooltip>
       </Box>
     </Box>
   );

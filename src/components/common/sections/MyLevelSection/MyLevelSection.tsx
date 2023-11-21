@@ -102,7 +102,8 @@ const MyLevelSection: FC<Props> = ({
           icon: myLevelIcons[project][index],
           lvl: index + 1,
           isClaimed: myLevelData.levelStatus[index] === 1,
-          isAvailable: index + 1 <= myLevelData.level,
+          isPefWaiting: index + 1 <= myLevelData.level && myLevelData.levelStatus[index] !== 1,
+          isAvailable: index <= myLevelData.levelStatus.findIndex(item => item === 0),
           isError: myLevelData.levelStatus[index] === 2,
         };
       })

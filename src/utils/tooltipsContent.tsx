@@ -257,3 +257,22 @@ export const TooltipMainInfoTransactionVolume = () => {
     </Box>
   );
 };
+export const TooltipMyLevelCard = () => {
+  const theme = useCustomTheme();
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+      }}
+    >
+      <Box className='Body-Lato-fw-700-fs-16' color={theme.palette.powderWhite}>
+        NFT is available, but start
+        <br />
+        by claimed the previous ones
+      </Box>
+    </Box>
+  );
+};
