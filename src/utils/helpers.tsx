@@ -29,11 +29,20 @@ export const copyToClickBoard = (text: string | undefined, message: string = 'Co
   text && copy(text);
 };
 export const formatCash = (n: any) => {
-  if (n < 1e3) return '$' + n;
+  if (n < 1e3) return '$' + (n / 1).toFixed(2);
   if (n >= 1e3 && n < 1e6) return '$' + (n / 1e3).toFixed(2) + ' k';
   if (n >= 1e6 && n < 1e9) return '$' + (n / 1e6).toFixed(2) + ' m';
   if (n >= 1e9 && n < 1e12) return '$' + (n / 1e9).toFixed(2) + ' b';
   if (n >= 1e12) return '$' + (n / 1e12).toFixed(2) + ' t';
+  return '';
+};
+export const formatCash2 = (n: any) => {
+  if (n < 1e3) return '$' + (n / 1).toFixed(3);
+  if (n >= 1e3 && n < 1e6) return '$' + (n / 1e3).toFixed(3) + ' K';
+  if (n >= 1e6 && n < 1e9) return '$' + (n / 1e6).toFixed(3) + ' M';
+  if (n >= 1e9 && n < 1e12) return '$' + (n / 1e9).toFixed(3) + ' B';
+  if (n >= 1e12) return '$' + (n / 1e12).toFixed(3) + ' T';
+  return '';
 };
 export const transformApiTransactionResponse = (data: IDashboardTransactionsResponse): IChartDot[] => {
   const result: IChartDot[] = [
@@ -414,7 +423,7 @@ export const transformApiBalanceResponse = (data: IDashboardBalanceResponse): IC
       uv: data.result.balance10_50,
     },
     {
-      name: '50<B100',
+      name: '50<100',
       shortName: '50<100',
       uv: data.result.balance50_100,
     },
@@ -441,8 +450,8 @@ export const prepareUserGradationToAchievementsCards = (data: IUserGradation): I
     {
       key: 'total_balance_usd',
       label: <div>Amount on balance</div>,
-      currency: '$',
-      value: Number.parseFloat(data['total_balance_usd'].value).toFixed(2),
+      currency: '',
+      value: formatCash2(data['total_balance_usd'].value),
       score: data['total_balance_usd'].score,
       top: data['total_balance_usd'].top,
       ToolTip: <TooltipAchievementsBalance />,
@@ -463,7 +472,11 @@ export const prepareUserGradationToAchievementsCards = (data: IUserGradation): I
     },
     {
       key: 'unique_days_count',
-      label: <div>Transactions on different days</div>,
+      label: (
+        <div>
+          Transactions on different <br /> days
+        </div>
+      ),
       currency: pluralize('day', data['unique_days_count'].score),
       value: data['unique_days_count'].value,
       score: data['unique_days_count'].score,
@@ -472,7 +485,11 @@ export const prepareUserGradationToAchievementsCards = (data: IUserGradation): I
     },
     {
       key: 'unique_weeks_count',
-      label: <div>Transactions on different weeks</div>,
+      label: (
+        <div>
+          Transactions on different <br /> weeks
+        </div>
+      ),
       currency: pluralize('week', data['unique_weeks_count'].score),
       value: data['unique_weeks_count'].value,
       score: data['unique_weeks_count'].score,
@@ -481,7 +498,11 @@ export const prepareUserGradationToAchievementsCards = (data: IUserGradation): I
     },
     {
       key: 'unique_months_count',
-      label: <div>Transactions on different months</div>,
+      label: (
+        <div>
+          Transactions on different <br /> months
+        </div>
+      ),
       currency: pluralize('month', data['unique_months_count'].score),
       value: data['unique_months_count'].value,
       score: data['unique_months_count'].score,
@@ -491,8 +512,8 @@ export const prepareUserGradationToAchievementsCards = (data: IUserGradation): I
     {
       key: 'volume',
       label: <div>Transaction volume</div>,
-      currency: '$',
-      value: Number.parseFloat(data['volume'].value).toFixed(2),
+      currency: '',
+      value: formatCash2(data['volume'].value),
       score: data['volume'].score,
       top: data['volume'].top,
       ToolTip: <TooltipAchievementsTransactionVolume />,
@@ -511,8 +532,8 @@ export const prepareUserGradationToAchievementsCards = (data: IUserGradation): I
     {
       key: 'total_spent_gas',
       label: <div>Gas spent</div>,
-      currency: '$',
-      value: Number.parseFloat(data['total_spent_gas'].value).toFixed(2),
+      currency: '',
+      value: formatCash2(data['total_spent_gas'].value),
       score: data['total_spent_gas'].score,
       top: data['total_spent_gas'].top,
       ToolTip: <TooltipAchievementsGas />,

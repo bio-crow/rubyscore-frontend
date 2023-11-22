@@ -28,7 +28,7 @@ export const TooltipMyLevelProfile2 = () => {
       }}
     >
       <Box className='Body-Lato-fw-600-fs-14' color={theme.palette.white50}>
-        Time for points update: every 2 minutes Points can increase through various activities:
+        Points can increase through various activities:
       </Box>
       <Box className='Body-Lato-fw-600-fs-14' color={theme.palette.white50}>
         <ul style={{ padding: 0, listStyle: 'inside' }}>
@@ -68,7 +68,7 @@ export const TooltipMyLevelDashboard2 = () => {
       }}
     >
       <Box className='Body-Lato-fw-600-fs-14' color={theme.palette.white50}>
-        Time for points update: every 2 minutes Points can increase through various activities:
+        Points can increase through various activities:
       </Box>
       <Box className='Body-Lato-fw-600-fs-14' color={theme.palette.white50}>
         <ul style={{ padding: 0, listStyle: 'inside' }}>
@@ -272,6 +272,57 @@ export const TooltipMyLevelCard = () => {
         NFT is available, but start
         <br />
         by claimed the previous ones
+      </Box>
+    </Box>
+  );
+};
+export const TooltipMyReferral = () => {
+  const theme = useCustomTheme();
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+      }}
+    >
+      <Box className='Body-Lato-fw-600-fs-14' color={theme.palette.white50}>
+        Points for active referrals upgrade at 00:00 UTC
+      </Box>
+    </Box>
+  );
+};
+export const TooltipStreakDays = () => {
+  const theme = useCustomTheme();
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+      }}
+    >
+      <Box className='Body-Lato-fw-600-fs-14' color={theme.palette.white50}>
+        Streak days are counted at 00:00 UTC
+      </Box>
+    </Box>
+  );
+};
+export const TooltipCurrentRank = () => {
+  const theme = useCustomTheme();
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+      }}
+    >
+      <Box className='Body-Lato-fw-600-fs-14' color={theme.palette.white50}>
+        Current rank updates once an hour
       </Box>
     </Box>
   );

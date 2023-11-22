@@ -16,6 +16,7 @@ import { setMyLevelData } from '@/core/state/dashboard.state';
 import { CircularProgress } from '@mui/material';
 import InfoIcon from '@/components/common/Icons/InfoIcon';
 import CustomTooltip from '@/components/common/CustomTooltip/CustomTooltip';
+import { TooltipCurrentRank } from '@/utils/tooltipsContent';
 
 const breakpointsConfig = {
   0: {
@@ -212,7 +213,7 @@ const MyLevelSection: FC<Props> = ({
             </Box>
           )}
         </Box>
-        {myLevelData && myLevelData.position.max !== 0 && (
+        {/*  {myLevelData && myLevelData.position.max !== 0 && (
           <Box
             sx={{
               display: 'flex',
@@ -221,6 +222,7 @@ const MyLevelSection: FC<Props> = ({
               gap: '16px',
             }}
           >
+
             <Box
               sx={{
                 display: 'flex',
@@ -230,8 +232,25 @@ const MyLevelSection: FC<Props> = ({
                 alignItems: { xs: 'unset', md: 'flex-end' },
               }}
             >
-              <Box color={theme.palette.powderWhite} className='Body-Inter-fw-700-fs-16'>
-                Current Rank
+              <Box sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '5px'
+              }}>
+                <CustomTooltip title={<TooltipCurrentRank/>}>
+                  <Box
+                    sx={{
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <InfoIcon fill={theme.palette.white50} />
+                  </Box>
+                </CustomTooltip>
+                <Box color={theme.palette.powderWhite} className='Body-Inter-fw-700-fs-16'>
+                  Current Rank
+                </Box>
               </Box>
               <Box
                 sx={{
@@ -263,7 +282,7 @@ const MyLevelSection: FC<Props> = ({
               </Box>
             </Box>
           </Box>
-        )}
+        )} */}
       </Box>
       {myLevelDataLoading ? (
         <Box display='flex' width='100%' height='100%' alignItems='center' justifyContent='center'>

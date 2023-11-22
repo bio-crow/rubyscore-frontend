@@ -141,7 +141,7 @@ const User = () => {
                 padding: { xs: '0px 15px 0px 15px', sm: '0px 30px 0px 30px', xl: 0 },
               }}
             >
-              {userStatistics && <UserInfoSection user={userStatistics} withUntilNextLevel />}
+              {userStatistics && <UserInfoSection user={userStatistics} />}
               <ScoreSection
                 bpConfig={breakpointsConfig}
                 wallet={params.wallet}

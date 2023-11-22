@@ -32,7 +32,7 @@ const AchievementCard: FC<Props> = ({ data }) => {
           borderRadius: '10px',
           border: `1px solid ${theme.palette.white10}`,
           background: theme.palette.backgroundColor,
-          minWidth: '190px',
+          minWidth: '210px',
         }}
       >
         <Box color={theme.palette.lightGreen} className='H1-Lato-fw-700-fs-32'>
@@ -70,7 +70,7 @@ const AchievementCard: FC<Props> = ({ data }) => {
                 color: theme.palette.lightGreen,
               }}
             >
-              {data.top}%
+              {data.top.toFixed(3)}%
             </Box>
             <Box
               sx={{

@@ -6,6 +6,9 @@ import ReferralTable from '@/modules/Profile/ReferralLinks/ReferralTable/Referra
 import { useAppSelector } from '@/core/store';
 import { copyToClickBoard } from '@/utils/helpers';
 import { appRoutes } from '@/constants/routes';
+import InfoIcon from '@/components/common/Icons/InfoIcon';
+import CustomTooltip from '@/components/common/CustomTooltip/CustomTooltip';
+import { TooltipMyReferral } from '@/utils/tooltipsContent';
 
 const ReferralLinks = () => {
   const theme = useCustomTheme();
@@ -39,11 +42,30 @@ const ReferralLinks = () => {
         >
           <Box
             sx={{
-              color: theme.palette.powderWhite,
+              display: 'flex',
+              alignItems: 'center',
+              gap: '5px',
             }}
-            className='H1-Lato-fw-700-fs-32'
           >
-            Referral links
+            <Box
+              sx={{
+                color: theme.palette.powderWhite,
+              }}
+              className='H1-Lato-fw-700-fs-32'
+            >
+              Referral links
+            </Box>
+            <CustomTooltip title={<TooltipMyReferral />}>
+              <Box
+                sx={{
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <InfoIcon fill={theme.palette.white50} />
+              </Box>
+            </CustomTooltip>
           </Box>
           <Box
             sx={{

@@ -146,10 +146,14 @@ const Section1 = () => {
             <CustomSocialLink icon='/asserts/social/mail.svg' url='mailto:Partnerships@rubyscore.io' />
           </Box>
         </Box>
-        {/*
-        <PrimaryButton variant='contained' size='large' fullWidth>
-          Get Updates
-        </PrimaryButton> */}
+        <PrimaryButton
+          variant='contained'
+          size='large'
+          fullWidth
+          href='https://docs.google.com/forms/d/1ft1YlAy1mXMMIuItCwEqDf9yft1lDUoTRcT6pn9UU5w'
+        >
+          Give feedback
+        </PrimaryButton>
       </Box>
     </Box>
   );

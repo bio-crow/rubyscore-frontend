@@ -7,6 +7,9 @@ import { claimStreakDays, getStreakDays } from '@/core/thunk/user.thunk';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { useEffect } from 'react';
 import { getStreakDaysSteps } from '@/utils/helpers';
+import CustomTooltip from '@/components/common/CustomTooltip/CustomTooltip';
+import { TooltipMyReferral, TooltipStreakDays } from '@/utils/tooltipsContent';
+import InfoIcon from '@/components/common/Icons/InfoIcon';
 
 const StreakDays = () => {
   const theme = useCustomTheme();
@@ -52,12 +55,32 @@ const StreakDays = () => {
         >
           <Box
             sx={{
-              color: theme.palette.powderWhite,
+              display: 'flex',
+              alignItems: 'center',
+              gap: '5px',
             }}
-            className='H2-Lato-fw-700-fs-24'
           >
-            Streak days
+            <Box
+              sx={{
+                color: theme.palette.powderWhite,
+              }}
+              className='H2-Lato-fw-700-fs-24'
+            >
+              Streak days
+            </Box>
+            <CustomTooltip title={<TooltipStreakDays />}>
+              <Box
+                sx={{
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <InfoIcon fill={theme.palette.white50} />
+              </Box>
+            </CustomTooltip>
           </Box>
+
           <Box
             sx={{
               color: theme.palette.white50,
