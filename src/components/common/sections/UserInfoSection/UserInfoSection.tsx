@@ -26,7 +26,7 @@ const UserInfoSection: FC<Props> = ({ user, withUntilNextLevel = false }) => {
   if (user?.position.max) {
     options.unshift({
       label: 'Top',
-      value: `${Math.floor((user?.position.current / user?.position.max) * 100)}%`,
+      value: `${((user?.position.current / user?.position.max) * 100).toFixed(3)}%`,
     });
   }
   if (user?.additional.maxStreak !== null) {
