@@ -1,49 +1,24 @@
 import { Box } from '@mui/system';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
-import { FC, useState } from 'react';
+import { FC, useEffect, useLayoutEffect, useState } from 'react';
 import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import PrevIcon from '@/components/common/Icons/PrevIcon';
 import NextIcon from '@/components/common/Icons/NextIcon';
 import { v4 as uuidv4 } from 'uuid';
-import { IScoreNetwork } from '@/types/index';
+import { DashboardTabIndexType, IScoreNetwork } from '@/types/index';
 import NetworkCard from '@/components/common/sections/ScoreSection/NetworkCard/NetworkCard';
+import { networkStaticData } from '@/constants/index';
+import { getUserScoreList } from '@/core/thunk/user.thunk';
+import { useAppDispatch, useAppSelector } from '@/core/store';
+import { setUserScoreList } from '@/core/state/user.state';
+import { CircularProgress } from '@mui/material';
+
 interface btnProps {
   hasNext?: boolean;
   onClick: Function;
 }
-const networks: IScoreNetwork[] = [
-  {
-    title: 'zkSync',
-    icon: '/asserts/net/zkSync.svg',
-    lvl: 2,
-    points: 345,
-  },
-  {
-    title: 'Linea',
-    icon: '/asserts/net/Linea.svg',
-    lvl: 6,
-    points: 345567,
-  },
-  {
-    title: 'Base',
-    icon: '/asserts/net/Base.svg',
-    lvl: 0,
-    points: 0,
-  },
-  {
-    title: 'Zora',
-    icon: '/asserts/net/Zora.svg',
-    lvl: 10,
-    points: 678678,
-  },
-  {
-    title: 'zkEvm',
-    icon: '/asserts/net/zkEvm.svg',
-    lvl: 10,
-    points: 123456,
-  },
-];
+
 const breakpointsConfig = {
   0: {
     slidesPerView: 1,
@@ -61,10 +36,25 @@ const breakpointsConfig = {
     slidesPerView: 4,
   },
 };
+
 interface Props {
   bpConfig?: any;
+  wallet: any;
+  selectable?: boolean;
+  activeTab?: { index: DashboardTabIndexType; label: string };
+  onSelect?: Function;
 }
-const ScoreSection: FC<Props> = ({ bpConfig = breakpointsConfig }) => {
+
+const ScoreSection: FC<Props> = ({
+  bpConfig = breakpointsConfig,
+  wallet,
+  selectable,
+  activeTab,
+  onSelect,
+}) => {
+  const dispatch = useAppDispatch();
+  const userScoreListLoading = useAppSelector(state => state.userState.userScoreListLoading);
+  const userScoreList = useAppSelector(state => state.userState.userScoreList);
   const theme = useCustomTheme();
   const [swiperRef, setSwiperRef] = useState<any>();
   const [hasNext, setHasNext] = useState(false);
@@ -77,17 +67,62 @@ const ScoreSection: FC<Props> = ({ bpConfig = breakpointsConfig }) => {
   };
   const onSwiper = (value: any) => {
     setSwiperRef(value);
-    setHasNext(value.allowSlideNext);
-    setHasPrev(value.allowSlidePrev);
+    setHasNext(!value.isEnd);
+    setHasPrev(!value.isBeginning);
   };
   const onResize = (value: any) => {
-    setHasNext(value.allowSlideNext);
-    setHasPrev(value.allowSlidePrev);
+    setSwiperRef(value);
+    setHasNext(!value.isEnd);
+    setHasPrev(!value.isBeginning);
   };
   const onSlideChange = (value: any) => {
-    setHasNext(value.allowSlideNext);
-    setHasPrev(value.allowSlidePrev);
+    setSwiperRef(value);
+    setHasNext(!value.isEnd);
+    setHasPrev(!value.isBeginning);
   };
+  useLayoutEffect(() => {
+    dispatch(getUserScoreList(wallet));
+    return () => {
+      dispatch(setUserScoreList(null));
+    };
+  }, []);
+  const networks: IScoreNetwork[] | null = userScoreList && [
+    {
+      index: 'zk_era',
+      title: 'zkSync',
+      icon: networkStaticData['zk_era'].icon,
+      lvl: userScoreList['zk_era'].level,
+      points: userScoreList['zk_era'].score,
+    },
+    {
+      index: 'linea',
+      title: 'Linea',
+      icon: networkStaticData['linea'].icon,
+      lvl: userScoreList['linea'].level,
+      points: userScoreList['linea'].score,
+    },
+    {
+      index: 'base',
+      title: 'Base',
+      icon: networkStaticData['base'].icon,
+      lvl: userScoreList['base'].level,
+      points: userScoreList['base'].score,
+    },
+    {
+      index: 'zk_evm',
+      title: 'zkEvm',
+      icon: networkStaticData['zk_evm'].icon,
+      lvl: userScoreList['zk_evm'].level,
+      points: userScoreList['zk_evm'].score,
+    },
+    {
+      index: 'scroll',
+      title: 'Scroll',
+      icon: networkStaticData['scroll'].icon,
+      lvl: userScoreList['scroll'].level,
+      points: userScoreList['scroll'].score,
+    },
+  ];
   return (
     <Box
       sx={{
@@ -114,7 +149,7 @@ const ScoreSection: FC<Props> = ({ bpConfig = breakpointsConfig }) => {
             gap: '16px',
           }}
         >
-          {(hasPrev || hasNext) && (
+          {(hasPrev || hasNext) && userScoreList && (
             <>
               <PrevButton onClick={handlePrevious} hasNext={hasPrev} />
               <NextButton onClick={handleNext} hasNext={hasNext} />
@@ -122,23 +157,56 @@ const ScoreSection: FC<Props> = ({ bpConfig = breakpointsConfig }) => {
           )}
         </Box>
       </Box>
-      <Box>
-        <Swiper
-          onSwiper={onSwiper}
-          onResize={onResize}
-          onSlideChange={onSlideChange}
-          slidesPerView={4}
-          loop={false}
-          spaceBetween={20}
-          breakpoints={bpConfig}
-        >
-          {networks.map((data: IScoreNetwork) => (
-            <SwiperSlide key={uuidv4()}>
-              <NetworkCard network={data} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </Box>
+      {userScoreListLoading ? (
+        <Box display='flex' width='100%' height='100%' alignItems='center' justifyContent='center'>
+          <CircularProgress
+            sx={{
+              color: theme.palette.lightGreen,
+            }}
+          />
+        </Box>
+      ) : (
+        <>
+          {userScoreList ? (
+            <Box>
+              <Swiper
+                onSwiper={onSwiper}
+                onResize={onResize}
+                onSlideChange={onSlideChange}
+                slidesPerView={4}
+                loop={false}
+                spaceBetween={20}
+                breakpoints={bpConfig}
+              >
+                {networks?.map((data: IScoreNetwork) => (
+                  <SwiperSlide key={uuidv4()}>
+                    <NetworkCard
+                      network={data}
+                      selectable={selectable}
+                      activeTab={activeTab}
+                      onSelect={onSelect}
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </Box>
+          ) : (
+            <Box
+              sx={{
+                display: 'flex',
+                width: '100%',
+                flex: '1',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: theme.palette.powderWhite,
+              }}
+              className='Body-Lato-fw-600-fs-24'
+            >
+              No Data
+            </Box>
+          )}
+        </>
+      )}
     </Box>
   );
 };

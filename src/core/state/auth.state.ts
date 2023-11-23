@@ -1,7 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { login, refreshToken, logout } from '@/core/thunk/auth.thunk';
-import { disconnect } from '@wagmi/core';
-import { store } from '@/core/store';
+import { refreshToken } from '@/core/thunk/auth.thunk';
 
 interface IAuthState {
   token: string | null;
@@ -24,45 +22,25 @@ export const authSlice = createSlice({
     setIsAuth: (state, action: PayloadAction<boolean>) => {
       state.isAuth = action.payload;
     },
+    setToken: (state, action: PayloadAction<string | null>) => {
+      state.token = action.payload;
+    },
+    setIsClaimed: (state, action: PayloadAction<boolean>) => {
+      state.isClaimed = action.payload;
+    },
     setAuthLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
     },
   },
   extraReducers: builder => {
-    builder
-      .addCase(login.pending, (state, action) => {
-        state.loading = true;
-      })
-      .addCase(login.fulfilled, (state, action) => {
-        if (action.payload) {
-          state.token = action.payload.data.result.token;
-          state.isClaimed = action.payload.data.result.isClaimed;
-          state.isAuth = true;
-          if (typeof window !== 'undefined') {
-            localStorage.setItem('isAuth', 'true');
-          }
-        } else {
-          if (typeof window !== 'undefined') {
-            localStorage.removeItem('signature');
-            localStorage.removeItem('isAuth');
-          }
-        }
-        state.loading = false;
-      })
-      .addCase(refreshToken.fulfilled, (state, action) => {
-        if (action.payload) {
-          state.token = action.payload.data.result.token;
-        }
-      })
-      .addCase(logout.fulfilled, (state, action) => {
-        state.isAuth = false;
-        localStorage.removeItem('signature');
-        localStorage.removeItem('isAuth');
-        state.token = null;
-      });
+    builder.addCase(refreshToken.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.token = action.payload.data.result.token;
+      }
+    });
   },
 });
 
 export default authSlice.reducer;
 
-export const { setIsAuth, setAuthLoading } = authSlice.actions;
+export const { setIsAuth, setToken, setIsClaimed, setAuthLoading } = authSlice.actions;

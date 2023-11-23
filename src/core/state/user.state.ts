@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { claimProfile, getNameByAddress, getPremiumStatus, getReferrals } from '@/core/thunk/user.thunk';
-import { IReferral } from '@/types/index';
+import { claimProfile, getReferrals } from '@/core/thunk/user.thunk';
+import { ILeaderboardUser, ILevelsInfo, IReferral, IScoreList, IStreakDays } from '@/types/index';
 
 interface IAuthState {
   referrals: IReferral[];
@@ -8,8 +8,15 @@ interface IAuthState {
   loading: boolean;
   claimProfileLoading: boolean;
   userName: string | null;
+  userProjectInfo: ILeaderboardUser | null;
   premiumStatus: boolean;
   premiumPrice: string;
+  userNFTList: string[];
+  userScoreList: IScoreList | null;
+  userScoreListLoading: boolean;
+  userLevelsInfo: ILevelsInfo | null;
+  activeUserLevelsInfo: ILevelsInfo | null;
+  streakDays: IStreakDays;
 }
 
 const initialState: IAuthState = {
@@ -18,8 +25,18 @@ const initialState: IAuthState = {
   loading: false,
   claimProfileLoading: false,
   userName: null,
+  userProjectInfo: null,
   premiumStatus: false,
   premiumPrice: '0',
+  userNFTList: [],
+  userScoreList: null,
+  userScoreListLoading: false,
+  userLevelsInfo: null,
+  activeUserLevelsInfo: null,
+  streakDays: {
+    current: 0,
+    isClaimable: false,
+  },
 };
 
 export const userSlice = createSlice({
@@ -29,11 +46,32 @@ export const userSlice = createSlice({
     setUserName: (state, action: PayloadAction<string | null>) => {
       state.userName = action.payload;
     },
+    setUserNFTList: (state, action: PayloadAction<string[]>) => {
+      state.userNFTList = action.payload;
+    },
+    setUserScoreList: (state, action: PayloadAction<IScoreList | null>) => {
+      state.userScoreList = action.payload;
+    },
+    setUserScoreListLoading: (state, action: PayloadAction<boolean>) => {
+      state.userScoreListLoading = action.payload;
+    },
     setPremiumStatus: (state, action: PayloadAction<boolean>) => {
       state.premiumStatus = action.payload;
     },
     setPremiumPrice: (state, action: PayloadAction<string>) => {
       state.premiumPrice = action.payload;
+    },
+    setUserLevelsInfo: (state, action: PayloadAction<ILevelsInfo | null>) => {
+      state.userLevelsInfo = action.payload;
+    },
+    setActiveUserLevelsInfo: (state, action: PayloadAction<ILevelsInfo | null>) => {
+      state.activeUserLevelsInfo = action.payload;
+    },
+    setStreakDays: (state, action: PayloadAction<IStreakDays>) => {
+      state.streakDays = action.payload;
+    },
+    setUserProjectInfo: (state, action: PayloadAction<ILeaderboardUser | null>) => {
+      state.userProjectInfo = action.payload;
     },
   },
   extraReducers: builder => {
@@ -53,20 +91,21 @@ export const userSlice = createSlice({
       })
       .addCase(claimProfile.fulfilled, (state, action) => {
         state.claimProfileLoading = false;
-      })
-      .addCase(getNameByAddress.fulfilled, (state, action) => {
-        if (action.payload) {
-          state.userName = action.payload;
-        }
-      })
-      .addCase(getPremiumStatus.fulfilled, (state, action) => {
-        if (action.payload) {
-          state.premiumStatus = action.payload;
-        }
       });
   },
 });
 
 export default userSlice.reducer;
 
-export const { setUserName, setPremiumStatus, setPremiumPrice } = userSlice.actions;
+export const {
+  setUserName,
+  setUserScoreListLoading,
+  setUserNFTList,
+  setUserScoreList,
+  setPremiumStatus,
+  setPremiumPrice,
+  setUserLevelsInfo,
+  setActiveUserLevelsInfo,
+  setStreakDays,
+  setUserProjectInfo,
+} = userSlice.actions;

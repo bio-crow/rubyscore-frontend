@@ -4,24 +4,43 @@ import Image from 'next/image';
 import CopyIcon from '@/components/common/Icons/CopyIcon';
 import { useAccount } from 'wagmi';
 import { copyToClickBoard } from '@/utils/helpers';
-const options = [
-  {
-    label: 'Points',
-    value: 1,
-  },
-  {
-    label: 'Max Steak',
-    value: 2,
-  },
-  {
-    label: 'Active referrals',
-    value: 3,
-  },
-];
-const UserInfoSection = () => {
+import { ILeaderboardUser } from '@/types/index';
+import { FC } from 'react';
+
+interface Props {
+  user: ILeaderboardUser | null;
+  withUntilNextLevel?: boolean;
+}
+const UserInfoSection: FC<Props> = ({ user, withUntilNextLevel = false }) => {
   const theme = useCustomTheme();
   const { address } = useAccount();
-  const maskedAddress = address && address.slice(0, 6) + '...' + address.slice(-6);
+  const maskedAddress = user && user.profile.wallet.slice(0, 6) + '...' + user.profile.wallet.slice(-6);
+  const options = [
+    {
+      label: withUntilNextLevel ? 'Points until next level' : 'Points',
+      value: withUntilNextLevel
+        ? `${Math.floor(user?.profile.rank.score || 0)} of ${user?.profile.rank.levelUp}`
+        : `${Math.floor(user?.profile.rank.score || 0)}`,
+    },
+  ];
+  if (user?.position.max) {
+    options.unshift({
+      label: 'Top',
+      value: `${((user?.position.current / user?.position.max) * 100).toFixed(3)}%`,
+    });
+  }
+  if (user?.additional.maxStreak !== null) {
+    options.push({
+      label: 'Max Steak',
+      value: `${user?.additional.maxStreak}`,
+    });
+  }
+  if (user?.additional.activeReferrals !== null) {
+    options.push({
+      label: 'Active referrals',
+      value: `${user?.additional.activeReferrals}`,
+    });
+  }
   return (
     <Box
       sx={{
@@ -43,7 +62,15 @@ const UserInfoSection = () => {
           alignItems: 'center',
         }}
       >
-        <Image src='/asserts/emptyUserIcon.svg' alt='icon' width='64' height='64' />
+        <Image
+          src={user?.profile.isPremium ? '/asserts/PremiumAvatar.svg' : '/asserts/FreeAvatar.svg'}
+          alt='icon'
+          width='64'
+          height='64'
+          style={{
+            borderRadius: '5px',
+          }}
+        />
         <Box
           sx={{
             display: 'flex',
@@ -65,7 +92,7 @@ const UserInfoSection = () => {
               }}
               className='Body-Inter-fw-700-fs-16'
             >
-              {maskedAddress}
+              {user?.profile.name || maskedAddress}
             </Box>
             <Box
               sx={{
@@ -88,7 +115,7 @@ const UserInfoSection = () => {
             }}
             className='Body-Inter-fw-700-fs-16'
           >
-            0 Level
+            {user?.profile.rank.level} Level
           </Box>
         </Box>
       </Box>
@@ -153,10 +180,10 @@ const UserInfoSection = () => {
             }}
           >
             <Box className='Body-Inter-fw-700-fs-18' color={theme.palette.lightGreen}>
-              3 456 556
+              {user?.position.current}
             </Box>
             <Box className='Body-Inter-fw-700-fs-18' color={theme.palette.white50}>
-              of 3 456 556
+              of {user?.position.max}
             </Box>
           </Box>
         </Box>

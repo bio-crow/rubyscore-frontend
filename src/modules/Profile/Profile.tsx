@@ -11,9 +11,11 @@ import MyLevelSection from '@/components/common/sections/MyLevelSection/MyLevelS
 import StreakDays from '@/modules/Profile/StreakDays/StreakDays';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import PrivatePageLayout from '@/components/layout/PrivatePageLayout/PrivatePageLayout';
-import { useEffect } from 'react';
-import { getNameByAddress, getReferrals } from '@/core/thunk/user.thunk';
+import { useEffect, useLayoutEffect } from 'react';
+import { getReferrals, getUserNFTList } from '@/core/thunk/user.thunk';
 import { useAccount } from 'wagmi';
+import { getCompletedTasks, getTasks } from '@/core/thunk/task.thunk';
+import { TooltipMyLevelProfile1, TooltipMyLevelProfile2 } from '@/utils/tooltipsContent';
 const breakpointsConfig = {
   0: {
     slidesPerView: 1.4,
@@ -38,9 +40,12 @@ const Profile = () => {
   const isAuth = useAppSelector(state => state.authState.isAuth);
   const premiumStatus = useAppSelector(state => state.userState.premiumStatus);
   const userName = useAppSelector(state => state.userState.userName);
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (address && isAuth) {
       dispatch(getReferrals());
+      dispatch(getUserNFTList(address));
+      dispatch(getTasks());
+      dispatch(getCompletedTasks(address));
     }
   }, [address, isAuth]);
   return (
@@ -51,7 +56,7 @@ const Profile = () => {
             display: 'grid',
             gap: '20px',
             width: '100%',
-            padding: { xs: '0px 15px 0px 15px', xl: 0 },
+            padding: { xs: '0px 15px 0px 15px', sm: '0px 30px 0px 30px', xl: 0 },
             gridTemplateColumns: { xs: '1fr', xl: '1fr 333px' },
           }}
         >
@@ -64,10 +69,15 @@ const Profile = () => {
               overflow: 'hidden',
             }}
           >
-            <MyLevelSection breakpoints={breakpointsConfig} initSlidePerPage={4.4} />
+            <MyLevelSection
+              breakpoints={breakpointsConfig}
+              initSlidePerPage={4.4}
+              ToolTip1={<TooltipMyLevelProfile1 />}
+              ToolTip2={<TooltipMyLevelProfile2 />}
+            />
             {!userName && <ClaimProfile />}
             {!premiumStatus && userName && <Benefits />}
-            <ScoreSection />
+            <ScoreSection wallet={address} />
             <DailyActivity />
             <StreakDays />
             <ReferralLinks />

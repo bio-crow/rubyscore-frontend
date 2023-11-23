@@ -12,7 +12,7 @@ export const ReferralUserCell = (params: GridRenderCellParams<any>) => {
   const copyValue = params.row.name || params.row.wallet;
   const maskedWallet =
     params.row.wallet && params.row.wallet.slice(0, 6) + '...' + params.row.wallet.slice(-6);
-  const isYou = leaderboardUser && leaderboardUser.wallet === params.row.wallet;
+  const isYou = leaderboardUser && leaderboardUser.profile.wallet === params.row.wallet;
   return (
     <Box
       sx={{
@@ -21,7 +21,15 @@ export const ReferralUserCell = (params: GridRenderCellParams<any>) => {
         gap: '10px',
       }}
     >
-      <Image src='/asserts/emptyUserIcon.svg' alt='icon' width='32' height='32' />
+      <Image
+        src={params.row.isPremium ? '/asserts/PremiumAvatar.svg' : '/asserts/FreeAvatar.svg'}
+        alt='icon'
+        width='32'
+        height='32'
+        style={{
+          borderRadius: '5px',
+        }}
+      />
       {isYou ? (
         <Box>You</Box>
       ) : (

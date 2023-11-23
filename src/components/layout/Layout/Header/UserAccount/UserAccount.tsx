@@ -37,10 +37,11 @@ const UserAccount: FC<Props> = ({ navLinks }) => {
     setAnchorEl(null);
     dispatch(logout());
   };
+  const premiumStatus = useAppSelector(state => state.userState.premiumStatus);
   const maskedAddress = address && address.slice(0, 6) + '...' + address.slice(-6);
   const isAuth = useAppSelector(state => state.authState.isAuth);
   const userName = useAppSelector(state => state.userState.userName);
-  const pathname = usePathname();
+  const userProjectInfo = useAppSelector(state => state.userState.userProjectInfo);
   return (
     <Box
       sx={{
@@ -57,7 +58,15 @@ const UserAccount: FC<Props> = ({ navLinks }) => {
       }}
     >
       <Box display='flex' alignItems='center' gap='5px'>
-        <Image src='/asserts/emptyUserIcon.svg' alt='icon' width='32' height='32' />
+        <Image
+          src={premiumStatus ? '/asserts/PremiumAvatar.svg' : '/asserts/FreeAvatar.svg'}
+          alt='icon'
+          width='32'
+          height='32'
+          style={{
+            borderRadius: '5px',
+          }}
+        />
         <Box
           sx={{
             display: { xs: 'none', sm: 'flex' },
@@ -68,7 +77,7 @@ const UserAccount: FC<Props> = ({ navLinks }) => {
             {userName || maskedAddress}
           </Box>
           <Box className='menu-Lato-fw-700-fs-12' color={theme.palette.white50}>
-            0 Points
+            {userProjectInfo?.profile.rank.score} Points
           </Box>
         </Box>
       </Box>
@@ -101,10 +110,10 @@ const UserAccount: FC<Props> = ({ navLinks }) => {
             }}
           >
             <Box className='menu-Lato-fw-700-fs-12' color={theme.palette.powderWhite}>
-              {maskedAddress}
+              {userName || maskedAddress}
             </Box>
             <Box className='menu-Lato-fw-700-fs-12' color={theme.palette.white50}>
-              0 Points
+              {userProjectInfo?.profile.rank.score} Points
             </Box>
           </Box>
         ) : (
@@ -125,7 +134,6 @@ const UserAccount: FC<Props> = ({ navLinks }) => {
           </Box>
         )}
         {isLowerLg &&
-          pathname !== '/' &&
           navLinks.map((item: any) => (
             <MenuItem key={item.label} onClick={() => router.push(item.route)}>
               {item.label}

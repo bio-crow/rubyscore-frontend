@@ -1,48 +1,34 @@
 import Layout from '@/components/layout/Layout/Layout';
 import { Box, Tab } from '@mui/material';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
-import { SyntheticEvent, useState } from 'react';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import DashboardTab from '@/modules/Dashboard/DashboardTab/DashboardTab';
-import DashboardTabs from '@/components/common/ui/DashboardTabs/DashboardTabs';
-type TabIndexType = 0 | 1 | 2 | 3 | 4;
-const panelTabs = [
-  {
-    index: 0,
-    label: 'ZkSync',
-  },
-  {
-    index: 1,
-    label: 'Linea',
-  },
-  {
-    index: 2,
-    label: 'Base',
-  },
-  {
-    index: 3,
-    label: 'Zora',
-  },
-  {
-    index: 4,
-    label: 'ZkEvm',
-  },
-];
+import { DashboardTabIndexType } from '@/types/index';
+import NetworkTabs from '@/components/common/ui/NetworkTabs/NetworkTabs';
+import { useAppDispatch } from '@/core/store';
+import { getUserGradation } from '@/core/thunk/dashboard.thunk';
+import { useAccount } from 'wagmi';
+import { dashboardPanelTabs } from '@/constants/index';
+import { setUserGradation } from '@/core/state/dashboard.state';
+
 const Dashboard = () => {
   const theme = useCustomTheme();
-  const isMd = useMediaQuery(theme.breakpoints.up('md'));
-  const [activeTabIndex, setActiveTabIndex] = useState<TabIndexType>(0);
-  const handleChange = (event: SyntheticEvent, newValue: TabIndexType) => {
-    setActiveTabIndex(newValue);
-  };
-  const dashboardTabs = {
-    0: <DashboardTab title='RubyScore' />,
-    1: <DashboardTab title='ZkSync' />,
-    2: <DashboardTab title='Linea' />,
-    3: <DashboardTab title='Base' />,
-    4: <DashboardTab title='Zora' />,
-    5: <DashboardTab title='ZkEvm' />,
-  };
+  const { address } = useAccount();
+  const [activeTab, setActiveTab] = useState<{ index: DashboardTabIndexType; label: string }>(
+    dashboardPanelTabs[0]
+  );
+  const dispatch = useAppDispatch();
+  useLayoutEffect(() => {
+    if (address) {
+      const data = {
+        wallet: `${address}`,
+        projectName: activeTab.index,
+      };
+      dispatch(getUserGradation(data));
+    } else {
+      dispatch(setUserGradation(null));
+    }
+  }, [activeTab.index, address]);
   return (
     <Layout>
       <Box
@@ -51,28 +37,13 @@ const Dashboard = () => {
           flexDirection: 'column',
           gap: '56px',
           width: '100%',
-          padding: { xs: '0px 15px 0px 15px', xl: 0 },
+          padding: { xs: '0px 15px 0px 15px', sm: '0px 30px 0px 30px', xl: 0 },
         }}
       >
-        <DashboardTabs
-          value={activeTabIndex}
-          onChange={handleChange}
-          variant={isMd ? 'fullWidth' : 'scrollable'}
-        >
-          {panelTabs.map(item => (
-            <Tab key={item.label} label={item.label} {...a11yProps(item.index)} />
-          ))}
-        </DashboardTabs>
-        {dashboardTabs[activeTabIndex]}
+        <NetworkTabs networks={dashboardPanelTabs} activeTab={activeTab} setActiveTab={setActiveTab} />
+        <DashboardTab activeTab={activeTab} />
       </Box>
     </Layout>
   );
 };
 export default Dashboard;
-
-function a11yProps(index: number) {
-  return {
-    id: `leaderboard-tab-${index}`,
-    'aria-controls': `leaderboard-tabpanel-${index}`,
-  };
-}

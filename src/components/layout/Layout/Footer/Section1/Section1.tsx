@@ -11,7 +11,7 @@ const Section1 = () => {
     <Box
       sx={{
         display: 'grid',
-        gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', xlg: '1fr 210px 170px 170px 210px' },
+        gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', xlg: '1fr 210px 170px 170px 260px' },
         gap: '20px',
         gridTemplateAreas: {
           xs: "'logo' 'community' 'learn' 'more' 'social'",
@@ -40,7 +40,7 @@ const Section1 = () => {
           alignSelf: 'start',
         }}
       >
-        {/*  <Box
+        {/*   <Box
           sx={{
             paddingBottom: '4px',
             color: theme.palette.white50,
@@ -50,10 +50,10 @@ const Section1 = () => {
         >
           Community
         </Box>
-          <CustomLink title='Community Hub' url={appRoutes.DASHBOARD} />
+        <CustomLink title='Community Hub' url={appRoutes.DASHBOARD} />
         <CustomLink title='Community Initiativies' url='#' />
         <CustomLink title='Governance Forum' url='#' />
-        <CustomLink title='Merch Store' url='#' />*/}
+        <CustomLink title='Merch Store' url='#' /> */}
       </Box>
       <Box
         sx={{
@@ -64,7 +64,7 @@ const Section1 = () => {
           alignSelf: 'start',
         }}
       >
-        {/* <Box
+        {/*  <Box
           sx={{
             paddingBottom: '4px',
             color: theme.palette.white50,
@@ -74,7 +74,7 @@ const Section1 = () => {
         >
           Learn
         </Box>
-            <CustomLink title='Blog' url='#' />
+        <CustomLink title='Blog' url='#' />
         <CustomLink title='Manager Toolkit' url='#' />
         <CustomLink title='WTF is QF' url='#' />
         <CustomLink title='Support' url='#' /> */}
@@ -88,7 +88,7 @@ const Section1 = () => {
           alignSelf: 'start',
         }}
       >
-        {/* <Box
+        {/*  <Box
           sx={{
             paddingBottom: '4px',
             color: theme.palette.white50,
@@ -98,7 +98,7 @@ const Section1 = () => {
         >
           More
         </Box>
-           <CustomLink title='Impact Report' url='#' />
+        <CustomLink title='Impact Report' url='#' />
         <CustomLink title='Press & Media' url='#' />
         <CustomLink title='Hackatons' url='#' />
         <CustomLink title='Bounties' url='#' /> */}
@@ -136,14 +136,23 @@ const Section1 = () => {
               gap: '10px',
             }}
           >
-            <CustomSocialLink icon='/asserts/social/discord.svg' url='https://www.linkedin.com' />
-            <CustomSocialLink icon='/asserts/social/twitter.svg' url='https://www.linkedin.com' />
-            <CustomSocialLink icon='/asserts/social/linkedin.svg' url='https://www.linkedin.com' />
-            <CustomSocialLink icon='/asserts/social/medium.svg' url='https://www.linkedin.com' />
+            <CustomSocialLink icon='/asserts/social/telegram.svg' url='https://t.me/RubyScore_ann' />
+            <CustomSocialLink icon='/asserts/social/twitter.svg' url='https://twitter.com/rubyscore_io' />
+            <CustomSocialLink
+              icon='/asserts/social/linkedin.svg'
+              url='https://www.linkedin.com/in/rubyscore'
+            />
+            <CustomSocialLink icon='/asserts/social/medium.svg' url='https://medium.com/@rubyscore.io' />
+            <CustomSocialLink icon='/asserts/social/mail.svg' url='mailto:Partnerships@rubyscore.io' />
           </Box>
         </Box>
-        <PrimaryButton variant='contained' size='large' fullWidth>
-          Get Updates
+        <PrimaryButton
+          variant='contained'
+          size='large'
+          fullWidth
+          href='https://docs.google.com/forms/d/1ft1YlAy1mXMMIuItCwEqDf9yft1lDUoTRcT6pn9UU5w'
+        >
+          Give feedback
         </PrimaryButton>
       </Box>
     </Box>

@@ -1,37 +1,19 @@
 import { Box } from '@mui/system';
 import UserInfo from '@/modules/Profile/ProfileInfo/UserInfo/UserInfo';
-import QuestsInfo from '@/modules/Profile/ProfileInfo/QuestsInfo/QuestsInfo';
+import TaskInfo from '@/modules/Profile/ProfileInfo/TaskInfo/TaskInfo';
 import NFTInfo from '@/modules/Profile/ProfileInfo/NFTInfo/NFTInfo';
-import { IQuestCard } from '@/types/index';
-import { useAppDispatch } from '@/core/store';
+import { useAppDispatch, useAppSelector } from '@/core/store';
 import { useEffect } from 'react';
-import { getNameByAddress, getReferrals } from '@/core/thunk/user.thunk';
 import { useAccount } from 'wagmi';
+import { initUserDataFromContract } from '@/core/thunk/user.thunk';
 
-const quests: IQuestCard[] = [
-  {
-    net: {
-      icon: '/asserts/net/Base.svg',
-      title: 'Base',
-    },
-    points: 10,
-    questTitle: 'Welcome Base Mainnet\n& Onchain Summer',
-  },
-  {
-    net: {
-      icon: '/asserts/net/zkSync.svg',
-      title: 'zkSync',
-    },
-    points: 5,
-    questTitle: 'Welcome Base Mainnet\n& Onchain',
-  },
-];
 const ProfileInfo = () => {
   const { address } = useAccount();
+  const completedTasks = useAppSelector(state => state.taskState.completedTasks);
   const dispatch = useAppDispatch();
   useEffect(() => {
     if (address) {
-      dispatch(getNameByAddress(address));
+      dispatch(initUserDataFromContract(address));
     }
   }, [address]);
   return (
@@ -46,7 +28,7 @@ const ProfileInfo = () => {
       }}
     >
       <UserInfo />
-      <QuestsInfo quests={quests} />
+      <TaskInfo tasks={completedTasks} />
       <NFTInfo nft={[]} />
     </Box>
   );

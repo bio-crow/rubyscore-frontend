@@ -8,6 +8,7 @@ interface Props {
   label?: string;
   placeholder?: string;
   InputProps?: any;
+  startAdornment?: any;
 }
 export const FormInputText: FC<Props> = ({ name, control, label, placeholder, InputProps }) => {
   return (

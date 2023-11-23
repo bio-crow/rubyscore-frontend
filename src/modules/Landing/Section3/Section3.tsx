@@ -11,7 +11,7 @@ const Section3 = () => {
         gap: '40px',
         alignItems: 'center',
         flexDirection: { xs: 'column', lg: 'row' },
-        padding: { xs: '0px 15px 0px 15px', xl: 0 },
+        padding: { xs: '0px 15px 0px 15px', sm: '0px 30px 0px 30px', xl: 0 },
       }}
     >
       <Box
@@ -37,7 +37,7 @@ const Section3 = () => {
             lineHeight: { xs: '36px', md: '48px', xlg: '72px' },
           }}
         >
-          The best analytics - only with us!
+          Top-notch analytics, available exclusively from us
         </Box>
         <Box
           sx={{
@@ -56,11 +56,8 @@ const Section3 = () => {
             color: theme.palette.white50,
           }}
         >
-          <Box>
-            We analyse millions of transactions, create segmentation on 10+ parameters, and track your wallet
-            among millions of others in our rankings.
-          </Box>
-          <Box>We change the game!</Box>
+          {`Analyzing millions of transactions, creating segments based on more than 10 parameters, and
+            monitoring your wallet among millions of others in our rankings. We're setting new standards!`}
         </Box>
       </Box>
       <Box

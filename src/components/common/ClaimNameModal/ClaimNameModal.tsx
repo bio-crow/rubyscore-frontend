@@ -15,9 +15,13 @@ import { CLAIM_PROFILE_FIELDS } from '@/constants/formFields';
 import { wagmiCheckName } from '@/core/api/contract.api';
 import { claimProfile } from '@/core/thunk/user.thunk';
 import { useAccount } from 'wagmi';
+import WarningIcon from '@/components/common/Icons/WarningIcon';
+import CurrencyIcon from '@/components/common/Icons/CurrencyIcon';
+
 interface Props {
   Trigger: any;
 }
+
 const ClaimNameModal: FC<Props> = ({ Trigger }) => {
   const claimProfileLoading = useAppSelector(state => state.userState.claimProfileLoading);
   const premiumPrice = useAppSelector(state => state.userState.premiumPrice);
@@ -55,20 +59,26 @@ const ClaimNameModal: FC<Props> = ({ Trigger }) => {
   const onSubmit = async (data: any) => {
     setErrorText(false);
     const name = data[CLAIM_PROFILE_FIELDS.NAME];
-    let isValid = true;
     if (name !== userName) {
-      isValid = await wagmiCheckName(name);
-    }
-    if (isValid) {
+      const isValid = await wagmiCheckName(name);
+      if (isValid) {
+        data = {
+          account: address,
+          payable: true,
+          name: name,
+          price: premiumPrice,
+        };
+        dispatch(claimProfile(data));
+      } else {
+        setErrorText(true);
+      }
+    } else {
       data = {
         account: address,
         payable: true,
-        name: name,
         price: premiumPrice,
       };
       dispatch(claimProfile(data));
-    } else {
-      setErrorText(true);
     }
   };
   const onError = (data: any) => {
@@ -151,8 +161,15 @@ const ClaimNameModal: FC<Props> = ({ Trigger }) => {
               }}
               className='Body-Lato-fw-700-fs-16'
             >
-              <Box>You are going to pay for account</Box>
-              <Box>You can leave the same name or choose any other.</Box>
+              <Box
+                sx={{
+                  display: 'flex',
+                }}
+              >
+                <Box sx={{ color: theme.palette.powderWhite }}>3 - 6 symbols&nbsp;</Box>
+                <Box>- Paid name, premium design (200 points)</Box>
+              </Box>
+              <Box>Extrapolation in scoring</Box>
             </Box>
           </Box>
           <form
@@ -175,7 +192,21 @@ const ClaimNameModal: FC<Props> = ({ Trigger }) => {
                 control={control}
                 placeholder='Search for your name'
               />
-              {errorText && <Box color='red'>Invalid name</Box>}
+              {errorText && (
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    color: theme.palette.red,
+                    gap: '10px',
+                    padding: '10px 10px 10px 10px',
+                  }}
+                  className='Body-Lato-fw-700-fs-16'
+                >
+                  <WarningIcon fill={theme.palette.red} />
+                  <Box>Invalid name</Box>
+                </Box>
+              )}
             </Box>
             <Box
               sx={{
@@ -192,8 +223,11 @@ const ClaimNameModal: FC<Props> = ({ Trigger }) => {
                 }}
                 className='Body-Lato-fw-600-fs-24'
               >
-                <Box>Price</Box>
-                <Box>{`${process.env.NEXT_PUBLIC_CHAIN_CURRENCY} ${premiumPrice}`}</Box>
+                <Box>Total</Box>
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <CurrencyIcon fill={theme.palette.powderWhite} />
+                  <Box>{premiumPrice}</Box>
+                </Box>
               </Box>
               <ThirdlyButton
                 variant='contained'

@@ -1,13 +1,22 @@
 import { Box } from '@mui/system';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { FC, useState } from 'react';
+import { FC, ReactElement, useEffect, useState } from 'react';
 import PrevIcon from '@/components/common/Icons/PrevIcon';
 import NextIcon from '@/components/common/Icons/NextIcon';
-import { ILevelCard, IScoreNetwork } from '@/types/index';
+import { DashboardTabIndexType, ILevelCard, IScoreNetwork } from '@/types/index';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { v4 as uuidv4 } from 'uuid';
 import MyLevelCard from '@/components/common/sections/MyLevelSection/MyLevelCard/MyLevelCard';
+import { useAppDispatch, useAppSelector } from '@/core/store';
+import { getUserLevelInfo } from '@/core/thunk/dashboard.thunk';
+import { useAccount } from 'wagmi';
+import { myLevelIcons } from '@/constants/index';
+import { setMyLevelData } from '@/core/state/dashboard.state';
+import { CircularProgress } from '@mui/material';
+import InfoIcon from '@/components/common/Icons/InfoIcon';
+import CustomTooltip from '@/components/common/CustomTooltip/CustomTooltip';
+import { TooltipCurrentRank } from '@/utils/tooltipsContent';
 
 const breakpointsConfig = {
   0: {
@@ -26,88 +35,35 @@ const breakpointsConfig = {
     slidesPerView: 5.4,
   },
 };
-const levels: ILevelCard[] = [
-  {
-    lvl: 1,
-    icon: '/asserts/nftDemoImage.png',
-    points: 1,
-    isAvailable: true,
-    isClaimed: true,
-  },
-  {
-    lvl: 2,
-    icon: '/asserts/nftDemoImage.png',
-    points: 1,
-    isAvailable: true,
-    isClaimed: true,
-  },
-  {
-    lvl: 3,
-    icon: '/asserts/nftDemoImage.png',
-    points: 2,
-    isAvailable: true,
-    isClaimed: false,
-  },
-  {
-    lvl: 4,
-    icon: '/asserts/nftDemoImage.png',
-    points: 2,
-    isAvailable: true,
-    isClaimed: false,
-  },
-  {
-    lvl: 5,
-    icon: '/asserts/nftDemoImage.png',
-    points: 3,
-    isAvailable: false,
-    isClaimed: false,
-  },
-  {
-    lvl: 6,
-    icon: '/asserts/nftDemoImage.png',
-    points: 3,
-    isAvailable: false,
-    isClaimed: false,
-  },
-  {
-    lvl: 7,
-    icon: '/asserts/nftDemoImage.png',
-    points: 4,
-    isAvailable: false,
-    isClaimed: false,
-  },
-  {
-    lvl: 8,
-    icon: '/asserts/nftDemoImage.png',
-    points: 4,
-    isAvailable: false,
-    isClaimed: false,
-  },
-  {
-    lvl: 9,
-    icon: '/asserts/nftDemoImage.png',
-    points: 5,
-    isAvailable: false,
-    isClaimed: false,
-  },
-  {
-    lvl: 10,
-    icon: '/asserts/nftDemoImage.png',
-    points: 5,
-    isAvailable: false,
-    isClaimed: false,
-  },
-];
+
 interface Props {
   breakpoints?: any;
   initSlidePerPage?: any;
+  project?: DashboardTabIndexType;
+  ToolTip1?: ReactElement;
+  ToolTip2?: ReactElement;
 }
-const MyLevelSection: FC<Props> = ({ breakpoints = breakpointsConfig, initSlidePerPage = 5.4 }) => {
+
+const MyLevelSection: FC<Props> = ({
+  breakpoints = breakpointsConfig,
+  initSlidePerPage = 5.4,
+  project = 'rubyscore',
+  ToolTip1,
+  ToolTip2,
+}) => {
+  const dispatch = useAppDispatch();
+  const myLevelData = useAppSelector(state => state.dashboardState.myLevelData);
+  const isAuth = useAppSelector(state => state.authState.isAuth);
+  const myLevelDataLoading = useAppSelector(state => state.dashboardState.myLevelDataLoading);
+  const { address } = useAccount();
   const theme = useCustomTheme();
   const isSm = useMediaQuery(theme.breakpoints.up('sm'));
   const [hasNext, setHasNext] = useState(false);
   const [hasPrev, setHasPrev] = useState(false);
   const [swiperRef, setSwiperRef] = useState<any>();
+  const percent =
+    myLevelData &&
+    Number.parseFloat(`${(myLevelData.position.current / myLevelData.position.max) * 100}`).toFixed(0);
   const handlePrevious = () => {
     swiperRef?.slidePrev();
   };
@@ -116,17 +72,43 @@ const MyLevelSection: FC<Props> = ({ breakpoints = breakpointsConfig, initSlideP
   };
   const onSwiper = (value: any) => {
     setSwiperRef(value);
-    setHasNext(value.allowSlideNext);
-    setHasPrev(value.allowSlidePrev);
+    setHasNext(!value.isEnd);
+    setHasPrev(!value.isBeginning);
   };
   const onResize = (value: any) => {
-    setHasNext(value.allowSlideNext);
-    setHasPrev(value.allowSlidePrev);
+    setSwiperRef(value);
+    setHasNext(!value.isEnd);
+    setHasPrev(!value.isBeginning);
   };
   const onSlideChange = (value: any) => {
-    setHasNext(value.allowSlideNext);
-    setHasPrev(value.allowSlidePrev);
+    setSwiperRef(value);
+    setHasNext(!value.isEnd);
+    setHasPrev(!value.isBeginning);
   };
+  useEffect(() => {
+    if (address && project && isAuth) {
+      const data = {
+        wallet: address,
+        project: project,
+      };
+      dispatch(getUserLevelInfo(data));
+    }
+    return () => {
+      dispatch(setMyLevelData(null));
+    };
+  }, [address, project, isAuth]);
+  const prepareLevels = myLevelData
+    ? myLevelData.levelStatus.map((item, index) => {
+        return {
+          icon: myLevelIcons[project][index],
+          lvl: index + 1,
+          isClaimed: myLevelData.levelStatus[index] === 1,
+          isPefWaiting: index + 1 <= myLevelData.level && myLevelData.levelStatus[index] !== 1,
+          isAvailable: index <= myLevelData.levelStatus.findIndex(item => item === 0),
+          isError: myLevelData.levelStatus[index] === 2,
+        };
+      })
+    : [];
   return (
     <Box
       sx={{
@@ -134,7 +116,7 @@ const MyLevelSection: FC<Props> = ({ breakpoints = breakpointsConfig, initSlideP
         flexDirection: 'column',
         padding: '40px 32px',
         borderRadius: '10px',
-        gap: '40px',
+        gap: '20px',
         border: `1px solid ${theme.palette.white10}`,
         background: theme.palette.black,
       }}
@@ -142,8 +124,8 @@ const MyLevelSection: FC<Props> = ({ breakpoints = breakpointsConfig, initSlideP
       <Box
         sx={{
           display: 'flex',
-          flexDirection: { xs: 'column', sm: 'row' },
-          alignItems: { xs: 'unset', sm: 'flex-start' },
+          flexDirection: { xs: 'column', md: 'row' },
+          alignItems: { xs: 'unset', md: 'flex-start' },
           justifyContent: 'space-between',
           gap: '20px',
         }}
@@ -175,66 +157,181 @@ const MyLevelSection: FC<Props> = ({ breakpoints = breakpointsConfig, initSlideP
               }}
               className='H2-Lato-fw-700-fs-24'
             >
-              0
+              {myLevelData?.level}
             </Box>
+            {ToolTip1 && (
+              <CustomTooltip title={ToolTip1}>
+                <Box
+                  sx={{
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  <InfoIcon fill={theme.palette.white50} />
+                </Box>
+              </CustomTooltip>
+            )}
           </Box>
+          {myLevelData && (
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+              }}
+            >
+              <Box
+                sx={{
+                  color: theme.palette.white50,
+                }}
+                className='Body-Lato-fw-500-fs-18'
+              >
+                Up to the next level
+              </Box>
+              <Box
+                sx={{
+                  color: theme.palette.lightGreen,
+                }}
+                className='Body-Lato-fw-500-fs-18'
+              >
+                {`${Math.floor(myLevelData.score)} / ${myLevelData.levelUp} Points`}
+              </Box>
+              {ToolTip2 && (
+                <CustomTooltip title={ToolTip2}>
+                  <Box
+                    sx={{
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <InfoIcon fill={theme.palette.white50} />
+                  </Box>
+                </CustomTooltip>
+              )}
+            </Box>
+          )}
+        </Box>
+        {/*  {myLevelData && myLevelData.position.max !== 0 && (
           <Box
             sx={{
               display: 'flex',
               alignItems: 'center',
-              gap: '10px',
+              justifyContent: { xs: 'space-between', md: 'unset' },
+              gap: '16px',
             }}
           >
+
             <Box
               sx={{
-                color: theme.palette.white50,
+                display: 'flex',
+                flexDirection: 'column',
+                paddingRight: { xs: 'none', lg: `20px` },
+                borderRight: { xs: 'none', lg: `1px solid ${theme.palette.white10}` },
+                alignItems: { xs: 'unset', md: 'flex-end' },
               }}
-              className='Body-Lato-fw-500-fs-18'
             >
-              Up to the next level
+              <Box sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '5px'
+              }}>
+                <CustomTooltip title={<TooltipCurrentRank/>}>
+                  <Box
+                    sx={{
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <InfoIcon fill={theme.palette.white50} />
+                  </Box>
+                </CustomTooltip>
+                <Box color={theme.palette.powderWhite} className='Body-Inter-fw-700-fs-16'>
+                  Current Rank
+                </Box>
+              </Box>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
+                  gap: '5px',
+                }}
+              >
+                <Box className='Body-Inter-fw-700-fs-18' color={theme.palette.lightGreen}>
+                  {myLevelData.position.current}
+                </Box>
+                <Box className='Body-Inter-fw-700-fs-18' color={theme.palette.white50}>
+                  of {myLevelData.position.max}
+                </Box>
+              </Box>
             </Box>
             <Box
               sx={{
-                color: theme.palette.lightGreen,
+                display: 'flex',
+                flexDirection: 'column',
               }}
-              className='Body-Lato-fw-500-fs-18'
             >
-              0 / 100 Points
+              <Box color={theme.palette.powderWhite} className='Body-Inter-fw-700-fs-16'>
+                TOP
+              </Box>
+              <Box className='Body-Inter-fw-700-fs-18' color={theme.palette.lightGreen}>
+                {percent}%
+              </Box>
             </Box>
           </Box>
+        )} */}
+      </Box>
+      {myLevelDataLoading ? (
+        <Box display='flex' width='100%' height='100%' alignItems='center' justifyContent='center'>
+          <CircularProgress
+            sx={{
+              color: theme.palette.lightGreen,
+            }}
+          />
         </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '16px',
-          }}
-        >
-          {(hasPrev || hasNext) && (
+      ) : (
+        <>
+          {prepareLevels && (
             <>
-              <PrevButton onClick={handlePrevious} hasNext={hasPrev} />
-              <NextButton onClick={handleNext} hasNext={hasNext} />
+              <Box>
+                <Swiper
+                  onSwiper={onSwiper}
+                  onResize={onResize}
+                  onSlideChange={onSlideChange}
+                  slidesPerView={initSlidePerPage}
+                  loop={false}
+                  spaceBetween={20}
+                  breakpoints={breakpoints}
+                >
+                  {prepareLevels.map((data: ILevelCard) => (
+                    <SwiperSlide key={uuidv4()}>
+                      <MyLevelCard data={data} project={project} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </Box>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
+                  gap: '16px',
+                }}
+              >
+                {(hasPrev || hasNext) && myLevelData && (
+                  <>
+                    <PrevButton onClick={handlePrevious} hasNext={hasPrev} />
+                    <NextButton onClick={handleNext} hasNext={hasNext} />
+                  </>
+                )}
+              </Box>
             </>
           )}
-        </Box>
-      </Box>
-      <Box>
-        <Swiper
-          onSwiper={onSwiper}
-          onResize={onResize}
-          onSlideChange={onSlideChange}
-          slidesPerView={initSlidePerPage}
-          loop={false}
-          spaceBetween={20}
-          breakpoints={breakpoints}
-        >
-          {levels.map((data: ILevelCard) => (
-            <SwiperSlide key={uuidv4()}>
-              <MyLevelCard data={data} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </Box>
+        </>
+      )}
     </Box>
   );
 };

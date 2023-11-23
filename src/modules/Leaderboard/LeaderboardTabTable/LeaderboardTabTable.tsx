@@ -1,5 +1,5 @@
 import { Box } from '@mui/system';
-import { leaderBoardBaseColumns } from '@/utils/baseTableColumns';
+import { leaderBoardBaseColumns, leaderBoardBaseColumnsShort } from '@/utils/baseTableColumns';
 import SecondaryTable from '@/components/common/ui/SecondaryTable/SecondaryTable';
 import { useRouter } from 'next/navigation';
 import { appRoutes } from '@/constants/routes';
@@ -13,12 +13,13 @@ import LeaderBoardPagination from '@/modules/Leaderboard/LeaderboardTabTable/Lea
 
 interface Props {
   tableData: ILeaderboardData[];
+  activeTab: any;
 }
 
-const LeaderboardTabTable: FC<Props> = ({ tableData }) => {
+const LeaderboardTabTable: FC<Props> = ({ tableData, activeTab }) => {
   const router = useRouter();
-
   const leaderboardUser = useAppSelector(state => state.leaderboardState.leaderboardUser);
+  const filteredUser = useAppSelector(state => state.leaderboardState.filteredUser);
   return (
     <Box
       sx={{
@@ -31,13 +32,15 @@ const LeaderboardTabTable: FC<Props> = ({ tableData }) => {
         getRowId={params => params.wallet}
         rows={tableData}
         getRowClassName={params =>
-          leaderboardUser?.wallet === params.row.wallet ? 'active-user-highlight' : ''
+          leaderboardUser?.profile.wallet === params.row.wallet ? 'active-user-highlight' : ''
         }
-        columns={leaderBoardBaseColumns}
+        columns={activeTab.index === 'rubyscore' ? leaderBoardBaseColumns : leaderBoardBaseColumnsShort}
         slots={{
           noRowsOverlay: CustomNoRows,
         }}
-        onRowClick={() => router.push(appRoutes.LEADERBOARD_USER)}
+        onRowClick={(data: any) => {
+          router.push(`${appRoutes.LEADERBOARD_USER}/${data.row.wallet}`);
+        }}
         initialState={{
           pagination: {
             paginationModel: {
@@ -50,7 +53,7 @@ const LeaderboardTabTable: FC<Props> = ({ tableData }) => {
         disableColumnMenu
         disableRowSelectionOnClick
       />
-      <LeaderBoardPagination />
+      {!filteredUser && <LeaderBoardPagination />}
     </Box>
   );
 };

@@ -13,7 +13,7 @@ const Section6 = () => {
         flexDirection: 'column',
         gap: '70px',
         alignItems: 'center',
-        padding: { xs: '0px 15px 0px 15px', xl: 0 },
+        padding: { xs: '0px 15px 0px 15px', sm: '0px 30px 0px 30px', xl: 0 },
       }}
     >
       <Box
@@ -39,10 +39,11 @@ const Section6 = () => {
           gap: { xs: '20px', md: '60px' },
         }}
       >
-        <CustomSocialLink icon='/asserts/social/discord.svg' url='https://www.linkedin.com' />
-        <CustomSocialLink icon='/asserts/social/twitter.svg' url='https://www.linkedin.com' />
-        <CustomSocialLink icon='/asserts/social/linkedin.svg' url='https://www.linkedin.com' />
-        <CustomSocialLink icon='/asserts/social/medium.svg' url='https://www.linkedin.com' />
+        <CustomSocialLink icon='/asserts/social/telegram.svg' url='https://t.me/RubyScore_ann' />
+        <CustomSocialLink icon='/asserts/social/twitter.svg' url='https://twitter.com/rubyscore_io' />
+        <CustomSocialLink icon='/asserts/social/linkedin.svg' url='https://www.linkedin.com/in/rubyscore' />
+        <CustomSocialLink icon='/asserts/social/medium.svg' url='https://medium.com/@rubyscore.io' />
+        <CustomSocialLink icon='/asserts/social/mail.svg' url='mailto:Partnerships@rubyscore.io' />
       </Box>
     </Box>
   );

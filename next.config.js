@@ -1,4 +1,5 @@
-const API_URL = process.env.NEXT_PUBLIC_BACK_END_API
+const API_URL = process.env.NEXT_PUBLIC_DEVELOP_PROXY_BACK_END_API
+
 const nextConfig = {
     swcMinify: true,
     async rewrites() {
@@ -8,6 +9,9 @@ const nextConfig = {
                 destination: `${API_URL}/:path*`,
             },
         ]
+    },
+    images: {
+        domains: ['rubyscore.fra1.digitaloceanspaces.com'],
     },
 }
 
