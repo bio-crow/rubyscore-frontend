@@ -49,7 +49,7 @@ const UserNFTTab = () => {
             justifyContent: 'center',
           }}
         >
-          {`No NFT's unloacked`}
+          {`No NFT's unlocked`}
         </Box>
       )}
     </Box>

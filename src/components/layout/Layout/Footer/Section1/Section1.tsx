@@ -109,7 +109,7 @@ const Section1 = () => {
           flexDirection: 'column',
           gap: '20px',
           gridArea: 'social',
-          maxWidth: '210px',
+          maxWidth: '260px',
           alignSelf: 'start',
         }}
       >

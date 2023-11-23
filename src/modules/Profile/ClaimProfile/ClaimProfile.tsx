@@ -104,7 +104,7 @@ const ClaimProfile = () => {
           }}
           className='Body-Lato-fw-500-fs-18'
         >
-          <Box>Own your identity in the digital world. Get started with a Web3 domain.</Box>
+          <Box>Own your identity in the digital world. Get started with RubyScore.</Box>
           <Box>
             <Box color={theme.palette.powderWhite} component='span'>
               3-6 symbols
