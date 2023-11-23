@@ -37,8 +37,8 @@ export const formatCash = (n: any) => {
   return '';
 };
 export const formatCash2 = (n: any) => {
-  if (n < 1e3) return '$' + (n / 1).toFixed(3);
-  if (n >= 1e3 && n < 1e6) return '$' + (n / 1e3).toFixed(3) + ' K';
+  if (n < 1e4) return '$' + (n / 1).toFixed(3);
+  if (n >= 1e4 && n < 1e6) return '$' + (n / 1e3).toFixed(3) + ' K';
   if (n >= 1e6 && n < 1e9) return '$' + (n / 1e6).toFixed(3) + ' M';
   if (n >= 1e9 && n < 1e12) return '$' + (n / 1e9).toFixed(3) + ' B';
   if (n >= 1e12) return '$' + (n / 1e12).toFixed(3) + ' T';

@@ -38,7 +38,15 @@ const AchievementCard: FC<Props> = ({ data }) => {
         <Box color={theme.palette.lightGreen} className='H1-Lato-fw-700-fs-32'>
           {`${data.value} ${data.currency}`}
         </Box>
-        <Box color={theme.palette.powderWhite} className='menu-Lato-fw-700-fs-12'>
+        <Box
+          sx={{
+            color: theme.palette.powderWhite,
+            display: 'flex',
+            alignItems: 'center',
+            minHeight: '32px',
+          }}
+          className='menu-Lato-fw-700-fs-12'
+        >
           {data.label}
         </Box>
       </Box>
@@ -106,24 +114,3 @@ const AchievementCard: FC<Props> = ({ data }) => {
   );
 };
 export default AchievementCard;
-
-const TooltipContent = () => {
-  const theme = useCustomTheme();
-  return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        textAlign: 'center',
-      }}
-    >
-      <Box className='Body-Inter-fw-700-fs-18' color={theme.palette.powderWhite}>
-        Amount on balance
-      </Box>
-      <Box className='Body-Lato-fw-600-fs-14' color={theme.palette.white50}>
-        The balance amount of the ETH coin and the main stablecoins
-      </Box>
-    </Box>
-  );
-};
