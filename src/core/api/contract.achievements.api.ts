@@ -1,23 +1,17 @@
-import { testContracts } from '@/providers/chains';
+import { testContracts } from '@/providers/testChains';
 import { readContract, readContracts, switchNetwork, waitForTransaction, writeContract } from '@wagmi/core';
 import { abiAchievements } from '@/constants/abiAchievements';
 import { apiPrivateAxios } from '@/core/api/axiosConfig';
 import { getNetwork } from '@wagmi/core';
-import {
-  IClaimLevelPayload,
-  IClaimLevelSignaturePayload,
-  IClaimLevelSignatureResponse,
-  IClaimPayload,
-  ILoginPayload,
-  IRefreshResponse,
-} from '@/core/types';
+import { IClaimLevelPayload, IClaimLevelSignaturePayload, IClaimLevelSignatureResponse } from '@/core/types';
 import { parseEther, parseGwei, formatEther } from 'viem';
 import { toast } from 'react-toastify';
 import { getAchievementsBaseContractConfig } from '@/utils/helpers';
 import { ILevelsInfo } from '@/types/index';
 import { abiIXProjectSBT } from '@/constants/abiIXProjectSBT';
-const contractInfo = testContracts;
-const appNet = testContracts.app;
+import { prodContracts } from '@/providers/prodChains';
+const contractInfo = process.env.NEXT_PUBLIC_IS_PROD === 'true' ? prodContracts : testContracts;
+const appNet = process.env.NEXT_PUBLIC_IS_PROD === 'true' ? prodContracts.app : testContracts.app;
 export const wagmiLevels = async (params: { wallet: string; project: string }): Promise<any> => {
   const action = async (params: { wallet: string; project: string }) => {
     const { wallet: address, project } = params;

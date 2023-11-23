@@ -1,26 +1,11 @@
 'use client';
 import React, { FC, ReactNode } from 'react';
 import merge from 'lodash.merge';
-import {
-  RainbowKitProvider,
-  connectorsForWallets,
-  darkTheme,
-  lightTheme,
-  Theme,
-} from '@rainbow-me/rainbowkit';
-import {
-  coinbaseWallet,
-  trustWallet,
-  walletConnectWallet,
-  metaMaskWallet,
-} from '@rainbow-me/rainbowkit/wallets';
-import { configureChains, createConfig, WagmiConfig } from 'wagmi';
-import { polygonMumbai } from 'wagmi/chains';
-import { publicProvider } from 'wagmi/providers/public';
+import { RainbowKitProvider, darkTheme, lightTheme, Theme } from '@rainbow-me/rainbowkit';
+import { WagmiConfig } from 'wagmi';
 import { store } from '@/core/store';
 import { Provider } from 'react-redux';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
-import * as process from 'process';
 import { appInfo, chains, wagmiConfig } from '@/providers/walletConfig';
 
 type Props = {

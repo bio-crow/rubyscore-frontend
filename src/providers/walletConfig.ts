@@ -8,9 +8,10 @@ import {
   trustWallet,
   walletConnectWallet,
 } from '@rainbow-me/rainbowkit/wallets';
-import { testChains } from '@/providers/chains';
-
-const { chains, publicClient, webSocketPublicClient } = configureChains(testChains, [publicProvider()]);
+import { testChains } from '@/providers/testChains';
+import { prodChains } from '@/providers/prodChains';
+const appChains = process.env.NEXT_PUBLIC_IS_PROD === 'true' ? prodChains : testChains;
+const { chains, publicClient, webSocketPublicClient } = configureChains(appChains, [publicProvider()]);
 
 const projectId = process.env.NEXT_PUBLIC_WC_PROJECT_ID || '';
 

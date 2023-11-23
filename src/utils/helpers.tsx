@@ -575,8 +575,8 @@ export const getAchievementsBaseContractConfig = (project: string, contractInfo:
       };
     default:
       return {
-        address: contractInfo.mumbai.contract,
-        chainId: contractInfo.mumbai.chainId,
+        address: contractInfo.projectAchievements.contract,
+        chainId: contractInfo.projectAchievements.chainId,
       };
   }
 };

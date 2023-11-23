@@ -5,8 +5,9 @@ import { IClaimPayload } from '@/core/types';
 import { readContract } from '@wagmi/core';
 import { toast } from 'react-toastify';
 import { parseEther } from 'viem';
-import { testContracts } from '@/providers/chains';
-const appNet = testContracts.app;
+import { testContracts } from '@/providers/testChains';
+import { prodContracts } from '@/providers/prodChains';
+const appNet = process.env.NEXT_PUBLIC_IS_PROD === 'true' ? prodContracts.app : testContracts.app;
 const baseConfig = {
   address: appNet.contract,
   abi: abiIXProjectSBT,
