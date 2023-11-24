@@ -5,6 +5,7 @@ import { useCustomTheme } from '@/hooks/useCustomTheme';
 import CustomLinearProgress from '@/components/common/ui/CustomLinearProgress/CustomLinearProgress';
 import InfoIcon from '@/components/common/Icons/InfoIcon';
 import CustomTooltip from '@/components/common/CustomTooltip/CustomTooltip';
+import { formatPercentsForCards } from '@/utils/helpers';
 interface Props {
   data: IAchievementCard;
 }
@@ -78,7 +79,7 @@ const AchievementCard: FC<Props> = ({ data }) => {
                 color: theme.palette.lightGreen,
               }}
             >
-              {data.top.toFixed(3)}%
+              {formatPercentsForCards(data.top)}%
             </Box>
             <Box
               sx={{
