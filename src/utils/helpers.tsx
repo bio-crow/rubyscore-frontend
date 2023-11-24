@@ -642,3 +642,15 @@ export const mapMayLevelDataFromResult = (result: any, levelStatus: any) => {
     levelStatus: levelStatus || [2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
   };
 };
+export const formatPercentsForCards = (value: number | null) => {
+  if (!value) {
+    return null;
+  }
+  if (value < 0.001) {
+    return 0.001;
+  }
+  if (value < 1) {
+    return value.toFixed(3);
+  }
+  return Math.floor(value);
+};

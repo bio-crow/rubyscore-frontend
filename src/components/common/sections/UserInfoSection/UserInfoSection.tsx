@@ -3,7 +3,7 @@ import { useCustomTheme } from '@/hooks/useCustomTheme';
 import Image from 'next/image';
 import CopyIcon from '@/components/common/Icons/CopyIcon';
 import { useAccount } from 'wagmi';
-import { copyToClickBoard } from '@/utils/helpers';
+import { copyToClickBoard, formatPercentsForCards } from '@/utils/helpers';
 import { ILeaderboardUser } from '@/types/index';
 import { FC } from 'react';
 
@@ -15,6 +15,7 @@ const UserInfoSection: FC<Props> = ({ user, withUntilNextLevel = false }) => {
   const theme = useCustomTheme();
   const { address } = useAccount();
   const maskedAddress = user && user.profile.wallet.slice(0, 6) + '...' + user.profile.wallet.slice(-6);
+  const TopPercent = user && (user?.position.current / user?.position.max) * 100;
   const options = [
     {
       label: withUntilNextLevel ? 'Points until next level' : 'Points',
@@ -26,7 +27,7 @@ const UserInfoSection: FC<Props> = ({ user, withUntilNextLevel = false }) => {
   if (user?.position.max) {
     options.unshift({
       label: 'Top',
-      value: `${((user?.position.current / user?.position.max) * 100).toFixed(3)}%`,
+      value: `${formatPercentsForCards(TopPercent)}%`,
     });
   }
   if (user?.additional.maxStreak !== null) {
