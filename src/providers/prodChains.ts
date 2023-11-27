@@ -11,10 +11,14 @@ export const prodChains: Chain[] = [
     },
     rpcUrls: {
       public: {
-        http: ['https://optimism.llamarpc.com'],
+        http: [
+          'https://rpc.ankr.com/optimism/7469b65bc433b15506c988eddeca58c3408e5a3f99ddbbbbf5d5f1cfaa13a153',
+        ],
       },
       default: {
-        http: ['https://optimism.llamarpc.com'],
+        http: [
+          'https://rpc.ankr.com/optimism/7469b65bc433b15506c988eddeca58c3408e5a3f99ddbbbbf5d5f1cfaa13a153',
+        ],
       },
     },
     blockExplorers: {
@@ -36,10 +40,10 @@ export const prodChains: Chain[] = [
     },
     rpcUrls: {
       public: {
-        http: ['https://base.llamarpc.com'],
+        http: ['https://rpc.ankr.com/base/7469b65bc433b15506c988eddeca58c3408e5a3f99ddbbbbf5d5f1cfaa13a153'],
       },
       default: {
-        http: ['https://base.llamarpc.com'],
+        http: ['https://rpc.ankr.com/base/7469b65bc433b15506c988eddeca58c3408e5a3f99ddbbbbf5d5f1cfaa13a153'],
       },
     },
     blockExplorers: {
@@ -61,10 +65,10 @@ export const prodChains: Chain[] = [
     },
     rpcUrls: {
       public: {
-        http: ['https://linea.drpc.org'],
+        http: ['https://rpc.ankr.com/linea/7469b65bc433b15506c988eddeca58c3408e5a3f99ddbbbbf5d5f1cfaa13a153'],
       },
       default: {
-        http: ['https://linea.drpc.org'],
+        http: ['https://rpc.ankr.com/linea/7469b65bc433b15506c988eddeca58c3408e5a3f99ddbbbbf5d5f1cfaa13a153'],
       },
     },
     blockExplorers: {
@@ -86,10 +90,14 @@ export const prodChains: Chain[] = [
     },
     rpcUrls: {
       public: {
-        http: ['https://polygon-zkevm.drpc.org'],
+        http: [
+          'https://rpc.ankr.com/polygon_zkevm/7469b65bc433b15506c988eddeca58c3408e5a3f99ddbbbbf5d5f1cfaa13a153',
+        ],
       },
       default: {
-        http: ['https://polygon-zkevm.drpc.org'],
+        http: [
+          'https://rpc.ankr.com/polygon_zkevm/7469b65bc433b15506c988eddeca58c3408e5a3f99ddbbbbf5d5f1cfaa13a153',
+        ],
       },
     },
     blockExplorers: {
@@ -111,10 +119,14 @@ export const prodChains: Chain[] = [
     },
     rpcUrls: {
       public: {
-        http: ['https://zksync-era.blockpi.network/v1/rpc/public'],
+        http: [
+          'https://rpc.ankr.com/zksync_era/7469b65bc433b15506c988eddeca58c3408e5a3f99ddbbbbf5d5f1cfaa13a153',
+        ],
       },
       default: {
-        http: ['https://zksync-era.blockpi.network/v1/rpc/public'],
+        http: [
+          'https://rpc.ankr.com/zksync_era/7469b65bc433b15506c988eddeca58c3408e5a3f99ddbbbbf5d5f1cfaa13a153',
+        ],
       },
     },
     blockExplorers: {
@@ -136,10 +148,14 @@ export const prodChains: Chain[] = [
     },
     rpcUrls: {
       public: {
-        http: ['https://rpc.scroll.io'],
+        http: [
+          'https://rpc.ankr.com/scroll/7469b65bc433b15506c988eddeca58c3408e5a3f99ddbbbbf5d5f1cfaa13a153',
+        ],
       },
       default: {
-        http: ['https://rpc.scroll.io'],
+        http: [
+          'https://rpc.ankr.com/scroll/7469b65bc433b15506c988eddeca58c3408e5a3f99ddbbbbf5d5f1cfaa13a153',
+        ],
       },
     },
     blockExplorers: {
@@ -156,7 +172,7 @@ export const prodContracts = {
   projectAchievements: { contract: '0xB9cC0Bb020cF55197C4C3d826AC87CAdba51f272', chainId: 10 },
   base: { contract: '0xbDB018e21AD1e5756853fe008793a474d329991b', chainId: 8453 },
   linea: { contract: '0xbDB018e21AD1e5756853fe008793a474d329991b', chainId: 59144 },
-  zkEVM: { contract: '0xDC3D8318Fbaec2de49281843f5bba22e78338146', chainId: 1101 },
+  zkEVM: { contract: '0xF57Cb671D50535126694Ce5Cc3CeBe3F32794896', chainId: 1101 },
   zkSync: { contract: '0x8A1142620CbdE2f2d63E88F35D0D76eAAce0AC9e', chainId: 324 },
   scroll: { contract: '0xDC3D8318Fbaec2de49281843f5bba22e78338146', chainId: 534351 },
 };
