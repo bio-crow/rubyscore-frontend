@@ -42,6 +42,7 @@ interface Props {
   project?: DashboardTabIndexType;
   ToolTip1?: ReactElement;
   ToolTip2?: ReactElement;
+  withTop?: boolean;
 }
 
 const MyLevelSection: FC<Props> = ({
@@ -50,6 +51,7 @@ const MyLevelSection: FC<Props> = ({
   project = 'rubyscore',
   ToolTip1,
   ToolTip2,
+  withTop = true
 }) => {
   const dispatch = useAppDispatch();
   const myLevelData = useAppSelector(state => state.dashboardState.myLevelData);
@@ -213,7 +215,7 @@ const MyLevelSection: FC<Props> = ({
             </Box>
           )}
         </Box>
-        {myLevelData && myLevelData.position.max !== 0 && (
+        {withTop && myLevelData && myLevelData.position.max !== 0 && (
           <Box
             sx={{
               display: 'flex',
