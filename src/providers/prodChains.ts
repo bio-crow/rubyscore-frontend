@@ -138,7 +138,7 @@ export const prodChains: Chain[] = [
     testnet: false,
   },
   {
-    id: 534351,
+    id: 534352,
     name: 'Scroll',
     network: 'Scroll',
     nativeCurrency: {
@@ -174,5 +174,5 @@ export const prodContracts = {
   linea: { contract: '0xbDB018e21AD1e5756853fe008793a474d329991b', chainId: 59144 },
   zkEVM: { contract: '0xF57Cb671D50535126694Ce5Cc3CeBe3F32794896', chainId: 1101 },
   zkSync: { contract: '0x8A1142620CbdE2f2d63E88F35D0D76eAAce0AC9e', chainId: 324 },
-  scroll: { contract: '0xDC3D8318Fbaec2de49281843f5bba22e78338146', chainId: 534351 },
+  scroll: { contract: '0xDC3D8318Fbaec2de49281843f5bba22e78338146', chainId: 534352 },
 };
