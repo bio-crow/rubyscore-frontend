@@ -51,7 +51,7 @@ const MyLevelSection: FC<Props> = ({
   project = 'rubyscore',
   ToolTip1,
   ToolTip2,
-  withTop = true
+  withTop = true,
 }) => {
   const dispatch = useAppDispatch();
   const myLevelData = useAppSelector(state => state.dashboardState.myLevelData);
