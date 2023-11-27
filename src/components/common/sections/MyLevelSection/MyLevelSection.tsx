@@ -213,7 +213,7 @@ const MyLevelSection: FC<Props> = ({
             </Box>
           )}
         </Box>
-        {/*  {myLevelData && myLevelData.position.max !== 0 && (
+        {myLevelData && myLevelData.position.max !== 0 && (
           <Box
             sx={{
               display: 'flex',
@@ -222,7 +222,6 @@ const MyLevelSection: FC<Props> = ({
               gap: '16px',
             }}
           >
-
             <Box
               sx={{
                 display: 'flex',
@@ -232,12 +231,14 @@ const MyLevelSection: FC<Props> = ({
                 alignItems: { xs: 'unset', md: 'flex-end' },
               }}
             >
-              <Box sx={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '5px'
-              }}>
-                <CustomTooltip title={<TooltipCurrentRank/>}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '5px',
+                }}
+              >
+                <CustomTooltip title={<TooltipCurrentRank />}>
                   <Box
                     sx={{
                       cursor: 'pointer',
@@ -282,7 +283,7 @@ const MyLevelSection: FC<Props> = ({
               </Box>
             </Box>
           </Box>
-        )} */}
+        )}
       </Box>
       {myLevelDataLoading ? (
         <Box display='flex' width='100%' height='100%' alignItems='center' justifyContent='center'>
