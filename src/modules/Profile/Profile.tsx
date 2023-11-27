@@ -70,6 +70,7 @@ const Profile = () => {
             }}
           >
             <MyLevelSection
+              withTop={false}
               breakpoints={breakpointsConfig}
               initSlidePerPage={4.4}
               ToolTip1={<TooltipMyLevelProfile1 />}
