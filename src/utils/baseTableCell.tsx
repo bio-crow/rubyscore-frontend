@@ -9,7 +9,7 @@ import { useAppSelector } from '@/core/store';
 export const ReferralUserCell = (params: GridRenderCellParams<any>) => {
   const theme = useCustomTheme();
   const leaderboardUser = useAppSelector(state => state.leaderboardState.leaderboardUser);
-  const copyValue = params.row.name || params.row.wallet;
+  const copyValue = params.row.wallet;
   const maskedWallet =
     params.row.wallet && params.row.wallet.slice(0, 6) + '...' + params.row.wallet.slice(-6);
   const isYou = leaderboardUser && leaderboardUser.profile.wallet === params.row.wallet;
