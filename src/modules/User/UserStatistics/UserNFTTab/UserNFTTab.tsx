@@ -17,7 +17,7 @@ const UserNFTTab = () => {
         gap: '20px',
       }}
     >
-      {list.length > 0 ? (
+      {list?.length > 0 ? (
         <>
           <Box
             sx={{

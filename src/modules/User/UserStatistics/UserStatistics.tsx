@@ -36,12 +36,12 @@ const UserStatistics = () => {
     {
       index: 0,
       label: 'Quests completed',
-      value: completedTasks.length,
+      value: completedTasks?.length,
     },
     {
       index: 1,
       label: 'NFTs unlocked',
-      value: list.length,
+      value: list?.length,
     },
   ];
   useEffect(() => {
