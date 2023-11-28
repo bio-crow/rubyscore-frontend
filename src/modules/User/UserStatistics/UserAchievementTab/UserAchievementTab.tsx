@@ -16,7 +16,7 @@ const UserAchievementTab = () => {
         gap: '20px',
       }}
     >
-      {completedTasks.length > 0 ? (
+      {completedTasks?.length > 0 ? (
         <Box
           sx={{
             flex: '1',
@@ -26,7 +26,11 @@ const UserAchievementTab = () => {
           }}
         >
           {completedTasks.map((data: ITask, index: number) => (
-            <AchievementCard task={data} key={uuidv4()} zIndex={completedTasks.length - index} />
+            <AchievementCard
+              task={data}
+              key={uuidv4()}
+              zIndex={completedTasks && completedTasks?.length - index}
+            />
           ))}
         </Box>
       ) : (
