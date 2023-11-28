@@ -11,14 +11,10 @@ export const prodChains: Chain[] = [
     },
     rpcUrls: {
       public: {
-        http: [
-          'https://rpc.ankr.com/optimism/7469b65bc433b15506c988eddeca58c3408e5a3f99ddbbbbf5d5f1cfaa13a153',
-        ],
+        http: ['https://optimism.llamarpc.com'],
       },
       default: {
-        http: [
-          'https://rpc.ankr.com/optimism/7469b65bc433b15506c988eddeca58c3408e5a3f99ddbbbbf5d5f1cfaa13a153',
-        ],
+        http: ['https://optimism.llamarpc.com'],
       },
     },
     blockExplorers: {
@@ -40,10 +36,10 @@ export const prodChains: Chain[] = [
     },
     rpcUrls: {
       public: {
-        http: ['https://rpc.ankr.com/base/7469b65bc433b15506c988eddeca58c3408e5a3f99ddbbbbf5d5f1cfaa13a153'],
+        http: ['https://base.llamarpc.com'],
       },
       default: {
-        http: ['https://rpc.ankr.com/base/7469b65bc433b15506c988eddeca58c3408e5a3f99ddbbbbf5d5f1cfaa13a153'],
+        http: ['https://base.llamarpc.com'],
       },
     },
     blockExplorers: {
@@ -65,10 +61,10 @@ export const prodChains: Chain[] = [
     },
     rpcUrls: {
       public: {
-        http: ['https://rpc.ankr.com/linea/7469b65bc433b15506c988eddeca58c3408e5a3f99ddbbbbf5d5f1cfaa13a153'],
+        http: ['https://linea.drpc.org'],
       },
       default: {
-        http: ['https://rpc.ankr.com/linea/7469b65bc433b15506c988eddeca58c3408e5a3f99ddbbbbf5d5f1cfaa13a153'],
+        http: ['https://linea.drpc.org'],
       },
     },
     blockExplorers: {
@@ -90,14 +86,10 @@ export const prodChains: Chain[] = [
     },
     rpcUrls: {
       public: {
-        http: [
-          'https://rpc.ankr.com/polygon_zkevm/7469b65bc433b15506c988eddeca58c3408e5a3f99ddbbbbf5d5f1cfaa13a153',
-        ],
+        http: ['https://polygon-zkevm.drpc.org'],
       },
       default: {
-        http: [
-          'https://rpc.ankr.com/polygon_zkevm/7469b65bc433b15506c988eddeca58c3408e5a3f99ddbbbbf5d5f1cfaa13a153',
-        ],
+        http: ['https://polygon-zkevm.drpc.org'],
       },
     },
     blockExplorers: {
@@ -119,14 +111,10 @@ export const prodChains: Chain[] = [
     },
     rpcUrls: {
       public: {
-        http: [
-          'https://rpc.ankr.com/zksync_era/7469b65bc433b15506c988eddeca58c3408e5a3f99ddbbbbf5d5f1cfaa13a153',
-        ],
+        http: ['https://zksync-era.blockpi.network/v1/rpc/public'],
       },
       default: {
-        http: [
-          'https://rpc.ankr.com/zksync_era/7469b65bc433b15506c988eddeca58c3408e5a3f99ddbbbbf5d5f1cfaa13a153',
-        ],
+        http: ['https://zksync-era.blockpi.network/v1/rpc/public'],
       },
     },
     blockExplorers: {
@@ -148,14 +136,10 @@ export const prodChains: Chain[] = [
     },
     rpcUrls: {
       public: {
-        http: [
-          'https://rpc.ankr.com/scroll/7469b65bc433b15506c988eddeca58c3408e5a3f99ddbbbbf5d5f1cfaa13a153',
-        ],
+        http: ['https://rpc.scroll.io'],
       },
       default: {
-        http: [
-          'https://rpc.ankr.com/scroll/7469b65bc433b15506c988eddeca58c3408e5a3f99ddbbbbf5d5f1cfaa13a153',
-        ],
+        http: ['https://rpc.scroll.io'],
       },
     },
     blockExplorers: {
