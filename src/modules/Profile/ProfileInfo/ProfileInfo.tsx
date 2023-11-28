@@ -9,6 +9,7 @@ import { initUserDataFromContract } from '@/core/thunk/user.thunk';
 
 const ProfileInfo = () => {
   const { address } = useAccount();
+
   const completedTasks = useAppSelector(state => state.taskState.completedTasks);
   const dispatch = useAppDispatch();
   useEffect(() => {
