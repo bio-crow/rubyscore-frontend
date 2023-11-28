@@ -1,11 +1,9 @@
 import { Box } from '@mui/system';
-import { useCustomTheme } from '../../../hooks/useCustomTheme';
+import { useCustomTheme } from '@/hooks/useCustomTheme';
 import ThirdlyButton from '@/components/common/ui/ThirdlyButton/ThirdlyButton';
 import Image from 'next/image';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { claimProfile } from '@/core/thunk/user.thunk';
 import { useAppDispatch, useAppSelector } from '@/core/store';
-import { useAccount } from 'wagmi';
 import ClaimNameModal from '@/components/common/ClaimNameModal/ClaimNameModal';
 
 const benefitsConfig = [

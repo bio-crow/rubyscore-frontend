@@ -1,7 +1,7 @@
 import Layout from '@/components/layout/Layout/Layout';
-import { Box, Tab } from '@mui/material';
+import { Box } from '@mui/material';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import DashboardTab from '@/modules/Dashboard/DashboardTab/DashboardTab';
 import { DashboardTabIndexType } from '@/types/index';
 import NetworkTabs from '@/components/common/ui/NetworkTabs/NetworkTabs';
