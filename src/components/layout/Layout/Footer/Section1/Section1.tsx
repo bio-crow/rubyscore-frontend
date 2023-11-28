@@ -50,7 +50,7 @@ const Section1 = () => {
         >
           Community
         </Box>
-        <CustomLink title='Community Hub' url={appRoutes.DASHBOARD} />
+
         <CustomLink title='Community Initiativies' url='#' />
         <CustomLink title='Governance Forum' url='#' />
         <CustomLink title='Merch Store' url='#' /> */}
