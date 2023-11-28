@@ -8,7 +8,7 @@ import { loadUserProjectInfo } from '@/core/thunk/user.thunk';
 export const getTasks = createAsyncThunk('taskSlice/getTasks', async (args, { dispatch }) => {
   dispatch(setTasksLoading(true));
   const data = await fetchTasks();
-  if (data?.data?.result) {
+  if (data?.data?.result?.tasks) {
     dispatch(setTasks(data?.data?.result.tasks));
   } else {
     dispatch(setTasks([]));
@@ -20,7 +20,7 @@ export const getCompletedTasks = createAsyncThunk(
   'taskSlice/getCompletedTasks',
   async (wallet: any, { dispatch }) => {
     const data = await fetchCompletedTasks(wallet);
-    if (data?.data?.result) {
+    if (data?.data?.result?.tasks) {
       dispatch(setCompletedTasks(data?.data?.result.tasks));
     } else {
       dispatch(setCompletedTasks([]));

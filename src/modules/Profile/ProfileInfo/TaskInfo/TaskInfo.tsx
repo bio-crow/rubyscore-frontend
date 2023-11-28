@@ -42,7 +42,7 @@ const TaskInfo: FC<Props> = ({ tasks }) => {
         </Box>
         <Box display='flex' alignItems='center' gap='10px'>
           <Box className='Body-Lato-fw-700-fs-16' color={theme.palette.lightGreen}>
-            {tasks.length}
+            {tasks?.length}
           </Box>
           <Box className='Body-Lato-fw-700-fs-16' color={theme.palette.powderWhite}>
             Quests
@@ -50,7 +50,7 @@ const TaskInfo: FC<Props> = ({ tasks }) => {
         </Box>
       </Box>
       <Box display='flex' flexDirection='column' paddingTop='16px' gap='10px'>
-        {tasks.length === 0 ? (
+        {tasks?.length === 0 ? (
           <Box display='flex' alignItems='center' gap='10px' justifyContent='center' minHeight='84px'>
             <Image src='/asserts/groupIcon.png' alt='icon' width='24' height='24' />
             <Box
@@ -66,12 +66,14 @@ const TaskInfo: FC<Props> = ({ tasks }) => {
           </Box>
         ) : (
           <>
-            {tasks.slice(0, 2).map((item: ITask, index: number) => (
-              <TaskCard key={uuidv4()} task={item} zIndex={3 - index} />
-            ))}
+            {tasks
+              ?.slice(0, 2)
+              .map((item: ITask, index: number) => (
+                <TaskCard key={uuidv4()} task={item} zIndex={3 - index} />
+              ))}
           </>
         )}
-        {tasks.length > 2 && (
+        {tasks?.length > 2 && (
           <SecondaryButton
             variant='contained'
             size='large'
