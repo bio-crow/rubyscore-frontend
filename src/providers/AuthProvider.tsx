@@ -70,6 +70,7 @@ const AuthProvider: FC<Props> = ({ children }) => {
     const handleConnectorUpdate = ({ account, chain }: ConnectorData) => {
       if (account) {
         dispatch(logout());
+        reset();
       }
     };
 
