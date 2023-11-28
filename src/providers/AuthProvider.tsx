@@ -1,6 +1,6 @@
 'use client';
 import { FC, ReactNode, useEffect } from 'react';
-import { useAccount, useConnect, useDisconnect } from 'wagmi';
+import { ConnectorData, useAccount, useConnect, useDisconnect } from 'wagmi';
 import { useSignMessage } from 'wagmi';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { ILoginPayload } from '@/core/types';
@@ -13,6 +13,7 @@ interface Props {
 
 const AuthProvider: FC<Props> = ({ children }) => {
   const searchParams = useSearchParams();
+  const { connector: activeConnector } = useAccount();
   const isAuth = useAppSelector(state => state.authState.isAuth);
   const loginLoading = useAppSelector(state => state.authState.loading);
   const referralCode = searchParams.get('ref');
@@ -65,6 +66,22 @@ const AuthProvider: FC<Props> = ({ children }) => {
       reset();
     }
   }, [error]);
+  useEffect(() => {
+    const handleConnectorUpdate = ({ account, chain }: ConnectorData) => {
+      if (account) {
+        dispatch(logout());
+        reset();
+      }
+    };
+
+    if (activeConnector) {
+      activeConnector.on('change', handleConnectorUpdate);
+    }
+
+    return () => {
+      activeConnector && activeConnector.off('change', handleConnectorUpdate);
+    };
+  }, [activeConnector]);
   return <>{children}</>;
 };
 export default AuthProvider;

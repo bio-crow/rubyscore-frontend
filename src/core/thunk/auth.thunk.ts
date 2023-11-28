@@ -56,9 +56,9 @@ export const refreshToken = createAsyncThunk('authSlice/fetchRefresh', async () 
   return await fetchRefreshToken();
 });
 export const logout = createAsyncThunk('authSlice/fetchLogout', async (args, { dispatch }) => {
-  await disconnect();
   localStorage.removeItem('signature');
   localStorage.removeItem('isAuth');
+  await disconnect();
   dispatch(setIsAuth(false));
   dispatch(setToken(null));
   dispatch(setIsClaimed(false));
@@ -67,5 +67,5 @@ export const logout = createAsyncThunk('authSlice/fetchLogout', async (args, { d
   dispatch(setPremiumStatus(false));
   dispatch(setPremiumPrice('0'));
   dispatch(setUserProjectInfo(null));
-  return await disconnect();
+  return;
 });
