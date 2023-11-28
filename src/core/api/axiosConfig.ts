@@ -26,6 +26,11 @@ apiPrivateAxios.interceptors.response.use(
       } catch (error) {
         throw error;
       }
+    } else {
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('signature');
+        localStorage.removeItem('isAuth');
+      }
     }
     throw error;
   }
