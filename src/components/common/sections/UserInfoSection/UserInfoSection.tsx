@@ -13,7 +13,6 @@ interface Props {
 }
 const UserInfoSection: FC<Props> = ({ user, withUntilNextLevel = false }) => {
   const theme = useCustomTheme();
-  const { address } = useAccount();
   const maskedAddress = user && user.profile.wallet.slice(0, 6) + '...' + user.profile.wallet.slice(-6);
   const TopPercent = user && (user?.position.current / user?.position.max) * 100;
   const options = [
@@ -100,7 +99,7 @@ const UserInfoSection: FC<Props> = ({ user, withUntilNextLevel = false }) => {
                 cursor: 'pointer',
                 height: '24px',
               }}
-              onClick={() => copyToClickBoard(address)}
+              onClick={() => copyToClickBoard(user?.profile?.wallet)}
             >
               <CopyIcon fill={theme.palette.white50} />
             </Box>
