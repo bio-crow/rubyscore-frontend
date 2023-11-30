@@ -60,7 +60,11 @@ const ClaimProfile = () => {
   useEffect(() => {
     const subscription = watch((value: any, { name, type }: any) => {
       if (name === CLAIM_PROFILE_FIELDS.NAME) {
-        setIsPaid(value[CLAIM_PROFILE_FIELDS.NAME].length < 7);
+        if (value[CLAIM_PROFILE_FIELDS.NAME].length < 7) {
+          setIsPaid(true);
+        } else {
+          setIsPaid(false);
+        }
       }
       setErrorText(false);
     });
