@@ -84,7 +84,7 @@ const AchievementCard: FC<Props> = ({ task, zIndex }) => {
         >
           {task.description}
         </Box>
-        <Box
+        {/*  <Box
           sx={{
             color: theme.palette.white50,
             display: open ? 'flex' : 'none',
@@ -92,7 +92,7 @@ const AchievementCard: FC<Props> = ({ task, zIndex }) => {
           className='Body-Lato-fw-600-fs-14'
         >
           {task.description}
-        </Box>
+        </Box> */}
       </Box>
     </Box>
   );

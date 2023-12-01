@@ -100,7 +100,7 @@ const DailyActivityCard: FC<Props> = ({ task }) => {
         >
           {task.description}
         </Box>
-        <Box
+        {/*  <Box
           sx={{
             color: theme.palette.white50,
             display: open ? 'flex' : 'none',
@@ -108,7 +108,7 @@ const DailyActivityCard: FC<Props> = ({ task }) => {
           className='Body-Lato-fw-600-fs-14'
         >
           {task.description}
-        </Box>
+        </Box> */}
         <PrimaryButton
           onClick={claim}
           variant='contained'
