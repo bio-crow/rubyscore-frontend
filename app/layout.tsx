@@ -11,8 +11,8 @@ import AuthProvider from '@/providers/AuthProvider';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const lato = Lato({ subsets: ['latin'], variable: '--font-lato', weight: ['100', '300', '400', '700'] });
 export const metadata: Metadata = {
-  title: 'RubyScore',
-  description: 'RubyScore',
+  title: 'Rubyscore',
+  description: 'Rubyscore',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
