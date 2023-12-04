@@ -7,7 +7,7 @@ import { ReactNode } from 'react';
 import WalletProvider from '@/providers/WalletProvider';
 import ToastieContainer from '@/components/common/ToastieContainer/ToastieContainer';
 import AuthProvider from '@/providers/AuthProvider';
-
+import { Analytics } from '@vercel/analytics/react';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const lato = Lato({ subsets: ['latin'], variable: '--font-lato', weight: ['100', '300', '400', '700'] });
 export const metadata: Metadata = {
@@ -21,7 +21,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <ThemeRegistry>
         <body className={`${inter.variable} ${lato.variable}`}>
           <WalletProvider>
-            <AuthProvider>{children}</AuthProvider>
+            <AuthProvider>
+              {children}
+              <Analytics />
+            </AuthProvider>
           </WalletProvider>
           <ToastieContainer />
         </body>

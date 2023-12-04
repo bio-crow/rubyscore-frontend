@@ -52,8 +52,6 @@ const DailyActivityCard: FC<Props> = ({ task }) => {
           background: theme.palette.black,
         }}
         onClick={() => setOpen(!open)}
-        onMouseEnter={() => setOpen(true)}
-        onMouseLeave={() => setOpen(false)}
       >
         <CardTimer />
         <Box

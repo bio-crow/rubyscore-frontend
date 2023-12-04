@@ -37,8 +37,6 @@ const TaskCard: FC<Props> = ({ task, zIndex }) => {
           background: theme.palette.backgroundColor,
         }}
         onClick={() => setOpen(!open)}
-        onMouseEnter={() => setOpen(true)}
-        onMouseLeave={() => setOpen(false)}
       >
         <Box display='flex' alignItems='center' gap='10px' flexWrap='wrap'>
           {task.projects.map(project => (
