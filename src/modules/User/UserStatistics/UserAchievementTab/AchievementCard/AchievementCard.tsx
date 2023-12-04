@@ -37,8 +37,6 @@ const AchievementCard: FC<Props> = ({ task, zIndex }) => {
           background: theme.palette.black,
         }}
         onClick={() => setOpen(!open)}
-        onMouseEnter={() => setOpen(true)}
-        onMouseLeave={() => setOpen(false)}
       >
         <Box
           sx={{
