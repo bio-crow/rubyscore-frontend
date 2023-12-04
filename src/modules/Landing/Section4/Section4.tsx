@@ -23,7 +23,7 @@ const Section4 = () => {
           zIndex: 5,
         }}
       >
-        <Image src='/asserts/landing/landing-section3-img.svg' alt='img' fill />
+        <Image src='/asserts/landing/landing-section3-img.png' alt='img' fill />
         <Box
           sx={{
             position: 'absolute',

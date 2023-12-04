@@ -65,7 +65,7 @@ const Section1 = () => {
           position: 'relative',
         }}
       >
-        <Image src='/asserts/landing/landing-section1-img.svg' alt='img' fill />
+        <Image src='/asserts/landing/landing-section1-img.png' alt='img' fill />
       </Box>
       <Box
         sx={{
