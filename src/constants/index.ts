@@ -120,7 +120,7 @@ export const myLevelIcons = {
 export const dashboardPanelTabs: { index: DashboardTabIndexType; label: string }[] = [
   {
     index: 'zk_era',
-    label: 'ZkSync',
+    label: 'zkSync',
   },
   {
     index: 'linea',
