@@ -1,205 +1,227 @@
 @import 'node_modules/modern-normalize/modern-normalize.css';
+html {
+    width:100vw;
+    overflow-x:hidden;
+}
 body {
-  ::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #f5f7f380;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #1c1e25;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #f5f7f31a;
-  }
+    width:100vw;
+    overflow-x:hidden;
+    ::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #f5f7f380;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #1c1e25;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #f5f7f31a;
+    }
 }
 
 main {
-  display: flex;
-  min-height: 100vh;
+    display: flex;
+    min-height: 100vh;
+    width:100vw;
+    overflow-x:hidden;
 }
 
 .H1-Lato-fw-700-fs-32 {
-  font-family: var(--font-lato);
-  font-size: 32px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 48px;
+    font-family: var(--font-lato);
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 48px;
 }
 
 .H2-Lato-fw-700-fs-24 {
-  font-family: var(--font-lato);
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 40px;
+    font-family: var(--font-lato);
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 40px;
 }
+
 .Body-Lato-fw-900-fs-64 {
-  font-family: var(--font-lato);
-  font-size: 64px;
-  font-style: normal;
-  font-weight: 900;
-  line-height: 72px;
+    font-family: var(--font-lato);
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 72px;
 }
+
 .Body-Lato-fw-800-fs-24 {
-  font-family: var(--font-lato);
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 800;
-  line-height: 32px;
+    font-family: var(--font-lato);
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 32px;
 }
 
 .Body-Lato-fw-600-fs-24 {
-  font-family: var(--font-lato);
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 32px;
-  @media (max-width: 500px) {
-    font-size: 18px;
-  }
+    font-family: var(--font-lato);
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 32px;
+    @media (max-width: 500px) {
+        font-size: 18px;
+    }
 }
+
 .Body-Lato-fw-500-fs-24 {
-  font-family: var(--font-lato);
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 32px;
+    font-family: var(--font-lato);
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32px;
 }
+
 .Body-Lato-fw-700-fs-18 {
-  font-family: var(--font-lato);
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 40px;
+    font-family: var(--font-lato);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 40px;
 }
 
 .Body-Lato-fw-500-fs-18 {
-  font-family: var(--font-lato);
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 40px;
+    font-family: var(--font-lato);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 40px;
 }
 
 .Body-Lato-fw-700-fs-16 {
-  font-family: var(--font-lato);
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 24px;
+    font-family: var(--font-lato);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
 }
 
 .Body-Lato-fw-700-fs-14 {
-  font-family: var(--font-lato);
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 32px;
+    font-family: var(--font-lato);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 32px;
 }
 
 .Body-Lato-fw-600-fs-14 {
-  font-family: var(--font-lato);
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 16px;
+    font-family: var(--font-lato);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 16px;
 }
 
 .Body-Lato-fw-500-fs-10 {
-  font-family: var(--font-lato);
-  font-size: 10px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 16px;
+    font-family: var(--font-lato);
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
 }
-.Body-Lato-fw-500-fs-12-h-24{
-  font-family: var(--font-lato);
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 24px;
+
+.Body-Lato-fw-500-fs-12-h-24 {
+    font-family: var(--font-lato);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
 }
-.Body-Inter-fw-700-fs-16{
-  font-family: var(--font-inter);
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 24px;
+
+.Body-Inter-fw-700-fs-16 {
+    font-family: var(--font-inter);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
 }
-.Body-Inter-fw-700-fs-18{
-  font-family: var(--font-inter);
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 40px;
+
+.Body-Inter-fw-700-fs-18 {
+    font-family: var(--font-inter);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 40px;
 }
+
 .profile-Lato-fw-700-fs-20 {
-  font-family: var(--font-lato);
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 32px;
+    font-family: var(--font-lato);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 32px;
 }
 
 .lvl-Lato-fw-700-fs-18 {
-  font-family: var(--font-lato);
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 32px;
+    font-family: var(--font-lato);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 32px;
 }
 
 .menu-Lato-fw-500-fs-14 {
-  font-family: var(--font-lato);
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 24px;
+    font-family: var(--font-lato);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
 }
 
 .menu-Lato-fw-700-fs-14 {
-  font-family: var(--font-lato);
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 24px;
+    font-family: var(--font-lato);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
 }
 
 .menu-Lato-fw-700-fs-12 {
-  font-family: var(--font-lato);
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 16px;
+    font-family: var(--font-lato);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px;
 }
 
 .points-Lato-fw-700-fs-12 {
-  font-family: var(--font-lato);
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 16px;
+    font-family: var(--font-lato);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px;
 }
+
 .benefit-content-Lato-fw-500-fs-14 {
-  font-family: var(--font-lato);
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 20px;
+    font-family: var(--font-lato);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
 }
+
 .benefit-title-Lato-fw-800-fs-18 {
-  font-family: var(--font-lato);
-  font-size: 32px;
-  font-style: normal;
-  font-weight: 800;
-  line-height: 40px;
+    font-family: var(--font-lato);
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 40px;
 }
+
 .benefit-title-Lato-fw-800-fs-32 {
-  font-family: var(--font-lato);
-  font-size: 32px;
-  font-style: normal;
-  font-weight: 800;
-  line-height: 40px;
+    font-family: var(--font-lato);
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 40px;
 }

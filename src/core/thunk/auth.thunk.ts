@@ -56,7 +56,6 @@ export const refreshToken = createAsyncThunk('authSlice/fetchRefresh', async () 
   return await fetchRefreshToken();
 });
 export const logout = createAsyncThunk('authSlice/fetchLogout', async (args, { dispatch }) => {
-  localStorage.removeItem('signature');
   localStorage.removeItem('isAuth');
   await disconnect();
   dispatch(setIsAuth(false));

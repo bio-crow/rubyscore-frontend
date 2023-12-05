@@ -18,17 +18,17 @@ const AuthProvider: FC<Props> = ({ children }) => {
   const loginLoading = useAppSelector(state => state.authState.loading);
   const referralCode = searchParams.get('ref');
   const { address, isConnected, connector, isReconnecting } = useAccount();
-  const message = 'Check Wallet';
+  const message =
+    ' A signature is required for authorization on the platform and does not pose a threat to users!';
   const { data: signMessageData, error, isLoading, signMessage, variables, reset } = useSignMessage();
   const dispatch = useAppDispatch();
   const { connect } = useConnect();
-  const storedSignature = typeof window !== 'undefined' && localStorage.getItem('signature');
   const storedAuth = typeof window !== 'undefined' && localStorage.getItem('isAuth');
   useEffect(() => {
+    const storedSignature = typeof window !== 'undefined' && localStorage.getItem('signature');
     if (!isAuth) {
       if (connector && isConnected && address) {
         if (storedSignature) {
-          dispatch(setAuthLoading(true));
           let data: ILoginPayload = {
             signature: storedSignature,
             message: message,
@@ -39,7 +39,6 @@ const AuthProvider: FC<Props> = ({ children }) => {
           }
           dispatch(login(data));
         } else if (signMessageData) {
-          dispatch(setAuthLoading(true));
           localStorage.setItem('signature', signMessageData);
           let data: ILoginPayload = {
             signature: signMessageData,
@@ -58,7 +57,7 @@ const AuthProvider: FC<Props> = ({ children }) => {
         connect();
       }
     }
-  }, [signMessageData, isConnected, connector, storedSignature, storedAuth, isReconnecting, loginLoading]);
+  }, [signMessageData, isConnected, connector, storedAuth, isReconnecting, loginLoading]);
   useEffect(() => {
     dispatch(setAuthLoading(isLoading));
     if (error) {
