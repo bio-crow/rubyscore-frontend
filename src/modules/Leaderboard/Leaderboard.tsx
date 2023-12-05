@@ -15,7 +15,7 @@ import { setFilteredUser } from '@/core/state/leaderboard.state';
 const panelTabs: { index: DashboardTabIndexType; label: string }[] = [
   {
     index: 'zk_era',
-    label: 'ZkSync',
+    label: 'zkSync',
   },
   {
     index: 'linea',
