@@ -1,6 +1,6 @@
 import { Chain, connectorsForWallets, darkTheme } from '@rainbow-me/rainbowkit';
 import { configureChains, createConfig } from 'wagmi';
-import { polygonMumbai } from 'wagmi/chains';
+import * as allDefaultChains from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
 import {
   coinbaseWallet,
@@ -11,7 +11,11 @@ import {
 import { testChains } from '@/providers/testChains';
 import { prodChains } from '@/providers/prodChains';
 const appChains = process.env.NEXT_PUBLIC_IS_PROD === 'true' ? prodChains : testChains;
-const { chains, publicClient, webSocketPublicClient } = configureChains(appChains, [publicProvider()]);
+const defaultNets = Object.values(allDefaultChains);
+const { chains, publicClient, webSocketPublicClient } = configureChains(
+  [...defaultNets, ...appChains],
+  [publicProvider()]
+);
 
 const projectId = process.env.NEXT_PUBLIC_WC_PROJECT_ID || '';
 

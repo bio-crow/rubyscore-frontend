@@ -132,7 +132,7 @@ export const dashboardPanelTabs: { index: DashboardTabIndexType; label: string }
   },
   {
     index: 'zk_evm',
-    label: 'ZkEvm',
+    label: 'zkEVM',
   },
   {
     index: 'scroll',
@@ -161,15 +161,15 @@ export const axisLabelMap = {
     y: 'Wallets',
   },
   gas: {
-    x: 'Spent usd',
+    x: 'Spent USD',
     y: 'Wallets',
   },
   volume: {
-    x: 'Volume usd',
+    x: 'Volume USD',
     y: 'Wallets',
   },
   balance: {
-    x: 'Balance usd',
+    x: 'Balance USD',
     y: 'Wallets',
   },
 };

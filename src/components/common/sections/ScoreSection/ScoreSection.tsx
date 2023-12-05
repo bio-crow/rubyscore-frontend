@@ -110,7 +110,7 @@ const ScoreSection: FC<Props> = ({
     },
     {
       index: 'zk_evm',
-      title: 'zkEvm',
+      title: 'zkEVM',
       icon: networkStaticData['zk_evm'].icon,
       lvl: userScoreList['zk_evm'].level,
       points: userScoreList['zk_evm'].score,

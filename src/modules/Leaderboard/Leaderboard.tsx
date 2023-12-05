@@ -27,7 +27,7 @@ const panelTabs: { index: DashboardTabIndexType; label: string }[] = [
   },
   {
     index: 'zk_evm',
-    label: 'ZkEvm',
+    label: 'zkEVM',
   },
   {
     index: 'scroll',
