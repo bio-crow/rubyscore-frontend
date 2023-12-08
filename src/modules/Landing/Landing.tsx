@@ -7,9 +7,10 @@ import Section2 from '@/modules/Landing/Section2/Section2';
 import Section3 from '@/modules/Landing/Section3/Section3';
 import Section4 from '@/modules/Landing/Section4/Section4';
 import Section5 from '@/modules/Landing/Section5/Section5';
-import Section6 from '@/modules/Landing/Section6/Section6';
+import Section7 from '@/modules/Landing/Section7/Section7';
 import Image from 'next/image';
 import bg from '../../../public/asserts/landing/landing-section6-bg1.png';
+import Section6 from '@/modules/Landing/Section6/Section6';
 const Landing = () => {
   const theme = useCustomTheme();
   const router = useRouter();
@@ -32,18 +33,7 @@ const Landing = () => {
         <Section4 />
         <Section5 />
         <Section6 />
-        <Box
-          sx={{
-            position: 'absolute',
-            bottom: '-25vw',
-            left: 'calc((100% - 100vw) / 2)',
-            zIndex: '-1',
-            width: '100vw',
-            aspectRatio: '1512/902',
-          }}
-        >
-          <Image src='/asserts/landing/landing-section6-bg1.png' alt='bg' fill />
-        </Box>
+        <Section7 />
       </Box>
     </Layout>
   );

@@ -8,6 +8,7 @@ import WalletProvider from '@/providers/WalletProvider';
 import ToastieContainer from '@/components/common/ToastieContainer/ToastieContainer';
 import AuthProvider from '@/providers/AuthProvider';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const lato = Lato({ subsets: ['latin'], variable: '--font-lato', weight: ['100', '300', '400', '700'] });
 export const metadata: Metadata = {
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <AuthProvider>
               {children}
               <Analytics />
+              <SpeedInsights />
             </AuthProvider>
           </WalletProvider>
           <ToastieContainer />
