@@ -61,7 +61,7 @@ const Section5 = () => {
       <Box
         sx={{
           width: { xs: '100%', lg: '60%' },
-          aspectRatio: '786/441',
+          aspectRatio: '1.82',
           maxWidth: { xs: '1000px', lg: '786px' },
           position: 'relative',
         }}

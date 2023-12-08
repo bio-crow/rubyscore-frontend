@@ -56,7 +56,7 @@ const Section2 = () => {
           right: 'calc((100% - 100vw) / 2)',
           zIndex: '-1',
           width: '40vw',
-          aspectRatio: '7/10',
+          aspectRatio: '0.52',
         }}
       >
         <Image src='/asserts/landing/landing-section2-bg1.png' alt='bg' fill />
