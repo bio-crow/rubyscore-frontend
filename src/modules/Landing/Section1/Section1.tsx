@@ -65,7 +65,7 @@ const Section1 = () => {
           position: 'relative',
         }}
       >
-        <Image src='/asserts/landing/landing-section1-img.png' alt='img' fill />
+        <Image src='/asserts/landing/landing-section1-img.png' alt='img' fill loading='eager' />
       </Box>
       <Box
         sx={{
@@ -77,7 +77,7 @@ const Section1 = () => {
           aspectRatio: '1/2',
         }}
       >
-        <Image src='/asserts/landing/landing-section1-bg1.png' alt='bg' fill />
+        <Image src='/asserts/landing/landing-section1-bg1.png' alt='bg' fill loading='eager' />
       </Box>
       <Box
         sx={{
