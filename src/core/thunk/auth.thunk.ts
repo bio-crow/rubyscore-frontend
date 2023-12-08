@@ -3,7 +3,7 @@ import { ILoginPayload } from '@/core/types';
 import { fetchLogin, fetchRefreshToken } from '@/core/api/auth.api';
 import { disconnect } from '@wagmi/core';
 import { setAuthLoading, setIsAuth, setIsClaimed, setToken } from '@/core/state/auth.state';
-import { wagmiInitUserDataFromContract } from '@/core/api/contract.achievements.api';
+import { wagmiInitUserDataFromContract } from '@/core/api/contract/contract.achievements.api';
 import {
   setPremiumPrice,
   setPremiumStatus,

@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { v4 as uuidv4 } from 'uuid';
 import PrevIcon from '@/components/common/Icons/PrevIcon';
 import NextIcon from '@/components/common/Icons/NextIcon';
+import NetworkCardWithVote from '@/components/common/ui/NetworkTabs/NetworkCardWithVote/NetworkCardWithVote';
 import NetworkCard from '@/components/common/ui/NetworkTabs/NetworkCard/NetworkCard';
 const bpConfig = {
   0: {
@@ -37,8 +38,9 @@ interface Props {
   networks: { label: string; index: DashboardTabIndexType }[];
   activeTab: { index: DashboardTabIndexType; label: string };
   setActiveTab: Function;
+  withVote?: boolean;
 }
-const NetworkTabs: FC<Props> = ({ networks, activeTab, setActiveTab }) => {
+const NetworkTabs: FC<Props> = ({ networks, activeTab, withVote = false, setActiveTab }) => {
   const theme = useCustomTheme();
   const [swiperRef, setSwiperRef] = useState<any>();
   const [hasNext, setHasNext] = useState(false);
@@ -86,7 +88,11 @@ const NetworkTabs: FC<Props> = ({ networks, activeTab, setActiveTab }) => {
         >
           {networks?.map((data: { label: string; index: DashboardTabIndexType }) => (
             <SwiperSlide key={uuidv4()}>
-              <NetworkCard network={data} activeTab={activeTab} setActiveTab={setActiveTab} />
+              {withVote ? (
+                <NetworkCardWithVote network={data} activeTab={activeTab} setActiveTab={setActiveTab} />
+              ) : (
+                <NetworkCard network={data} activeTab={activeTab} setActiveTab={setActiveTab} />
+              )}
             </SwiperSlide>
           ))}
         </Swiper>

@@ -6,7 +6,7 @@ import {
   fetchUserNftList,
   fetchUserScoreList,
 } from '@/core/api/user.api';
-import { wagmiClaimName } from '@/core/api/contract.api';
+import { wagmiClaimName } from '@/core/api/contract/contract.api';
 import { IClaimPayload } from '@/core/types';
 import { formatEther } from 'viem';
 import {
@@ -21,7 +21,7 @@ import {
   setUserScoreList,
   setUserScoreListLoading,
 } from '@/core/state/user.state';
-import { wagmiInitUserDataFromContract } from '@/core/api/contract.achievements.api';
+import { wagmiInitUserDataFromContract } from '@/core/api/contract/contract.achievements.api';
 import { toast } from 'react-toastify';
 import { searchUser } from '@/core/api/leaderboard.api';
 

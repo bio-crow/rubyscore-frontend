@@ -1,16 +1,26 @@
 import { TextField, Tooltip } from '@mui/material';
-import { gridPageCountSelector, gridPageSelector, useGridApiContext } from '@mui/x-data-grid';
-import PrimaryPagination from '@/components/common/ui/PrimaryPagination/PrimaryPagination';
-import { FC, ReactElement, ReactNode } from 'react';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import { cloneElement, FC, ReactElement, ReactNode, useState } from 'react';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { Box } from '@mui/system';
 
 interface Props {
   title: any;
-  children: ReactElement;
+  children: any;
+  controlled?: boolean;
+  disableFocusListener?: boolean;
+  disableHoverListener?: boolean;
+  disableTouchListener?: boolean;
 }
 
-const CustomTooltip: FC<Props> = ({ children, title }) => {
+const CustomTooltip: FC<Props> = ({
+  children,
+  title,
+  controlled = false,
+  disableFocusListener = false,
+  disableHoverListener = false,
+  disableTouchListener = false,
+}) => {
   const theme = useCustomTheme();
   const tooltipTop = {
     '& .MuiTooltip-tooltip': {
@@ -28,6 +38,42 @@ const CustomTooltip: FC<Props> = ({ children, title }) => {
       },
     },
   };
+  const [open, setOpen] = useState(false);
+
+  const handleTooltipClose = () => {
+    setOpen(false);
+  };
+
+  const handleTooltipOpen = () => {
+    setOpen(true);
+  };
+  if (controlled) {
+    return (
+      <ClickAwayListener onClickAway={handleTooltipClose}>
+        {controlled ? (
+          <Tooltip
+            onClose={handleTooltipClose}
+            open={open}
+            onClickCapture={handleTooltipOpen}
+            onClick={handleTooltipOpen}
+            disableFocusListener={disableFocusListener}
+            disableHoverListener={disableHoverListener}
+            disableTouchListener={disableTouchListener}
+            title={title}
+            placement='top'
+            arrow
+            PopperProps={{ sx: tooltipTop }}
+          >
+            {children}
+          </Tooltip>
+        ) : (
+          <Tooltip title={title} placement='top' arrow PopperProps={{ sx: tooltipTop }}>
+            {children}
+          </Tooltip>
+        )}
+      </ClickAwayListener>
+    );
+  }
   return (
     <Tooltip title={title} placement='top' arrow PopperProps={{ sx: tooltipTop }}>
       {children}

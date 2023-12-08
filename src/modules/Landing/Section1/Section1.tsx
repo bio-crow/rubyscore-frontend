@@ -91,9 +91,7 @@ const Section1 = () => {
           background: '#92FD9D',
           filter: 'blur(15vw)',
         }}
-      >
-        <Image src='/asserts/landing/landing-section1-bg2.png' alt='bg' fill />
-      </Box>
+      />
     </Box>
   );
 };

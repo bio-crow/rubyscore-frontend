@@ -1,4 +1,5 @@
 import { Chain } from '@rainbow-me/rainbowkit';
+import { prodVoteContracts } from '@/providers/prodChains';
 export const testChains: Chain[] = [
   {
     id: 80001,
@@ -185,3 +186,4 @@ export const testContracts = {
   zkSync: { contract: '0xDA0F79DB2F00e93aBE1AB6FfA51bbd9043605917', chainId: 280 },
   scroll: { contract: '0x81C55bbA5d5D05a0C02f4B561B560194f34a6D07', chainId: 534351 },
 };
+export const testVoteContracts = prodVoteContracts;

@@ -12,7 +12,7 @@ import { claimProfileSchema } from '@/utils/validationConfig';
 import { ClaimProfileFormContext } from '@/context/index';
 import { FormInputText } from '@/components/common/fields/InputField';
 import { CLAIM_PROFILE_FIELDS } from '@/constants/formFields';
-import { wagmiCheckName } from '@/core/api/contract.api';
+import { wagmiCheckName } from '@/core/api/contract/contract.api';
 import { claimProfile } from '@/core/thunk/user.thunk';
 import { useAccount } from 'wagmi';
 import WarningIcon from '@/components/common/Icons/WarningIcon';

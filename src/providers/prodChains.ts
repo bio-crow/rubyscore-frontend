@@ -160,3 +160,10 @@ export const prodContracts = {
   zkSync: { contract: '0x8A1142620CbdE2f2d63E88F35D0D76eAAce0AC9e', chainId: 324 },
   scroll: { contract: '0xDC3D8318Fbaec2de49281843f5bba22e78338146', chainId: 534352 },
 };
+export const prodVoteContracts = {
+  base: { contract: '0xe10Add2ad591A7AC3CA46788a06290De017b9fB4', chainId: 8453 },
+  linea: { contract: '0xe10Add2ad591A7AC3CA46788a06290De017b9fB4', chainId: 59144 },
+  zkEVM: { contract: '0xe10Add2ad591A7AC3CA46788a06290De017b9fB4', chainId: 1101 },
+  zkSync: { contract: '0xCb84d512F0C9943D3BC6B4Be8801aC8Aa6621a54', chainId: 324 },
+  scroll: { contract: '0xe10Add2ad591A7AC3CA46788a06290De017b9fB4', chainId: 534352 },
+};

@@ -10,7 +10,7 @@ import { CLAIM_PROFILE_FIELDS } from '@/constants/formFields';
 import { useAccount } from 'wagmi';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { claimProfile } from '@/core/thunk/user.thunk';
-import { wagmiCheckName } from '@/core/api/contract.api';
+import { wagmiCheckName } from '@/core/api/contract/contract.api';
 import * as process from 'process';
 import WarningIcon from '@/components/common/Icons/WarningIcon';
 

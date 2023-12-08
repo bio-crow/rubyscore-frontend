@@ -1,5 +1,6 @@
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { Box } from '@mui/system';
+import { FC } from 'react';
 
 export const TooltipMyLevelProfile1 = () => {
   const theme = useCustomTheme();
@@ -323,6 +324,25 @@ export const TooltipCurrentRank = () => {
     >
       <Box className='Body-Lato-fw-600-fs-14' color={theme.palette.white50}>
         Current rank updates once an hour
+      </Box>
+    </Box>
+  );
+};
+export const TooltipVoteBtn: FC<{ isAuth: boolean }> = ({ isAuth }) => {
+  const theme = useCustomTheme();
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+      }}
+    >
+      <Box className='Body-Lato-fw-600-fs-14' color={theme.palette.white50}>
+        {isAuth
+          ? `This is a user vote, in which by voting the user interacts with the contract`
+          : `You need to authenticate through you wallet`}
       </Box>
     </Box>
   );

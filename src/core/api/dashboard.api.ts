@@ -8,6 +8,8 @@ import {
   IDashboardVolumeResponse,
   IDashboardWeeksResponse,
   IProjectStatisticsResponse,
+  IProjectVotesPayload,
+  IProjectVotesResponse,
   IUserGradationPayload,
   IUserGradationResponse,
   IUserTransactionsDatesPayload,
@@ -91,6 +93,14 @@ export const fetchUserTransactionsDates = async (params: IUserTransactionsDatesP
     return await apiPrivateAxios.get<IUserTransactionsDatesResponse>(
       `/dashboard/${projectName}/user-transactions`
     );
+  } catch (error) {
+    //console.error(error);
+  }
+};
+export const fetchProjectVotes = async (params: IProjectVotesPayload) => {
+  const { projectName } = params;
+  try {
+    return await apiPublicAxios.get<IProjectVotesResponse>(`/dashboard/${projectName}/vote`);
   } catch (error) {
     //console.error(error);
   }
