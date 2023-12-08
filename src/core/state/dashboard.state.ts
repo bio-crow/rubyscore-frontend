@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   IChartDot,
+  IDashboardTabsVoteInfo,
   ILeaderboardData,
   ILeaderboardUser,
   ILevelInfo,
@@ -8,10 +9,6 @@ import {
   IUserGradation,
   IUserTransactionsDates,
 } from '@/types/index';
-import { getPrivateLeaderboardData, getPublicLeaderboardData } from '@/core/thunk/leaderboard.thunk';
-import { AxiosResponse } from 'axios';
-import { ILeaderBoardResponse } from '@/core/types';
-import { getUserGradation } from '@/core/thunk/dashboard.thunk';
 
 interface IDashboardState {
   chartData: IChartDot[];
@@ -24,6 +21,8 @@ interface IDashboardState {
   userGradation: IUserGradation | null;
   levelLoading: string | null;
   userTransactionsDates: IUserTransactionsDates | null;
+  dashboardTabsVoteInfo: IDashboardTabsVoteInfo;
+  dashboardTabsVoteInfoLoading: string | null;
 }
 
 const initialState: IDashboardState = {
@@ -37,6 +36,16 @@ const initialState: IDashboardState = {
   userGradation: null,
   levelLoading: null,
   userTransactionsDates: null,
+  dashboardTabsVoteInfo: {
+    zk_era: null,
+    linea: null,
+    base: null,
+    zk_evm: null,
+    scroll: null,
+    zora: null,
+    rubyscore: null,
+  },
+  dashboardTabsVoteInfoLoading: null,
 };
 
 export const dashboardSlice = createSlice({
@@ -45,6 +54,16 @@ export const dashboardSlice = createSlice({
   reducers: {
     setChartData: (state, action: PayloadAction<IChartDot[]>) => {
       state.chartData = action.payload;
+    },
+    setDashboardTabsVoteInfo: (state, action: PayloadAction<IDashboardTabsVoteInfo>) => {
+      state.dashboardTabsVoteInfo = action.payload;
+    },
+    updateDashboardTabsVoteInfo: (state, action: PayloadAction<{ projectName: string; count: number }>) => {
+      const { projectName, count } = action.payload;
+      state.dashboardTabsVoteInfo = { ...state.dashboardTabsVoteInfo, [projectName]: count };
+    },
+    setDashboardTabsVoteInfoLoading: (state, action: PayloadAction<string | null>) => {
+      state.dashboardTabsVoteInfoLoading = action.payload;
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
@@ -89,4 +108,7 @@ export const {
   setLoading,
   setLevelLoading,
   setUserTransactionsDates,
+  setDashboardTabsVoteInfo,
+  updateDashboardTabsVoteInfo,
+  setDashboardTabsVoteInfoLoading,
 } = dashboardSlice.actions;

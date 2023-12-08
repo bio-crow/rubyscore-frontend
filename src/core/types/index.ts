@@ -18,7 +18,7 @@ import {
   fetchDashboardWeeks,
   fetchUserGradation,
 } from '@/core/api/dashboard.api';
-import { fetchClaimLevelSignature } from '@/core/api/contract.achievements.api';
+import { fetchClaimLevelSignature } from '@/core/api/contract/contract.achievements.api';
 
 export interface ILoginPayload {
   signature: string;
@@ -114,6 +114,10 @@ export interface IClaimPayload {
   name?: string;
   price: string;
   payable?: boolean;
+}
+export interface IVotePayload {
+  account: any;
+  project: string;
 }
 
 export interface IDashboardTransactionsResponse {
@@ -244,11 +248,19 @@ export interface IUserGradationPayload {
   projectName: string;
   wallet: string;
 }
+export interface IProjectVotesPayload {
+  projectName: string;
+}
 export interface IUserTransactionsDatesPayload {
   projectName: string;
 }
 export interface IUserGradationResponse {
   result: IUserGradation;
+}
+export interface IProjectVotesResponse {
+  result: {
+    count: number;
+  };
 }
 export interface IUserTransactionsDatesResponse {
   result: IUserTransactionsDates;

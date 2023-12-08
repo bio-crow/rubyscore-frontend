@@ -1,12 +1,12 @@
 import Layout from '@/components/layout/Layout/Layout';
 import { Box } from '@mui/material';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import DashboardTab from '@/modules/Dashboard/DashboardTab/DashboardTab';
 import { DashboardTabIndexType } from '@/types/index';
 import NetworkTabs from '@/components/common/ui/NetworkTabs/NetworkTabs';
 import { useAppDispatch } from '@/core/store';
-import { getUserGradation } from '@/core/thunk/dashboard.thunk';
+import { getUserGradation, initDashboardTabsVotes } from '@/core/thunk/dashboard.thunk';
 import { useAccount } from 'wagmi';
 import { dashboardPanelTabs } from '@/constants/index';
 import { setUserGradation } from '@/core/state/dashboard.state';
@@ -29,6 +29,9 @@ const Dashboard = () => {
       dispatch(setUserGradation(null));
     }
   }, [activeTab.index, address]);
+  useEffect(() => {
+    dispatch(initDashboardTabsVotes());
+  }, []);
   return (
     <Layout>
       <Box
@@ -40,7 +43,12 @@ const Dashboard = () => {
           padding: { xs: '0px 15px 0px 15px', sm: '0px 30px 0px 30px', xl: 0 },
         }}
       >
-        <NetworkTabs networks={dashboardPanelTabs} activeTab={activeTab} setActiveTab={setActiveTab} />
+        <NetworkTabs
+          networks={dashboardPanelTabs}
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          withVote
+        />
         <DashboardTab activeTab={activeTab} />
       </Box>
     </Layout>

@@ -548,10 +548,39 @@ export const getAchievementsBaseContractConfig = (project: string, contractInfo:
         address: contractInfo.base.contract,
         chainId: contractInfo.base.chainId,
       };
-    case 'zora':
+    case 'linea':
       return {
-        address: contractInfo.zora.contract,
-        chainId: contractInfo.zora.chainId,
+        address: contractInfo.linea.contract,
+        chainId: contractInfo.linea.chainId,
+      };
+    case 'zk_evm':
+      return {
+        address: contractInfo.zkEVM.contract,
+        chainId: contractInfo.zkEVM.chainId,
+      };
+    case 'zk_era':
+      return {
+        address: contractInfo.zkSync.contract,
+        chainId: contractInfo.zkSync.chainId,
+      };
+    case 'scroll':
+      return {
+        address: contractInfo.scroll.contract,
+        chainId: contractInfo.scroll.chainId,
+      };
+    default:
+      return {
+        address: contractInfo.projectAchievements.contract,
+        chainId: contractInfo.projectAchievements.chainId,
+      };
+  }
+};
+export const getVoteBaseContractConfig = (project: string, contractInfo: any) => {
+  switch (project) {
+    case 'base':
+      return {
+        address: contractInfo.base.contract,
+        chainId: contractInfo.base.chainId,
       };
     case 'linea':
       return {

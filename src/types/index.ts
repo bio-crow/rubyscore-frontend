@@ -196,3 +196,12 @@ export interface IUserTransactionsDates {
   first_transaction_time: number;
   last_transaction_time: number;
 }
+export interface IDashboardTabsVoteInfo {
+  zk_era: number | null;
+  linea: number | null;
+  base: number | null;
+  zk_evm: number | null;
+  scroll: number | null;
+  zora: number | null;
+  rubyscore: number | null;
+}

@@ -20,6 +20,7 @@ import {
   fetchDashboardVolume,
   fetchDashboardWeeks,
   fetchProjectStatistics,
+  fetchProjectVotes,
   fetchUserGradation,
   fetchUserTransactionsDates,
 } from '@/core/api/dashboard.api';
@@ -34,9 +35,11 @@ import {
   setLevelLoading,
   setMyLevelDataLoading,
   setUserTransactionsDates,
+  setDashboardTabsVoteInfo,
+  updateDashboardTabsVoteInfo,
+  setDashboardTabsVoteInfoLoading,
 } from '@/core/state/dashboard.state';
-import { ChartIndexType, DashboardTabIndexType, IChartDot } from '@/types/index';
-import { setUserStatistics, setUserStatisticsLoading } from '@/core/state/leaderboard.state';
+import { ChartIndexType, DashboardTabIndexType, IChartDot, IDashboardTabsVoteInfo } from '@/types/index';
 import { searchUser } from '@/core/api/leaderboard.api';
 import { IClaimLevelPayload, IUserGradationPayload, IUserTransactionsDatesPayload } from '@/core/types';
 import {
@@ -44,8 +47,10 @@ import {
   wagmiClaimLevel,
   wagmiInitUserDataFromContract,
   wagmiLevels,
-} from '@/core/api/contract.achievements.api';
+} from '@/core/api/contract/contract.achievements.api';
 import { initUserDataFromContract } from '@/core/thunk/user.thunk';
+import { wagmiVote } from '@/core/api/contract/contract.vote.api';
+import { toast } from 'react-toastify';
 
 export const getDashboardChartData = createAsyncThunk(
   'dashboardSlice/getDashboardTransactionsData',
@@ -107,6 +112,7 @@ export const getDashboardChartData = createAsyncThunk(
 
     dispatch(setChartData(preparedData));
     dispatch(setLoading(false));
+    return;
   }
 );
 export const getUserLevelInfo = createAsyncThunk(
@@ -223,6 +229,58 @@ export const getUserTransactionsDates = createAsyncThunk(
     } else {
       dispatch(setUserTransactionsDates(null));
     }
+    return;
+  }
+);
+export const initDashboardTabsVotes = createAsyncThunk(
+  'dashboardSlice/initDashboardTabsVotes',
+  async (args, { dispatch }) => {
+    const projects: DashboardTabIndexType[] = ['zk_era', 'linea', 'base', 'zk_evm', 'scroll'];
+    const initValue: IDashboardTabsVoteInfo = {
+      zk_era: null,
+      linea: null,
+      base: null,
+      zk_evm: null,
+      scroll: null,
+      zora: null,
+      rubyscore: null,
+    };
+    const promises = projects.map(project =>
+      fetchProjectVotes({
+        projectName: project,
+      })
+    );
+    const values = await Promise.all(promises);
+    values.forEach((data, index) => {
+      const count = data?.data?.result?.count || null;
+      if (data?.data?.result) {
+        initValue[projects[index]] = count;
+      }
+    });
+    dispatch(setDashboardTabsVoteInfo(initValue));
+    return;
+  }
+);
+export const updateDashboardTabsVotesItem = createAsyncThunk(
+  'dashboardSlice/updateDashboardTabsVotesItem',
+  async (payload: { projectName: string; wallet: any }, { dispatch }) => {
+    const { projectName, wallet } = payload;
+    dispatch(setDashboardTabsVoteInfoLoading(projectName));
+    try {
+      await wagmiVote({
+        project: projectName,
+        account: wallet,
+      });
+      toast('Your vote has been counted', { position: 'top-right' });
+    } catch (e) {
+      //console.error(error);
+    }
+    const data = await fetchProjectVotes({ projectName });
+    if (data?.data?.result) {
+      const count = data?.data?.result?.count;
+      dispatch(updateDashboardTabsVoteInfo({ projectName, count: count }));
+    }
+    dispatch(setDashboardTabsVoteInfoLoading(null));
     return;
   }
 );
