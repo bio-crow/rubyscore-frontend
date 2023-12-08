@@ -25,9 +25,11 @@ export const wagmiVote = async (data: IVotePayload): Promise<any> => {
       account: account,
     };
     const { hash } = await writeContract(config);
-    return await waitForTransaction({
+    const result = await waitForTransaction({
       hash: hash,
     });
+    toast('Your vote has been counted', { position: 'top-right' });
+    return result;
   };
   try {
     return await action(data);

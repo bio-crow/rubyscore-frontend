@@ -271,7 +271,6 @@ export const updateDashboardTabsVotesItem = createAsyncThunk(
         project: projectName,
         account: wallet,
       });
-      toast('Your vote has been counted', { position: 'top-right' });
     } catch (e) {
       //console.error(error);
     }
