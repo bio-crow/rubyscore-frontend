@@ -82,7 +82,12 @@ export const fetchProjectStatistics = async (projectName: string) => {
 export const fetchUserGradation = async (params: IUserGradationPayload) => {
   const { projectName, wallet } = params;
   try {
-    return await apiPublicAxios.get<IUserGradationResponse>(`/dashboard/${projectName}/${wallet}`);
+    const config: any = {
+      headers: {
+        'Cache-Control': 'max-age=300',
+      },
+    };
+    return await apiPublicAxios.get<IUserGradationResponse>(`/dashboard/${projectName}/${wallet}`, config);
   } catch (error) {
     //console.error(error);
   }

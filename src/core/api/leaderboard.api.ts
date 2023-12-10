@@ -1,5 +1,5 @@
 import { ILeaderBoardResponse, ISearchUserPayload, ISearchUserResponse } from '@/core/types';
-import { apiPrivateAxios, apiPublicAxios } from '@/core/api/axiosConfig';
+import { apiPrivateAxios, apiPublicAxios, apiPublicAxiosLimited } from '@/core/api/axiosConfig';
 import { toast } from 'react-toastify';
 
 export const fetchPublicLeaderboard = async (projectName: string) => {
@@ -19,7 +19,8 @@ export const fetchPrivateLeaderboard = async (projectName: string) => {
 };
 export const searchUser = async (params: ISearchUserPayload) => {
   try {
-    return await apiPublicAxios.post<ISearchUserResponse>(`/leaderboard/search`, null, { params });
+    apiPublicAxiosLimited.setRateLimitOptions({ maxRequests: 5, perMilliseconds: 60000 });
+    return await apiPublicAxiosLimited.post<ISearchUserResponse>(`/leaderboard/search`, null, { params });
   } catch (error) {
     toast('Wallet not found', { position: 'top-right' });
   }

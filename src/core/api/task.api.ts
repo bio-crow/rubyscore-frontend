@@ -6,7 +6,7 @@ import {
   ITasksCompletedResponse,
   ITasksResponse,
 } from '@/core/types';
-import { apiPrivateAxios } from '@/core/api/axiosConfig';
+import { apiPrivateAxios, apiPrivateAxiosLimited } from '@/core/api/axiosConfig';
 
 export const fetchTasks = async () => {
   try {
@@ -24,7 +24,8 @@ export const fetchCompletedTasks = async (wallet: string) => {
 };
 export const loadClaimTask = async (taskId: number) => {
   try {
-    return await apiPrivateAxios.post<any>(`/task/check`, null, { params: { taskId } });
+    apiPrivateAxiosLimited.setRateLimitOptions({ maxRequests: 20, perMilliseconds: 60000 });
+    return await apiPrivateAxiosLimited.post<any>(`/task/check`, null, { params: { taskId } });
   } catch (error) {
     //console.error(error);
   }

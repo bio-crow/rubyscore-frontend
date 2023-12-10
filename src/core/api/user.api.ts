@@ -23,7 +23,12 @@ export const fetchUserNftList = async (wallet: string) => {
 };
 export const fetchUserScoreList = async (wallet: string) => {
   try {
-    return await apiPublicAxios.get<IScoreListResponse>(`/profile/${wallet}/score`);
+    const config: any = {
+      headers: {
+        'Cache-Control': 'max-age=300',
+      },
+    };
+    return await apiPublicAxios.get<IScoreListResponse>(`/profile/${wallet}/score`, config);
   } catch (error) {
     //console.error(error);
   }
