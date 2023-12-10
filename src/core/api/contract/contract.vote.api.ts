@@ -25,7 +25,7 @@ export const wagmiVote = async (data: IVotePayload): Promise<any> => {
       account: account,
     };
     if (project !== 'zk_era') {
-      config.gas = 22000
+      config.gas = 22000;
     }
     const { hash } = await writeContract(config);
     const result = await waitForTransaction({
