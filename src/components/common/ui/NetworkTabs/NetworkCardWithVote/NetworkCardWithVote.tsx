@@ -111,6 +111,7 @@ const NetworkCardWithVote: FC<Props> = ({ network, activeTab, setActiveTab }) =>
             </SecondaryButton>
           </CustomTooltip>
         </Box>
+        {/*
         <Box
           sx={{
             display: 'flex',
@@ -127,7 +128,7 @@ const NetworkCardWithVote: FC<Props> = ({ network, activeTab, setActiveTab }) =>
           >
             {dashboardTabsVoteInfo[network.index] !== null ? dashboardTabsVoteInfo[network.index] : '-'}
           </Box>
-        </Box>
+        </Box>*/}
       </Box>
     </Box>
   );
