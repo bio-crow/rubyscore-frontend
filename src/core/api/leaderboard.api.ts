@@ -19,7 +19,7 @@ export const fetchPrivateLeaderboard = async (projectName: string) => {
 };
 export const searchUser = async (params: ISearchUserPayload) => {
   try {
-    apiPublicAxiosLimited.setRateLimitOptions({ maxRequests: 5, perMilliseconds: 60000 });
+    apiPublicAxiosLimited.setRateLimitOptions({ maxRequests: 50, perMilliseconds: 60000 });
     return await apiPublicAxiosLimited.post<ISearchUserResponse>(`/leaderboard/search`, null, { params });
   } catch (error) {
     toast('Wallet not found', { position: 'top-right' });
