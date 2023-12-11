@@ -17,6 +17,7 @@ import { CircularProgress } from '@mui/material';
 import InfoIcon from '@/components/common/Icons/InfoIcon';
 import CustomTooltip from '@/components/common/CustomTooltip/CustomTooltip';
 import { TooltipCurrentRank } from '@/utils/tooltipsContent';
+import { formatPercentsForCards } from '@/utils/helpers';
 
 const breakpointsConfig = {
   0: {
@@ -65,7 +66,9 @@ const MyLevelSection: FC<Props> = ({
   const [swiperRef, setSwiperRef] = useState<any>();
   const percent =
     myLevelData &&
-    Number.parseFloat(`${(myLevelData.position.current / myLevelData.position.max) * 100}`).toFixed(0);
+    formatPercentsForCards(
+      Number.parseFloat(`${(myLevelData.position.current / myLevelData.position.max) * 100}`)
+    );
   const handlePrevious = () => {
     swiperRef?.slidePrev();
   };
