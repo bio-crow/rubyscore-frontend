@@ -39,7 +39,9 @@ export const wagmiVote = async (data: IVotePayload): Promise<any> => {
         to: baseConfig.address,
         value: parseEther('0.00000001'),
       });
-      config.gas = gasEstimate;
+      if (gasEstimate) {
+        config.gas = Math.floor(Number(BigInt(gasEstimate)) * 0.7);
+      }
     }
     const { hash } = await writeContract(config);
     const result = await waitForTransaction({
