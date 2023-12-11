@@ -23,8 +23,8 @@ export const wagmiVote = async (data: IVotePayload): Promise<any> => {
     const gasEstimate = await wagmiConfig.publicClient.estimateGas({
       account,
       to: baseConfig.address,
-      value: parseEther('0.00000001')
-    })
+      value: parseEther('0.00000001'),
+    });
     let config: any = {
       ...baseConfig,
       functionName: 'vote',
@@ -37,9 +37,9 @@ export const wagmiVote = async (data: IVotePayload): Promise<any> => {
       const gasEstimate = await wagmiConfig.publicClient.estimateGas({
         account,
         to: baseConfig.address,
-        value: parseEther('0.00000001')
-      })
-      config.gas = gasEstimate + 1000n
+        value: parseEther('0.00000001'),
+      });
+      config.gas = gasEstimate;
     }
     const { hash } = await writeContract(config);
     const result = await waitForTransaction({
