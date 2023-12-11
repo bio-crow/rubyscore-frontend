@@ -7,6 +7,8 @@ import { testVoteContracts } from '@/providers/testChains';
 import { abiIXProjectSBT } from '@/constants/abiIXProjectSBT';
 import { abiVote } from '@/constants/abiVote';
 import { toast } from 'react-toastify';
+import { parseEther } from 'viem';
+import { wagmiConfig } from '@/providers/walletConfig';
 const contractInfo = process.env.NEXT_PUBLIC_IS_PROD === 'true' ? prodVoteContracts : testVoteContracts;
 export const wagmiVote = async (data: IVotePayload): Promise<any> => {
   const action = async (data: IVotePayload) => {
@@ -18,6 +20,11 @@ export const wagmiVote = async (data: IVotePayload): Promise<any> => {
         chainId: baseConfig.chainId,
       });
     }
+    const gasEstimate = await wagmiConfig.publicClient.estimateGas({
+      account,
+      to: baseConfig.address,
+      value: parseEther('0.00000001')
+    })
     let config: any = {
       ...baseConfig,
       functionName: 'vote',
@@ -26,6 +33,13 @@ export const wagmiVote = async (data: IVotePayload): Promise<any> => {
     };
     if (project !== 'zk_era') {
       config.gas = 22000;
+    } else {
+      const gasEstimate = await wagmiConfig.publicClient.estimateGas({
+        account,
+        to: baseConfig.address,
+        value: parseEther('0.00000001')
+      })
+      config.gas = gasEstimate + 1000n
     }
     const { hash } = await writeContract(config);
     const result = await waitForTransaction({
