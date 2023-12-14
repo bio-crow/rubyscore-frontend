@@ -36,8 +36,6 @@ const breakpointsConfig = {
   },
 };
 const Profile = () => {
-  const searchParams = useSearchParams();
-  const referralCode = searchParams.get('ref');
   const dispatch = useAppDispatch();
   const { address } = useAccount();
   const isAuth = useAppSelector(state => state.authState.isAuth);
@@ -51,11 +49,6 @@ const Profile = () => {
       dispatch(getCompletedTasks(address));
     }
   }, [address, isAuth]);
-  useEffect(() => {
-    if (referralCode) {
-      track('Signup', { referralLink: referralCode });
-    }
-  }, [referralCode]);
   return (
     <Layout>
       {isAuth ? (

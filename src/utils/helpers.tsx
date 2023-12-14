@@ -23,6 +23,7 @@ import {
   TooltipAchievementsWallet,
   TooltipAchievementsWeeks,
 } from '@/utils/tooltipsContent';
+import { track } from '@vercel/analytics';
 
 export const copyToClickBoard = (text: string | undefined, message: string = 'Copied to clipboard') => {
   toast(message, { position: 'bottom-center' });
