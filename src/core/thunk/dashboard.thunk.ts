@@ -59,12 +59,10 @@ import { IClaimLevelPayload, IUserGradationPayload, IUserTransactionsDatesPayloa
 import {
   fetchClaimLevelSignature,
   wagmiClaimLevel,
-  wagmiInitUserDataFromContract,
   wagmiLevels,
 } from '@/core/api/contract/contract.achievements.api';
 import { initUserDataFromContract } from '@/core/thunk/user.thunk';
 import { wagmiVote } from '@/core/api/contract/contract.vote.api';
-import { toast } from 'react-toastify';
 
 export const getDashboardChartData = createAsyncThunk(
   'dashboardSlice/getDashboardTransactionsData',

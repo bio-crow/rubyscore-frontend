@@ -21,7 +21,6 @@ import {
   IUserTransactionsDatesResponse,
 } from '@/core/types';
 import { apiPrivateAxios, apiPublicAxios } from '@/core/api/axiosConfig';
-import { transformApiTransactionResponse } from '@/utils/helpers';
 
 export const fetchDashboardTransactions = async (projectName: string) => {
   try {
