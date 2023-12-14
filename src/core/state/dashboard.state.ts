@@ -12,7 +12,9 @@ import {
 
 interface IDashboardState {
   chartData: IChartDot[];
+  infoChartData: IChartDot[];
   loading: boolean;
+  infoChartLoading: boolean;
   myLevelData: ILevelInfo | null;
   myLevelDataLoading: boolean;
   projectStatistics: IProjectStatistics | null;
@@ -27,7 +29,9 @@ interface IDashboardState {
 
 const initialState: IDashboardState = {
   chartData: [],
+  infoChartData: [],
   loading: false,
+  infoChartLoading: false,
   myLevelData: null,
   myLevelDataLoading: false,
   projectStatistics: null,
@@ -55,6 +59,9 @@ export const dashboardSlice = createSlice({
     setChartData: (state, action: PayloadAction<IChartDot[]>) => {
       state.chartData = action.payload;
     },
+    setInfoChartData: (state, action: PayloadAction<IChartDot[]>) => {
+      state.infoChartData = action.payload;
+    },
     setDashboardTabsVoteInfo: (state, action: PayloadAction<IDashboardTabsVoteInfo>) => {
       state.dashboardTabsVoteInfo = action.payload;
     },
@@ -67,6 +74,9 @@ export const dashboardSlice = createSlice({
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
+    },
+    setInfoChartLoading: (state, action: PayloadAction<boolean>) => {
+      state.infoChartLoading = action.payload;
     },
     setMyLevelData: (state, action: PayloadAction<ILevelInfo | null>) => {
       state.myLevelData = action.payload;
@@ -99,6 +109,7 @@ export default dashboardSlice.reducer;
 
 export const {
   setChartData,
+  setInfoChartData,
   setUserGradation,
   setMyLevelDataLoading,
   setUserGradationLoading,
@@ -106,6 +117,7 @@ export const {
   setProjectStatisticsLoading,
   setMyLevelData,
   setLoading,
+  setInfoChartLoading,
   setLevelLoading,
   setUserTransactionsDates,
   setDashboardTabsVoteInfo,

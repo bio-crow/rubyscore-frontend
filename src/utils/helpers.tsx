@@ -445,6 +445,15 @@ export const transformApiBalanceResponse = (data: IDashboardBalanceResponse): IC
   ];
   return result;
 };
+export const transformApiChartInfoResponse = (data: any): IChartDot[] => {
+  return data.result.chart.map((dot: any) => {
+    return {
+      name: dot.date,
+      shortName: '',
+      uv: dot.count || dot.volume || dot.tvl,
+    };
+  });
+};
 export const prepareUserGradationToAchievementsCards = (data: IUserGradation): IAchievementCard[] => {
   const result: IAchievementCard[] = [
     {

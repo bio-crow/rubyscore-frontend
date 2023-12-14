@@ -1,5 +1,16 @@
 import { FC } from 'react';
-import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import {
+  Area,
+  AreaChart,
+  Bar,
+  BarChart,
+  Brush,
+  CartesianGrid,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { Box } from '@mui/system';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -15,12 +26,12 @@ interface Props {
   loading: boolean;
 }
 
-const TransactionChart: FC<Props> = ({ data, loading, axisLabel }) => {
+const InfoChart: FC<Props> = ({ data, loading, axisLabel }) => {
   const theme = useCustomTheme();
   const isLg = useMediaQuery(theme.breakpoints.up('lg'));
   const isMd = useMediaQuery(theme.breakpoints.up('md'));
   return (
-    <ResponsiveContainer width='100%' aspect={isMd ? 11.0 / 4.0 : 2.0 / 1.1}>
+    <ResponsiveContainer width={isMd ? '98%' : '95%'} aspect={isMd ? 11.0 / 4.0 : 2.0 / 1.1}>
       {loading ? (
         <Box display='flex' width='100%' height='100%' alignItems='center' justifyContent='center'>
           <CircularProgress
@@ -30,7 +41,9 @@ const TransactionChart: FC<Props> = ({ data, loading, axisLabel }) => {
           />
         </Box>
       ) : (
-        <AreaChart
+        <BarChart
+          width={500}
+          height={300}
           data={data}
           margin={{
             top: 30,
@@ -38,26 +51,17 @@ const TransactionChart: FC<Props> = ({ data, loading, axisLabel }) => {
             left: 0,
             bottom: 30,
           }}
+          style={{
+            overflow: 'visible',
+          }}
         >
-          <defs>
-            <linearGradient id='colorUv' x1='0' y1='0' x2='0' y2='1'>
-              <stop
-                offset='5%'
-                stopColor={theme.palette.chartGradientStartColor}
-                stopOpacity={theme.palette.chartGradientStartOpacity}
-              />
-              <stop
-                offset='95%'
-                stopColor={theme.palette.chartGradientEndColor}
-                stopOpacity={theme.palette.chartGradientEndOpacity}
-              />
-            </linearGradient>
-          </defs>
+          <Bar dataKey='uv' fill={theme.palette.lightBlue} />
           <XAxis
+            tickCount={7}
             label={{ value: axisLabel.x, angle: 0, position: 'insideBottomRight', dx: 30, dy: -5 }}
-            dataKey={isLg ? 'name' : 'shortName'}
             stroke={theme.palette.gray}
             axisLine={{ display: 'none' }}
+            tickFormatter={value => ''}
             tick={{
               fill: theme.palette.powderWhite,
               fontSize: isLg ? '14px' : '11px',
@@ -67,8 +71,8 @@ const TransactionChart: FC<Props> = ({ data, loading, axisLabel }) => {
             dy={25}
           />
           <YAxis
-            tickCount={9}
-            label={{ value: axisLabel.y, angle: 0, position: 'insideTopRight', dx: 0, dy: -30 }}
+            tickCount={6}
+            label={{ value: axisLabel.y, angle: 0, position: 'insideTopLeft', dx: 0, dy: -30 }}
             tickFormatter={value =>
               new Intl.NumberFormat('en-US', {
                 notation: 'compact',
@@ -86,15 +90,15 @@ const TransactionChart: FC<Props> = ({ data, loading, axisLabel }) => {
             }}
             dx={-5}
           />
-          <CartesianGrid repeatCount={4} stroke={theme.palette.gray} />
+          <CartesianGrid repeatCount={4} stroke={theme.palette.gray} strokeDasharray='3 3' opacity={0.3} />
           <Tooltip
-            content={props => <CustomTooltip {...props} />}
+            content={props => <CustomTooltip {...props} axisLabel={axisLabel} />}
             wrapperStyle={{
               background: theme.palette.gray,
-              border: `1px solid ${theme.palette.lightGreen}`,
+              border: `1px solid ${theme.palette.lightBlue}`,
               borderRadius: '20px',
               padding: '4px 16px',
-              color: theme.palette.lightGreen,
+              color: theme.palette.lightBlue,
               fontSize: '12px',
               fontStyle: 'normal',
               fontWeight: 600,
@@ -105,41 +109,60 @@ const TransactionChart: FC<Props> = ({ data, loading, axisLabel }) => {
               border: 'none',
             }}
           />
-          <Area
-            type='monotone'
-            dataKey='uv'
-            dot={<CustomDot />}
-            strokeWidth={4}
-            stroke={theme.palette.chartGradientStartColor}
-            fillOpacity={1}
-            fill='url(#colorUv)'
-          />
-        </AreaChart>
+          <Brush
+            dataKey='name'
+            gap={1}
+            height={30}
+            className='infoChartBrush'
+            fill='transparent'
+            traveller={renderCustomTraveller}
+            stroke={theme.palette.white50}
+            alwaysShowText
+            textRendering={6}
+            textAnchor='start'
+            tickFormatter={value => new Date(value * 1000).toLocaleDateString()}
+          >
+            <AreaChart data={data}>
+              <defs>
+                <linearGradient id='colorInfoUv' x1='0' y1='0' x2='0' y2='1'>
+                  <stop offset='5%' stopColor={theme.palette.lightBlue} stopOpacity={0.9} />
+                  <stop offset='95%' stopColor={theme.palette.lightBlue} stopOpacity={0.1} />
+                </linearGradient>
+              </defs>
+              <Area type='monotone' dataKey='uv' fill={'rgba(4, 203, 253, 0.2)'} stroke='none' />
+            </AreaChart>
+          </Brush>
+        </BarChart>
       )}
     </ResponsiveContainer>
   );
 };
-export default TransactionChart;
+export default InfoChart;
 
 const CustomTooltip = (props: any) => {
-  const { active, payload, label } = props;
+  const { active, payload, label, axisLabel } = props;
   if (active && payload && payload.length) {
-    return <Box>{payload[0].value}</Box>;
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        <Box>{new Date(payload[0].payload.name * 1000).toLocaleDateString()}</Box>
+        <Box>{`${axisLabel.y}:${payload[0].value}`}</Box>
+      </Box>
+    );
   }
 
   return null;
 };
-const CustomDot = (props: any) => {
-  const { cx, cy, stroke, payload, value } = props;
-  const theme = useCustomTheme();
+function renderCustomTraveller(props: any) {
+  const { x, y, width, height, stroke } = props;
+
   return (
-    <circle
-      cx={cx}
-      cy={cy}
-      r={5}
-      stroke={theme.palette.lightGreen}
-      strokeWidth={2}
-      fill={theme.palette.black}
-    />
+    <>
+      <rect x={x} y={y} width={width} height={height} fill={stroke} stroke='none' />
+    </>
   );
-};
+}

@@ -173,3 +173,25 @@ export const axisLabelMap = {
     y: 'Wallets',
   },
 };
+export const axisInfoChartLabelMap = {
+  activeUser: {
+    x: 'Date',
+    y: 'Users',
+  },
+  transactions: {
+    x: 'Date',
+    y: 'Tx',
+  },
+  tvl: {
+    x: 'Date',
+    y: 'TVL',
+  },
+  transactionsBridge: {
+    x: 'Date',
+    y: 'Users',
+  },
+  volume: {
+    x: 'Date',
+    y: 'Volume',
+  },
+};

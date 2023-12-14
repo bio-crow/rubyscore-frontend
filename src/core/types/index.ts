@@ -19,6 +19,7 @@ import {
   fetchUserGradation,
 } from '@/core/api/dashboard.api';
 import { fetchClaimLevelSignature } from '@/core/api/contract/contract.achievements.api';
+import { transformApiTransactionResponse } from '@/utils/helpers';
 
 export interface ILoginPayload {
   signature: string;
@@ -309,5 +310,45 @@ export interface ITasksResponse {
 export interface ITasksCompletedResponse {
   result: {
     tasks: ITask[];
+  };
+}
+export interface IInfoChartActiveUserResponse {
+  result: {
+    chart: {
+      date: number;
+      count: number;
+    }[];
+  };
+}
+export interface IInfoChartTransactionsResponse {
+  result: {
+    chart: {
+      date: number;
+      count: number;
+    }[];
+  };
+}
+export interface IInfoChartTVLResponse {
+  result: {
+    chart: {
+      date: number;
+      tvl: number;
+    }[];
+  };
+}
+export interface IInfoChartTransactionsBridgeResponse {
+  result: {
+    chart: {
+      date: number;
+      count: number;
+    }[];
+  };
+}
+export interface IInfoChartVolumeResponse {
+  result: {
+    chart: {
+      date: number;
+      volume: number;
+    }[];
   };
 }

@@ -1,16 +1,11 @@
 import { Box } from '@mui/system';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { v4 as uuidv4 } from 'uuid';
-import MainInfoCard from '@/modules/Dashboard/DashboardTab/MainInfo/MainInfoCard/MainInfoCard';
+import MainInfoCard from '@/modules/Dashboard/DashboardTab/InfoSection/MainInfo/MainInfoCard/MainInfoCard';
 import 'swiper/css';
-import { FC, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/core/store';
-import { getProjectStatistics } from '@/core/thunk/dashboard.thunk';
-import { CircularProgress } from '@mui/material';
-import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { formatCash } from '@/utils/helpers';
 import { TooltipMainInfoTransactionVolume, TooltipMainInfoUser } from '@/utils/tooltipsContent';
-
 const MainInfo = () => {
   const projectStatistics = useAppSelector(state => state.dashboardState.projectStatistics);
   const data = projectStatistics

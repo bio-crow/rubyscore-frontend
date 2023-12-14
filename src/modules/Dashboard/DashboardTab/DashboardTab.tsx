@@ -1,9 +1,9 @@
 import { Box } from '@mui/system';
 import { FC, useEffect } from 'react';
 import MyLevelSection from '@/components/common/sections/MyLevelSection/MyLevelSection';
-import MainInfo from '@/modules/Dashboard/DashboardTab/MainInfo/MainInfo';
+import InfoSection from '@/modules/Dashboard/DashboardTab/InfoSection/InfoSection';
 import AchievementsSection from '@/components/common/sections/AchievementsSection/AchievementsSection';
-import Transactions from '@/modules/Dashboard/DashboardTab/Transactions/Transactions';
+import TransactionsSection from '@/modules/Dashboard/DashboardTab/TransactionsSection/TransactionsSection';
 import { DashboardTabIndexType } from '@/types/index';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import {
@@ -69,8 +69,8 @@ const DashboardTab: FC<Props> = ({ activeTab }) => {
               ToolTip2={<TooltipMyLevelDashboard2 />}
             />
           )}
-          <MainInfo />
-          <Transactions activeTab={activeTab} />
+          <InfoSection activeTab={activeTab} />
+          <TransactionsSection activeTab={activeTab} />
           <AchievementsSection activeTab={activeTab} wallet={address} onRefresh={onRefresh} />
         </Box>
       )}

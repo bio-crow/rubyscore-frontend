@@ -10,6 +10,7 @@ export type ChartIndexType =
   | 'gas'
   | 'volume'
   | 'balance';
+export type InfoChartIndexType = 'activeUser' | 'transactions' | 'tvl' | 'transactionsBridge' | 'volume';
 export type DashboardTabIndexType = 'zk_era' | 'linea' | 'base' | 'zora' | 'zk_evm' | 'scroll' | 'rubyscore';
 export interface IScoreNetwork {
   index: DashboardTabIndexType;

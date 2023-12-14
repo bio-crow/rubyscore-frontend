@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
   mapMayLevelDataFromResult,
   transformApiBalanceResponse,
+  transformApiChartInfoResponse,
   transformApiContractsResponse,
   transformApiDaysResponse,
   transformApiGasResponse,
@@ -19,6 +20,11 @@ import {
   fetchDashboardTransactions,
   fetchDashboardVolume,
   fetchDashboardWeeks,
+  fetchInfoChartActiveUser,
+  fetchInfoChartTransactions,
+  fetchInfoChartTransactionsBridge,
+  fetchInfoChartTVL,
+  fetchInfoChartVolume,
   fetchProjectStatistics,
   fetchProjectVotes,
   fetchUserGradation,
@@ -38,8 +44,16 @@ import {
   setDashboardTabsVoteInfo,
   updateDashboardTabsVoteInfo,
   setDashboardTabsVoteInfoLoading,
+  setInfoChartLoading,
+  setInfoChartData,
 } from '@/core/state/dashboard.state';
-import { ChartIndexType, DashboardTabIndexType, IChartDot, IDashboardTabsVoteInfo } from '@/types/index';
+import {
+  ChartIndexType,
+  DashboardTabIndexType,
+  IChartDot,
+  IDashboardTabsVoteInfo,
+  InfoChartIndexType,
+} from '@/types/index';
 import { searchUser } from '@/core/api/leaderboard.api';
 import { IClaimLevelPayload, IUserGradationPayload, IUserTransactionsDatesPayload } from '@/core/types';
 import {
@@ -112,6 +126,41 @@ export const getDashboardChartData = createAsyncThunk(
 
     dispatch(setChartData(preparedData));
     dispatch(setLoading(false));
+    return;
+  }
+);
+export const getDashboardInfoChartData = createAsyncThunk(
+  'dashboardSlice/getDashboardInfoChartData',
+  async (
+    payload: { projectName: DashboardTabIndexType; type: InfoChartIndexType; interval: number[] },
+    { dispatch }
+  ) => {
+    dispatch(setInfoChartLoading(true));
+    dispatch(setInfoChartData([]));
+    let preparedData: IChartDot[] = [];
+    let result;
+    switch (payload.type) {
+      case 'activeUser':
+        result = await fetchInfoChartActiveUser(payload);
+        break;
+      case 'transactions':
+        result = await fetchInfoChartTransactions(payload);
+        break;
+      case 'tvl':
+        result = await fetchInfoChartTVL(payload);
+        break;
+      case 'transactionsBridge':
+        result = await fetchInfoChartTransactionsBridge(payload);
+        break;
+      case 'volume':
+        result = await fetchInfoChartVolume(payload);
+        break;
+    }
+    if (result?.data) {
+      preparedData = transformApiChartInfoResponse(result.data);
+    }
+    dispatch(setInfoChartData(preparedData));
+    dispatch(setInfoChartLoading(false));
     return;
   }
 );

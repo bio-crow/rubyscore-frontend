@@ -1,9 +1,9 @@
 import { Box } from '@mui/system';
-import TransactionInfo from '@/modules/Dashboard/DashboardTab/Transactions/TransactionInfo/TransactionInfo';
+import TransactionInfo from '@/modules/Dashboard/DashboardTab/InfoSection/TransactionInfo/TransactionInfo';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
-import TransactionChart from '@/modules/Dashboard/DashboardTab/Transactions/TransactionChart/TransactionChart';
+import TransactionChart from '@/modules/Dashboard/DashboardTab/TransactionsSection/TransactionChart/TransactionChart';
 import { Tab } from '@mui/material';
 import ChartTabs from '@/components/common/ui/ChartTabs/ChartTabs';
 import { ChartIndexType, DashboardTabIndexType } from '@/types/index';
@@ -47,9 +47,8 @@ const panelTabs: { index: ChartIndexType; label: string }[] = [
 interface Props {
   activeTab: { index: DashboardTabIndexType; label: string };
 }
-const Transactions: FC<Props> = ({ activeTab }) => {
+const TransactionsSection: FC<Props> = ({ activeTab }) => {
   const theme = useCustomTheme();
-  const userTransactionsDates = useAppSelector(state => state.dashboardState.userTransactionsDates);
   const isAuth = useAppSelector(state => state.authState.isAuth);
   const dispatch = useAppDispatch();
   const loading = useAppSelector(state => state.dashboardState.loading);
@@ -58,10 +57,6 @@ const Transactions: FC<Props> = ({ activeTab }) => {
   const [activeChartTab, setActiveChartTab] = useState<{ index: ChartIndexType; label: string }>(
     panelTabs[0]
   );
-  const showTransactionsInfo =
-    userTransactionsDates &&
-    !!userTransactionsDates.first_transaction_time &&
-    !!userTransactionsDates.last_transaction_time;
   const handleChange = (event: SyntheticEvent, newValue: ChartIndexType) => {
     const tab = panelTabs.find(item => item.index === newValue);
     tab && setActiveChartTab(tab);
@@ -85,7 +80,6 @@ const Transactions: FC<Props> = ({ activeTab }) => {
         gap: '20px',
       }}
     >
-      {isAuth && showTransactionsInfo && <TransactionInfo activeTab={activeTab} />}
       <Box
         sx={{
           display: 'flex',
@@ -111,7 +105,7 @@ const Transactions: FC<Props> = ({ activeTab }) => {
     </Box>
   );
 };
-export default Transactions;
+export default TransactionsSection;
 
 function a11yProps(index: string) {
   return {

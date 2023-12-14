@@ -30,7 +30,14 @@ main {
     width:100vw;
     overflow-x:hidden;
 }
-
+.recharts-surface {
+    overflow: visible;
+}
+.infoChartBrush {
+    .recharts-brush-texts {
+        font-size: 10px;
+    }
+}
 .H1-Lato-fw-700-fs-32 {
     font-family: var(--font-lato);
     font-size: 32px;

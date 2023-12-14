@@ -7,6 +7,11 @@ import {
   IDashboardTransactionsResponse,
   IDashboardVolumeResponse,
   IDashboardWeeksResponse,
+  IInfoChartActiveUserResponse,
+  IInfoChartTransactionsBridgeResponse,
+  IInfoChartTransactionsResponse,
+  IInfoChartTVLResponse,
+  IInfoChartVolumeResponse,
   IProjectStatisticsResponse,
   IProjectVotesPayload,
   IProjectVotesResponse,
@@ -16,6 +21,8 @@ import {
   IUserTransactionsDatesResponse,
 } from '@/core/types';
 import { apiPrivateAxios, apiPublicAxios } from '@/core/api/axiosConfig';
+import { transformApiTransactionResponse } from '@/utils/helpers';
+
 export const fetchDashboardTransactions = async (projectName: string) => {
   try {
     return await apiPublicAxios.get<IDashboardTransactionsResponse>(`/dashboard/${projectName}/transactions`);
@@ -106,6 +113,68 @@ export const fetchProjectVotes = async (params: IProjectVotesPayload) => {
   const { projectName } = params;
   try {
     return await apiPublicAxios.get<IProjectVotesResponse>(`/dashboard/${projectName}/vote`);
+  } catch (error) {
+    //console.error(error);
+  }
+};
+
+export const fetchInfoChartActiveUser = async (payload: { projectName: string; interval: number[] }) => {
+  try {
+    const { projectName, interval } = payload;
+    return await apiPublicAxios.post<IInfoChartActiveUserResponse>(
+      `/dashboard/${projectName}/chart/active-users`,
+      null,
+      { params: { from: interval[0], to: interval[1] } }
+    );
+  } catch (error) {
+    //console.error(error);
+  }
+};
+export const fetchInfoChartTransactions = async (payload: { projectName: string; interval: number[] }) => {
+  try {
+    const { projectName, interval } = payload;
+    return await apiPublicAxios.post<IInfoChartTransactionsResponse>(
+      `/dashboard/${projectName}/chart/tx`,
+      null,
+      { params: { from: interval[0], to: interval[1] } }
+    );
+  } catch (error) {
+    //console.error(error);
+  }
+};
+export const fetchInfoChartTVL = async (payload: { projectName: string; interval: number[] }) => {
+  try {
+    const { projectName, interval } = payload;
+    return await apiPublicAxios.post<IInfoChartTVLResponse>(`/dashboard/${projectName}/chart/tvl`, null, {
+      params: { from: interval[0], to: interval[1] },
+    });
+  } catch (error) {
+    //console.error(error);
+  }
+};
+export const fetchInfoChartTransactionsBridge = async (payload: {
+  projectName: string;
+  interval: number[];
+}) => {
+  try {
+    const { projectName, interval } = payload;
+    return await apiPublicAxios.post<IInfoChartTransactionsBridgeResponse>(
+      `/dashboard/${projectName}/chart/users`,
+      null,
+      { params: { from: interval[0], to: interval[1] } }
+    );
+  } catch (error) {
+    //console.error(error);
+  }
+};
+export const fetchInfoChartVolume = async (payload: { projectName: string; interval: number[] }) => {
+  try {
+    const { projectName, interval } = payload;
+    return await apiPublicAxios.post<IInfoChartVolumeResponse>(
+      `/dashboard/${projectName}/chart/volume`,
+      null,
+      { params: { from: interval[0], to: interval[1] } }
+    );
   } catch (error) {
     //console.error(error);
   }
