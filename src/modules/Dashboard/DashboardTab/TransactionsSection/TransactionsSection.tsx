@@ -1,5 +1,4 @@
 import { Box } from '@mui/system';
-import TransactionInfo from '@/modules/Dashboard/DashboardTab/InfoSection/TransactionInfo/TransactionInfo';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
