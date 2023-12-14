@@ -55,7 +55,7 @@ const Profile = () => {
     if (referralCode) {
       track('Signup', { referralLink: referralCode });
     }
-  }, []);
+  }, [referralCode]);
   return (
     <Layout>
       {isAuth ? (
