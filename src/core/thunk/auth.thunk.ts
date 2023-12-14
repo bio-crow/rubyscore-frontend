@@ -42,9 +42,6 @@ export const login = createAsyncThunk('authSlice/fetchLogin', async (params: ILo
       if (userData?.data?.result) {
         dispatch(setUserProjectInfo(userData.data.result.user));
       }
-      if (params.referralCode) {
-        track('Signup', { referralLink: params.referralCode });
-      }
       dispatch(setIsAuth(true));
     } catch (e) {
       if (typeof window !== 'undefined') {
