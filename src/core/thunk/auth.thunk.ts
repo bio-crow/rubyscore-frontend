@@ -14,6 +14,7 @@ import {
 import { formatEther } from 'viem';
 import { searchUser } from '@/core/api/leaderboard.api';
 import { getCompletedTasks } from '@/core/thunk/task.thunk';
+import { track } from '@vercel/analytics';
 
 export const login = createAsyncThunk('authSlice/fetchLogin', async (params: ILoginPayload, { dispatch }) => {
   dispatch(setAuthLoading(true));
@@ -40,6 +41,9 @@ export const login = createAsyncThunk('authSlice/fetchLogin', async (params: ILo
       dispatch(setPremiumPrice(formatEther(wagmiData.premiumPrice)));
       if (userData?.data?.result) {
         dispatch(setUserProjectInfo(userData.data.result.user));
+      }
+      if (params.referralCode) {
+        track('Signup', { referralLink: params.referralCode });
       }
       dispatch(setIsAuth(true));
     } catch (e) {
