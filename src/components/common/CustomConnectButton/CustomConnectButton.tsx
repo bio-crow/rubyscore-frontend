@@ -10,8 +10,6 @@ interface Props {
 }
 
 const CustomConnectButton: FC<Props> = ({ Trigger }) => {
-  const searchParams = useSearchParams();
-  const referralCode = searchParams.get('ref');
   return (
     <ConnectButton.Custom>
       {({
@@ -29,12 +27,7 @@ const CustomConnectButton: FC<Props> = ({ Trigger }) => {
         const ConnectBtn = cloneElement(
           Trigger,
           {
-            onClick: () => {
-              if (referralCode) {
-                track('Signup', { referralLink: referralCode });
-              }
-              openConnectModal();
-            },
+            onClick: openConnectModal,
           },
           Trigger.props.children
         );

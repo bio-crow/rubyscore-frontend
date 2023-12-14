@@ -16,6 +16,8 @@ import { getReferrals, getUserNFTList } from '@/core/thunk/user.thunk';
 import { useAccount } from 'wagmi';
 import { getCompletedTasks, getTasks } from '@/core/thunk/task.thunk';
 import { TooltipMyLevelProfile1, TooltipMyLevelProfile2 } from '@/utils/tooltipsContent';
+import { useSearchParams } from 'next/navigation';
+import { track } from '@vercel/analytics';
 const breakpointsConfig = {
   0: {
     slidesPerView: 1.4,
@@ -34,7 +36,8 @@ const breakpointsConfig = {
   },
 };
 const Profile = () => {
-  const theme = useCustomTheme();
+  const searchParams = useSearchParams();
+  const referralCode = searchParams.get('ref');
   const dispatch = useAppDispatch();
   const { address } = useAccount();
   const isAuth = useAppSelector(state => state.authState.isAuth);
@@ -48,6 +51,11 @@ const Profile = () => {
       dispatch(getCompletedTasks(address));
     }
   }, [address, isAuth]);
+  useEffect(() => {
+    if (referralCode) {
+      track('Signup', { referralLink: referralCode });
+    }
+  }, []);
   return (
     <Layout>
       {isAuth ? (
