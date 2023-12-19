@@ -1,3 +1,4 @@
+'use client';
 import Layout from '@/components/layout/Layout/Layout';
 import { Box } from '@mui/material';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
@@ -10,13 +11,20 @@ import { getUserGradation, initDashboardTabsVotes } from '@/core/thunk/dashboard
 import { useAccount } from 'wagmi';
 import { dashboardPanelTabs } from '@/constants/index';
 import { setUserGradation } from '@/core/state/dashboard.state';
-
+import { useSearchParams, useRouter } from 'next/navigation';
 const Dashboard = () => {
   const theme = useCustomTheme();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const netTab = searchParams.get('net');
   const { address } = useAccount();
   const [activeTab, setActiveTab] = useState<{ index: DashboardTabIndexType; label: string }>(
     dashboardPanelTabs[0]
   );
+  const changeTab = (tab: any) => {
+    router.push(`?net=${tab.index}`);
+    setActiveTab(tab);
+  };
   const dispatch = useAppDispatch();
   useLayoutEffect(() => {
     if (address) {
@@ -32,6 +40,12 @@ const Dashboard = () => {
   useEffect(() => {
     dispatch(initDashboardTabsVotes());
   }, []);
+  useEffect(() => {
+    if (netTab) {
+      const tab = dashboardPanelTabs.find(item => item.index === netTab);
+      tab && setActiveTab(tab);
+    }
+  }, [netTab]);
   return (
     <Layout>
       <Box
@@ -43,12 +57,7 @@ const Dashboard = () => {
           padding: { xs: '0px 15px 0px 15px', sm: '0px 30px 0px 30px', xl: 0 },
         }}
       >
-        <NetworkTabs
-          networks={dashboardPanelTabs}
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          withVote
-        />
+        <NetworkTabs networks={dashboardPanelTabs} activeTab={activeTab} setActiveTab={changeTab} withVote />
         <DashboardTab activeTab={activeTab} />
       </Box>
     </Layout>

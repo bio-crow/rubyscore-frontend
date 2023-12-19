@@ -13,8 +13,12 @@ import NetworkTabs from '@/components/common/ui/NetworkTabs/NetworkTabs';
 import { DashboardTabIndexType } from '@/types/index';
 import { setFilteredUser } from '@/core/state/leaderboard.state';
 import { dashboardPanelTabs } from '@/constants/index';
+import { useRouter, useSearchParams } from 'next/navigation';
 const Dashboard = () => {
   const theme = useCustomTheme();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const netTab = searchParams.get('net');
   const isAuth = useAppSelector(state => state.authState.isAuth);
   const dispatch = useAppDispatch();
   const [activeTab, setActiveTab] = useState<{ index: DashboardTabIndexType; label: string }>(
@@ -39,6 +43,16 @@ const Dashboard = () => {
       dispatch(setFilteredUser(null));
     };
   }, [isAuth, activeTab]);
+  const changeTab = (tab: any) => {
+    router.push(`?net=${tab.index}`);
+    setActiveTab(tab);
+  };
+  useEffect(() => {
+    if (netTab) {
+      const tab = dashboardPanelTabs.find(item => item.index === netTab);
+      tab && setActiveTab(tab);
+    }
+  }, [netTab]);
   return (
     <Layout>
       <Box
@@ -50,7 +64,7 @@ const Dashboard = () => {
           padding: { xs: '0px 15px 0px 15px', sm: '0px 30px 0px 30px', xl: 0 },
         }}
       >
-        <NetworkTabs networks={dashboardPanelTabs} activeTab={activeTab} setActiveTab={setActiveTab} />
+        <NetworkTabs networks={dashboardPanelTabs} activeTab={activeTab} setActiveTab={changeTab} />
         <LeaderboardTab tableData={filteredUser ? [filteredUser] : shownLeaderBoard} activeTab={activeTab} />
       </Box>
     </Layout>
