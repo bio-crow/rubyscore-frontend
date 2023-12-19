@@ -29,13 +29,13 @@ const UserInfoSection: FC<Props> = ({ user, withUntilNextLevel = false }) => {
       value: `${formatPercentsForCards(TopPercent)}%`,
     });
   }
-  if (user?.additional.maxStreak !== null) {
+  if (user?.additional?.maxStreak) {
     options.push({
       label: 'Max Steak',
       value: `${user?.additional.maxStreak}`,
     });
   }
-  if (user?.additional.activeReferrals !== null) {
+  if (user?.additional?.activeReferrals) {
     options.push({
       label: 'Active referrals',
       value: `${user?.additional.activeReferrals}`,
