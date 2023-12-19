@@ -1,7 +1,7 @@
 import { Box } from '@mui/system';
 import { leaderBoardBaseColumns, leaderBoardBaseColumnsShort } from '@/utils/baseTableColumns';
 import SecondaryTable from '@/components/common/ui/SecondaryTable/SecondaryTable';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { appRoutes } from '@/constants/routes';
 import { ILeaderboardData } from '@/types/index';
 import { FC } from 'react';
@@ -20,6 +20,8 @@ const LeaderboardTabTable: FC<Props> = ({ tableData, activeTab }) => {
   const router = useRouter();
   const leaderboardUser = useAppSelector(state => state.leaderboardState.leaderboardUser);
   const filteredUser = useAppSelector(state => state.leaderboardState.filteredUser);
+  const searchParams = useSearchParams();
+  const netTab = searchParams.get('net');
   return (
     <Box
       sx={{
@@ -39,7 +41,7 @@ const LeaderboardTabTable: FC<Props> = ({ tableData, activeTab }) => {
           noRowsOverlay: CustomNoRows,
         }}
         onRowClick={(data: any) => {
-          router.push(`${appRoutes.LEADERBOARD_USER}/${data.row.wallet}`);
+          router.push(`${appRoutes.LEADERBOARD_USER}/${data.row.wallet}?net=${netTab}`);
         }}
         initialState={{
           pagination: {

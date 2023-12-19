@@ -46,6 +46,9 @@ const breakpointsConfig = {
 const User = () => {
   const theme = useCustomTheme();
   const params: any = useParams();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const netTab = searchParams.get('net');
   const [activeProject, setActiveProject] = useState<{ index: DashboardTabIndexType; label: string }>(
     dashboardPanelTabs[0]
   );
@@ -54,8 +57,9 @@ const User = () => {
   const userStatisticsLoading = useAppSelector(state => state.leaderboardState.userStatisticsLoading);
   const dispatch = useAppDispatch();
   const changeTab = (index: DashboardTabIndexType) => {
-    const tab = dashboardPanelTabs.find(item => item.index === index);
+    const tab: any = dashboardPanelTabs.find(item => item.index === index);
     tab && setActiveProject(tab);
+    router.push(`?net=${tab.index}`);
   };
   useLayoutEffect(() => {
     if (params.wallet) {
@@ -105,6 +109,12 @@ const User = () => {
     dispatch(getUserNFTList(params.wallet));
     dispatch(getUserScoreList(params.wallet));
   };
+  useEffect(() => {
+    if (netTab) {
+      const tab = dashboardPanelTabs.find(item => item.index === netTab);
+      tab && setActiveProject(tab);
+    }
+  }, [netTab]);
   return (
     <Layout>
       {userStatisticsLoading ? (
