@@ -11,7 +11,15 @@ export type ChartIndexType =
   | 'volume'
   | 'balance';
 export type InfoChartIndexType = 'activeUser' | 'transactions' | 'tvl' | 'transactionsBridge' | 'volume';
-export type DashboardTabIndexType = 'zk_era' | 'linea' | 'base' | 'zora' | 'zk_evm' | 'scroll' | 'rubyscore';
+export type DashboardTabIndexType =
+  | 'zk_era'
+  | 'linea'
+  | 'base'
+  | 'zora'
+  | 'zk_evm'
+  | 'scroll'
+  | 'rubyscore'
+  | 'manta';
 export interface IScoreNetwork {
   index: DashboardTabIndexType;
   title: string;
@@ -120,6 +128,10 @@ export interface IScoreList {
     score: number;
     level: number;
   };
+  manta: {
+    score: number;
+    level: number;
+  };
   base: {
     score: number;
     level: number;
@@ -183,6 +195,7 @@ export interface ILevelsInfo {
   linea: [];
   zk_era: [];
   zk_evm: [];
+  manta: [];
   base: [];
   scroll: [];
 }
@@ -202,6 +215,7 @@ export interface IDashboardTabsVoteInfo {
   linea: number | null;
   base: number | null;
   zk_evm: number | null;
+  manta: number | null;
   scroll: number | null;
   zora: number | null;
   rubyscore: number | null;

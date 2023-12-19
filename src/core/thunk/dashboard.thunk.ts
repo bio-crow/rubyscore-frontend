@@ -282,7 +282,7 @@ export const getUserTransactionsDates = createAsyncThunk(
 export const initDashboardTabsVotes = createAsyncThunk(
   'dashboardSlice/initDashboardTabsVotes',
   async (args, { dispatch }) => {
-    const projects: DashboardTabIndexType[] = ['zk_era', 'linea', 'base', 'zk_evm', 'scroll'];
+    const projects: DashboardTabIndexType[] = ['zk_era', 'linea', 'base', 'zk_evm', 'scroll', 'manta'];
     const initValue: IDashboardTabsVoteInfo = {
       zk_era: null,
       linea: null,
@@ -291,6 +291,7 @@ export const initDashboardTabsVotes = createAsyncThunk(
       scroll: null,
       zora: null,
       rubyscore: null,
+      manta: null,
     };
     const promises = projects.map(project =>
       fetchProjectVotes({

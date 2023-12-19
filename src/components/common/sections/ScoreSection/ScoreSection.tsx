@@ -109,11 +109,11 @@ const ScoreSection: FC<Props> = ({
       points: userScoreList['base'].score,
     },
     {
-      index: 'zk_evm',
-      title: 'zkEVM',
-      icon: networkStaticData['zk_evm'].icon,
-      lvl: userScoreList['zk_evm'].level,
-      points: userScoreList['zk_evm'].score,
+      index: 'manta',
+      title: 'Manta',
+      icon: networkStaticData['manta'].icon,
+      lvl: userScoreList['manta'].level,
+      points: userScoreList['manta'].score,
     },
     {
       index: 'scroll',
@@ -121,6 +121,13 @@ const ScoreSection: FC<Props> = ({
       icon: networkStaticData['scroll'].icon,
       lvl: userScoreList['scroll'].level,
       points: userScoreList['scroll'].score,
+    },
+    {
+      index: 'zk_evm',
+      title: 'zkEVM',
+      icon: networkStaticData['zk_evm'].icon,
+      lvl: userScoreList['zk_evm'].level,
+      points: userScoreList['zk_evm'].score,
     },
   ];
   return (

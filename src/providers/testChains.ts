@@ -176,6 +176,31 @@ export const testChains: Chain[] = [
     },
     testnet: false,
   },
+  {
+    id: 169,
+    name: 'Manta Pacific Mainnet',
+    network: 'Manta Pacific Mainnet',
+    nativeCurrency: {
+      decimals: 18,
+      name: 'Manta Pacific Mainnet',
+      symbol: 'ETH',
+    },
+    rpcUrls: {
+      public: {
+        http: ['https://pacific-rpc.manta.network/http'],
+      },
+      default: {
+        http: ['https://pacific-rpc.manta.network/http'],
+      },
+    },
+    blockExplorers: {
+      default: {
+        name: 'Manta Pacific Mainnet',
+        url: 'https://pacific-explorer.manta.network',
+      },
+    },
+    testnet: false,
+  },
 ];
 export const testContracts = {
   app: { contract: '0x37C3837a0C37C002894BB035f5dD73933523B66d', chainId: 80001 },
@@ -185,5 +210,6 @@ export const testContracts = {
   zkEVM: { contract: '0x81C55bbA5d5D05a0C02f4B561B560194f34a6D07', chainId: 1442 },
   zkSync: { contract: '0xDA0F79DB2F00e93aBE1AB6FfA51bbd9043605917', chainId: 280 },
   scroll: { contract: '0x81C55bbA5d5D05a0C02f4B561B560194f34a6D07', chainId: 534351 },
+  manta: { contract: '0xbDB018e21AD1e5756853fe008793a474d329991b', chainId: 169 },
 };
 export const testVoteContracts = prodVoteContracts;

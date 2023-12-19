@@ -12,33 +12,14 @@ import {
 import NetworkTabs from '@/components/common/ui/NetworkTabs/NetworkTabs';
 import { DashboardTabIndexType } from '@/types/index';
 import { setFilteredUser } from '@/core/state/leaderboard.state';
-const panelTabs: { index: DashboardTabIndexType; label: string }[] = [
-  {
-    index: 'zk_era',
-    label: 'zkSync',
-  },
-  {
-    index: 'linea',
-    label: 'Linea',
-  },
-  {
-    index: 'base',
-    label: 'Base',
-  },
-  {
-    index: 'zk_evm',
-    label: 'zkEVM',
-  },
-  {
-    index: 'scroll',
-    label: 'Scroll',
-  },
-];
+import { dashboardPanelTabs } from '@/constants/index';
 const Dashboard = () => {
   const theme = useCustomTheme();
   const isAuth = useAppSelector(state => state.authState.isAuth);
   const dispatch = useAppDispatch();
-  const [activeTab, setActiveTab] = useState<{ index: DashboardTabIndexType; label: string }>(panelTabs[0]);
+  const [activeTab, setActiveTab] = useState<{ index: DashboardTabIndexType; label: string }>(
+    dashboardPanelTabs[0]
+  );
   const shownLeaderBoard = useAppSelector(state => state.leaderboardState.shownLeaderBoard);
   const filteredUser = useAppSelector(state => state.leaderboardState.filteredUser);
   useEffect(() => {
@@ -69,7 +50,7 @@ const Dashboard = () => {
           padding: { xs: '0px 15px 0px 15px', sm: '0px 30px 0px 30px', xl: 0 },
         }}
       >
-        <NetworkTabs networks={panelTabs} activeTab={activeTab} setActiveTab={setActiveTab} />
+        <NetworkTabs networks={dashboardPanelTabs} activeTab={activeTab} setActiveTab={setActiveTab} />
         <LeaderboardTab tableData={filteredUser ? [filteredUser] : shownLeaderBoard} activeTab={activeTab} />
       </Box>
     </Layout>

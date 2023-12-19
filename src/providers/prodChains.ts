@@ -150,6 +150,31 @@ export const prodChains: Chain[] = [
     },
     testnet: false,
   },
+  {
+    id: 169,
+    name: 'Manta Pacific Mainnet',
+    network: 'Manta Pacific Mainnet',
+    nativeCurrency: {
+      decimals: 18,
+      name: 'Manta Pacific Mainnet',
+      symbol: 'ETH',
+    },
+    rpcUrls: {
+      public: {
+        http: ['https://pacific-rpc.manta.network/http'],
+      },
+      default: {
+        http: ['https://pacific-rpc.manta.network/http'],
+      },
+    },
+    blockExplorers: {
+      default: {
+        name: 'Manta Pacific Mainnet',
+        url: 'https://pacific-explorer.manta.network',
+      },
+    },
+    testnet: false,
+  },
 ];
 export const prodContracts = {
   app: { contract: '0x009dbfee9e155766af434ed1652ca3769b05e76f', chainId: 10 },
@@ -159,6 +184,7 @@ export const prodContracts = {
   zkEVM: { contract: '0xF57Cb671D50535126694Ce5Cc3CeBe3F32794896', chainId: 1101 },
   zkSync: { contract: '0x8A1142620CbdE2f2d63E88F35D0D76eAAce0AC9e', chainId: 324 },
   scroll: { contract: '0xDC3D8318Fbaec2de49281843f5bba22e78338146', chainId: 534352 },
+  manta: { contract: '0xbDB018e21AD1e5756853fe008793a474d329991b', chainId: 169 },
 };
 export const prodVoteContracts = {
   base: { contract: '0xe10Add2ad591A7AC3CA46788a06290De017b9fB4', chainId: 8453 },
@@ -166,4 +192,5 @@ export const prodVoteContracts = {
   zkEVM: { contract: '0xe10Add2ad591A7AC3CA46788a06290De017b9fB4', chainId: 1101 },
   zkSync: { contract: '0xCb84d512F0C9943D3BC6B4Be8801aC8Aa6621a54', chainId: 324 },
   scroll: { contract: '0xe10Add2ad591A7AC3CA46788a06290De017b9fB4', chainId: 534352 },
+  manta: { contract: '0xF57Cb671D50535126694Ce5Cc3CeBe3F32794896', chainId: 169 },
 };

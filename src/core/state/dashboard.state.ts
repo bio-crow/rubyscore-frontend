@@ -48,6 +48,7 @@ const initialState: IDashboardState = {
     scroll: null,
     zora: null,
     rubyscore: null,
+    manta: null,
   },
   dashboardTabsVoteInfoLoading: null,
 };

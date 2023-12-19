@@ -178,7 +178,7 @@ const MyLevelSection: FC<Props> = ({
               </CustomTooltip>
             )}
           </Box>
-          {myLevelData && (
+          {myLevelData && myLevelData.levelUp && (
             <Box
               sx={{
                 display: 'flex',

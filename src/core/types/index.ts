@@ -68,6 +68,10 @@ export interface IScoreListResponse {
       score: 0;
       level: 1;
     };
+    manta: {
+      score: 0;
+      level: 1;
+    };
     base: {
       score: 0;
       level: 1;
