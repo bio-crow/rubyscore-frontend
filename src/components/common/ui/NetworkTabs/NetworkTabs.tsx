@@ -9,6 +9,7 @@ import PrevIcon from '@/components/common/Icons/PrevIcon';
 import NextIcon from '@/components/common/Icons/NextIcon';
 import NetworkCardWithVote from '@/components/common/ui/NetworkTabs/NetworkCardWithVote/NetworkCardWithVote';
 import NetworkCard from '@/components/common/ui/NetworkTabs/NetworkCard/NetworkCard';
+import { useSearchParams } from 'next/navigation';
 const bpConfig = {
   0: {
     slidesPerView: 1,
@@ -42,6 +43,8 @@ interface Props {
 }
 const NetworkTabs: FC<Props> = ({ networks, activeTab, withVote = false, setActiveTab }) => {
   const theme = useCustomTheme();
+  const searchParams = useSearchParams();
+  const netTab = searchParams.get('net');
   const [swiperRef, setSwiperRef] = useState<any>();
   const [hasNext, setHasNext] = useState(false);
   const [hasPrev, setHasPrev] = useState(false);
@@ -80,6 +83,7 @@ const NetworkTabs: FC<Props> = ({ networks, activeTab, withVote = false, setActi
         <Swiper
           onSwiper={onSwiper}
           onResize={onResize}
+          initialSlide={networks.findIndex(item => item.index === netTab)}
           onSlideChange={onSlideChange}
           slidesPerView={4}
           loop={false}

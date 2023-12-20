@@ -181,6 +181,7 @@ const ScoreSection: FC<Props> = ({
                 onResize={onResize}
                 onSlideChange={onSlideChange}
                 slidesPerView={4}
+                initialSlide={networks?.findIndex(item => item.index === activeTab?.index)}
                 loop={false}
                 spaceBetween={20}
                 breakpoints={bpConfig}
