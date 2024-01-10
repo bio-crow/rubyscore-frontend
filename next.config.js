@@ -9,7 +9,7 @@ const nextConfig = {
         headers: [
           {
             key: 'Access-Control-Request-Headers',
-            value: 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept',
+            value: 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, Authorization',
           },
           { key: 'Access-Control-Allow-Origin', value: 'https://galxe.com' },
           { key: 'Access-Control-Allow-Credentials', value: 'true' },
