@@ -10,7 +10,7 @@ const nextConfig = {
                     { key: "Access-Control-Request-Headers", value: "Origin, X-Requested-With, Content-Type, Accept, Authorization" },
                     { key: "Access-Control-Allow-Origin", value: "https://galxe.com" },
                     { key: "Access-Control-Allow-Credentials", value: "true" },
-                    { key: "Access-Control-Allow-Methods", value: "*" },
+                    { key: "Access-Control-Allow-Methods", value: "GET,POST,OPTIONS,DELETE,PUT" },
                 ]
             }
         ]
