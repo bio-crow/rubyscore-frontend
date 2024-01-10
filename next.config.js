@@ -7,9 +7,10 @@ const nextConfig = {
             {
                 source: "/api/:path*",
                 headers: [
-                    { key: "Access-Control-Request-Headers", value: "Content-Type" },
+                    { key: "Access-Control-Request-Headers", value: "Origin, X-Requested-With, Content-Type, Accept, Authorization" },
                     { key: "Access-Control-Allow-Origin", value: "https://galxe.com" },
-                    { key: "Access-Control-Allow-Methods", value: "POST,OPTIONS" },
+                    { key: "Access-Control-Allow-Credentials", value: "true" },
+                    { key: "Access-Control-Allow-Methods", value: "*" },
                 ]
             }
         ]
