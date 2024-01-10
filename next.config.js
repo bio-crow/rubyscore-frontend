@@ -7,6 +7,8 @@ const nextConfig = {
             {
                 source: "/api/:path*",
                 headers: [
+                    { key: "Access-Control-Request-Headers", value: "X-PINGOTHER, Content-Type" },
+                    { key: "Access-Control-Allow-Credentials", value: "true" },
                     { key: "Access-Control-Allow-Origin", value: "https://galxe.com" },
                     { key: "Access-Control-Allow-Methods", value: "GET,DELETE,PATCH,POST,PUT,OPTIONS" },
                 ]
