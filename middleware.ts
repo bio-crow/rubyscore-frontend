@@ -5,7 +5,6 @@ export const corsHeaders = {
   'Access-Control-Allow-Headers': 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version',
 }
 export function middleware(request: Request) {
-  // retrieve the current response
   if (request.method === 'OPTIONS') {
     return NextResponse.json({}, { headers: corsHeaders })
   }
