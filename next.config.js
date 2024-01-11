@@ -2,13 +2,8 @@ const API_URL = process.env.NEXT_PUBLIC_DEVELOP_PROXY_BACK_END_API;
 
 const nextConfig = {
   swcMinify: true,
-
   async rewrites() {
     return [
-      {
-        source: '/api/:path(^(?!.*\\/static\\/).*$)',
-        destination: `/api/:path*`,
-      },
       {
         source: '/api/:path*',
         destination: `${API_URL}/:path*`,
