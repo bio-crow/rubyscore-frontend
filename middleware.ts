@@ -10,7 +10,6 @@ export function middleware(request: Request) {
     return NextResponse.json({}, { headers: corsHeaders })
   }
   const res = NextResponse.next()
-  // add the CORS headers to the response
   res.headers.append('Access-Control-Allow-Credentials', "true")
   res.headers.append('Access-Control-Allow-Origin', 'https://galxe.com') // replace this your actual origin
   res.headers.append('Access-Control-Allow-Methods', 'GET,DELETE,PATCH,POST,PUT')
