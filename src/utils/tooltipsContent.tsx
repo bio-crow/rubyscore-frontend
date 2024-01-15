@@ -347,3 +347,20 @@ export const TooltipVoteBtn: FC<{ isAuth: boolean }> = ({ isAuth }) => {
     </Box>
   );
 };
+export const TooltipAttestationBtn = () => {
+  const theme = useCustomTheme();
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+      }}
+    >
+      <Box className='Body-Lato-fw-600-fs-14' color={theme.palette.white50}>
+        Not enough points for claim
+      </Box>
+    </Box>
+  );
+};

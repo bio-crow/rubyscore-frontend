@@ -1,5 +1,6 @@
 import {
   DashboardTabIndexType,
+  IAttestationData,
   ILeaderboardData,
   ILeaderboardUser,
   IStreakDays,
@@ -119,6 +120,12 @@ export interface IClaimPayload {
   name?: string;
   price: string;
   payable?: boolean;
+}
+export interface IClaimAttestationPayload {
+  project: string;
+  price: string;
+  account: any;
+  attestationData: IAttestationData;
 }
 export interface IVotePayload {
   account: any;
@@ -355,4 +362,7 @@ export interface IInfoChartVolumeResponse {
       volume: number;
     }[];
   };
+}
+export interface IAttestationDataResponse {
+  result: IAttestationData;
 }

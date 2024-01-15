@@ -10,10 +10,6 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import CustomConnectButton from '@/components/common/CustomConnectButton/CustomConnectButton';
 import PrimaryButton from '@/components/common/ui/PrimaryButton/PrimaryButton';
-import { useAccount } from 'wagmi';
-import { useEffect } from 'react';
-import { initUserDataFromContract } from '@/core/thunk/user.thunk';
-import { setPremiumStatus, setUserLevelsInfo, setUserName } from '@/core/state/user.state';
 
 const navLinks = [
   {
@@ -31,6 +27,10 @@ const navLinks = [
   {
     label: 'Profile',
     route: appRoutes.PROFILE,
+  },
+  {
+    label: 'Linea Attestation',
+    route: appRoutes.ATTESTATION_LINEA,
   },
 ];
 
