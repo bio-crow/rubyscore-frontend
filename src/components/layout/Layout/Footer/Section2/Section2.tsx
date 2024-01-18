@@ -15,7 +15,7 @@ const Section2 = () => {
         color: theme.palette.white50,
       }}
     >
-      <Box className='menu-Lato-fw-500-fs-14'>RubyScore © 2023</Box>
+      <Box className='menu-Lato-fw-500-fs-14'>RubyScore © 2024</Box>
       {/*
       <Box
         sx={{
