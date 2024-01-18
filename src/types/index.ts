@@ -220,3 +220,12 @@ export interface IDashboardTabsVoteInfo {
   zora: number | null;
   rubyscore: number | null;
 }
+export interface IAttestationData {
+  attestationParams: {
+    schemaId: string;
+    expirationDate: string;
+    subject: string;
+    attestationData: string;
+  } | null;
+  signature: string | null;
+}

@@ -4,4 +4,5 @@ export const appRoutes = {
   LEADERBOARD: '/leaderboard',
   LEADERBOARD_USER: '/user',
   PROFILE: '/profile',
+  ATTESTATION_LINEA: '/attestation',
 };

@@ -232,3 +232,10 @@ main {
     font-weight: 800;
     line-height: 40px;
 }
+.Body-Lato-fw-800-fs-40 {
+    font-family: var(--font-lato);
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 50px;
+}

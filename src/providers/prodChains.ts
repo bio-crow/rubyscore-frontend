@@ -194,3 +194,6 @@ export const prodVoteContracts = {
   scroll: { contract: '0xe10Add2ad591A7AC3CA46788a06290De017b9fB4', chainId: 534352 },
   manta: { contract: '0xF57Cb671D50535126694Ce5Cc3CeBe3F32794896', chainId: 169 },
 };
+export const prodAttestationContracts = {
+  linea: { contract: '0xB9cC0Bb020cF55197C4C3d826AC87CAdba51f272', chainId: 59144 },
+};
