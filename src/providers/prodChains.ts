@@ -195,8 +195,5 @@ export const prodVoteContracts = {
   manta: { contract: '0xF57Cb671D50535126694Ce5Cc3CeBe3F32794896', chainId: 169 },
 };
 export const prodAttestationContracts = {
-  linea: { contract: '0x23AF94f601B20bD4026C94cFAFc24494A2D7Fe79', chainId: 59144 },
-};
-export const prodAttestationCertificateContracts = {
-  linea: { contract: '0xed02ae22631c9a58b24d8612331dc4b28abfd49a', chainId: 59144 },
+  linea: { contract: '0xB9cC0Bb020cF55197C4C3d826AC87CAdba51f272', chainId: 59144 },
 };

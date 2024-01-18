@@ -1,27 +1,20 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchAttestationData } from '@/core/api/attestation.api';
+import { fetchAttestationData, fetchCheckAttestation } from '@/core/api/attestation.api';
 import {
   setAttestationData,
   setAttestationPrice,
   setAttestationStatus,
   setClaimAttestationLoading,
 } from '@/core/state/attestation.state';
-import {
-  wagmiAttestationPrice,
-  wagmiClaimAttestation,
-  wagmiGetAttestationStatus,
-} from '@/core/api/contract/contract.attestation.api';
+import { wagmiAttestationPrice, wagmiClaimAttestation } from '@/core/api/contract/contract.attestation.api';
 import { formatEther } from 'viem';
 import { IClaimAttestationPayload, IClaimPayload } from '@/core/types';
-import { wagmiClaimName } from '@/core/api/contract/contract.api';
-import { initUserDataFromContract } from '@/core/thunk/user.thunk';
-
 export const getAttestationData = createAsyncThunk(
   'attestationSlice/getAttestationData',
   async (payload: { address: any; project: string }, { dispatch }) => {
     const { project, address } = payload;
-    const status = await wagmiGetAttestationStatus(payload);
-    if (status) {
+    const res: any = await fetchCheckAttestation({ wallet: address, project: project });
+    if (res.data?.result?.count > 0) {
       dispatch(setAttestationStatus(true));
     } else {
       dispatch(setAttestationStatus(false));

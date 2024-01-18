@@ -1,13 +1,5 @@
-import {
-  prodAttestationCertificateContracts,
-  prodAttestationContracts,
-  prodContracts,
-} from '@/providers/prodChains';
-import {
-  testAttestationCertificateContracts,
-  testAttestationContracts,
-  testContracts,
-} from '@/providers/testChains';
+import { prodAttestationContracts } from '@/providers/prodChains';
+import { testAttestationContracts } from '@/providers/testChains';
 import { getAchievementsBaseContractConfig } from '@/utils/helpers';
 import { getNetwork, readContract, switchNetwork, waitForTransaction, writeContract } from '@wagmi/core';
 import { abiAttestation } from '@/constants/abiAttestation';
@@ -21,10 +13,6 @@ import { abiAttestationCertificate } from '@/constants/abiAttestationCertificate
 
 const contractInfo =
   process.env.NEXT_PUBLIC_IS_PROD === 'true' ? prodAttestationContracts : testAttestationContracts;
-const contractCertificateInfo =
-  process.env.NEXT_PUBLIC_IS_PROD === 'true'
-    ? prodAttestationCertificateContracts
-    : testAttestationCertificateContracts;
 export const wagmiAttestationPrice = async (params: { schemaId: string; project: string }): Promise<any> => {
   const action = async (params: { schemaId: string; project: string }) => {
     const { schemaId, project } = params;
@@ -86,25 +74,4 @@ export const wagmiClaimAttestation = async (params: IClaimAttestationPayload): P
     toast(error.shortMessage, { position: 'top-right' });
   }
   return;
-};
-export const wagmiGetAttestationStatus = async (params: { address: any; project: string }): Promise<any> => {
-  const action = async (params: { address: any; project: string }) => {
-    const { address, project } = params;
-    const accounts = [address];
-    const ids = [1];
-    const baseConfig = getAchievementsBaseContractConfig(project, contractCertificateInfo);
-    let config: any = {
-      ...baseConfig,
-      abi: abiAttestationCertificate,
-      functionName: 'balanceOfBatch',
-      args: [accounts, ids],
-    };
-    const result: any = await readContract(config);
-    return result[0] && parseInt(result[0]) === 1;
-  };
-  try {
-    return await action(params);
-  } catch (error) {
-    // console.error(error);
-  }
 };
