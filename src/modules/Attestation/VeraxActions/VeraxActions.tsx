@@ -39,7 +39,7 @@ const VeraxActions = () => {
     refCode && copyToClickBoard(`${window.location.origin}${appRoutes.PROFILE}/?ref=${refCode}`);
   };
   const openDashboard = () => {
-    router.push(appRoutes.DASHBOARD);
+    router.push(`${appRoutes.DASHBOARD}?net=linea`);
   };
   const claimAttest = () => {
     if (attestationPrice && attestationData && address) {
