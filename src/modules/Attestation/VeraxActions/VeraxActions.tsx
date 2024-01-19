@@ -250,6 +250,8 @@ const VeraxActions = () => {
             variant='outlined'
             size='large'
             fullWidth={isXs}
+            /* @ts-expect-error */
+            target='_blank'
             href='https://twitter.com/rubyscore_io'
           >
             <Image src='/asserts/x-button.png' alt='icon' width='24' height='24' />
