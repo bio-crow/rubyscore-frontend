@@ -41,7 +41,7 @@ const Section7 = () => {
       >
         <CustomSocialLink icon='/asserts/social/telegram.svg' url='https://t.me/RubyScore_ann' />
         <CustomSocialLink icon='/asserts/social/twitter.svg' url='https://twitter.com/rubyscore_io' />
-        <CustomSocialLink icon='/asserts/social/linkedin.svg' url='https://www.linkedin.com/in/rubyscore' />
+        <CustomSocialLink icon='/asserts/social/debank.png' url='https://debank.com/official/RubyScore' />
         <CustomSocialLink icon='/asserts/social/medium.svg' url='https://medium.com/@rubyscore.io' />
         <CustomSocialLink icon='/asserts/social/mail.svg' url='mailto:Partnerships@rubyscore.io' />
       </Box>
