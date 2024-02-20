@@ -11,10 +11,10 @@ export const prodChains: Chain[] = [
     },
     rpcUrls: {
       public: {
-        http: ['https://optimism.llamarpc.com'],
+        http: ['https://mainnet.optimism.io'],
       },
       default: {
-        http: ['https://optimism.llamarpc.com'],
+        http: ['https://mainnet.optimism.io'],
       },
     },
     blockExplorers: {
