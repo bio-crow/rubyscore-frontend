@@ -13,7 +13,6 @@ import { dashboardPanelTabs } from '@/constants/index';
 import { setUserGradation } from '@/core/state/dashboard.state';
 import { useSearchParams, useRouter } from 'next/navigation';
 const Dashboard = () => {
-  const theme = useCustomTheme();
   const router = useRouter();
   const searchParams = useSearchParams();
   const netTab = searchParams.get('net');
