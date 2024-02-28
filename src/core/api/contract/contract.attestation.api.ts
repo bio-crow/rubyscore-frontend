@@ -53,6 +53,7 @@ export const wagmiClaimAttestation = async (params: IClaimAttestationPayload): P
       functionName: 'attestRubyscore',
       value: parseEther(price),
       account: account,
+      gas: 370000,
       args: [
         [
           attestationParams?.schemaId,
