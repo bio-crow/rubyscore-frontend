@@ -210,7 +210,7 @@ export const prodContracts = {
   zkSync: { contract: '0x8A1142620CbdE2f2d63E88F35D0D76eAAce0AC9e', chainId: 324 },
   scroll: { contract: '0xDC3D8318Fbaec2de49281843f5bba22e78338146', chainId: 534352 },
   manta: { contract: '0xbDB018e21AD1e5756853fe008793a474d329991b', chainId: 169 },
-  blast:{contract: '0x009DBFEe9E155766AF434ED1652CA3769B05E76f', chainId: 81457}
+  blast: { contract: '0x009DBFEe9E155766AF434ED1652CA3769B05E76f', chainId: 81457 },
 };
 export const prodVoteContracts = {
   base: { contract: '0xe10Add2ad591A7AC3CA46788a06290De017b9fB4', chainId: 8453 },
@@ -219,7 +219,7 @@ export const prodVoteContracts = {
   zkSync: { contract: '0xCb84d512F0C9943D3BC6B4Be8801aC8Aa6621a54', chainId: 324 },
   scroll: { contract: '0xe10Add2ad591A7AC3CA46788a06290De017b9fB4', chainId: 534352 },
   manta: { contract: '0xF57Cb671D50535126694Ce5Cc3CeBe3F32794896', chainId: 169 },
-  blast: {contract: '0xbDB018e21AD1e5756853fe008793a474d329991b', chainId: 81457}
+  blast: { contract: '0xbDB018e21AD1e5756853fe008793a474d329991b', chainId: 81457 },
 };
 export const prodAttestationContracts = {
   linea: { contract: '0xB9cC0Bb020cF55197C4C3d826AC87CAdba51f272', chainId: 59144 },
