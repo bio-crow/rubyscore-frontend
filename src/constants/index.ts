@@ -162,10 +162,10 @@ export const dashboardPanelTabs: { index: DashboardTabIndexType; label: string }
     index: 'base',
     label: 'Base',
   },
-  {
+  /*  {
     index: 'blast',
     label: 'Blast',
-  },
+  },*/
   {
     index: 'scroll',
     label: 'Scroll',
