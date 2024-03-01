@@ -9,6 +9,7 @@ export const networkStaticData: {
   scroll: { icon: string };
   rubyscore: { icon: string };
   manta: { icon: string };
+  blast: { icon: string };
 } = {
   zk_era: {
     icon: '/asserts/net/zkSync.svg',
@@ -33,6 +34,9 @@ export const networkStaticData: {
   },
   manta: {
     icon: '/asserts/net/manta.svg',
+  },
+  blast: {
+    icon: '/asserts/net/blast.svg',
   },
 };
 export const myLevelIcons = {
@@ -132,6 +136,16 @@ export const myLevelIcons = {
     '/asserts/box/manta/manta9.png',
     '/asserts/box/manta/manta10.png',
   ],
+  blast: ['/asserts/box/blast/blast1.png',
+    '/asserts/box/blast/blast2.png',
+    '/asserts/box/blast/blast3.png',
+    '/asserts/box/blast/blast4.png',
+    '/asserts/box/blast/blast5.png',
+    '/asserts/box/blast/blast6.png',
+    '/asserts/box/blast/blast7.png',
+    '/asserts/box/blast/blast8.png',
+    '/asserts/box/blast/blast9.png',
+    '/asserts/box/blast/blast10.png'],
 };
 export const dashboardPanelTabs: { index: DashboardTabIndexType; label: string }[] = [
   {
@@ -147,8 +161,8 @@ export const dashboardPanelTabs: { index: DashboardTabIndexType; label: string }
     label: 'Base',
   },
   {
-    index: 'manta',
-    label: 'Manta',
+    index: 'blast',
+    label: 'Blast',
   },
   {
     index: 'scroll',
@@ -157,6 +171,10 @@ export const dashboardPanelTabs: { index: DashboardTabIndexType; label: string }
   {
     index: 'zk_evm',
     label: 'zkEVM',
+  },
+  {
+    index: 'manta',
+    label: 'Manta',
   },
 ];
 export const axisLabelMap = {

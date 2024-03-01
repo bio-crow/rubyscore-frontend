@@ -19,7 +19,8 @@ export type DashboardTabIndexType =
   | 'zk_evm'
   | 'scroll'
   | 'rubyscore'
-  | 'manta';
+  | 'manta'
+  | 'blast';
 export interface IScoreNetwork {
   index: DashboardTabIndexType;
   title: string;
@@ -140,6 +141,10 @@ export interface IScoreList {
     score: number;
     level: number;
   };
+  blast: {
+    score: number;
+    level: number;
+  };
 }
 export interface IUserGradation {
   address: string;
@@ -198,6 +203,7 @@ export interface ILevelsInfo {
   manta: [];
   base: [];
   scroll: [];
+  blast: [];
 }
 
 export interface ITask {
@@ -219,6 +225,7 @@ export interface IDashboardTabsVoteInfo {
   scroll: number | null;
   zora: number | null;
   rubyscore: number | null;
+  blast: number | null;
 }
 export interface IAttestationData {
   attestationParams: {
