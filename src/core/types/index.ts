@@ -84,7 +84,7 @@ export interface IScoreListResponse {
     blast: {
       score: number;
       level: number;
-    }
+    };
   };
 }
 

@@ -136,7 +136,8 @@ export const myLevelIcons = {
     '/asserts/box/manta/manta9.png',
     '/asserts/box/manta/manta10.png',
   ],
-  blast: ['/asserts/box/blast/blast1.png',
+  blast: [
+    '/asserts/box/blast/blast1.png',
     '/asserts/box/blast/blast2.png',
     '/asserts/box/blast/blast3.png',
     '/asserts/box/blast/blast4.png',
@@ -145,7 +146,8 @@ export const myLevelIcons = {
     '/asserts/box/blast/blast7.png',
     '/asserts/box/blast/blast8.png',
     '/asserts/box/blast/blast9.png',
-    '/asserts/box/blast/blast10.png'],
+    '/asserts/box/blast/blast10.png',
+  ],
 };
 export const dashboardPanelTabs: { index: DashboardTabIndexType; label: string }[] = [
   {
