@@ -50,37 +50,41 @@ export interface INFTListResponse {
 export interface IScoreListResponse {
   result: {
     rubyscore: {
-      score: 110;
-      level: 2;
+      score: number;
+      level: number;
     };
     linea: {
-      score: 0;
-      level: 1;
+      score: number;
+      level: number;
     };
     zk_era: {
-      score: 0;
-      level: 1;
+      score: number;
+      level: number;
     };
     zora: {
-      score: 0;
-      level: 1;
+      score: number;
+      level: number;
     };
     zk_evm: {
-      score: 0;
-      level: 1;
+      score: number;
+      level: number;
     };
     manta: {
-      score: 0;
-      level: 1;
+      score: number;
+      level: number;
     };
     base: {
-      score: 0;
-      level: 1;
+      score: number;
+      level: number;
     };
     scroll: {
-      score: 0;
-      level: 1;
+      score: number;
+      level: number;
     };
+    blast: {
+      score: number;
+      level: number;
+    }
   };
 }
 

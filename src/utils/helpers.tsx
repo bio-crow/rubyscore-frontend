@@ -563,6 +563,11 @@ export const getAchievementsBaseContractConfig = (project: string, contractInfo:
         address: contractInfo.manta.contract,
         chainId: contractInfo.manta.chainId,
       };
+    case 'blast':
+      return {
+        address: contractInfo.blast.contract,
+        chainId: contractInfo.blast.chainId,
+      };
     case 'linea':
       return {
         address: contractInfo.linea.contract,
@@ -601,6 +606,11 @@ export const getVoteBaseContractConfig = (project: string, contractInfo: any) =>
       return {
         address: contractInfo.manta.contract,
         chainId: contractInfo.manta.chainId,
+      };
+    case 'blast':
+      return {
+        address: contractInfo.blast.contract,
+        chainId: contractInfo.blast.chainId,
       };
     case 'linea':
       return {

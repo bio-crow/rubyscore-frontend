@@ -49,6 +49,7 @@ const initialState: IDashboardState = {
     zora: null,
     rubyscore: null,
     manta: null,
+    blast: null,
   },
   dashboardTabsVoteInfoLoading: null,
 };

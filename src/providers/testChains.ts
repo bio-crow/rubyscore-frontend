@@ -201,6 +201,31 @@ export const testChains: Chain[] = [
     },
     testnet: false,
   },
+  {
+    id: 168587773,
+    name: 'Blast Sepolia Testnet',
+    network: 'Blast Sepolia Testnet',
+    nativeCurrency: {
+      decimals: 18,
+      name: 'Blast Sepolia Testnet',
+      symbol: 'ETH',
+    },
+    rpcUrls: {
+      public: {
+        http: ['https://sepolia.blast.io'],
+      },
+      default: {
+        http: ['https://sepolia.blast.io'],
+      },
+    },
+    blockExplorers: {
+      default: {
+        name: 'Blast Sepolia Testnet',
+        url: 'https://testnet.blastscan.io',
+      },
+    },
+    testnet: false,
+  },
 ];
 export const testContracts = {
   app: { contract: '0x37C3837a0C37C002894BB035f5dD73933523B66d', chainId: 80001 },
@@ -211,6 +236,7 @@ export const testContracts = {
   zkSync: { contract: '0xDA0F79DB2F00e93aBE1AB6FfA51bbd9043605917', chainId: 280 },
   scroll: { contract: '0x81C55bbA5d5D05a0C02f4B561B560194f34a6D07', chainId: 534351 },
   manta: { contract: '0xbDB018e21AD1e5756853fe008793a474d329991b', chainId: 169 },
+  blast: {contract: '0x2A1000293467a221F5d4cA98F4b7912c4c9c22b3', chainId: 168587773}
 };
 export const testVoteContracts = prodVoteContracts;
 export const testAttestationContracts = {
