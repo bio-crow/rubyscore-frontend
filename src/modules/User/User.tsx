@@ -24,7 +24,7 @@ import {
 import { DashboardTabIndexType } from '@/types/index';
 import { dashboardPanelTabs } from '@/constants/index';
 import { setActiveUserLevelsInfo } from '@/core/state/user.state';
-import { getCompletedTasks } from '@/core/thunk/task.thunk';
+import { getCompletedUserTasks } from '@/core/thunk/task.thunk';
 
 const breakpointsConfig = {
   0: {
@@ -72,7 +72,7 @@ const User = () => {
       );
       dispatch(getUserNFTList(params.wallet));
       dispatch(activeUserDataFromContract(params.wallet));
-      dispatch(getCompletedTasks(params.wallet));
+      dispatch(getCompletedUserTasks(params.wallet));
     } else {
       dispatch(setUserStatistics(null));
       dispatch(setActiveUserLevelsInfo(null));
@@ -105,7 +105,7 @@ const User = () => {
         withLoad: false,
       })
     );
-    dispatch(getCompletedTasks(params.wallet));
+    dispatch(getCompletedUserTasks(params.wallet));
     dispatch(getUserNFTList(params.wallet));
     dispatch(getUserScoreList(params.wallet));
   };

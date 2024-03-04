@@ -1,6 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchCompletedTasks, fetchTasks, loadClaimTask } from '@/core/api/task.api';
-import { setClaimingTaskId, setCompletedTasks, setTasks, setTasksLoading } from '@/core/state/task.state';
+import {
+  setClaimingTaskId,
+  setCompletedTasks,
+  setCompletedUserTasks,
+  setTasks,
+  setTasksLoading,
+} from '@/core/state/task.state';
 import { toast } from 'react-toastify';
 import { updateUserLevelInfo } from '@/core/thunk/dashboard.thunk';
 import { loadUserProjectInfo } from '@/core/thunk/user.thunk';
@@ -24,6 +30,18 @@ export const getCompletedTasks = createAsyncThunk(
       dispatch(setCompletedTasks(data?.data?.result.tasks));
     } else {
       dispatch(setCompletedTasks([]));
+    }
+    return;
+  }
+);
+export const getCompletedUserTasks = createAsyncThunk(
+  'taskSlice/getCompletedTasks',
+  async (wallet: any, { dispatch }) => {
+    const data = await fetchCompletedTasks(wallet);
+    if (data?.data?.result?.tasks) {
+      dispatch(setCompletedUserTasks(data?.data?.result.tasks));
+    } else {
+      dispatch(setCompletedUserTasks([]));
     }
     return;
   }

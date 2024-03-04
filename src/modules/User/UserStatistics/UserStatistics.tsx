@@ -16,7 +16,7 @@ type TabIndexType = 0 | 1;
 const UserStatistics = () => {
   const statRef = useRef<any>(null);
   const theme = useCustomTheme();
-  const completedTasks = useAppSelector(state => state.taskState.completedTasks);
+  const completedUserTasks = useAppSelector(state => state.taskState.completedUserTasks);
   const searchParams = useSearchParams();
   const tab = searchParams.get('tab');
   const isMd = useMediaQuery(theme.breakpoints.up('md'));
@@ -36,7 +36,7 @@ const UserStatistics = () => {
     {
       index: 0,
       label: 'Quests completed',
-      value: completedTasks?.length,
+      value: completedUserTasks?.length,
     },
     {
       index: 1,

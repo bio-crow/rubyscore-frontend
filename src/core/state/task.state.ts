@@ -3,6 +3,7 @@ import { ITask } from '@/types/index';
 interface ITaskState {
   tasks: ITask[];
   completedTasks: ITask[];
+  completedUserTasks: ITask[];
   tasksLoading: boolean;
   claimingTaskId: number | null;
 }
@@ -10,6 +11,7 @@ interface ITaskState {
 const initialState: ITaskState = {
   tasks: [],
   completedTasks: [],
+  completedUserTasks: [],
   tasksLoading: false,
   claimingTaskId: null,
 };
@@ -27,6 +29,9 @@ export const taskSlice = createSlice({
     setCompletedTasks: (state, action: PayloadAction<ITask[]>) => {
       state.completedTasks = action.payload;
     },
+    setCompletedUserTasks: (state, action: PayloadAction<ITask[]>) => {
+      state.completedUserTasks = action.payload;
+    },
     setClaimingTaskId: (state, action: PayloadAction<number | null>) => {
       state.claimingTaskId = action.payload;
     },
@@ -35,4 +40,5 @@ export const taskSlice = createSlice({
 
 export default taskSlice.reducer;
 
-export const { setTasks, setTasksLoading, setClaimingTaskId, setCompletedTasks } = taskSlice.actions;
+export const { setTasks, setTasksLoading, setClaimingTaskId, setCompletedTasks, setCompletedUserTasks } =
+  taskSlice.actions;
