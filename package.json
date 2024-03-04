@@ -9,7 +9,8 @@
     "lint": "next lint",
     "lint:fix": "eslint --fix",
     "prettier": "npx prettier \"{app,public,src}/**/*.{ts,tsx}\" --write",
-    "format": "yarn prettier && yarn lint:fix"
+    "format": "yarn prettier && yarn lint:fix",
+    "prepare": "husky"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -72,20 +73,10 @@
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "husky": "^8.0.3",
+    "husky": "^9.0.11",
     "prettier": "^3.0.3",
     "prettier-plugin-organize-imports": "^3.2.3",
     "typescript": "5.2.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{ts,tsx,json}": [
-      "npm run format"
-    ]
   },
   "prettier": {
     "tabWidth": 2,

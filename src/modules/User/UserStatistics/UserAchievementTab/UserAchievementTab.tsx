@@ -1,5 +1,4 @@
 import { Box } from '@mui/system';
-import PrimaryPagination from '@/components/common/ui/PrimaryPagination/PrimaryPagination';
 import { v4 as uuidv4 } from 'uuid';
 import { ITask } from '@/types/index';
 
@@ -7,7 +6,7 @@ import AchievementCard from '@/modules/User/UserStatistics/UserAchievementTab/Ac
 import { useAppSelector } from '@/core/store';
 
 const UserAchievementTab = () => {
-  const completedTasks = useAppSelector(state => state.taskState.completedTasks);
+  const completedUserTasks = useAppSelector(state => state.taskState.completedUserTasks);
   return (
     <Box
       sx={{
@@ -16,7 +15,7 @@ const UserAchievementTab = () => {
         gap: '20px',
       }}
     >
-      {completedTasks?.length > 0 ? (
+      {completedUserTasks?.length > 0 ? (
         <Box
           sx={{
             flex: '1',
@@ -25,11 +24,11 @@ const UserAchievementTab = () => {
             gridTemplateColumns: { xs: '1fr', md: '1fr 1fr', lg: '1fr 1fr 1fr', xlg: '1fr 1fr 1fr 1fr' },
           }}
         >
-          {completedTasks.map((data: ITask, index: number) => (
+          {completedUserTasks.map((data: ITask, index: number) => (
             <AchievementCard
               task={data}
               key={uuidv4()}
-              zIndex={completedTasks && completedTasks?.length - index}
+              zIndex={completedUserTasks && completedUserTasks?.length - index}
             />
           ))}
         </Box>

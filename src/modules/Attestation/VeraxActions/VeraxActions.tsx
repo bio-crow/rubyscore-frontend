@@ -103,7 +103,7 @@ const VeraxActions = () => {
               className='Body-Lato-fw-600-fs-14'
             >
               Claim your attestation <br />
-              on the RubyScore Network
+              on the RubyScore
             </Box>
             <Box
               sx={{
