@@ -714,7 +714,7 @@ export const formatPercentsForCards = (value: number | null) => {
   return Math.floor(value);
 };
 
-export const getTwoLinesNetworksData = (networks, minLineLength = 5) => {
+export const getTwoLinesNetworksData = (networks:any[], minLineLength = 5) => {
   let result = [];
   const lineLength = Math.ceil(networks.length / 2);
   if (lineLength < minLineLength) {
