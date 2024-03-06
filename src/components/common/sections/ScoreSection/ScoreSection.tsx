@@ -13,6 +13,8 @@ import { getUserScoreList } from '@/core/thunk/user.thunk';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { setUserScoreList } from '@/core/state/user.state';
 import { CircularProgress } from '@mui/material';
+import TwoNetworkCard from '@/components/common/sections/ScoreSection/TwoNetworkCard/TwoNetworkCard';
+import { getTwoLinesNetworksData } from '@/utils/helpers';
 
 interface btnProps {
   hasNext?: boolean;
@@ -43,15 +45,17 @@ interface Props {
   selectable?: boolean;
   activeTab?: { index: DashboardTabIndexType; label: string };
   onSelect?: Function;
+  isTwoLine?: boolean;
 }
 
 const ScoreSection: FC<Props> = ({
-  bpConfig = breakpointsConfig,
-  wallet,
-  selectable,
-  activeTab,
-  onSelect,
-}) => {
+                                   bpConfig = breakpointsConfig,
+                                   wallet,
+                                   selectable,
+                                   activeTab,
+                                   onSelect,
+                                   isTwoLine = false,
+                                 }) => {
   const dispatch = useAppDispatch();
   const userScoreListLoading = useAppSelector(state => state.userState.userScoreListLoading);
   const userScoreList = useAppSelector(state => state.userState.userScoreList);
@@ -137,6 +141,7 @@ const ScoreSection: FC<Props> = ({
       points: userScoreList['manta'].score,
     },
   ];
+  const preparedNetworks = networks ? getTwoLinesNetworksData(networks, swiperRef?.params?.slidesPerView) : []
   return (
     <Box
       sx={{
@@ -193,7 +198,7 @@ const ScoreSection: FC<Props> = ({
                 spaceBetween={20}
                 breakpoints={bpConfig}
               >
-                {networks?.map((data: IScoreNetwork) => (
+                {!isTwoLine && networks?.map((data: IScoreNetwork) => (
                   <SwiperSlide key={uuidv4()}>
                     <NetworkCard
                       network={data}
@@ -201,6 +206,13 @@ const ScoreSection: FC<Props> = ({
                       activeTab={activeTab}
                       onSelect={onSelect}
                     />
+                  </SwiperSlide>
+                ))}
+                {isTwoLine && preparedNetworks?.map(({ network1, network2 }) => (
+                  <SwiperSlide key={uuidv4()}>
+                    <TwoNetworkCard network1={network1} network2={network2} selectable={selectable}
+                                    activeTab={activeTab}
+                                    onSelect={onSelect} />
                   </SwiperSlide>
                 ))}
               </Swiper>

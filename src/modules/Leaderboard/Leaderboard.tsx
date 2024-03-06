@@ -14,6 +14,7 @@ import { DashboardTabIndexType } from '@/types/index';
 import { setFilteredUser } from '@/core/state/leaderboard.state';
 import { dashboardPanelTabs } from '@/constants/index';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { initDashboardTabsVotes } from '@/core/thunk/dashboard.thunk';
 const Dashboard = () => {
   const theme = useCustomTheme();
   const searchParams = useSearchParams();
@@ -53,6 +54,9 @@ const Dashboard = () => {
       tab && setActiveTab(tab);
     }
   }, [netTab]);
+  useEffect(() => {
+    dispatch(initDashboardTabsVotes());
+  }, []);
   return (
     <Layout>
       <Box
@@ -64,7 +68,7 @@ const Dashboard = () => {
           padding: { xs: '0px 15px 0px 15px', sm: '0px 30px 0px 30px', xl: 0 },
         }}
       >
-        <NetworkTabs networks={dashboardPanelTabs} activeTab={activeTab} setActiveTab={changeTab} />
+        <NetworkTabs networks={dashboardPanelTabs} activeTab={activeTab} setActiveTab={changeTab} withVote isTwoLine />
         <LeaderboardTab tableData={filteredUser ? [filteredUser] : shownLeaderBoard} activeTab={activeTab} />
       </Box>
     </Layout>
