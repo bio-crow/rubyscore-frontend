@@ -10,6 +10,8 @@ import NextIcon from '@/components/common/Icons/NextIcon';
 import NetworkCardWithVote from '@/components/common/ui/NetworkTabs/NetworkCardWithVote/NetworkCardWithVote';
 import NetworkCard from '@/components/common/ui/NetworkTabs/NetworkCard/NetworkCard';
 import { useSearchParams } from 'next/navigation';
+import { getTwoLinesNetworksData } from '@/utils/helpers';
+import TwoNetworkCard from '@/components/common/ui/NetworkTabs/TwoNetworkCard/TwoNetworkCard';
 const bpConfig = {
   0: {
     slidesPerView: 1,
@@ -40,8 +42,15 @@ interface Props {
   activeTab: { index: DashboardTabIndexType; label: string };
   setActiveTab: Function;
   withVote?: boolean;
+  isTwoLine?: boolean;
 }
-const NetworkTabs: FC<Props> = ({ networks, activeTab, withVote = false, setActiveTab }) => {
+const NetworkTabs: FC<Props> = ({
+  networks,
+  activeTab,
+  withVote = false,
+  isTwoLine = false,
+  setActiveTab,
+}) => {
   const theme = useCustomTheme();
   const searchParams = useSearchParams();
   const netTab = searchParams.get('net');
@@ -69,39 +78,84 @@ const NetworkTabs: FC<Props> = ({ networks, activeTab, withVote = false, setActi
     setHasNext(!value.isEnd);
     setHasPrev(!value.isBeginning);
   };
+  const preparedNetworks = getTwoLinesNetworksData(networks, swiperRef?.params?.slidesPerView);
   return (
     <Box
       sx={{
         display: 'flex',
-        alignItems: 'center',
+        flexDirection: 'column',
         gap: '20px',
-        width: '100%',
       }}
     >
-      <PrevButton onClick={handlePrevious} hasNext={hasPrev} />
-      <Box flex='1' overflow='hidden'>
-        <Swiper
-          onSwiper={onSwiper}
-          onResize={onResize}
-          initialSlide={networks.findIndex(item => item.index === netTab)}
-          onSlideChange={onSlideChange}
-          slidesPerView={4}
-          loop={false}
-          spaceBetween={20}
-          breakpoints={bpConfig}
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px',
+        }}
+      >
+        <Box
+          sx={{
+            color: theme.palette.powderWhite,
+          }}
+          className='H2-Lato-fw-700-fs-24'
         >
-          {networks?.map((data: { label: string; index: DashboardTabIndexType }) => (
-            <SwiperSlide key={uuidv4()}>
-              {withVote ? (
-                <NetworkCardWithVote network={data} activeTab={activeTab} setActiveTab={setActiveTab} />
-              ) : (
-                <NetworkCard network={data} activeTab={activeTab} setActiveTab={setActiveTab} />
-              )}
-            </SwiperSlide>
-          ))}
-        </Swiper>
+          Networks
+        </Box>
+        <Box
+          sx={{
+            color: theme.palette.lightGreen,
+          }}
+          className='H2-Lato-fw-700-fs-24'
+        >
+          {networks.length}
+        </Box>
       </Box>
-      <NextButton onClick={handleNext} hasNext={hasNext} />
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '20px',
+          width: '100%',
+        }}
+      >
+        {/*<PrevButton onClick={handlePrevious} hasNext={hasPrev} />*/}
+        <Box flex='1' overflow='hidden'>
+          <Swiper
+            onSwiper={onSwiper}
+            onResize={onResize}
+            initialSlide={networks.findIndex(item => item.index === netTab)}
+            onSlideChange={onSlideChange}
+            slidesPerView={4}
+            loop={false}
+            spaceBetween={20}
+            breakpoints={bpConfig}
+          >
+            {!isTwoLine &&
+              networks?.map((data: { label: string; index: DashboardTabIndexType }) => (
+                <SwiperSlide key={uuidv4()}>
+                  {withVote ? (
+                    <NetworkCardWithVote network={data} activeTab={activeTab} setActiveTab={setActiveTab} />
+                  ) : (
+                    <NetworkCard network={data} activeTab={activeTab} setActiveTab={setActiveTab} />
+                  )}
+                </SwiperSlide>
+              ))}
+            {isTwoLine &&
+              preparedNetworks?.map(({ network1, network2 }) => (
+                <SwiperSlide key={uuidv4()}>
+                  <TwoNetworkCard
+                    network1={network1}
+                    network2={network2}
+                    activeTab={activeTab}
+                    setActiveTab={setActiveTab}
+                  />
+                </SwiperSlide>
+              ))}
+          </Swiper>
+        </Box>
+        {/* <NextButton onClick={handleNext} hasNext={hasNext} /> */}
+      </Box>
     </Box>
   );
 };

@@ -158,6 +158,7 @@ const User = () => {
                 selectable={true}
                 activeTab={activeProject}
                 onSelect={changeTab}
+                isTwoLine
               />
               <AchievementsSection activeTab={activeProject} wallet={params.wallet} onRefresh={onRefresh} />
               {userStatistics && <UserStatistics />}

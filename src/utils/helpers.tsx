@@ -713,3 +713,28 @@ export const formatPercentsForCards = (value: number | null) => {
   }
   return Math.floor(value);
 };
+
+export const getTwoLinesNetworksData = (networks, minLineLength = 5) => {
+  let result = [];
+  const lineLength = Math.ceil(networks.length / 2);
+  if (lineLength < minLineLength) {
+    for (let i = 0; i < minLineLength; i++) {
+      result.push({ network1: networks[i] });
+    }
+    result = result.map((item, index) => {
+      return {
+        ...item,
+        network2: networks[minLineLength + index] || null,
+      };
+    });
+  } else {
+    for (let i = 0; i < networks.length; i++) {
+      if (i % 2 === 0) {
+        result.push({ network1: networks[i] });
+      } else {
+        result[result.length - 1] = { ...result[result.length - 1], network2: networks[i] };
+      }
+    }
+  }
+  return result;
+};
