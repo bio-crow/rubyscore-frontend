@@ -10,7 +10,7 @@ interface Props {
   setActiveTab: Function;
 }
 
-const TwoNetworkCard: FC<Props> = ({ network1,network2, activeTab, setActiveTab }) => {
+const TwoNetworkCard: FC<Props> = ({ network1, network2, activeTab, setActiveTab }) => {
   return (
     <Box
       sx={{
@@ -19,8 +19,12 @@ const TwoNetworkCard: FC<Props> = ({ network1,network2, activeTab, setActiveTab 
         gap: '20px',
       }}
     >
-      {network1 && <NetworkCardWithVote network={network1} activeTab={activeTab} setActiveTab={setActiveTab} />}
-      {network2 && <NetworkCardWithVote network={network2} activeTab={activeTab} setActiveTab={setActiveTab} />}
+      {network1 && (
+        <NetworkCardWithVote network={network1} activeTab={activeTab} setActiveTab={setActiveTab} />
+      )}
+      {network2 && (
+        <NetworkCardWithVote network={network2} activeTab={activeTab} setActiveTab={setActiveTab} />
+      )}
     </Box>
   );
 };

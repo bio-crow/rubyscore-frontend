@@ -68,7 +68,13 @@ const Dashboard = () => {
           padding: { xs: '0px 15px 0px 15px', sm: '0px 30px 0px 30px', xl: 0 },
         }}
       >
-        <NetworkTabs networks={dashboardPanelTabs} activeTab={activeTab} setActiveTab={changeTab} withVote isTwoLine />
+        <NetworkTabs
+          networks={dashboardPanelTabs}
+          activeTab={activeTab}
+          setActiveTab={changeTab}
+          withVote
+          isTwoLine
+        />
         <LeaderboardTab tableData={filteredUser ? [filteredUser] : shownLeaderBoard} activeTab={activeTab} />
       </Box>
     </Layout>

@@ -42,9 +42,15 @@ interface Props {
   activeTab: { index: DashboardTabIndexType; label: string };
   setActiveTab: Function;
   withVote?: boolean;
-  isTwoLine?:boolean;
+  isTwoLine?: boolean;
 }
-const NetworkTabs: FC<Props> = ({ networks, activeTab, withVote = false,isTwoLine=false, setActiveTab }) => {
+const NetworkTabs: FC<Props> = ({
+  networks,
+  activeTab,
+  withVote = false,
+  isTwoLine = false,
+  setActiveTab,
+}) => {
   const theme = useCustomTheme();
   const searchParams = useSearchParams();
   const netTab = searchParams.get('net');
@@ -72,26 +78,36 @@ const NetworkTabs: FC<Props> = ({ networks, activeTab, withVote = false,isTwoLin
     setHasNext(!value.isEnd);
     setHasPrev(!value.isBeginning);
   };
-  const preparedNetworks = getTwoLinesNetworksData(networks, swiperRef?.params?.slidesPerView)
+  const preparedNetworks = getTwoLinesNetworksData(networks, swiperRef?.params?.slidesPerView);
   return (
-    <Box sx={{
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '20px'
-    }}>
-      <Box sx={{
+    <Box
+      sx={{
         display: 'flex',
-        alignItems: 'center',
-        gap: '10px'
-      }}>
-        <Box sx={{
-          color: theme.palette.powderWhite
-        }} className='H2-Lato-fw-700-fs-24'>
+        flexDirection: 'column',
+        gap: '20px',
+      }}
+    >
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px',
+        }}
+      >
+        <Box
+          sx={{
+            color: theme.palette.powderWhite,
+          }}
+          className='H2-Lato-fw-700-fs-24'
+        >
           Networks
         </Box>
-        <Box sx={{
-          color: theme.palette.lightGreen
-        }} className='H2-Lato-fw-700-fs-24'>
+        <Box
+          sx={{
+            color: theme.palette.lightGreen,
+          }}
+          className='H2-Lato-fw-700-fs-24'
+        >
           {networks.length}
         </Box>
       </Box>
@@ -115,20 +131,27 @@ const NetworkTabs: FC<Props> = ({ networks, activeTab, withVote = false,isTwoLin
             spaceBetween={20}
             breakpoints={bpConfig}
           >
-            {!isTwoLine && networks?.map((data: { label: string; index: DashboardTabIndexType }) => (
-              <SwiperSlide key={uuidv4()}>
-                {withVote ? (
-                  <NetworkCardWithVote network={data} activeTab={activeTab} setActiveTab={setActiveTab} />
-                ) : (
-                  <NetworkCard network={data} activeTab={activeTab} setActiveTab={setActiveTab} />
-                )}
-              </SwiperSlide>
-            ))}
-            {isTwoLine && preparedNetworks?.map(({ network1, network2 }) => (
-              <SwiperSlide key={uuidv4()}>
-                <TwoNetworkCard network1={network1} network2={network2} activeTab={activeTab} setActiveTab={setActiveTab} />
-              </SwiperSlide>
-            ))}
+            {!isTwoLine &&
+              networks?.map((data: { label: string; index: DashboardTabIndexType }) => (
+                <SwiperSlide key={uuidv4()}>
+                  {withVote ? (
+                    <NetworkCardWithVote network={data} activeTab={activeTab} setActiveTab={setActiveTab} />
+                  ) : (
+                    <NetworkCard network={data} activeTab={activeTab} setActiveTab={setActiveTab} />
+                  )}
+                </SwiperSlide>
+              ))}
+            {isTwoLine &&
+              preparedNetworks?.map(({ network1, network2 }) => (
+                <SwiperSlide key={uuidv4()}>
+                  <TwoNetworkCard
+                    network1={network1}
+                    network2={network2}
+                    activeTab={activeTab}
+                    setActiveTab={setActiveTab}
+                  />
+                </SwiperSlide>
+              ))}
           </Swiper>
         </Box>
         {/* <NextButton onClick={handleNext} hasNext={hasNext} /> */}

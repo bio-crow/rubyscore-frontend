@@ -12,7 +12,7 @@ interface Props {
   onSelect?: Function;
 }
 
-const TwoNetworkCard: FC<Props> = ({ network1,network2, selectable, activeTab, onSelect}) => {
+const TwoNetworkCard: FC<Props> = ({ network1, network2, selectable, activeTab, onSelect }) => {
   return (
     <Box
       sx={{
@@ -21,18 +21,12 @@ const TwoNetworkCard: FC<Props> = ({ network1,network2, selectable, activeTab, o
         gap: '20px',
       }}
     >
-      {network1 &&     <NetworkCard
-        network={network1}
-        selectable={selectable}
-        activeTab={activeTab}
-        onSelect={onSelect}
-      />}
-      {network2 &&     <NetworkCard
-        network={network2}
-        selectable={selectable}
-        activeTab={activeTab}
-        onSelect={onSelect}
-      />}
+      {network1 && (
+        <NetworkCard network={network1} selectable={selectable} activeTab={activeTab} onSelect={onSelect} />
+      )}
+      {network2 && (
+        <NetworkCard network={network2} selectable={selectable} activeTab={activeTab} onSelect={onSelect} />
+      )}
     </Box>
   );
 };

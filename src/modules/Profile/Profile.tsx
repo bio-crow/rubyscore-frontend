@@ -79,7 +79,7 @@ const Profile = () => {
             />
             {!userName && <ClaimProfile />}
             {!premiumStatus && userName && <Benefits />}
-            <ScoreSection wallet={address} isTwoLine/>
+            <ScoreSection wallet={address} isTwoLine />
             <DailyActivity />
             <StreakDays />
             <ReferralLinks />
