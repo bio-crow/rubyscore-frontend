@@ -1,7 +1,14 @@
 import { prodAttestationContracts } from '@/providers/prodChains';
 import { testAttestationContracts } from '@/providers/testChains';
 import { getAchievementsBaseContractConfig } from '@/utils/helpers';
-import { getNetwork, readContract, switchNetwork, waitForTransaction, writeContract } from '@wagmi/core';
+import {
+  getNetwork,
+  readContract,
+  switchNetwork,
+  waitForTransaction,
+  writeContract,
+  prepareWriteContract,
+} from '@wagmi/core';
 import { abiAttestation } from '@/constants/abiAttestation';
 import { IClaimAttestationPayload, IClaimLevelPayload } from '@/core/types';
 import { abiAchievements } from '@/constants/abiAchievements';
@@ -64,10 +71,14 @@ export const wagmiClaimAttestation = async (params: IClaimAttestationPayload): P
         [signature],
       ],
     };
-    const { hash } = await writeContract(config);
-    return await waitForTransaction({
+    const { request } = await prepareWriteContract(config);
+    const { hash } = await writeContract(request);
+
+    const data = await waitForTransaction({
       hash: hash,
     });
+
+    if (data.status === 'success') return data;
   };
   try {
     return await action(params);
