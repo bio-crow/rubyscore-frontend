@@ -1,7 +1,14 @@
 import { prodAttestationContracts } from '@/providers/prodChains';
 import { testAttestationContracts } from '@/providers/testChains';
 import { getAchievementsBaseContractConfig } from '@/utils/helpers';
-import { getNetwork, readContract, switchNetwork, waitForTransaction, writeContract,prepareWriteContract } from '@wagmi/core';
+import {
+  getNetwork,
+  readContract,
+  switchNetwork,
+  waitForTransaction,
+  writeContract,
+  prepareWriteContract,
+} from '@wagmi/core';
 import { abiAttestation } from '@/constants/abiAttestation';
 import { IClaimAttestationPayload, IClaimLevelPayload } from '@/core/types';
 import { abiAchievements } from '@/constants/abiAchievements';
