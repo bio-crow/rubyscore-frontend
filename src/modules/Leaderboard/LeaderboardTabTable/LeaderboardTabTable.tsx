@@ -21,7 +21,6 @@ const LeaderboardTabTable: FC<Props> = ({ tableData, activeTab }) => {
   const leaderboardUser = useAppSelector(state => state.leaderboardState.leaderboardUser);
   const filteredUser = useAppSelector(state => state.leaderboardState.filteredUser);
   const searchParams = useSearchParams();
-  const netTab = searchParams.get('net');
   return (
     <Box
       sx={{
@@ -41,7 +40,7 @@ const LeaderboardTabTable: FC<Props> = ({ tableData, activeTab }) => {
           noRowsOverlay: CustomNoRows,
         }}
         onRowClick={(data: any) => {
-          router.push(`${appRoutes.LEADERBOARD_USER}/${data.row.wallet}?net=${netTab}`);
+          router.push(`${appRoutes.LEADERBOARD_USER}/${data.row.wallet}?net=${activeTab.index}`);
         }}
         initialState={{
           pagination: {
