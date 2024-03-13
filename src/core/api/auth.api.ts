@@ -1,5 +1,5 @@
 import { ILoginPayload, ILoginResponse, IRefreshResponse } from '@/core/types';
-import {apiPrivateAxios, apiPublicAxios, apiPublicAxiosLimited} from '@/core/api/axiosConfig';
+import { apiPrivateAxios, apiPublicAxiosLimited } from '@/core/api/axiosConfig';
 
 export const fetchLogin = async (params: ILoginPayload) => {
   try {

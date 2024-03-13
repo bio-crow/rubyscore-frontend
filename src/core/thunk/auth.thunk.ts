@@ -14,20 +14,19 @@ import {
 import { formatEther } from 'viem';
 import { searchUser } from '@/core/api/leaderboard.api';
 import { getCompletedTasks } from '@/core/thunk/task.thunk';
-import { track } from '@vercel/analytics';
 
 export const login = createAsyncThunk('authSlice/fetchLogin', async (params: ILoginPayload, { dispatch }) => {
   dispatch(setAuthLoading(true));
 
-  let token: string | null | undefined = ''
-  let isClaimed = false
+  let token: string | null | undefined;
+  let isClaimed = false;
 
-  if(localStorage.getItem('signature')) {
+  if (localStorage.getItem('signature')) {
     token = localStorage.getItem('signature');
   } else {
-    const loginData = await fetchLogin(params)
-    token = loginData?.data?.result?.token
-    isClaimed = loginData?.data?.result?.isClaimed ?? false
+    const loginData = await fetchLogin(params);
+    token = loginData?.data?.result?.token;
+    isClaimed = loginData?.data?.result?.isClaimed ?? false;
   }
   if (token) {
     dispatch(getCompletedTasks(params.wallet));
