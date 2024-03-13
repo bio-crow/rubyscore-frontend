@@ -18,11 +18,21 @@ import { track } from '@vercel/analytics';
 
 export const login = createAsyncThunk('authSlice/fetchLogin', async (params: ILoginPayload, { dispatch }) => {
   dispatch(setAuthLoading(true));
-  const loginData = await fetchLogin(params);
-  if (loginData?.data?.result) {
+
+  let token: string | null | undefined = ''
+  let isClaimed = false
+
+  if(localStorage.getItem('signature')) {
+    token = localStorage.getItem('signature');
+  } else {
+    const loginData = await fetchLogin(params)
+    token = loginData?.data?.result?.token
+    isClaimed = loginData?.data?.result?.isClaimed ?? false
+  }
+  if (token) {
     dispatch(getCompletedTasks(params.wallet));
-    dispatch(setToken(loginData.data.result.token));
-    dispatch(setIsClaimed(loginData.data.result.isClaimed));
+    dispatch(setToken(token));
+    dispatch(setIsClaimed(isClaimed));
     if (typeof window !== 'undefined') {
       localStorage.setItem('isAuth', 'true');
     }

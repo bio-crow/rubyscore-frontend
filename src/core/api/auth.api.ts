@@ -1,9 +1,9 @@
 import { ILoginPayload, ILoginResponse, IRefreshResponse } from '@/core/types';
-import { apiPrivateAxios, apiPublicAxios } from '@/core/api/axiosConfig';
+import {apiPrivateAxios, apiPublicAxios, apiPublicAxiosLimited} from '@/core/api/axiosConfig';
 
 export const fetchLogin = async (params: ILoginPayload) => {
   try {
-    return await apiPublicAxios.post<ILoginResponse>('/auth/login', null, { params });
+    return await apiPublicAxiosLimited.post<ILoginResponse>('/auth/login', null, { params });
   } catch (error: any) {
     if (typeof window !== 'undefined') {
       localStorage.removeItem('signature');
