@@ -96,7 +96,7 @@ const Section1 = () => {
         >
           Resources
         </Box>
-        <CustomLink title='Docs' url='https://docs.rubyscore.io/' target='_blank'/>
+        <CustomLink title='Docs' url='https://docs.rubyscore.io/' target='_blank' />
         {/* <CustomLink title='Press & Media' url='#' />
         <CustomLink title='Hackatons' url='#' />
         <CustomLink title='Bounties' url='#' /> */}
@@ -158,7 +158,7 @@ const Section1 = () => {
 };
 export default Section1;
 
-const CustomLink = ({ title, url, target ='_self' }: { title: string; url: string, target?: string }) => {
+const CustomLink = ({ title, url, target = '_self' }: { title: string; url: string; target?: string }) => {
   const theme = useCustomTheme();
   return (
     <Link
