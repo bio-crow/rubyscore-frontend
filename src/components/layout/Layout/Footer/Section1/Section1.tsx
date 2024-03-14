@@ -86,7 +86,7 @@ const Section1 = () => {
           alignSelf: 'start',
         }}
       >
-        {/*  <Box
+        <Box
           sx={{
             paddingBottom: '4px',
             color: theme.palette.white50,
@@ -94,10 +94,10 @@ const Section1 = () => {
           }}
           className='Body-Lato-fw-500-fs-12-h-24'
         >
-          More
+          Resources
         </Box>
-        <CustomLink title='Impact Report' url='#' />
-        <CustomLink title='Press & Media' url='#' />
+        <CustomLink title='Docs' url='https://docs.rubyscore.io/' target='_blank' />
+        {/* <CustomLink title='Press & Media' url='#' />
         <CustomLink title='Hackatons' url='#' />
         <CustomLink title='Bounties' url='#' /> */}
       </Box>
@@ -158,7 +158,7 @@ const Section1 = () => {
 };
 export default Section1;
 
-const CustomLink = ({ title, url }: { title: string; url: string }) => {
+const CustomLink = ({ title, url, target = '_self' }: { title: string; url: string; target?: string }) => {
   const theme = useCustomTheme();
   return (
     <Link
@@ -166,6 +166,7 @@ const CustomLink = ({ title, url }: { title: string; url: string }) => {
       style={{
         textDecoration: 'none',
       }}
+      target={target}
     >
       <Box className='menu-Lato-fw-500-fs-14' color={theme.palette.powderWhite}>
         {title}
