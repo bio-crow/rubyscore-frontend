@@ -17,13 +17,23 @@ import { getCompletedTasks } from '@/core/thunk/task.thunk';
 
 export const login = createAsyncThunk('authSlice/fetchLogin', async (params: ILoginPayload, { dispatch }) => {
   dispatch(setAuthLoading(true));
-
   let token: string | null | undefined;
   let isClaimed = false;
 
-  if (localStorage.getItem('signature')) {
-    token = localStorage.getItem('signature');
-  } else {
+  try {
+    if (sessionStorage.getItem('sessionData')) {
+      const sessionDataString = sessionStorage.getItem('sessionData') || '';
+      const sessionData = JSON.parse(sessionDataString);
+
+      if (sessionData.exp > new Date().getTime()) {
+        token = sessionData.token;
+      } else {
+        throw new Error('Session data expired');
+      }
+    } else {
+      throw new Error('Session data not found');
+    }
+  } catch (error) {
     const loginData = await fetchLogin(params);
     token = loginData?.data?.result?.token;
     isClaimed = loginData?.data?.result?.isClaimed ?? false;
@@ -33,6 +43,12 @@ export const login = createAsyncThunk('authSlice/fetchLogin', async (params: ILo
     dispatch(setToken(token));
     dispatch(setIsClaimed(isClaimed));
     if (typeof window !== 'undefined') {
+      // If the user has not visited the site for more than a day and has not closed the browser, he should log in again using fetchLogin
+      // Otherwise, let's update expiration of token and keep him logged in
+      sessionStorage.setItem(
+        'sessionData',
+        JSON.stringify({ exp: new Date().getTime() + 86_400_000, token })
+      );
       localStorage.setItem('isAuth', 'true');
     }
     const wagmiProm = wagmiInitUserDataFromContract(params.wallet);
@@ -56,6 +72,7 @@ export const login = createAsyncThunk('authSlice/fetchLogin', async (params: ILo
       if (typeof window !== 'undefined') {
         localStorage.removeItem('signature');
         localStorage.removeItem('isAuth');
+        sessionStorage.removeItem('sessionData');
       }
     }
   }
