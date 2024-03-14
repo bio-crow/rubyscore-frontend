@@ -33,7 +33,7 @@ export const login = createAsyncThunk('authSlice/fetchLogin', async (params: ILo
     } else {
       throw new Error('Session data not found');
     }
-  } catch (error) {
+  } catch {
     const loginData = await fetchLogin(params);
     token = loginData?.data?.result?.token;
     isClaimed = loginData?.data?.result?.isClaimed ?? false;
@@ -70,8 +70,8 @@ export const login = createAsyncThunk('authSlice/fetchLogin', async (params: ILo
       dispatch(setIsAuth(true));
     } catch (e) {
       if (typeof window !== 'undefined') {
-        localStorage.removeItem('signature');
         localStorage.removeItem('isAuth');
+        localStorage.removeItem('signature');
         sessionStorage.removeItem('sessionData');
       }
     }
@@ -84,6 +84,8 @@ export const refreshToken = createAsyncThunk('authSlice/fetchRefresh', async () 
 });
 export const logout = createAsyncThunk('authSlice/fetchLogout', async (args, { dispatch }) => {
   localStorage.removeItem('isAuth');
+  localStorage.removeItem('signature');
+  sessionStorage.removeItem('sessionData');
   await disconnect();
   dispatch(setIsAuth(false));
   dispatch(setToken(null));

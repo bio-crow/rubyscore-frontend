@@ -76,8 +76,6 @@ const AuthProvider: FC<Props> = ({ children }) => {
     const handleConnectorUpdate = ({ account, chain }: ConnectorData) => {
       if (account) {
         dispatch(logout());
-        localStorage.removeItem('signature');
-        sessionStorage.removeItem('sessionData');
         reset();
       }
     };
