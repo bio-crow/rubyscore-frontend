@@ -72,7 +72,7 @@ const Section1 = () => {
           Learn
         </Box>
         <CustomLink title='Blog' url='#' />
-        <CustomLink title='Manager Toolkit' url='#' />
+
         <CustomLink title='Support' url='#' /> */}
       </Box>
       <Box
