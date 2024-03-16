@@ -96,9 +96,6 @@ const Section1 = () => {
           Resources
         </Box>
         <CustomLink title='Docs' url='https://docs.rubyscore.io/' target='_blank' />
-        {/* <CustomLink title='Press & Media' url='#' />
-        <CustomLink title='Hackatons' url='#' />
-        <CustomLink title='Bounties' url='#' /> */}
       </Box>
       <Box
         sx={{
