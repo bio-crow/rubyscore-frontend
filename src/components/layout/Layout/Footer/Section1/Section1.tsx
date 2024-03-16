@@ -2,7 +2,6 @@ import { Box } from '@mui/system';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import Image from 'next/image';
 import PrimaryButton from '@/components/common/ui/PrimaryButton/PrimaryButton';
-import { appRoutes } from '@/constants/routes';
 import Link from 'next/link';
 
 const Section1 = () => {
