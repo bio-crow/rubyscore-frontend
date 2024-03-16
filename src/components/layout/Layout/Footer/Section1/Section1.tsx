@@ -73,7 +73,6 @@ const Section1 = () => {
         </Box>
         <CustomLink title='Blog' url='#' />
         <CustomLink title='Manager Toolkit' url='#' />
-        <CustomLink title='WTF is QF' url='#' />
         <CustomLink title='Support' url='#' /> */}
       </Box>
       <Box
