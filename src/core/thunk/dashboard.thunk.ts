@@ -290,6 +290,7 @@ export const initDashboardTabsVotes = createAsyncThunk(
       'scroll',
       'manta',
       'blast',
+      'zora',
     ];
     const initValue: IDashboardTabsVoteInfo = {
       zk_era: null,
@@ -297,10 +298,10 @@ export const initDashboardTabsVotes = createAsyncThunk(
       base: null,
       zk_evm: null,
       scroll: null,
-      zora: null,
       rubyscore: null,
       manta: null,
       blast: null,
+      zora: null,
     };
     const promises = projects.map(project =>
       fetchProjectVotes({
@@ -309,7 +310,7 @@ export const initDashboardTabsVotes = createAsyncThunk(
     );
     const values = await Promise.all(promises);
     values.forEach((data, index) => {
-      const count = data?.data?.result?.count || null;
+      const count = data?.data?.result?.count ?? null;
       if (data?.data?.result) {
         initValue[projects[index]] = count;
       }
