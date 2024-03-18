@@ -167,9 +167,9 @@ export const wagmiInitUserDataFromContract = async (wallet: string): Promise<any
         result[7].status === 'success' ? result[7].result.map((item: string) => parseInt(item)) : errData,
       zora: result[8].status === 'success' ? result[8].result.map((item: string) => parseInt(item)) : errData,
     };
-    const userName = result[8].status === 'success' ? result[8].result : null;
-    const userStatus = result[9].status === 'success' ? result[9].result : null;
-    const premiumPrice = result[10].status === 'success' ? result[10].result : null;
+    const userName = result[9].status === 'success' ? result[9].result : null;
+    const userStatus = result[10].status === 'success' ? result[10].result : null;
+    const premiumPrice = result[11].status === 'success' ? result[11].result : null;
     return { levelsInfo, userName, userStatus, premiumPrice };
   };
   try {
