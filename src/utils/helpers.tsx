@@ -588,6 +588,11 @@ export const getAchievementsBaseContractConfig = (project: string, contractInfo:
         address: contractInfo.scroll.contract,
         chainId: contractInfo.scroll.chainId,
       };
+    case 'zora':
+      return {
+        address: contractInfo.zora.contract,
+        chainId: contractInfo.zora.chainId,
+      };
     default:
       return {
         address: contractInfo.projectAchievements.contract,
