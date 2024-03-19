@@ -26,7 +26,7 @@ export const login = createAsyncThunk('authSlice/fetchLogin', async (params: ILo
       const sessionData = JSON.parse(sessionDataString);
 
       if (sessionData.exp > new Date().getTime()) {
-        token = sessionData.token;
+        token = atob(sessionData.token);
       } else {
         throw new Error('Session data expired');
       }
@@ -47,7 +47,7 @@ export const login = createAsyncThunk('authSlice/fetchLogin', async (params: ILo
       // Otherwise, let's update expiration of token and keep him logged in
       sessionStorage.setItem(
         'sessionData',
-        JSON.stringify({ exp: new Date().getTime() + 86_400_000, token })
+        JSON.stringify({ exp: new Date().getTime() + 86_400_000, token: btoa(token) })
       );
       localStorage.setItem('isAuth', 'true');
     }
