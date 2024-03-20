@@ -328,7 +328,7 @@ export const TooltipCurrentRank = () => {
     </Box>
   );
 };
-export const TooltipVoteTab: FC<{ isAuth: boolean }> = ({ isAuth }) => {
+export const TooltipVoteTab = () => {
   const theme = useCustomTheme();
   return (
     <Box
@@ -340,9 +340,7 @@ export const TooltipVoteTab: FC<{ isAuth: boolean }> = ({ isAuth }) => {
       }}
     >
       <Box className='Body-Lato-fw-600-fs-14' color={theme.palette.red}>
-        {isAuth
-          ? `Chain is experiencing some problems. Get back later`
-          : `You need to authenticate through you wallet`}
+        Chain is experiencing some problems. Get back later
       </Box>
     </Box>
   );

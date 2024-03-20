@@ -218,15 +218,15 @@ export interface IUserTransactionsDates {
   last_transaction_time: number;
 }
 export interface IDashboardTabsVoteInfo {
-  zk_era: number | null;
-  linea: number | null;
-  base: number | null;
-  zk_evm: number | null;
-  manta: number | null;
-  scroll: number | null;
-  rubyscore: number | null;
-  blast: number | null;
-  zora: number | null;
+  zk_era: { count: number | null; is_ok: boolean };
+  linea: { count: number | null; is_ok: boolean };
+  base: { count: number | null; is_ok: boolean };
+  zk_evm: { count: number | null; is_ok: boolean };
+  manta: { count: number | null; is_ok: boolean };
+  scroll: { count: number | null; is_ok: boolean };
+  rubyscore: { count: number | null; is_ok: boolean };
+  blast: { count: number | null; is_ok: boolean };
+  zora: { count: number | null; is_ok: boolean };
 }
 export interface IAttestationData {
   attestationParams: {

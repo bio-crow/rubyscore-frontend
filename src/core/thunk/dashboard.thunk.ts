@@ -293,15 +293,15 @@ export const initDashboardTabsVotes = createAsyncThunk(
       'zora',
     ];
     const initValue: IDashboardTabsVoteInfo = {
-      zk_era: null,
-      linea: null,
-      base: null,
-      zk_evm: null,
-      scroll: null,
-      rubyscore: null,
-      manta: null,
-      blast: null,
-      zora: null,
+      zk_era: { count: null, is_ok: true },
+      linea: { count: null, is_ok: true },
+      base: { count: null, is_ok: true },
+      zk_evm: { count: null, is_ok: true },
+      scroll: { count: null, is_ok: true },
+      rubyscore: { count: null, is_ok: true },
+      manta: { count: null, is_ok: true },
+      blast: { count: null, is_ok: true },
+      zora: { count: null, is_ok: true },
     };
     const promises = projects.map(project =>
       fetchProjectVotes({
@@ -312,7 +312,7 @@ export const initDashboardTabsVotes = createAsyncThunk(
     values.forEach((data, index) => {
       const count = data?.data?.result?.count ?? null;
       if (data?.data?.result) {
-        initValue[projects[index]] = count;
+        initValue[projects[index]].count = count;
       }
     });
     dispatch(setDashboardTabsVoteInfo(initValue));
@@ -334,8 +334,10 @@ export const updateDashboardTabsVotesItem = createAsyncThunk(
     }
     const data = await fetchProjectVotes({ projectName });
     if (data?.data?.result) {
-      const count = data?.data?.result?.count;
-      dispatch(updateDashboardTabsVoteInfo({ projectName, count: count }));
+      const response = data?.data;
+      dispatch(
+        updateDashboardTabsVoteInfo({ projectName, count: response?.result?.count, is_ok: response?.is_ok })
+      );
     }
     dispatch(setDashboardTabsVoteInfoLoading(null));
     return;

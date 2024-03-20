@@ -1,16 +1,16 @@
-import { Box } from '@mui/system';
-import { DashboardTabIndexType, IScoreNetwork } from '@/types/index';
-import { FC } from 'react';
-import { useCustomTheme } from '@/hooks/useCustomTheme';
-import pluralize from 'pluralize';
 import Image from 'next/image';
+import { FC } from 'react';
+import { Box } from '@mui/system';
+import { useAccount } from 'wagmi';
+import { useConnectModal } from '@rainbow-me/rainbowkit';
+import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { networkStaticData } from '@/constants/index';
 import SecondaryButton from '@/components/common/ui/SecondaryButton/SecondaryButton';
 import { TooltipVoteBtn, TooltipVoteTab } from '@/utils/tooltipsContent';
 import CustomTooltip from '@/components/common/CustomTooltip/CustomTooltip';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { updateDashboardTabsVotesItem } from '@/core/thunk/dashboard.thunk';
-import { useAccount } from 'wagmi';
+import { DashboardTabIndexType, IScoreNetwork } from '@/types/index';
 
 interface Props {
   network: { label: string; index: DashboardTabIndexType };
@@ -21,12 +21,14 @@ interface Props {
 const NetworkCardWithVote: FC<Props> = ({ network, activeTab, setActiveTab }) => {
   const theme = useCustomTheme();
   const { address } = useAccount();
+  const { openConnectModal } = useConnectModal();
   const isAuth = useAppSelector(state => state.authState.isAuth);
   const dashboardTabsVoteInfo = useAppSelector(state => state.dashboardState.dashboardTabsVoteInfo);
   const dashboardTabsVoteInfoLoading = useAppSelector(
     state => state.dashboardState.dashboardTabsVoteInfoLoading
   );
-  const isNetworkAvailable = !!dashboardTabsVoteInfo[network.index];
+  const isNetworkAvailable = dashboardTabsVoteInfo[network.index].is_ok;
+
   const dispatch = useAppDispatch();
   const vote = (e: any) => {
     e.stopPropagation();
@@ -41,7 +43,7 @@ const NetworkCardWithVote: FC<Props> = ({ network, activeTab, setActiveTab }) =>
   };
   return (
     <CustomTooltip
-      title={!isNetworkAvailable && <TooltipVoteTab isAuth={isAuth} />}
+      title={isAuth && !isNetworkAvailable && <TooltipVoteTab />}
       disableFocusListener={!isNetworkAvailable}
       disableHoverListener={!isNetworkAvailable}
       disableTouchListener={!isNetworkAvailable}
@@ -105,25 +107,18 @@ const NetworkCardWithVote: FC<Props> = ({ network, activeTab, setActiveTab }) =>
           }}
         >
           <Box>
-            <CustomTooltip
-              title={<TooltipVoteBtn isAuth={isAuth} />}
-              controlled={!isNetworkAvailable || !isAuth}
-              disableFocusListener={!isNetworkAvailable || !isAuth}
-              disableHoverListener={!isNetworkAvailable || !isAuth}
-              disableTouchListener={!isNetworkAvailable || !isAuth}
+            <SecondaryButton
+              variant='contained'
+              size='small'
+              loading={dashboardTabsVoteInfoLoading === network.index}
+              disabled={!isNetworkAvailable}
+              onClick={e => {
+                isNetworkAvailable && vote(e);
+                openConnectModal && openConnectModal();
+              }}
             >
-              <SecondaryButton
-                variant='contained'
-                size='small'
-                disabled={!isNetworkAvailable}
-                loading={dashboardTabsVoteInfoLoading === network.index}
-                onClick={e => {
-                  isNetworkAvailable && vote(e);
-                }}
-              >
-                Vote
-              </SecondaryButton>
-            </CustomTooltip>
+              Vote
+            </SecondaryButton>
           </Box>
           <Box
             sx={{
@@ -139,7 +134,9 @@ const NetworkCardWithVote: FC<Props> = ({ network, activeTab, setActiveTab }) =>
               }}
               className='Body-Lato-fw-700-fs-14'
             >
-              {dashboardTabsVoteInfo[network.index] !== null ? dashboardTabsVoteInfo[network.index] : '-'}
+              {dashboardTabsVoteInfo[network.index].count !== null
+                ? dashboardTabsVoteInfo[network.index].count
+                : '-'}
             </Box>
           </Box>
         </Box>
