@@ -25,7 +25,7 @@ export const login = createAsyncThunk('authSlice/fetchLogin', async (params: ILo
       const sessionDataString = sessionStorage.getItem('sessionData') || '';
       const sessionData = JSON.parse(sessionDataString);
 
-      if (sessionData.exp > new Date().getTime()) {
+      if (sessionData.exp > Date.now()) {
         token = atob(sessionData.token);
       } else {
         throw new Error('Session data expired');
@@ -43,12 +43,6 @@ export const login = createAsyncThunk('authSlice/fetchLogin', async (params: ILo
     dispatch(setToken(token));
     dispatch(setIsClaimed(isClaimed));
     if (typeof window !== 'undefined') {
-      // If the user has not visited the site for more than a day and has not closed the browser, he should log in again using fetchLogin
-      // Otherwise, let's update expiration of token and keep him logged in
-      sessionStorage.setItem(
-        'sessionData',
-        JSON.stringify({ exp: new Date().getTime() + 86_400_000, token: btoa(token) })
-      );
       localStorage.setItem('isAuth', 'true');
     }
     const wagmiProm = wagmiInitUserDataFromContract(params.wallet);

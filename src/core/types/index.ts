@@ -33,6 +33,7 @@ export interface ILoginResponse {
   result: {
     token: string;
     isClaimed: boolean;
+    exp: number;
   };
 }
 
@@ -92,6 +93,7 @@ export interface ILoginResponse {
   result: {
     token: string;
     isClaimed: boolean;
+    exp: number;
   };
 }
 
