@@ -14,15 +14,34 @@ import {
 import { formatEther } from 'viem';
 import { searchUser } from '@/core/api/leaderboard.api';
 import { getCompletedTasks } from '@/core/thunk/task.thunk';
-import { track } from '@vercel/analytics';
 
 export const login = createAsyncThunk('authSlice/fetchLogin', async (params: ILoginPayload, { dispatch }) => {
   dispatch(setAuthLoading(true));
-  const loginData = await fetchLogin(params);
-  if (loginData?.data?.result) {
+  let token: string | null | undefined;
+  let isClaimed = false;
+
+  try {
+    if (sessionStorage.getItem('sessionData')) {
+      const sessionDataString = sessionStorage.getItem('sessionData') || '';
+      const sessionData = JSON.parse(sessionDataString);
+
+      if (sessionData.exp > Date.now()) {
+        token = atob(sessionData.token);
+      } else {
+        throw new Error('Session data expired');
+      }
+    } else {
+      throw new Error('Session data not found');
+    }
+  } catch {
+    const loginData = await fetchLogin(params);
+    token = loginData?.data?.result?.token;
+    isClaimed = loginData?.data?.result?.isClaimed ?? false;
+  }
+  if (token) {
     dispatch(getCompletedTasks(params.wallet));
-    dispatch(setToken(loginData.data.result.token));
-    dispatch(setIsClaimed(loginData.data.result.isClaimed));
+    dispatch(setToken(token));
+    dispatch(setIsClaimed(isClaimed));
     if (typeof window !== 'undefined') {
       localStorage.setItem('isAuth', 'true');
     }
@@ -45,8 +64,9 @@ export const login = createAsyncThunk('authSlice/fetchLogin', async (params: ILo
       dispatch(setIsAuth(true));
     } catch (e) {
       if (typeof window !== 'undefined') {
-        localStorage.removeItem('signature');
         localStorage.removeItem('isAuth');
+        localStorage.removeItem('signature');
+        sessionStorage.removeItem('sessionData');
       }
     }
   }
@@ -58,6 +78,8 @@ export const refreshToken = createAsyncThunk('authSlice/fetchRefresh', async () 
 });
 export const logout = createAsyncThunk('authSlice/fetchLogout', async (args, { dispatch }) => {
   localStorage.removeItem('isAuth');
+  localStorage.removeItem('signature');
+  sessionStorage.removeItem('sessionData');
   await disconnect();
   dispatch(setIsAuth(false));
   dispatch(setToken(null));

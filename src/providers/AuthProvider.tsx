@@ -7,9 +7,16 @@ import { ILoginPayload } from '@/core/types';
 import { login, logout } from '@/core/thunk/auth.thunk';
 import { useSearchParams } from 'next/navigation';
 import { setAuthLoading, setIsAuth } from '@/core/state/auth.state';
+
 interface Props {
   children: ReactNode;
 }
+
+let loginData: ILoginPayload = {
+  signature: '',
+  message: '',
+  wallet: '',
+};
 
 const AuthProvider: FC<Props> = ({ children }) => {
   const searchParams = useSearchParams();
@@ -29,26 +36,26 @@ const AuthProvider: FC<Props> = ({ children }) => {
     if (!isAuth && !loginLoading) {
       if (connector && isConnected && address) {
         if (storedSignature) {
-          let data: ILoginPayload = {
+          loginData = {
             signature: storedSignature,
             message: message,
             wallet: address,
           };
           if (referralCode) {
-            data = { ...data, referralCode };
+            loginData = { ...loginData, referralCode };
           }
-          dispatch(login(data));
+          dispatch(login(loginData));
         } else if (signMessageData) {
           localStorage.setItem('signature', signMessageData);
-          let data: ILoginPayload = {
+          let dataWithNewSign: ILoginPayload = {
             signature: signMessageData,
             message: message,
             wallet: address,
           };
           if (referralCode) {
-            data = { ...data, referralCode };
+            loginData = { ...dataWithNewSign, referralCode };
           }
-          dispatch(login(data));
+          dispatch(login(loginData));
         } else {
           signMessage({ message });
         }
