@@ -196,15 +196,15 @@ export interface IUserGradation {
   };
 }
 export interface ILevelsInfo {
-  rubyscore: [];
-  linea: [];
-  zk_era: [];
-  zk_evm: [];
-  manta: [];
-  base: [];
-  scroll: [];
-  blast: [];
-  zora: [];
+  rubyscore: number[];
+  linea: number[];
+  zk_era: number[];
+  zk_evm: number[];
+  manta: number[];
+  base: number[];
+  scroll: number[];
+  blast: number[];
+  zora: number[];
 }
 
 export interface ITask {

@@ -36,7 +36,7 @@ const NetworkCardWithVote: FC<Props> = ({ network, activeTab, setActiveTab }) =>
     if (userLevelsInfo == null) {
       isNetworkAvailable = true;
     } else if (userLevelsInfo) {
-      isNetworkAvailable = userLevelsInfo[network.index][0] !== 2;
+      isNetworkAvailable = !userLevelsInfo[network.index].includes(2);
     }
   }
   const dispatch = useAppDispatch();
