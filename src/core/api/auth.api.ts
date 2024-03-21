@@ -16,7 +16,6 @@ export const fetchLogin = async (params: ILoginPayload) => {
     return response;
   } catch (error: any) {
     if (typeof window !== 'undefined') {
-      localStorage.removeItem('signature');
       localStorage.removeItem('isAuth');
       sessionStorage.removeItem('sessionData');
     }
