@@ -25,7 +25,7 @@ export const login = createAsyncThunk('authSlice/fetchLogin', async (params: ILo
       const sessionDataString = sessionStorage.getItem('sessionData') || '';
       const sessionData = JSON.parse(sessionDataString);
 
-      if (sessionData.exp > Date.now()) {
+      if (sessionData.exp < Date.now()) {
         token = atob(sessionData.token);
       } else {
         throw new Error('Session data expired');
