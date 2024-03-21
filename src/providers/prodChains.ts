@@ -200,6 +200,31 @@ export const prodChains: Chain[] = [
     },
     testnet: false,
   },
+  {
+    id: 7777777,
+    name: 'Zora',
+    network: 'Zora',
+    nativeCurrency: {
+      decimals: 18,
+      name: 'Zora',
+      symbol: 'ETH',
+    },
+    rpcUrls: {
+      public: {
+        http: ['https://rpc.zora.energy'],
+      },
+      default: {
+        http: ['https://rpc.zora.energy'],
+      },
+    },
+    blockExplorers: {
+      default: {
+        name: 'Zora',
+        url: 'https://explorer.zora.energy',
+      },
+    },
+    testnet: false,
+  },
 ];
 export const prodContracts = {
   app: { contract: '0x009dbfee9e155766af434ed1652ca3769b05e76f', chainId: 10 },
@@ -211,6 +236,7 @@ export const prodContracts = {
   scroll: { contract: '0xDC3D8318Fbaec2de49281843f5bba22e78338146', chainId: 534352 },
   manta: { contract: '0xbDB018e21AD1e5756853fe008793a474d329991b', chainId: 169 },
   blast: { contract: '0x009DBFEe9E155766AF434ED1652CA3769B05E76f', chainId: 81457 },
+  zora: { contract: '0xbDB018e21AD1e5756853fe008793a474d329991b', chainId: 7777777 },
 };
 export const prodVoteContracts = {
   base: { contract: '0xe10Add2ad591A7AC3CA46788a06290De017b9fB4', chainId: 8453 },
@@ -220,6 +246,7 @@ export const prodVoteContracts = {
   scroll: { contract: '0xe10Add2ad591A7AC3CA46788a06290De017b9fB4', chainId: 534352 },
   manta: { contract: '0xF57Cb671D50535126694Ce5Cc3CeBe3F32794896', chainId: 169 },
   blast: { contract: '0xbDB018e21AD1e5756853fe008793a474d329991b', chainId: 81457 },
+  zora: { contract: '0xDC3D8318Fbaec2de49281843f5bba22e78338146', chainId: 7777777 },
 };
 export const prodAttestationContracts = {
   linea: { contract: '0xB9cC0Bb020cF55197C4C3d826AC87CAdba51f272', chainId: 59144 },

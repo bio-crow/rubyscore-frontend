@@ -226,6 +226,31 @@ export const testChains: Chain[] = [
     },
     testnet: false,
   },
+  {
+    id: 999999999,
+    name: 'Zora Sepolia Testnet',
+    network: 'Zora Sepolia Testnet',
+    nativeCurrency: {
+      decimals: 18,
+      name: 'Zora Sepolia Testnet',
+      symbol: 'ETH',
+    },
+    rpcUrls: {
+      public: {
+        http: ['https://sepolia.rpc.zora.energy'],
+      },
+      default: {
+        http: ['https://sepolia.rpc.zora.energy'],
+      },
+    },
+    blockExplorers: {
+      default: {
+        name: 'Zora Sepolia Testnet',
+        url: 'https://sepolia.explorer.zora.energy',
+      },
+    },
+    testnet: false,
+  },
 ];
 export const testContracts = {
   app: { contract: '0x37C3837a0C37C002894BB035f5dD73933523B66d', chainId: 80001 },
@@ -237,6 +262,7 @@ export const testContracts = {
   scroll: { contract: '0x81C55bbA5d5D05a0C02f4B561B560194f34a6D07', chainId: 534351 },
   manta: { contract: '0xbDB018e21AD1e5756853fe008793a474d329991b', chainId: 169 },
   blast: { contract: '0x2A1000293467a221F5d4cA98F4b7912c4c9c22b3', chainId: 168587773 },
+  zora: { contract: '0x2A1000293467a221F5d4cA98F4b7912c4c9c22b4', chainId: 999999999 },
 };
 export const testVoteContracts = prodVoteContracts;
 export const testAttestationContracts = {
