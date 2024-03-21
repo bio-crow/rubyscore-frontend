@@ -2,7 +2,6 @@ import { Box } from '@mui/system';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import Image from 'next/image';
 import PrimaryButton from '@/components/common/ui/PrimaryButton/PrimaryButton';
-import { appRoutes } from '@/constants/routes';
 import Link from 'next/link';
 
 const Section1 = () => {
@@ -73,8 +72,7 @@ const Section1 = () => {
           Learn
         </Box>
         <CustomLink title='Blog' url='#' />
-        <CustomLink title='Manager Toolkit' url='#' />
-        <CustomLink title='WTF is QF' url='#' />
+
         <CustomLink title='Support' url='#' /> */}
       </Box>
       <Box
@@ -86,7 +84,7 @@ const Section1 = () => {
           alignSelf: 'start',
         }}
       >
-        {/*  <Box
+        <Box
           sx={{
             paddingBottom: '4px',
             color: theme.palette.white50,
@@ -94,12 +92,9 @@ const Section1 = () => {
           }}
           className='Body-Lato-fw-500-fs-12-h-24'
         >
-          More
+          Resources
         </Box>
-        <CustomLink title='Impact Report' url='#' />
-        <CustomLink title='Press & Media' url='#' />
-        <CustomLink title='Hackatons' url='#' />
-        <CustomLink title='Bounties' url='#' /> */}
+        <CustomLink title='Docs' url='https://docs.rubyscore.io/' target='_blank' />
       </Box>
       <Box
         sx={{
@@ -158,7 +153,7 @@ const Section1 = () => {
 };
 export default Section1;
 
-const CustomLink = ({ title, url }: { title: string; url: string }) => {
+const CustomLink = ({ title, url, target = '_self' }: { title: string; url: string; target?: string }) => {
   const theme = useCustomTheme();
   return (
     <Link
@@ -166,6 +161,7 @@ const CustomLink = ({ title, url }: { title: string; url: string }) => {
       style={{
         textDecoration: 'none',
       }}
+      target={target}
     >
       <Box className='menu-Lato-fw-500-fs-14' color={theme.palette.powderWhite}>
         {title}

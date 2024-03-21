@@ -3,13 +3,13 @@ import { DashboardTabIndexType } from '@/types/index';
 export const networkStaticData: {
   zk_evm: { icon: string };
   zk_era: { icon: string };
-  zora: { icon: string };
   linea: { icon: string };
   base: { icon: string };
   scroll: { icon: string };
   rubyscore: { icon: string };
   manta: { icon: string };
   blast: { icon: string };
+  zora: { icon: string };
 } = {
   zk_era: {
     icon: '/asserts/net/zkSync.svg',
@@ -19,9 +19,6 @@ export const networkStaticData: {
   },
   base: {
     icon: '/asserts/net/Base.svg',
-  },
-  zora: {
-    icon: '/asserts/net/Zora.svg',
   },
   zk_evm: {
     icon: '/asserts/net/zkEvm.svg',
@@ -37,6 +34,9 @@ export const networkStaticData: {
   },
   blast: {
     icon: '/asserts/net/blast.svg',
+  },
+  zora: {
+    icon: '/asserts/net/Zora.svg',
   },
 };
 export const myLevelIcons = {
@@ -75,18 +75,6 @@ export const myLevelIcons = {
     '/asserts/box/base/base8.png',
     '/asserts/box/base/base9.png',
     '/asserts/box/base/base10.png',
-  ],
-  zora: [
-    '/asserts/box/zora/zora1.png',
-    '/asserts/box/zora/zora2.png',
-    '/asserts/box/zora/zora3.png',
-    '/asserts/box/zora/zora4.png',
-    '/asserts/box/zora/zora5.png',
-    '/asserts/box/zora/zora6.png',
-    '/asserts/box/zora/zora7.png',
-    '/asserts/box/zora/zora8.png',
-    '/asserts/box/zora/zora9.png',
-    '/asserts/box/zora/zora10.png',
   ],
   zk_evm: [
     '/asserts/box/zkEvm/zkEvm1.png',
@@ -148,6 +136,18 @@ export const myLevelIcons = {
     '/asserts/box/blast/blast9.png',
     '/asserts/box/blast/blast10.png',
   ],
+  zora: [
+    '/asserts/box/zora/zora1.png',
+    '/asserts/box/zora/zora2.png',
+    '/asserts/box/zora/zora3.png',
+    '/asserts/box/zora/zora4.png',
+    '/asserts/box/zora/zora5.png',
+    '/asserts/box/zora/zora6.png',
+    '/asserts/box/zora/zora7.png',
+    '/asserts/box/zora/zora8.png',
+    '/asserts/box/zora/zora9.png',
+    '/asserts/box/zora/zora10.png',
+  ],
 };
 export const dashboardPanelTabs: { index: DashboardTabIndexType; label: string }[] = [
   {
@@ -177,6 +177,10 @@ export const dashboardPanelTabs: { index: DashboardTabIndexType; label: string }
   {
     index: 'manta',
     label: 'Manta',
+  },
+  {
+    index: 'zora',
+    label: 'Zora',
   },
 ];
 export const axisLabelMap = {

@@ -41,15 +41,15 @@ const initialState: IDashboardState = {
   levelLoading: null,
   userTransactionsDates: null,
   dashboardTabsVoteInfo: {
-    zk_era: null,
-    linea: null,
-    base: null,
-    zk_evm: null,
-    scroll: null,
-    zora: null,
-    rubyscore: null,
-    manta: null,
-    blast: null,
+    zk_era: { count: null, is_ok: true },
+    linea: { count: null, is_ok: true },
+    base: { count: null, is_ok: true },
+    zk_evm: { count: null, is_ok: true },
+    scroll: { count: null, is_ok: true },
+    rubyscore: { count: null, is_ok: true },
+    manta: { count: null, is_ok: true },
+    blast: { count: null, is_ok: true },
+    zora: { count: null, is_ok: true },
   },
   dashboardTabsVoteInfoLoading: null,
 };
@@ -67,9 +67,12 @@ export const dashboardSlice = createSlice({
     setDashboardTabsVoteInfo: (state, action: PayloadAction<IDashboardTabsVoteInfo>) => {
       state.dashboardTabsVoteInfo = action.payload;
     },
-    updateDashboardTabsVoteInfo: (state, action: PayloadAction<{ projectName: string; count: number }>) => {
-      const { projectName, count } = action.payload;
-      state.dashboardTabsVoteInfo = { ...state.dashboardTabsVoteInfo, [projectName]: count };
+    updateDashboardTabsVoteInfo: (
+      state,
+      action: PayloadAction<{ projectName: string; count: number; is_ok: boolean }>
+    ) => {
+      const { projectName, count, is_ok } = action.payload;
+      state.dashboardTabsVoteInfo = { ...state.dashboardTabsVoteInfo, [projectName]: { count, is_ok } };
     },
     setDashboardTabsVoteInfoLoading: (state, action: PayloadAction<string | null>) => {
       state.dashboardTabsVoteInfoLoading = action.payload;

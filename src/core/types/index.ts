@@ -276,6 +276,7 @@ export interface IUserGradationResponse {
   result: IUserGradation;
 }
 export interface IProjectVotesResponse {
+  is_ok: boolean;
   result: {
     count: number;
   };

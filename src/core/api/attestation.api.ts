@@ -8,6 +8,7 @@ export const fetchAttestationData = async (params: { project: string }) => {
     //console.error(error);
   }
 };
+
 export const fetchCheckAttestation = async (params: { project: string; wallet: any }) => {
   try {
     return await apiPrivateAxios.post<IAttestationDataResponse>('/attestation/check', null, { params });
