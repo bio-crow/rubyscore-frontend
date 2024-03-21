@@ -262,7 +262,7 @@ export const testContracts = {
   scroll: { contract: '0x81C55bbA5d5D05a0C02f4B561B560194f34a6D07', chainId: 534351 },
   manta: { contract: '0xbDB018e21AD1e5756853fe008793a474d329991b', chainId: 169 },
   blast: { contract: '0x2A1000293467a221F5d4cA98F4b7912c4c9c22b3', chainId: 168587773 },
-  zora: { contract: '0x2A1000293467a221F5d4cA98F4b7912c4c9c22b4', chainId: 999999999 },
+  zora: { contract: '0xbDB018e21AD1e5756853fe008793a474d329991b', chainId: 7777777 },
 };
 export const testVoteContracts = prodVoteContracts;
 export const testAttestationContracts = {
