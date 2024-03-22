@@ -35,7 +35,12 @@ export const wagmiLevels = async (params: { wallet: string; project: string }): 
       functionName: 'balanceOfBatch',
       args: [accounts, ids],
     };
-    const result: any = await readContract(config);
+    let result: any;
+    try {
+      result = await readContract(config);
+    } catch (err) {
+      // console.log(err);
+    }
     return result.map((item: string) => parseInt(item));
   };
   try {

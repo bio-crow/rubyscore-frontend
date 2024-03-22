@@ -6,11 +6,11 @@ import { useConnectModal } from '@rainbow-me/rainbowkit';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { networkStaticData } from '@/constants/index';
 import SecondaryButton from '@/components/common/ui/SecondaryButton/SecondaryButton';
-import { TooltipVoteBtn, TooltipVoteTab } from '@/utils/tooltipsContent';
+import { TooltipVoteTab } from '@/utils/tooltipsContent';
 import CustomTooltip from '@/components/common/CustomTooltip/CustomTooltip';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { updateDashboardTabsVotesItem } from '@/core/thunk/dashboard.thunk';
-import { DashboardTabIndexType, IScoreNetwork } from '@/types/index';
+import { DashboardTabIndexType } from '@/types/index';
 
 interface Props {
   network: { label: string; index: DashboardTabIndexType };
@@ -23,12 +23,22 @@ const NetworkCardWithVote: FC<Props> = ({ network, activeTab, setActiveTab }) =>
   const { address } = useAccount();
   const { openConnectModal } = useConnectModal();
   const isAuth = useAppSelector(state => state.authState.isAuth);
+  const userLevelsInfo = useAppSelector(state => state.userState.userLevelsInfo);
   const dashboardTabsVoteInfo = useAppSelector(state => state.dashboardState.dashboardTabsVoteInfo);
   const dashboardTabsVoteInfoLoading = useAppSelector(
     state => state.dashboardState.dashboardTabsVoteInfoLoading
   );
-  const isNetworkAvailable = dashboardTabsVoteInfo[network.index].is_ok;
-
+  // 2 in case if levelStatus is undefined from mapMayLevelDataFromResult which using wagmiLevels connected to networks
+  // levelStatus: levelStatus || [2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+  let isNetworkAvailable: boolean = false;
+  if (dashboardTabsVoteInfo[network.index].is_ok) {
+    // info loading case
+    if (userLevelsInfo == null) {
+      isNetworkAvailable = true;
+    } else if (userLevelsInfo) {
+      isNetworkAvailable = !userLevelsInfo[network.index].includes(2);
+    }
+  }
   const dispatch = useAppDispatch();
   const vote = (e: any) => {
     e.stopPropagation();

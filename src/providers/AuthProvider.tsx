@@ -53,9 +53,9 @@ const AuthProvider: FC<Props> = ({ children }) => {
             wallet: address,
           };
           if (referralCode) {
-            loginData = { ...dataWithNewSign, referralCode };
+            dataWithNewSign = { ...dataWithNewSign, referralCode };
           }
-          dispatch(login(loginData));
+          dispatch(login(dataWithNewSign));
         } else {
           signMessage({ message });
         }
