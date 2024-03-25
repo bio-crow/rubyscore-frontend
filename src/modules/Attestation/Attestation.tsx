@@ -18,7 +18,7 @@ const Attestation = () => {
   useLayoutEffect(() => {
     if (address && isAuth) {
       dispatch(getReferrals());
-      dispatch(getUserScoreList(address));
+      dispatch(getUserScoreList({ wallet: address, net: 1 }));
       dispatch(getAttestationData({ address: address, project: 'linea' }));
     }
     return () => {

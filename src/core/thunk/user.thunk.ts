@@ -42,9 +42,9 @@ export const getUserNFTList = createAsyncThunk(
 );
 export const getUserScoreList = createAsyncThunk(
   'userSlice/getUserScoreList',
-  async (wallet: string, { dispatch }) => {
+  async ({ wallet, net }: any, { dispatch }) => {
     dispatch(setUserScoreListLoading(true));
-    const data: any = await fetchUserScoreList(wallet);
+    const data: any = await fetchUserScoreList({ wallet, net });
     if (data.data.result) {
       dispatch(setUserScoreList(data.data.result));
     } else {
