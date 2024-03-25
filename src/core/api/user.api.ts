@@ -21,7 +21,7 @@ export const fetchUserNftList = async (wallet: string) => {
     //console.error(error);
   }
 };
-export const fetchUserScoreList = async ({ wallet, net }) => {
+export const fetchUserScoreList = async ({ wallet, net }: any) => {
   try {
     const config: any = {
       headers: {
