@@ -85,7 +85,7 @@ const ScoreSection: FC<Props> = ({
     setHasPrev(!value.isBeginning);
   };
   useLayoutEffect(() => {
-    dispatch(getUserScoreList(wallet));
+    dispatch(getUserScoreList({ wallet }));
     return () => {
       dispatch(setUserScoreList(null));
     };
@@ -140,13 +140,13 @@ const ScoreSection: FC<Props> = ({
       lvl: userScoreList['manta'].level,
       points: userScoreList['manta'].score,
     },
-    {
+    /* {
       index: 'zora',
       title: 'Zora',
       icon: networkStaticData['zora'].icon,
       lvl: userScoreList['zora'].level,
       points: userScoreList['zora'].score,
-    },
+    },*/
   ];
   const preparedNetworks = networks
     ? getTwoLinesNetworksData(networks, swiperRef?.params?.slidesPerView)

@@ -107,7 +107,7 @@ const User = () => {
     );
     dispatch(getCompletedUserTasks(params.wallet));
     dispatch(getUserNFTList(params.wallet));
-    dispatch(getUserScoreList(params.wallet));
+    dispatch(getUserScoreList({ wallet: params.wallet }));
   };
   useEffect(() => {
     if (netTab) {
