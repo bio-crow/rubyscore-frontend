@@ -15,12 +15,12 @@ export type DashboardTabIndexType =
   | 'zk_era'
   | 'linea'
   | 'base'
-  | 'zora'
   | 'zk_evm'
   | 'scroll'
   | 'rubyscore'
   | 'manta'
-  | 'blast';
+  | 'blast'
+  | 'zora';
 export interface IScoreNetwork {
   index: DashboardTabIndexType;
   title: string;
@@ -121,10 +121,6 @@ export interface IScoreList {
     score: number;
     level: number;
   };
-  zora: {
-    score: number;
-    level: number;
-  };
   zk_evm: {
     score: number;
     level: number;
@@ -142,6 +138,10 @@ export interface IScoreList {
     level: number;
   };
   blast: {
+    score: number;
+    level: number;
+  };
+  zora: {
     score: number;
     level: number;
   };
@@ -196,14 +196,15 @@ export interface IUserGradation {
   };
 }
 export interface ILevelsInfo {
-  rubyscore: [];
-  linea: [];
-  zk_era: [];
-  zk_evm: [];
-  manta: [];
-  base: [];
-  scroll: [];
-  blast: [];
+  rubyscore: number[];
+  linea: number[];
+  zk_era: number[];
+  zk_evm: number[];
+  manta: number[];
+  base: number[];
+  scroll: number[];
+  blast: number[];
+  zora: number[];
 }
 
 export interface ITask {
@@ -217,15 +218,15 @@ export interface IUserTransactionsDates {
   last_transaction_time: number;
 }
 export interface IDashboardTabsVoteInfo {
-  zk_era: number | null;
-  linea: number | null;
-  base: number | null;
-  zk_evm: number | null;
-  manta: number | null;
-  scroll: number | null;
-  zora: number | null;
-  rubyscore: number | null;
-  blast: number | null;
+  zk_era: { count: number | null; is_ok: boolean };
+  linea: { count: number | null; is_ok: boolean };
+  base: { count: number | null; is_ok: boolean };
+  zk_evm: { count: number | null; is_ok: boolean };
+  manta: { count: number | null; is_ok: boolean };
+  scroll: { count: number | null; is_ok: boolean };
+  rubyscore: { count: number | null; is_ok: boolean };
+  blast: { count: number | null; is_ok: boolean };
+  zora: { count: number | null; is_ok: boolean };
 }
 export interface IAttestationData {
   attestationParams: {

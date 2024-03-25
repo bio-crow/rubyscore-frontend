@@ -2,7 +2,6 @@ import { Box } from '@mui/system';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import Image from 'next/image';
 import PrimaryButton from '@/components/common/ui/PrimaryButton/PrimaryButton';
-import { appRoutes } from '@/constants/routes';
 import Link from 'next/link';
 
 const Section1 = () => {
@@ -73,8 +72,7 @@ const Section1 = () => {
           Learn
         </Box>
         <CustomLink title='Blog' url='#' />
-        <CustomLink title='Manager Toolkit' url='#' />
-        <CustomLink title='WTF is QF' url='#' />
+
         <CustomLink title='Support' url='#' /> */}
       </Box>
       <Box
@@ -97,9 +95,6 @@ const Section1 = () => {
           Resources
         </Box>
         <CustomLink title='Docs' url='https://docs.rubyscore.io/' target='_blank' />
-        {/* <CustomLink title='Press & Media' url='#' />
-        <CustomLink title='Hackatons' url='#' />
-        <CustomLink title='Bounties' url='#' /> */}
       </Box>
       <Box
         sx={{
