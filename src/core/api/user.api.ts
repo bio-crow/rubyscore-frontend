@@ -21,13 +21,19 @@ export const fetchUserNftList = async (wallet: string) => {
     //console.error(error);
   }
 };
-export const fetchUserScoreList = async (wallet: string) => {
+export const fetchUserScoreList = async ({ wallet, net }) => {
   try {
     const config: any = {
       headers: {
         'Cache-Control': 'max-age=300',
       },
     };
+    if (net) {
+      return await apiPublicAxios.get<IScoreListResponse>(
+        `/profile/${wallet}/score?attestation=${net}`,
+        config
+      );
+    }
     return await apiPublicAxios.get<IScoreListResponse>(`/profile/${wallet}/score`, config);
   } catch (error) {
     //console.error(error);
