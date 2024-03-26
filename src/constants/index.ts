@@ -178,10 +178,10 @@ export const dashboardPanelTabs: { index: DashboardTabIndexType; label: string }
     index: 'manta',
     label: 'Manta',
   },
-  /* {
+  /*   {
     index: 'zora',
     label: 'Zora',
-  },*/
+  }, */
 ];
 export const axisLabelMap = {
   transactions: {

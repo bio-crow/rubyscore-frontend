@@ -146,7 +146,7 @@ const ScoreSection: FC<Props> = ({
       icon: networkStaticData['zora'].icon,
       lvl: userScoreList['zora']?.level,
       points: userScoreList['zora']?.score,
-    },*/
+    }, */
   ];
   const preparedNetworks = networks
     ? getTwoLinesNetworksData(networks, swiperRef?.params?.slidesPerView)
