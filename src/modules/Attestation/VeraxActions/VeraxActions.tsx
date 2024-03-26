@@ -54,8 +54,8 @@ const VeraxActions = () => {
       );
     }
   };
-  const onCAPTCHAChange = value => {
-    if (value) {
+  const onCAPTCHAChange = (value: any) => {
+    if (!!value) {
       setIsCAPTCHAFilled(true);
     }
   };
@@ -171,7 +171,7 @@ const VeraxActions = () => {
                 }}
               >
                 <ReCAPTCHA
-                  sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                  sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? ''}
                   theme='dark'
                   onChange={onCAPTCHAChange}
                 />
