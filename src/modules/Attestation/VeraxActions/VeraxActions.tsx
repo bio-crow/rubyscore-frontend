@@ -54,8 +54,8 @@ const VeraxActions = () => {
       );
     }
   };
-  const onCAPTCHAChange = value => {
-    if (value) {
+  const onCAPTCHAChange = (value: any) => {
+    if (!!value) {
       setIsCAPTCHAFilled(true);
     }
   };
