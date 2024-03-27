@@ -1,14 +1,14 @@
 import { Box } from '@mui/system';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import PrimaryButton from '@/components/common/ui/PrimaryButton/PrimaryButton';
-import fa from '@walletconnect/legacy-modal/dist/cjs/browser/languages/fa';
+import ReCAPTCHA from 'react-google-recaptcha';
 import SecondaryButton from '@/components/common/ui/SecondaryButton/SecondaryButton';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { copyToClickBoard } from '@/utils/helpers';
 import { appRoutes } from '@/constants/routes';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useEffect, useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { getReferrals, getUserScoreList } from '@/core/thunk/user.thunk';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import CustomConnectButton from '@/components/common/CustomConnectButton/CustomConnectButton';
@@ -31,6 +31,7 @@ const VeraxActions = () => {
   const userScoreList = useAppSelector(state => state.userState.userScoreList);
   const points = userScoreList?.linea?.score;
   const notEnoughPoints = !points || points < 15;
+  const [isCAPTCHAFilled, setIsCAPTCHAFilled] = useState(false);
   const theme = useCustomTheme();
   const isXs = useMediaQuery(theme.breakpoints.down('sm'));
   const router = useRouter();
@@ -51,6 +52,11 @@ const VeraxActions = () => {
           attestationData: attestationData,
         })
       );
+    }
+  };
+  const onCAPTCHAChange = (value: any) => {
+    if (!!value) {
+      setIsCAPTCHAFilled(true);
     }
   };
   return (
@@ -151,14 +157,35 @@ const VeraxActions = () => {
               </Box>
             </CustomTooltip>
           ) : (
-            <PrimaryButton
-              variant='contained'
-              size='large'
-              loading={claimAttestationLoading}
-              onClick={claimAttest}
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '5px',
+              }}
             >
-              Claim Attestation
-            </PrimaryButton>
+              <Box
+                sx={{
+                  transform: 'scale(0.72)',
+                  transformOrigin: '0 0',
+                }}
+              >
+                {/*} <ReCAPTCHA
+                  sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? ''}
+                  theme='dark'
+                  onChange={onCAPTCHAChange}
+                /> */}
+              </Box>
+              <PrimaryButton
+                variant='contained'
+                size='large'
+                // disabled={!isCAPTCHAFilled}
+                loading={claimAttestationLoading}
+                onClick={claimAttest}
+              >
+                Claim Attestation
+              </PrimaryButton>
+            </Box>
           ))}
       </Box>
       <Box
