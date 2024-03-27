@@ -30,7 +30,7 @@ const VeraxActions = () => {
   const claimAttestationLoading = useAppSelector(state => state.attestationState.claimAttestationLoading);
   const userScoreList = useAppSelector(state => state.userState.userScoreList);
   const points = userScoreList?.linea?.score;
-  const notEnoughPoints = !points || points < 15;
+  const notEnoughPoints = !points || points < 40;
   const [isCAPTCHAFilled, setIsCAPTCHAFilled] = useState(false);
   const theme = useCustomTheme();
   const isXs = useMediaQuery(theme.breakpoints.down('sm'));
