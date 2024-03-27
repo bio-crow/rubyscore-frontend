@@ -30,7 +30,7 @@ const VeraxActions = () => {
   const claimAttestationLoading = useAppSelector(state => state.attestationState.claimAttestationLoading);
   const userScoreList = useAppSelector(state => state.userState.userScoreList);
   const points = userScoreList?.linea?.score;
-  const notEnoughPoints = !points || points < 40;
+  const notEnoughPoints = !points || points < 15;
   const [isCAPTCHAFilled, setIsCAPTCHAFilled] = useState(false);
   const theme = useCustomTheme();
   const isXs = useMediaQuery(theme.breakpoints.down('sm'));
@@ -170,16 +170,16 @@ const VeraxActions = () => {
                   transformOrigin: '0 0',
                 }}
               >
-                <ReCAPTCHA
+                {/*} <ReCAPTCHA
                   sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? ''}
                   theme='dark'
                   onChange={onCAPTCHAChange}
-                />
+                /> */}
               </Box>
               <PrimaryButton
                 variant='contained'
                 size='large'
-                disabled={!isCAPTCHAFilled}
+                // disabled={!isCAPTCHAFilled}
                 loading={claimAttestationLoading}
                 onClick={claimAttest}
               >
