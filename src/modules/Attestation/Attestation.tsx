@@ -63,7 +63,7 @@ const Attestation = () => {
           >
             <p>
               To successfully complete the Proof of Humanity attestation for Linea, you are required to
-              accumulate 40 Points on the Linea network, equivalent to level 3 and higher.
+              accumulate 15 Points on the Linea network, equivalent to level 3 and higher.
             </p>
             <p>
               RubyScore uses on-chain metrics to determine the points assigned to each wallet, reflecting your
