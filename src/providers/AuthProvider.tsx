@@ -33,9 +33,6 @@ const AuthProvider: FC<Props> = ({ children }) => {
   const storedAuth = typeof window !== 'undefined' && localStorage.getItem('isAuth');
   useEffect(() => {
     const storedSignature = typeof window !== 'undefined' && localStorage.getItem('signature');
-    if (!storedSignature && signMessageData) {
-      reset();
-    }
     if (!isAuth && !loginLoading) {
       if (connector && isConnected && address) {
         if (storedSignature) {
