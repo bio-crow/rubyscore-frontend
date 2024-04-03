@@ -164,10 +164,8 @@ const VeraxActions = () => {
                 }}
               >
                 <Turnstile
-                  sitekey='0x4AAAAAAAWPPhORGjHT9RzC'
+                  sitekey={process.env.NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY || ''}
                   onVerify={token => {
-                    /* eslint-disable */
-                    console.log(token);
                     if (token) {
                       setIsCaptchaFilled(true);
                     }
