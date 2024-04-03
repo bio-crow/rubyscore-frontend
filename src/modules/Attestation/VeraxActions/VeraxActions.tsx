@@ -1,22 +1,17 @@
 import { Box } from '@mui/system';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import PrimaryButton from '@/components/common/ui/PrimaryButton/PrimaryButton';
-import ReCAPTCHA from 'react-google-recaptcha';
 import SecondaryButton from '@/components/common/ui/SecondaryButton/SecondaryButton';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { copyToClickBoard } from '@/utils/helpers';
 import { appRoutes } from '@/constants/routes';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useEffect, useLayoutEffect, useState } from 'react';
-import { getReferrals, getUserScoreList } from '@/core/thunk/user.thunk';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import CustomConnectButton from '@/components/common/CustomConnectButton/CustomConnectButton';
-import { setUserScoreList } from '@/core/state/user.state';
 import { TooltipAttestationBtn, TooltipVoteBtn } from '@/utils/tooltipsContent';
 import CustomTooltip from '@/components/common/CustomTooltip/CustomTooltip';
 import { claimAttestation } from '@/core/thunk/attestation.thunk';
-import { IAttestationData } from '@/types/index';
 import { useAccount } from 'wagmi';
 
 const VeraxActions = () => {
@@ -30,8 +25,7 @@ const VeraxActions = () => {
   const claimAttestationLoading = useAppSelector(state => state.attestationState.claimAttestationLoading);
   const userScoreList = useAppSelector(state => state.userState.userScoreList);
   const points = userScoreList?.linea?.score;
-  const notEnoughPoints = !points || points < 15;
-  const [isCAPTCHAFilled, setIsCAPTCHAFilled] = useState(false);
+  const notEnoughPoints = !points || points < 40;
   const theme = useCustomTheme();
   const isXs = useMediaQuery(theme.breakpoints.down('sm'));
   const router = useRouter();
@@ -52,11 +46,6 @@ const VeraxActions = () => {
           attestationData: attestationData,
         })
       );
-    }
-  };
-  const onCAPTCHAChange = (value: any) => {
-    if (!!value) {
-      setIsCAPTCHAFilled(true);
     }
   };
   return (
@@ -164,22 +153,9 @@ const VeraxActions = () => {
                 gap: '5px',
               }}
             >
-              <Box
-                sx={{
-                  transform: 'scale(0.72)',
-                  transformOrigin: '0 0',
-                }}
-              >
-                {/*} <ReCAPTCHA
-                  sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? ''}
-                  theme='dark'
-                  onChange={onCAPTCHAChange}
-                /> */}
-              </Box>
               <PrimaryButton
                 variant='contained'
                 size='large'
-                // disabled={!isCAPTCHAFilled}
                 loading={claimAttestationLoading}
                 onClick={claimAttest}
               >
