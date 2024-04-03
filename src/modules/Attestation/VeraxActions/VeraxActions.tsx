@@ -1,4 +1,5 @@
 import { Box } from '@mui/system';
+import Turnstile, { useTurnstile } from 'react-turnstile';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import PrimaryButton from '@/components/common/ui/PrimaryButton/PrimaryButton';
 import SecondaryButton from '@/components/common/ui/SecondaryButton/SecondaryButton';
@@ -13,11 +14,13 @@ import { TooltipAttestationBtn, TooltipVoteBtn } from '@/utils/tooltipsContent';
 import CustomTooltip from '@/components/common/CustomTooltip/CustomTooltip';
 import { claimAttestation } from '@/core/thunk/attestation.thunk';
 import { useAccount } from 'wagmi';
+import { useState } from 'react';
 
 const VeraxActions = () => {
   const isAuth = useAppSelector(state => state.authState.isAuth);
   const loading = useAppSelector(state => state.authState.loading);
   const { address } = useAccount();
+  const [isCaptchaFilled, setIsCaptchaFilled] = useState(false);
   const dispatch = useAppDispatch();
   const attestationPrice = useAppSelector(state => state.attestationState.attestationPrice);
   const attestationData = useAppSelector(state => state.attestationState.attestationData);
@@ -30,6 +33,7 @@ const VeraxActions = () => {
   const isXs = useMediaQuery(theme.breakpoints.down('sm'));
   const router = useRouter();
   const refCode = useAppSelector(state => state.userState.refCode);
+  const turnstile = useTurnstile();
   const copyReferralLink = () => {
     refCode && copyToClickBoard(`${window.location.origin}${appRoutes.PROFILE}/?ref=${refCode}`);
   };
@@ -153,9 +157,25 @@ const VeraxActions = () => {
                 gap: '5px',
               }}
             >
+              <Box
+                sx={{
+                  transform: 'scale(0.72)',
+                  transformOrigin: '0 0',
+                }}
+              >
+                <Turnstile
+                  sitekey={process.env.NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY || ''}
+                  onVerify={token => {
+                    if (token) {
+                      setIsCaptchaFilled(true);
+                    }
+                  }}
+                />
+              </Box>
               <PrimaryButton
                 variant='contained'
                 size='large'
+                disabled={!isCaptchaFilled}
                 loading={claimAttestationLoading}
                 onClick={claimAttest}
               >
