@@ -6,12 +6,14 @@ import { useEffect, useLayoutEffect, useState } from 'react';
 import DashboardTab from '@/modules/Dashboard/DashboardTab/DashboardTab';
 import { DashboardTabIndexType } from '@/types/index';
 import NetworkTabs from '@/components/common/ui/NetworkTabs/NetworkTabs';
-import { useAppDispatch } from '@/core/store';
+import { useAppDispatch, useAppSelector } from '@/core/store';
 import { getUserGradation, initDashboardTabsVotes } from '@/core/thunk/dashboard.thunk';
 import { useAccount } from 'wagmi';
 import { dashboardPanelTabs } from '@/constants/index';
 import { setUserGradation } from '@/core/state/dashboard.state';
 import { useSearchParams, useRouter } from 'next/navigation';
+import ShareModalWrapper from '@/components/common/ShareModal';
+import { setShareModalState } from '@/core/state/shareModal.state';
 const Dashboard = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -20,6 +22,7 @@ const Dashboard = () => {
   const [activeTab, setActiveTab] = useState<{ index: DashboardTabIndexType; label: string }>(
     dashboardPanelTabs[0]
   );
+  const shareModalConfig = useAppSelector(state => state.shareModalState);
   const changeTab = (tab: any) => {
     router.push(`?net=${tab.index}`);
     setActiveTab(tab);
@@ -45,6 +48,11 @@ const Dashboard = () => {
       tab && setActiveTab(tab);
     }
   }, [netTab]);
+
+  const handleClose = () => {
+    dispatch(setShareModalState({ isOpen: false, type: null, social: null }));
+  };
+
   return (
     <Layout>
       <Box
@@ -56,6 +64,9 @@ const Dashboard = () => {
           padding: { xs: '0px 15px 0px 15px', sm: '0px 30px 0px 30px', xl: 0 },
         }}
       >
+        {shareModalConfig.isOpen && (
+          <ShareModalWrapper open={shareModalConfig.isOpen} onClose={handleClose} />
+        )}
         <NetworkTabs
           networks={dashboardPanelTabs}
           activeTab={activeTab}

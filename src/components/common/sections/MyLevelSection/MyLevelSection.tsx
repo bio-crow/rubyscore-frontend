@@ -13,11 +13,13 @@ import { getUserLevelInfo } from '@/core/thunk/dashboard.thunk';
 import { useAccount } from 'wagmi';
 import { myLevelIcons } from '@/constants/index';
 import { setMyLevelData } from '@/core/state/dashboard.state';
-import { CircularProgress } from '@mui/material';
+import { Button, CircularProgress } from '@mui/material';
 import InfoIcon from '@/components/common/Icons/InfoIcon';
 import CustomTooltip from '@/components/common/CustomTooltip/CustomTooltip';
 import { TooltipCurrentRank } from '@/utils/tooltipsContent';
 import { formatPercentsForCards } from '@/utils/helpers';
+import Image from 'next/image';
+import { setShareModalState } from '@/core/state/shareModal.state';
 
 const breakpointsConfig = {
   0: {
@@ -278,6 +280,8 @@ const MyLevelSection: FC<Props> = ({
               sx={{
                 display: 'flex',
                 flexDirection: 'column',
+                paddingRight: { xs: 'none', lg: `16px` },
+                borderRight: { xs: 'none', lg: `1px solid ${theme.palette.white10}` },
               }}
             >
               <Box color={theme.palette.powderWhite} className='Body-Inter-fw-700-fs-16'>
@@ -286,6 +290,57 @@ const MyLevelSection: FC<Props> = ({
               <Box className='Body-Inter-fw-700-fs-18' color={theme.palette.lightGreen}>
                 {percent}%
               </Box>
+            </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                gap: '12px',
+                alignItems: 'center',
+              }}
+            >
+              <Box color={theme.palette.powderWhite} className='Body-Inter-fw-700-fs-16'>
+                Share my stats
+              </Box>
+              <Button
+                onClick={() =>
+                  dispatch(
+                    setShareModalState({
+                      isOpen: true,
+                      type: 'stats',
+                      social: 'twitter',
+                    })
+                  )
+                }
+                sx={{
+                  padding: '12px',
+                  background: '#92FE9D',
+                  borderRadius: '10px',
+                  border: '1px solid var(--white-10, rgba(245, 247, 243, 0.10))',
+                  minWidth: '0',
+                }}
+              >
+                <Image src='/asserts/social/x.svg' width={24} height={24} alt='X' />
+              </Button>
+              <Button
+                onClick={() =>
+                  dispatch(
+                    setShareModalState({
+                      isOpen: true,
+                      type: 'stats',
+                      social: 'telegram',
+                    })
+                  )
+                }
+                sx={{
+                  padding: '12px',
+                  background: '#92FE9D',
+                  borderRadius: '10px',
+                  border: '1px solid var(--white-10, rgba(245, 247, 243, 0.10))',
+                  minWidth: '0',
+                }}
+              >
+                <Image src='/asserts/social/telegram_outline.svg' width={24} height={24} alt='Telegram' />
+              </Button>
             </Box>
           </Box>
         )}
