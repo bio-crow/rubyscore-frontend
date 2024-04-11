@@ -1,20 +1,104 @@
-import { useAppSelector } from '@/core/store';
-import { formatPercentsForCards } from '@/utils/helpers';
-import { Box, Modal } from '@mui/material';
+import { useAppDispatch, useAppSelector } from '@/core/store';
+import { formatPercentsForCards, prepareUserGradationToAchievementsCards } from '@/utils/helpers';
+import { Box, Button, Modal, Skeleton } from '@mui/material';
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import ModalButton from './ModalButton';
+import RubyScoreImage from 'public/asserts/logo.svg';
+import { getReferrals } from '@/core/thunk/user.thunk';
+import CardBg from 'public/asserts/card_bg.png';
+import { toJpeg } from 'html-to-image';
+import { toast } from 'react-toastify';
+import AchievementCard from './AchievementCard';
+import { ShareModalSocial, ShareModalType } from '@/core/state/shareModal.state';
+import TelegramIcon from 'public/asserts/social/telegram(white).svg';
+import XIcon from 'public/asserts/social/x(white).svg';
+import { uploadImage } from '@/core/api/shares.api';
 
 interface ShareModalProps {
   close: () => void;
+  activeNetwork: string;
+  type: ShareModalType;
+  social: ShareModalSocial;
 }
 
-const ShareModal = ({ close }: ShareModalProps) => {
+const ShareModal = ({ close, activeNetwork, type, social }: ShareModalProps) => {
+  const [image, setImage] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const myLevelData = useAppSelector(state => state.dashboardState.myLevelData);
+  const refCode = useAppSelector(state => state.userState.refCode);
+  const dispatch = useAppDispatch();
+
+  useLayoutEffect(() => {
+    dispatch(getReferrals());
+  }, []);
   const percent =
     myLevelData &&
     formatPercentsForCards(
       Number.parseFloat(`${(myLevelData.position.current / myLevelData.position.max) * 100}`)
     );
+
+  const cardRef = useRef(null);
+
+  useEffect(() => {
+    if (cardRef.current) {
+      toJpeg(cardRef.current)
+        .then(function (dataUrl: string) {
+          setImage(dataUrl);
+        })
+        .catch(function () {
+          toast.error('oops, something went wrong!');
+        });
+    }
+  }, [cardRef.current]);
+
+  const onSaveImage = () => {
+    const link = document.createElement('a');
+    link.download = `stats-${Date.now().toString()}.jpg`;
+    link.href = image;
+    link.click();
+  };
+
+  const shareViaTelegram = async () => {
+    setIsLoading(true);
+    const uploadedImageLink = await uploadImage(image);
+    if (!uploadedImageLink) {
+      setIsLoading(false);
+      return;
+    }
+    const url = `https://t.me/share/url?url=https://rubyscore.io/dashboard?og_image=${uploadedImageLink.data.id}%26ref=${refCode}`;
+    window.open(url, '_blank');
+    setIsLoading(false);
+  };
+
+  const shareViaTwitter = async () => {
+    setIsLoading(true);
+    const uploadedImageLink = await uploadImage(image);
+    if (!uploadedImageLink) {
+      setIsLoading(false);
+      return;
+    }
+    const url = `https://twitter.com/intent/tweet?url=https://rubyscore.io/dashboard?og_image=${uploadedImageLink.data.id}%26ref=${refCode}`;
+    window.open(url, '_blank');
+    setIsLoading(false);
+  };
+
+  const getShareButton = () =>
+    ({
+      telegram: (
+        <ModalButton onClick={shareViaTelegram} disabled={isLoading}>
+          <Image src={TelegramIcon} alt='telegram' />
+          Share via Telegram
+        </ModalButton>
+      ),
+      twitter: (
+        <ModalButton onClick={shareViaTwitter} disabled={isLoading}>
+          <Image src={XIcon} alt='x(twitter)' />
+          Share via X(Twitter)
+        </ModalButton>
+      ),
+    })[social as string];
+
   return (
     <Box
       sx={{
@@ -38,12 +122,112 @@ const ShareModal = ({ close }: ShareModalProps) => {
         </Box>
       </Box>
       <Box
+        ref={cardRef}
         sx={{
           borderRadius: '10px',
           padding: '50px',
           position: 'relative',
+          overflow: 'hidden',
+          background: '#121317',
+          display: 'flex',
+          alignItems: 'center',
         }}
-      ></Box>
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            width: '50%',
+            alignItems: 'flex-start',
+            gap: '47px',
+            flex: '1 0 50%',
+          }}
+        >
+          <div
+            style={{
+              position: 'absolute',
+              width: '650px',
+              height: '360px',
+              right: '0',
+              bottom: '0',
+              background: 'rgba(83, 231, 200, 0.40)',
+              filter: 'blur(150px)',
+              transform: 'translateX(50%)',
+            }}
+          />
+          <div
+            style={{
+              position: 'absolute',
+              width: '350px',
+              height: '660px',
+              opacity: '0.4',
+              left: '50%',
+              top: '70%',
+              background: '#04CBFD',
+              filter: 'blur(250px)',
+              transform: 'translateX(-50%)',
+            }}
+          />
+          {type === 'stats' && (
+            <Image src={CardBg} style={{ position: 'absolute', right: 0, bottom: 0 }} alt='bg' />
+          )}
+          <Box sx={{ gap: '24px', display: 'flex', alignItems: 'center' }}>
+            <Image src={RubyScoreImage} alt='rubyscore' width='156' />
+            <span
+              style={{
+                display: 'inline-block',
+                height: '16px',
+                width: '2px',
+                borderRadius: '1px',
+                background: 'linear-gradient(90deg, #92FE9D 0%, #00C9FF 100%, #00C9FF 100%)',
+              }}
+            />
+          </Box>
+          <Box>
+            <p className='share-card-Michroma-fw-400-fs-16' style={{ margin: 0 }}>
+              CURRENT RANK
+            </p>
+            <p className='share-card-Montserrat-Alt-fw-600-fs-72' style={{ margin: 0, color: '#92FD9D' }}>
+              #{myLevelData?.position.current}
+            </p>
+          </Box>
+          <Box>
+            <p className='share-card-Montserrat-Alt-fw-600-fs-32' style={{ margin: 0 }}>
+              TOP <span style={{ color: '#92FD9D' }}>{percent}%</span>
+            </p>
+            {myLevelData?.position.max && (
+              <p className='share-card-Montserrat-Alt-fw-600-fs-12' style={{ margin: 0 }}>
+                Wallet is better than{' '}
+                <span style={{ fontWeight: '700', color: '#92FD9D' }}>
+                  {myLevelData?.position.max - myLevelData?.position.current}{' '}
+                </span>
+                of {myLevelData?.position.max}
+              </p>
+            )}
+          </Box>
+        </Box>
+        {type === 'achievements' && <AchievementCard />}
+      </Box>
+      <Box sx={{ display: 'flex', gap: '20px' }}>
+        {image ? getShareButton() : <Skeleton variant='rounded' width='50%' height='54px' />}
+        {image ? (
+          <ModalButton onClick={onSaveImage}>Save Image</ModalButton>
+        ) : (
+          <Skeleton variant='rounded' width='50%' height='54px' />
+        )}
+      </Box>
+      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '4px' }}>
+        <p className='Body-Lato-fw-500-fs-12-h-24' style={{ color: 'rgba(245, 247, 243, 0.50)', margin: 0 }}>
+          Referral link
+        </p>
+        <p className='Body-Inter-fw-700-fs-16' style={{ margin: 0 }}>
+          {refCode ? (
+            `rubyscore.io/dashboard?ref=${refCode}`
+          ) : (
+            <Skeleton variant='text' sx={{ fontSize: '16px' }} width={325} />
+          )}
+        </p>
+      </Box>
     </Box>
   );
 };
@@ -51,12 +235,15 @@ const ShareModal = ({ close }: ShareModalProps) => {
 interface ShareModalWrapperProps {
   open: boolean;
   onClose: () => void;
+  activeNetwork: string;
+  type: ShareModalType;
+  social: ShareModalSocial;
 }
 
-const ShareModalWrapper = ({ open, onClose }: ShareModalWrapperProps) => {
+const ShareModalWrapper = ({ open, onClose, activeNetwork, type, social }: ShareModalWrapperProps) => {
   return (
-    <Modal open={open} onClose={onClose}>
-      <ShareModal close={onClose} />
+    <Modal open={open} onClose={onClose} sx={{ backdropFilter: 'blur(6px)' }}>
+      <ShareModal close={onClose} activeNetwork={activeNetwork} type={type} social={social} />
     </Modal>
   );
 };

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-type ShareModalType = 'achievements' | 'stats' | null;
-type ShareModalSocial = 'twitter' | 'telegram' | null;
+export type ShareModalType = 'achievements' | 'stats' | null;
+export type ShareModalSocial = 'twitter' | 'telegram' | null;
 
 interface IShareModalState {
   isOpen: boolean;
