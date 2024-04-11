@@ -1,7 +1,6 @@
 'use client';
 import Layout from '@/components/layout/Layout/Layout';
 import { Box } from '@mui/material';
-import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { useEffect, useLayoutEffect, useState } from 'react';
 import DashboardTab from '@/modules/Dashboard/DashboardTab/DashboardTab';
 import { DashboardTabIndexType } from '@/types/index';
@@ -61,22 +60,22 @@ const Dashboard = () => {
     <>
       {OGImage && refCode && (
         <>
+          <meta key='og:type' property='og:type' content='website' />
+          <meta key='og:description' property='og:description' content='Rubyscore' />
+          <meta key='og:title' property='og:title' content='Rubyscore' />
           <meta
+            key='og:image'
             property='og:image'
             content={`https://rubyscore.fra1.digitaloceanspaces.com/shares/${OGImage}.png`}
           />
+          <meta key='twitter:card' name='twitter:card' content='summary_large_image' />
+          <meta key='twitter:description' property='twitter:description' content='Rubyscore' />
+          <meta key='twitter:title' property='twitter:title' content='Rubyscore' />
           <meta
-            property='og:url'
-            content={`https://${window.location.origin}/dashboard?og_image=${OGImage}%26ref=${refCode}`}
-          />
-          <meta property='og:type' content='website' />
-          <meta property='og:title' content='Rubyscore' />
-          <meta property='og:description' content='Dashboard' />
-          <meta
-            property='og:image'
+            key='twitter:image'
+            name='twitter:image'
             content={`https://rubyscore.fra1.digitaloceanspaces.com/shares/${OGImage}.png`}
           />
-          <meta name='twitter:card' content='summary_large_image' />
         </>
       )}
       <Layout>

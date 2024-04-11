@@ -14,11 +14,6 @@ import localFont from 'next/font/local';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const lato = Lato({ subsets: ['latin'], variable: '--font-lato', weight: ['100', '300', '400', '700'] });
 const michroma = Michroma({ subsets: ['latin'], variable: '--font-michroma', weight: ['400'] });
-// const montserratAlt = Montserrat_Alternates({
-//   subsets: ['latin'],
-//   variable: '--font-montserrat-alt',
-//   weight: ['600'],
-// });
 const montserratAlt = localFont({
   src: [
     {
