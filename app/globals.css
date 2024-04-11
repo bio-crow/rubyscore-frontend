@@ -239,3 +239,51 @@ main {
     font-weight: 800;
     line-height: 50px;
 }
+
+.share-card-Michroma-fw-400-fs-16 {
+    font-family: var(--font-michroma);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.share-card-Michroma-fw-400-fs-12 {
+    font-family: var(--font-michroma);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.share-card-Montserrat-Alt-fw-600-fs-72 {
+    font-family: var(--font-montserrat-alt);
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 84px;
+}
+
+.share-card-Montserrat-Alt-fw-600-fs-32 {
+    font-family: var(--font-montserrat-alt);
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 40px;
+}
+
+.share-card-Montserrat-Alt-fw-600-fs-12 {
+    font-family: var(--font-montserrat-alt);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+}
+
+.share-card-Montserrat-Alt-fw-600-fs-10 {
+    font-family: var(--font-montserrat-alt);
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; 
+}
