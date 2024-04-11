@@ -56,6 +56,14 @@ const Dashboard = () => {
     dispatch(setShareModalState({ isOpen: false, type: null, social: null }));
   };
 
+  const isHidden = process.env.NEXT_PUBLIC_HIDE_DASHBOARD === 'true';
+
+  useEffect(() => {
+    isHidden && router.push('/');
+  }, []);
+
+  if (isHidden) return null;
+
   return (
     <>
       {OGImage && refCode && (
