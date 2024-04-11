@@ -66,7 +66,7 @@ const ShareModal = ({ close, activeNetwork, type, social }: ShareModalProps) => 
       setIsLoading(false);
       return;
     }
-    const url = `https://t.me/share/url?url=https://${window.location.origin}/dashboard?og_image=${uploadedImageLink.data.id}%26ref=${refCode}`;
+    const url = `https://t.me/share/url?url=${window.location.origin}/dashboard?og_image=${uploadedImageLink.data.id}%26ref=${refCode}`;
     window.open(url, '_blank');
     setIsLoading(false);
   };
@@ -78,7 +78,7 @@ const ShareModal = ({ close, activeNetwork, type, social }: ShareModalProps) => 
       setIsLoading(false);
       return;
     }
-    const url = `https://twitter.com/intent/tweet?url=https://${window.location.origin}/dashboard?og_image=${uploadedImageLink.data.id}%26ref=${refCode}`;
+    const url = `https://twitter.com/intent/tweet?url=${window.location.origin}/dashboard?og_image=${uploadedImageLink.data.id}%26ref=${refCode}`;
     window.open(url, '_blank');
     setIsLoading(false);
   };
