@@ -23,6 +23,7 @@ const Dashboard = () => {
   const [activeTab, setActiveTab] = useState<{ index: DashboardTabIndexType; label: string }>(
     dashboardPanelTabs[0]
   );
+  const refCode = useAppSelector(state => state.userState.refCode);
   const shareModalConfig = useAppSelector(state => state.shareModalState);
 
   const changeTab = (tab: any) => {
@@ -58,6 +59,17 @@ const Dashboard = () => {
     <>
       {OGImage && (
         <>
+          <meta
+            property='og:image'
+            content={`https://rubyscore.fra1.digitaloceanspaces.com/shares/${OGImage}.png`}
+          />
+          <meta
+            property='og:url'
+            content={`https://${window.location.origin}/dashboard?og_image=${OGImage}%26ref=${refCode}`}
+          />
+          <meta property='og:type' content='website' />
+          <meta property='og:title' content='Rubyscore' />
+          <meta property='og:description' content='Dashboard' />
           <meta
             property='og:image'
             content={`https://rubyscore.fra1.digitaloceanspaces.com/shares/${OGImage}.png`}
