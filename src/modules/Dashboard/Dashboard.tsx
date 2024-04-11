@@ -14,6 +14,7 @@ import { setUserGradation } from '@/core/state/dashboard.state';
 import { useSearchParams, useRouter } from 'next/navigation';
 import ShareModalWrapper from '@/components/common/ShareModal';
 import { setShareModalState } from '@/core/state/shareModal.state';
+import Head from 'next/head';
 const Dashboard = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -58,7 +59,7 @@ const Dashboard = () => {
   return (
     <>
       {OGImage && refCode && (
-        <>
+        <Head>
           <meta
             property='og:image'
             content={`https://rubyscore.fra1.digitaloceanspaces.com/shares/${OGImage}.png`}
@@ -75,7 +76,7 @@ const Dashboard = () => {
             content={`https://rubyscore.fra1.digitaloceanspaces.com/shares/${OGImage}.png`}
           />
           <meta name='twitter:card' content='summary_large_image' />
-        </>
+        </Head>
       )}
       <Layout>
         <Box
