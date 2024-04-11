@@ -19,11 +19,11 @@ const Dashboard = () => {
   const searchParams = useSearchParams();
   const netTab = searchParams.get('net');
   const OGImage = searchParams.get('og_image');
+  const refCode = searchParams.get('ref');
   const { address } = useAccount();
   const [activeTab, setActiveTab] = useState<{ index: DashboardTabIndexType; label: string }>(
     dashboardPanelTabs[0]
   );
-  const refCode = useAppSelector(state => state.userState.refCode);
   const shareModalConfig = useAppSelector(state => state.shareModalState);
 
   const changeTab = (tab: any) => {
@@ -57,7 +57,7 @@ const Dashboard = () => {
   };
   return (
     <>
-      {OGImage && (
+      {OGImage && refCode && (
         <>
           <meta
             property='og:image'
