@@ -1,8 +1,6 @@
 'use client';
 import Layout from '@/components/layout/Layout/Layout';
 import { Box } from '@mui/material';
-import { useCustomTheme } from '@/hooks/useCustomTheme';
-import type { Metadata } from 'next';
 import { useEffect, useLayoutEffect, useState } from 'react';
 import DashboardTab from '@/modules/Dashboard/DashboardTab/DashboardTab';
 import { DashboardTabIndexType } from '@/types/index';
@@ -15,7 +13,6 @@ import { setUserGradation } from '@/core/state/dashboard.state';
 import { useSearchParams, useRouter } from 'next/navigation';
 import ShareModalWrapper from '@/components/common/ShareModal';
 import { setShareModalState } from '@/core/state/shareModal.state';
-import Head from 'next/head';
 
 const Dashboard = () => {
   const router = useRouter();
