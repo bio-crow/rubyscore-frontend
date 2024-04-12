@@ -1,14 +1,11 @@
 import Dashboard from '@/modules/Dashboard/Dashboard';
-import { Suspense } from 'react';
+
+export const dynamic = 'force-dynamic';
 
 export default function Page() {
   return (
-    <>
-      <main>
-        <Suspense fallback={<div />}>
-          <Dashboard />
-        </Suspense>
-      </main>
-    </>
+    <main>
+      <Dashboard />
+    </main>
   );
 }
