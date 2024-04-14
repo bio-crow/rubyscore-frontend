@@ -12,10 +12,10 @@ export const testChains: Chain[] = [
     },
     rpcUrls: {
       public: {
-        http: ['https://endpoints.omniatech.io/v1/matic/mumbai/public'],
+        http: ['https://polygon-mumbai.gateway.tenderly.co'],
       },
       default: {
-        http: ['https://endpoints.omniatech.io/v1/matic/mumbai/public'],
+        http: ['https://polygon-mumbai.gateway.tenderly.co'],
       },
     },
     blockExplorers: {
