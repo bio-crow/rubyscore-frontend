@@ -62,7 +62,7 @@ const MyLevelSection: FC<Props> = ({
   const myLevelDataLoading = useAppSelector(state => state.dashboardState.myLevelDataLoading);
   const { address } = useAccount();
   const theme = useCustomTheme();
-  const isSm = useMediaQuery(theme.breakpoints.up('sm'));
+  const isLg = useMediaQuery(theme.breakpoints.up('lg'));
   const [hasNext, setHasNext] = useState(false);
   const [hasPrev, setHasPrev] = useState(false);
   const [swiperRef, setSwiperRef] = useState<any>();
@@ -291,57 +291,59 @@ const MyLevelSection: FC<Props> = ({
                 {percent}%
               </Box>
             </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                gap: '12px',
-                alignItems: 'center',
-              }}
-            >
-              <Box color={theme.palette.powderWhite} className='Body-Inter-fw-700-fs-16'>
-                Share my stats
+            {isLg && (
+              <Box
+                sx={{
+                  display: 'flex',
+                  gap: '12px',
+                  alignItems: 'center',
+                }}
+              >
+                <Box color={theme.palette.powderWhite} className='Body-Inter-fw-700-fs-16'>
+                  Share my stats
+                </Box>
+                <Button
+                  onClick={() =>
+                    dispatch(
+                      setShareModalState({
+                        isOpen: true,
+                        type: 'stats',
+                        social: 'twitter',
+                      })
+                    )
+                  }
+                  sx={{
+                    padding: '12px',
+                    background: '#92FE9D',
+                    borderRadius: '10px',
+                    border: '1px solid var(--white-10, rgba(245, 247, 243, 0.10))',
+                    minWidth: '0',
+                  }}
+                >
+                  <Image src='/asserts/social/x.svg' width={24} height={24} alt='X' />
+                </Button>
+                <Button
+                  onClick={() =>
+                    dispatch(
+                      setShareModalState({
+                        isOpen: true,
+                        type: 'stats',
+                        social: 'telegram',
+                      })
+                    )
+                  }
+                  sx={{
+                    padding: '12px',
+                    background: '#92FE9D',
+                    borderRadius: '10px',
+                    border: '1px solid var(--white-10, rgba(245, 247, 243, 0.10))',
+                    minWidth: '0',
+                  }}
+                >
+                  <Image src='/asserts/social/telegram_outline.svg' width={24} height={24} alt='Telegram' />
+                </Button>
               </Box>
-              <Button
-                onClick={() =>
-                  dispatch(
-                    setShareModalState({
-                      isOpen: true,
-                      type: 'stats',
-                      social: 'twitter',
-                    })
-                  )
-                }
-                sx={{
-                  padding: '12px',
-                  background: '#92FE9D',
-                  borderRadius: '10px',
-                  border: '1px solid var(--white-10, rgba(245, 247, 243, 0.10))',
-                  minWidth: '0',
-                }}
-              >
-                <Image src='/asserts/social/x.svg' width={24} height={24} alt='X' />
-              </Button>
-              <Button
-                onClick={() =>
-                  dispatch(
-                    setShareModalState({
-                      isOpen: true,
-                      type: 'stats',
-                      social: 'telegram',
-                    })
-                  )
-                }
-                sx={{
-                  padding: '12px',
-                  background: '#92FE9D',
-                  borderRadius: '10px',
-                  border: '1px solid var(--white-10, rgba(245, 247, 243, 0.10))',
-                  minWidth: '0',
-                }}
-              >
-                <Image src='/asserts/social/telegram_outline.svg' width={24} height={24} alt='Telegram' />
-              </Button>
-            </Box>
+            )}
           </Box>
         )}
       </Box>

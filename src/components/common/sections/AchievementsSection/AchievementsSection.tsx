@@ -32,6 +32,7 @@ const AchievementsSection: FC<Props> = ({ activeTab, wallet, onRefresh }) => {
   const shareModalConfig = useAppSelector(state => state.shareModalState);
   const theme = useCustomTheme();
   const isSm = useMediaQuery(theme.breakpoints.up('sm'));
+  const isLg = useMediaQuery(theme.breakpoints.up('lg'));
   const refreshGradation = () => {
     if (wallet) {
       const data = {
@@ -86,49 +87,53 @@ const AchievementsSection: FC<Props> = ({ activeTab, wallet, onRefresh }) => {
               >
                 Refresh
               </SecondaryButton>
-              <Box color={theme.palette.powderWhite} className='Body-Inter-fw-700-fs-16'>
-                Share my stats
-              </Box>
-              <Button
-                onClick={() =>
-                  dispatch(
-                    setShareModalState({
-                      isOpen: true,
-                      type: 'achievements',
-                      social: 'twitter',
-                    })
-                  )
-                }
-                sx={{
-                  padding: '12px',
-                  background: '#92FE9D',
-                  borderRadius: '10px',
-                  border: '1px solid var(--white-10, rgba(245, 247, 243, 0.10))',
-                  minWidth: '0',
-                }}
-              >
-                <Image src='/asserts/social/x.svg' width={24} height={24} alt='X' />
-              </Button>
-              <Button
-                onClick={() =>
-                  dispatch(
-                    setShareModalState({
-                      isOpen: true,
-                      type: 'achievements',
-                      social: 'telegram',
-                    })
-                  )
-                }
-                sx={{
-                  padding: '12px',
-                  background: '#92FE9D',
-                  borderRadius: '10px',
-                  border: '1px solid var(--white-10, rgba(245, 247, 243, 0.10))',
-                  minWidth: '0',
-                }}
-              >
-                <Image src='/asserts/social/telegram_outline.svg' width={24} height={24} alt='Telegram' />
-              </Button>
+              {isLg && (
+                <>
+                  <Box color={theme.palette.powderWhite} className='Body-Inter-fw-700-fs-16'>
+                    Share my stats
+                  </Box>
+                  <Button
+                    onClick={() =>
+                      dispatch(
+                        setShareModalState({
+                          isOpen: true,
+                          type: 'achievements',
+                          social: 'twitter',
+                        })
+                      )
+                    }
+                    sx={{
+                      padding: '12px',
+                      background: '#92FE9D',
+                      borderRadius: '10px',
+                      border: '1px solid var(--white-10, rgba(245, 247, 243, 0.10))',
+                      minWidth: '0',
+                    }}
+                  >
+                    <Image src='/asserts/social/x.svg' width={24} height={24} alt='X' />
+                  </Button>
+                  <Button
+                    onClick={() =>
+                      dispatch(
+                        setShareModalState({
+                          isOpen: true,
+                          type: 'achievements',
+                          social: 'telegram',
+                        })
+                      )
+                    }
+                    sx={{
+                      padding: '12px',
+                      background: '#92FE9D',
+                      borderRadius: '10px',
+                      border: '1px solid var(--white-10, rgba(245, 247, 243, 0.10))',
+                      minWidth: '0',
+                    }}
+                  >
+                    <Image src='/asserts/social/telegram_outline.svg' width={24} height={24} alt='Telegram' />
+                  </Button>
+                </>
+              )}
             </>
           )}
         </Box>

@@ -1,8 +1,8 @@
 import { useAppDispatch, useAppSelector } from '@/core/store';
-import { formatPercentsForCards, prepareUserGradationToAchievementsCards } from '@/utils/helpers';
-import { Box, Button, Modal, Skeleton } from '@mui/material';
+import { formatPercentsForCards } from '@/utils/helpers';
+import { Box, Modal, Skeleton } from '@mui/material';
 import Image from 'next/image';
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import ModalButton from './ModalButton';
 import RubyScoreImage from 'public/asserts/logo.svg';
 import { getReferrals } from '@/core/thunk/user.thunk';
@@ -14,6 +14,49 @@ import { ShareModalSocial, ShareModalType } from '@/core/state/shareModal.state'
 import TelegramIcon from 'public/asserts/social/telegram(white).svg';
 import XIcon from 'public/asserts/social/x(white).svg';
 import { uploadImage } from '@/core/api/shares.api';
+import ZkSyncImage from 'public/asserts/shareIcons/zk_sync.png';
+import LineaImage from 'public/asserts/shareIcons/Linea.png';
+import BaseImage from 'public/asserts/shareIcons/base.png';
+import zkEVMImage from 'public/asserts/shareIcons/zk_evm.png';
+import ScrollImage from 'public/asserts/shareIcons/scroll.png';
+import MantaImage from 'public/asserts/shareIcons/manta.png';
+import BlastImage from 'public/asserts/shareIcons/blast.png';
+import ZoraImage from 'public/asserts/shareIcons/zora.png';
+
+const networkName = {
+  zk_era: {
+    title: 'zkSync',
+    src: ZkSyncImage,
+  },
+  linea: {
+    title: 'Linea',
+    src: LineaImage,
+  },
+  base: {
+    title: 'Base',
+    src: BaseImage,
+  },
+  zk_evm: {
+    title: 'zkEVM',
+    src: zkEVMImage,
+  },
+  scroll: {
+    title: 'Scroll',
+    src: ScrollImage,
+  },
+  manta: {
+    title: 'Manta',
+    src: MantaImage,
+  },
+  blast: {
+    title: 'Blast',
+    src: BlastImage,
+  },
+  zora: {
+    title: 'Zora',
+    src: ZoraImage,
+  },
+};
 
 interface ShareModalProps {
   close: () => void;
@@ -24,11 +67,11 @@ interface ShareModalProps {
 
 const ShareModal = ({ close, activeNetwork, type, social }: ShareModalProps) => {
   const [image, setImage] = useState<string>('');
+  const [cardRef, setCardRef] = useState<null | HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const myLevelData = useAppSelector(state => state.dashboardState.myLevelData);
   const refCode = useAppSelector(state => state.userState.refCode);
   const dispatch = useAppDispatch();
-
   useLayoutEffect(() => {
     dispatch(getReferrals());
   }, []);
@@ -38,11 +81,9 @@ const ShareModal = ({ close, activeNetwork, type, social }: ShareModalProps) => 
       Number.parseFloat(`${(myLevelData.position.current / myLevelData.position.max) * 100}`)
     );
 
-  const cardRef = useRef(null);
-
   useEffect(() => {
-    if (cardRef.current) {
-      toJpeg(cardRef.current, {
+    if (cardRef) {
+      toJpeg(cardRef, {
         quality: 0.85,
       })
         .then(function (dataUrl: string) {
@@ -52,7 +93,7 @@ const ShareModal = ({ close, activeNetwork, type, social }: ShareModalProps) => 
           toast.error('oops, something went wrong!');
         });
     }
-  }, [cardRef.current]);
+  }, [cardRef]);
 
   const onSaveImage = () => {
     const link = document.createElement('a');
@@ -123,96 +164,118 @@ const ShareModal = ({ close, activeNetwork, type, social }: ShareModalProps) => 
           <Image src='/asserts/close.svg' width='40' height='40' alt='close' />
         </Box>
       </Box>
-      <Box
-        ref={cardRef}
-        sx={{
-          borderRadius: '10px',
-          padding: '50px',
-          position: 'relative',
-          overflow: 'hidden',
-          background: '#121317',
-          display: 'flex',
-          alignItems: 'center',
-        }}
-      >
+      {myLevelData ? (
         <Box
+          ref={setCardRef}
           sx={{
+            borderRadius: '10px',
+            padding: '50px',
+            position: 'relative',
+            overflow: 'hidden',
+            background: '#121317',
             display: 'flex',
-            flexDirection: 'column',
-            width: '50%',
-            alignItems: 'flex-start',
-            gap: '47px',
-            flex: '1 0 50%',
+            alignItems: 'center',
           }}
         >
-          <div
-            style={{
-              position: 'absolute',
-              width: '650px',
-              height: '360px',
-              right: '0',
-              bottom: '0',
-              background: 'rgba(83, 231, 200, 0.40)',
-              filter: 'blur(150px)',
-              transform: 'translateX(50%)',
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              width: '50%',
+              alignItems: 'flex-start',
+              gap: '47px',
+              flex: '1 0 50%',
             }}
-          />
-          <div
-            style={{
-              position: 'absolute',
-              width: '350px',
-              height: '660px',
-              opacity: '0.4',
-              left: '50%',
-              top: '70%',
-              background: '#04CBFD',
-              filter: 'blur(250px)',
-              transform: 'translateX(-50%)',
-            }}
-          />
-          {type === 'stats' && (
-            <Image src={CardBg} style={{ position: 'absolute', right: 0, bottom: 0 }} alt='bg' />
-          )}
-          <Box sx={{ gap: '24px', display: 'flex', alignItems: 'center' }}>
-            <Image src={RubyScoreImage} alt='rubyscore' width='156' />
-            <span
+          >
+            <div
               style={{
-                display: 'inline-block',
-                height: '16px',
-                width: '2px',
-                borderRadius: '1px',
-                background: 'linear-gradient(90deg, #92FE9D 0%, #00C9FF 100%, #00C9FF 100%)',
+                position: 'absolute',
+                width: '650px',
+                height: '360px',
+                right: '0',
+                bottom: '0',
+                background: 'rgba(83, 231, 200, 0.40)',
+                filter: 'blur(150px)',
+                transform: 'translateX(50%)',
               }}
             />
-          </Box>
-          <Box>
-            <p className='share-card-Michroma-fw-400-fs-16' style={{ margin: 0 }}>
-              CURRENT RANK
-            </p>
-            <p className='share-card-Montserrat-Alt-fw-600-fs-72' style={{ margin: 0, color: '#92FD9D' }}>
-              #{myLevelData?.position.current}
-            </p>
-          </Box>
-          <Box>
-            <p className='share-card-Montserrat-Alt-fw-600-fs-32' style={{ margin: 0 }}>
-              TOP <span style={{ color: '#92FD9D' }}>{percent}%</span>
-            </p>
-            {myLevelData?.position.max && (
-              <p className='share-card-Montserrat-Alt-fw-600-fs-12' style={{ margin: 0 }}>
-                Wallet is better than{' '}
-                <span style={{ fontWeight: '700', color: '#92FD9D' }}>
-                  {myLevelData?.position.max - myLevelData?.position.current}{' '}
-                </span>
-                of {myLevelData?.position.max}
-              </p>
+            <div
+              style={{
+                position: 'absolute',
+                width: '350px',
+                height: '660px',
+                opacity: '0.4',
+                left: '50%',
+                top: '70%',
+                background: '#04CBFD',
+                filter: 'blur(250px)',
+                transform: 'translateX(-50%)',
+              }}
+            />
+            {type === 'stats' && (
+              <Image src={CardBg} style={{ position: 'absolute', right: 0, bottom: 0 }} alt='bg' />
             )}
+            <Box sx={{ gap: '24px', display: 'flex', alignItems: 'center' }}>
+              <Image src={RubyScoreImage} alt='rubyscore' width='156' />
+              <span
+                style={{
+                  display: 'inline-block',
+                  height: '16px',
+                  width: '2px',
+                  borderRadius: '1px',
+                  background: 'linear-gradient(90deg, #92FE9D 0%, #00C9FF 100%, #00C9FF 100%)',
+                }}
+              />
+              <Box
+                className='Body-Inter-fw-700-fs-16'
+                sx={{ display: 'flex', gap: '12px', alignItems: 'center' }}
+              >
+                <Image
+                  src={networkName[activeNetwork as keyof typeof networkName]?.src}
+                  width={30}
+                  height={30}
+                  alt='network'
+                />
+                {networkName[activeNetwork as keyof typeof networkName]?.title}
+              </Box>
+            </Box>
+            <Box>
+              <p className='share-card-Michroma-fw-400-fs-16' style={{ margin: 0 }}>
+                CURRENT RANK
+              </p>
+              <p className='share-card-Montserrat-Alt-fw-600-fs-72' style={{ margin: 0, color: '#92FD9D' }}>
+                #{new Intl.NumberFormat().format(myLevelData?.position.current)}
+              </p>
+            </Box>
+            <Box>
+              <p className='share-card-Montserrat-Alt-fw-600-fs-32' style={{ margin: 0 }}>
+                TOP <span style={{ color: '#92FD9D' }}>{percent}%</span>
+              </p>
+              {myLevelData?.position.max && (
+                <p className='share-card-Montserrat-Alt-fw-600-fs-12' style={{ margin: 0 }}>
+                  Wallet is better than{' '}
+                  <span style={{ fontWeight: '700', color: '#92FD9D' }}>
+                    {new Intl.NumberFormat().format(
+                      myLevelData?.position.max - myLevelData?.position.current
+                    )}{' '}
+                  </span>
+                  of {new Intl.NumberFormat().format(myLevelData?.position.max)}
+                </p>
+              )}
+            </Box>
           </Box>
+          {type === 'achievements' && <AchievementCard />}
         </Box>
-        {type === 'achievements' && <AchievementCard />}
-      </Box>
+      ) : (
+        <Skeleton variant='rounded' width='694px' height='360px' />
+      )}
       <Box sx={{ display: 'flex', gap: '20px' }}>
-        {image ? getShareButton() : <Skeleton variant='rounded' width='50%' height='54px' />}
-        {image ? (
+        {image && refCode && myLevelData ? (
+          getShareButton()
+        ) : (
+          <Skeleton variant='rounded' width='50%' height='54px' />
+        )}
+        {image && refCode && myLevelData ? (
           <ModalButton onClick={onSaveImage}>Save Image</ModalButton>
         ) : (
           <Skeleton variant='rounded' width='50%' height='54px' />
@@ -245,7 +308,9 @@ interface ShareModalWrapperProps {
 const ShareModalWrapper = ({ open, onClose, activeNetwork, type, social }: ShareModalWrapperProps) => {
   return (
     <Modal open={open} onClose={onClose} sx={{ backdropFilter: 'blur(6px)' }}>
-      <ShareModal close={onClose} activeNetwork={activeNetwork} type={type} social={social} />
+      <>
+        <ShareModal close={onClose} activeNetwork={activeNetwork} type={type} social={social} />
+      </>
     </Modal>
   );
 };
