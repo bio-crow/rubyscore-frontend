@@ -265,6 +265,17 @@ const ShareModal = ({ close, activeNetwork, type, social }: ShareModalProps) => 
             </Box>
           </Box>
           {type === 'achievements' && <AchievementCard />}
+          <Box
+            className='Body-Lato-fw-500-fs-12-h-24'
+            style={{
+              position: 'absolute',
+              right: '20px',
+              bottom: '10px',
+              color: 'rgba(245, 247, 243, 0.50)',
+            }}
+          >
+            {new Date().toUTCString()}
+          </Box>
         </Box>
       ) : (
         <Skeleton variant='rounded' width='694px' height='360px' />
