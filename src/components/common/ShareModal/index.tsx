@@ -42,7 +42,9 @@ const ShareModal = ({ close, activeNetwork, type, social }: ShareModalProps) => 
 
   useEffect(() => {
     if (cardRef.current) {
-      toJpeg(cardRef.current)
+      toJpeg(cardRef.current, {
+        quality: 0.85,
+      })
         .then(function (dataUrl: string) {
           setImage(dataUrl);
         })

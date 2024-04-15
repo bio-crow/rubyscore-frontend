@@ -3,7 +3,8 @@ import { apiPrivateAxios } from './axiosConfig';
 
 export const uploadImage = async (image: string) => {
   try {
-    return apiPrivateAxios.post<{ link: string; id: string }>('/shares/upload', { image });
+    const res = await apiPrivateAxios.post<{ link: string; id: string }>('/shares/upload', { image });
+    return res;
   } catch (error) {
     toast.error('Failed to upload an image');
     return null;
