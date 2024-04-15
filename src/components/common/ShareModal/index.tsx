@@ -15,7 +15,7 @@ import TelegramIcon from 'public/asserts/social/telegram(white).svg';
 import XIcon from 'public/asserts/social/x(white).svg';
 import { uploadImage } from '@/core/api/shares.api';
 import ZkSyncImage from 'public/asserts/shareIcons/zk_sync.png';
-import LineaImage from 'public/asserts/shareIcons/Linea.png';
+import LineaImage from 'public/asserts/shareIcons/linea.png';
 import BaseImage from 'public/asserts/shareIcons/base.png';
 import zkEVMImage from 'public/asserts/shareIcons/zk_evm.png';
 import ScrollImage from 'public/asserts/shareIcons/scroll.png';
