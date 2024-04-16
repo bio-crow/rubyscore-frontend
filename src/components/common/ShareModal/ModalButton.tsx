@@ -10,13 +10,13 @@ const ModalButton = ({ children, ...props }: ModalButtonProps) => {
     <Button
       {...props}
       variant='outlined'
+      className='Body-Inter-fw-700-fs-16'
       sx={{
         padding: '12px 0px',
         flexGrow: 1,
         flexBasis: '50%',
         border: '1px solid rgba(245, 247, 243, 0.50)',
         borderRadius: '10px',
-        fontFamily: 'Lato',
         fontSize: '16px',
         fontWeight: '700',
         textTransform: 'none',
