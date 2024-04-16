@@ -455,6 +455,18 @@ export const transformApiChartInfoResponse = (data: any): IChartDot[] => {
     };
   });
 };
+export const achievementCardKeys = [
+  'Amount on Balance',
+  'Transactions',
+  'WITH UNIQUE CONTRACTS',
+  'ON DIFFERENT DAYS',
+  'ON DIFFERENT WEEKS',
+  'ON DIFFERENT MONTHS',
+  'Transaction Volume',
+  'Number Of Transactions',
+  'Gas Spent',
+];
+
 export const prepareUserGradationToAchievementsCards = (data: IUserGradation): IAchievementCard[] => {
   const result: IAchievementCard[] = [
     {

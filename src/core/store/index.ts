@@ -6,6 +6,7 @@ import leaderboardReducer from '@/core/state/leaderboard.state';
 import dashboardReducer from '@/core/state/dashboard.state';
 import taskReducer from '@/core/state/task.state';
 import attestationReducer from '@/core/state/attestation.state';
+import shareModalReducer from '@/core/state/shareModal.state';
 export const store = configureStore({
   reducer: {
     authState: authReducer,
@@ -14,6 +15,7 @@ export const store = configureStore({
     dashboardState: dashboardReducer,
     taskState: taskReducer,
     attestationState: attestationReducer,
+    shareModalState: shareModalReducer,
   },
 });
 export type RootState = ReturnType<typeof store.getState>;
