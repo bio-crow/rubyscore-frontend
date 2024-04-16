@@ -14,14 +14,14 @@ import { ShareModalSocial, ShareModalType } from '@/core/state/shareModal.state'
 import TelegramIcon from 'public/asserts/social/telegram(white).svg';
 import XIcon from 'public/asserts/social/x(white).svg';
 import { uploadImage } from '@/core/api/shares.api';
-import ZkSyncImage from 'public/asserts/shareIcons/zk_sync.png';
-import LineaImage from 'public/asserts/shareIcons/linea.png';
-import BaseImage from 'public/asserts/shareIcons/base.png';
-import zkEVMImage from 'public/asserts/shareIcons/zk_evm.png';
-import ScrollImage from 'public/asserts/shareIcons/scroll.png';
-import MantaImage from 'public/asserts/shareIcons/manta.png';
-import BlastImage from 'public/asserts/shareIcons/blast.png';
-import ZoraImage from 'public/asserts/shareIcons/zora.png';
+import ZkSyncImage from 'public/asserts/net/zkSync.svg';
+import LineaImage from 'public/asserts/net/Linea.svg';
+import BaseImage from 'public/asserts/net/Base.svg';
+import zkEVMImage from 'public/asserts/net/zkEvm.svg';
+import ScrollImage from 'public/asserts/net/Scroll.svg';
+import MantaImage from 'public/asserts/net/manta.svg';
+import BlastImage from 'public/asserts/net/blast.svg';
+import ZoraImage from 'public/asserts/net/Zora.svg';
 
 const networkName = {
   zk_era: {
