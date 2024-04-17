@@ -62,10 +62,6 @@ export interface IScoreListResponse {
       score: number;
       level: number;
     };
-    zora: {
-      score: number;
-      level: number;
-    };
     zk_evm: {
       score: number;
       level: number;
@@ -83,6 +79,18 @@ export interface IScoreListResponse {
       level: number;
     };
     blast: {
+      score: number;
+      level: number;
+    };
+    zora: {
+      score: number;
+      level: number;
+    };
+    // taiko: {
+    //   score: number;
+    //   level: number;
+    // };
+    mantle: {
       score: number;
       level: number;
     };
