@@ -5,20 +5,18 @@ import { IClaimPayload } from '@/core/types';
 import { readContract } from '@wagmi/core';
 import { toast } from 'react-toastify';
 import { parseEther } from 'viem';
-import { testContracts } from '@/providers/testChains';
-import { prodContracts } from '@/providers/prodChains';
-const appNet = process.env.NEXT_PUBLIC_IS_PROD === 'true' ? prodContracts.app : testContracts.app;
+import { networkContracts } from '@/providers/networkChains';
 const baseConfig = {
-  address: appNet.contract,
+  address: networkContracts.app.contract,
   abi: abiIXProjectSBT,
-  chainId: appNet.chainId,
+  chainId: networkContracts.app.chainId,
 };
 export const wagmiClaimName = async (data: IClaimPayload): Promise<any> => {
   const action = async ({ account, name, payable, price }: IClaimPayload) => {
     const { chain, chains } = await getNetwork();
-    if (chain && chain.id !== appNet.chainId) {
+    if (chain && chain.id !== networkContracts.app.chainId) {
       await switchNetwork({
-        chainId: appNet.chainId,
+        chainId: networkContracts.app.chainId,
       });
     }
     let config: any = {

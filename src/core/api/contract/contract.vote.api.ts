@@ -2,18 +2,15 @@ import { getNetwork, switchNetwork, waitForTransaction, writeContract } from '@w
 import { getVoteBaseContractConfig } from '@/utils/helpers';
 
 import { IVotePayload } from '@/core/types';
-import { prodVoteContracts } from '@/providers/prodChains';
-import { testVoteContracts } from '@/providers/testChains';
-import { abiIXProjectSBT } from '@/constants/abiIXProjectSBT';
+import { networkVoteContracts } from '@/providers/networkChains';
 import { abiVote } from '@/constants/abiVote';
 import { toast } from 'react-toastify';
 import { parseEther } from 'viem';
 import { wagmiConfig } from '@/providers/walletConfig';
-const contractInfo = process.env.NEXT_PUBLIC_IS_PROD === 'true' ? prodVoteContracts : testVoteContracts;
 export const wagmiVote = async (data: IVotePayload): Promise<any> => {
   const action = async (data: IVotePayload) => {
     const { project, account } = data;
-    const baseConfig = getVoteBaseContractConfig(project, contractInfo);
+    const baseConfig = getVoteBaseContractConfig(project, networkVoteContracts);
     const { chain, chains } = await getNetwork();
     if (chain && chain.id !== baseConfig.chainId) {
       await switchNetwork({

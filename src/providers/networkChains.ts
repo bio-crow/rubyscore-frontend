@@ -1,5 +1,5 @@
 import { Chain } from '@rainbow-me/rainbowkit';
-export const prodChains: Chain[] = [
+export const networkChains: Chain[] = [
   {
     id: 10,
     name: 'Optimism',
@@ -226,7 +226,7 @@ export const prodChains: Chain[] = [
     testnet: false,
   },
 ];
-export const prodContracts = {
+export const networkContracts = {
   app: { contract: '0x009dbfee9e155766af434ed1652ca3769b05e76f', chainId: 10 },
   projectAchievements: { contract: '0xB9cC0Bb020cF55197C4C3d826AC87CAdba51f272', chainId: 10 },
   base: { contract: '0xbDB018e21AD1e5756853fe008793a474d329991b', chainId: 8453 },
@@ -238,7 +238,7 @@ export const prodContracts = {
   blast: { contract: '0x009DBFEe9E155766AF434ED1652CA3769B05E76f', chainId: 81457 },
   zora: { contract: '0xbDB018e21AD1e5756853fe008793a474d329991b', chainId: 7777777 },
 };
-export const prodVoteContracts = {
+export const networkVoteContracts = {
   base: { contract: '0xe10Add2ad591A7AC3CA46788a06290De017b9fB4', chainId: 8453 },
   linea: { contract: '0xe10Add2ad591A7AC3CA46788a06290De017b9fB4', chainId: 59144 },
   zkEVM: { contract: '0xe10Add2ad591A7AC3CA46788a06290De017b9fB4', chainId: 1101 },
