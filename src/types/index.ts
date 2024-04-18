@@ -90,6 +90,8 @@ export interface IChartDot {
   name: string;
   shortName: string;
   uv: number;
+  uvString?: string;
+  cumulative?: string;
 }
 export interface ILevelInfo {
   level: number;

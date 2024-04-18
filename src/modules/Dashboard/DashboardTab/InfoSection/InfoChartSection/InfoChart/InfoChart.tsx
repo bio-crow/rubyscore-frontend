@@ -149,8 +149,8 @@ const CustomTooltip = (props: any) => {
           flexDirection: 'column',
         }}
       >
-        <Box>{new Date(payload[0].payload.name * 1000).toLocaleDateString()}</Box>
-        <Box>{`${axisLabel.y}:${payload[0].value}`}</Box>
+        <Box>{new Date(payload[0]['payload'].name * 1000).toLocaleDateString()}</Box>
+        <Box>{`${axisLabel.y}: ${payload[0]['payload'].uvString}`}</Box>
       </Box>
     );
   }
