@@ -147,20 +147,6 @@ const ScoreSection: FC<Props> = ({
       lvl: userScoreList['zora']?.level,
       points: userScoreList['zora']?.score,
     },
-    // {
-    //   index: 'taiko',
-    //   title: 'Taiko',
-    //   icon: networkStaticData['taiko'].icon,
-    //   lvl: userScoreList['taiko']?.level,
-    //   points: userScoreList['taiko']?.score,
-    // },
-    {
-      index: 'mantle',
-      title: 'Mantle',
-      icon: networkStaticData['mantle'].icon,
-      lvl: userScoreList['mantle']?.level,
-      points: userScoreList['mantle']?.score,
-    },
   ];
   const preparedNetworks = networks
     ? getTwoLinesNetworksData(networks, swiperRef?.params?.slidesPerView)

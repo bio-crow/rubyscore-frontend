@@ -10,8 +10,6 @@ export const networkStaticData: {
   manta: { icon: string };
   blast: { icon: string };
   zora: { icon: string };
-  // taiko: { icon: string };
-  mantle: { icon: string };
 } = {
   zk_era: {
     icon: '/asserts/net/zkSync.svg',
@@ -39,12 +37,6 @@ export const networkStaticData: {
   },
   zora: {
     icon: '/asserts/net/Zora.svg',
-  },
-  // taiko: {
-  //   icon: '/asserts/net/taiko.svg',
-  // },
-  mantle: {
-    icon: '/asserts/net/mantle.svg',
   },
 };
 export const myLevelIcons = {
@@ -156,30 +148,6 @@ export const myLevelIcons = {
     '/asserts/box/zora/zora9.png',
     '/asserts/box/zora/zora10.png',
   ],
-  taiko: [
-    '/asserts/box/taiko/taiko1.png',
-    '/asserts/box/taiko/taiko2.png',
-    '/asserts/box/taiko/taiko3.png',
-    '/asserts/box/taiko/taiko4.png',
-    '/asserts/box/taiko/taiko5.png',
-    '/asserts/box/taiko/taiko6.png',
-    '/asserts/box/taiko/taiko7.png',
-    '/asserts/box/taiko/taiko8.png',
-    '/asserts/box/taiko/taiko9.png',
-    '/asserts/box/taiko/taiko10.png',
-  ],
-  mantle: [
-    '/asserts/box/mantle/mantle1.png',
-    '/asserts/box/mantle/mantle2.png',
-    '/asserts/box/mantle/mantle3.png',
-    '/asserts/box/mantle/mantle4.png',
-    '/asserts/box/mantle/mantle5.png',
-    '/asserts/box/mantle/mantle6.png',
-    '/asserts/box/mantle/mantle7.png',
-    '/asserts/box/mantle/mantle8.png',
-    '/asserts/box/mantle/mantle9.png',
-    '/asserts/box/mantle/mantle10.png',
-  ],
 };
 export const dashboardPanelTabs: { index: DashboardTabIndexType; label: string }[] = [
   {
@@ -213,14 +181,6 @@ export const dashboardPanelTabs: { index: DashboardTabIndexType; label: string }
   {
     index: 'zora',
     label: 'Zora',
-  },
-  // {
-  //   index: 'taiko',
-  //   label: 'Taiko',
-  // },
-  {
-    index: 'mantle',
-    label: 'Mantle',
   },
 ];
 export const axisLabelMap = {

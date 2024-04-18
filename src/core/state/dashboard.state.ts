@@ -50,8 +50,6 @@ const initialState: IDashboardState = {
     manta: { count: null, is_ok: true },
     blast: { count: null, is_ok: true },
     zora: { count: null, is_ok: true },
-    // taiko: { count: null, is_ok: true },
-    mantle: { count: null, is_ok: true },
   },
   dashboardTabsVoteInfoLoading: null,
 };

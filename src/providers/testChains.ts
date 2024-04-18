@@ -1,5 +1,5 @@
 import { Chain } from '@rainbow-me/rainbowkit';
-import { prodContracts, prodVoteContracts } from '@/providers/prodChains';
+import { prodVoteContracts } from '@/providers/prodChains';
 export const testChains: Chain[] = [
   {
     id: 80001,
@@ -47,6 +47,31 @@ export const testChains: Chain[] = [
       default: {
         name: 'Base Goerli Testnet',
         url: 'https://goerli.basescan.org',
+      },
+    },
+    testnet: false,
+  },
+  {
+    id: 999,
+    name: 'Zora Goerli',
+    network: 'Zora Goerli',
+    nativeCurrency: {
+      decimals: 18,
+      name: 'Zora Goerli',
+      symbol: 'GöETH',
+    },
+    rpcUrls: {
+      public: {
+        http: ['https://testnet.rpc.zora.energy'],
+      },
+      default: {
+        http: ['https://testnet.rpc.zora.energy'],
+      },
+    },
+    blockExplorers: {
+      default: {
+        name: 'Zora Goerli',
+        url: 'https://testnet.explorer.zora.energy',
       },
     },
     testnet: false,
@@ -226,56 +251,6 @@ export const testChains: Chain[] = [
     },
     testnet: false,
   },
-  // {
-  //   id: 167008,
-  //   name: 'Taiko Testnet',
-  //   network: 'Taiko Testnet',
-  //   nativeCurrency: {
-  //     decimals: 18,
-  //     name: 'Taiko Testnet',
-  //     symbol: 'ETH',
-  //   },
-  //   rpcUrls: {
-  //     public: {
-  //       http: ['https://taiko-katla.blockpi.network/v1/rpc/public'],
-  //     },
-  //     default: {
-  //       http: ['https://taiko-katla.blockpi.network/v1/rpc/public'],
-  //     },
-  //   },
-  //   blockExplorers: {
-  //     default: {
-  //       name: 'Taiko Testnet',
-  //       url: 'https://explorer.katla.taiko.xyz\n',
-  //     },
-  //   },
-  //   testnet: false,
-  // },
-  {
-    id: 5000,
-    name: 'Mantle Mainnet',
-    network: 'Mantle Mainnet',
-    nativeCurrency: {
-      decimals: 18,
-      name: 'Mantle Mainnet',
-      symbol: 'MNT',
-    },
-    rpcUrls: {
-      public: {
-        http: ['https://mantle-rpc.publicnode.com'],
-      },
-      default: {
-        http: ['https://mantle-rpc.publicnode.com'],
-      },
-    },
-    blockExplorers: {
-      default: {
-        name: 'Mantle Mainnet',
-        url: 'https://explorer.mantle.xyz',
-      },
-    },
-    testnet: false,
-  },
 ];
 export const testContracts = {
   app: { contract: '0x37C3837a0C37C002894BB035f5dD73933523B66d', chainId: 80001 },
@@ -287,9 +262,7 @@ export const testContracts = {
   scroll: { contract: '0x81C55bbA5d5D05a0C02f4B561B560194f34a6D07', chainId: 534351 },
   manta: { contract: '0xbDB018e21AD1e5756853fe008793a474d329991b', chainId: 169 },
   blast: { contract: '0x2A1000293467a221F5d4cA98F4b7912c4c9c22b3', chainId: 168587773 },
-  zora: prodContracts['zora'],
-  // taiko: { contract: '', chainId: 167008 },
-  mantle: prodContracts['mantle'],
+  zora: { contract: '0xbDB018e21AD1e5756853fe008793a474d329991b', chainId: 7777777 },
 };
 export const testVoteContracts = prodVoteContracts;
 export const testAttestationContracts = {
