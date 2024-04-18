@@ -9,6 +9,7 @@ import { ChartIndexType, DashboardTabIndexType, IChartDot } from '@/types/index'
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { getDashboardChartData, getUserTransactionsDates } from '@/core/thunk/dashboard.thunk';
 import { axisLabelMap } from '@/constants/index';
+import { getReadableChartData } from '@/utils/helpers';
 const panelTabs: { index: ChartIndexType; label: string }[] = [
   {
     index: 'transactions',
@@ -67,12 +68,10 @@ const TransactionsSection: FC<Props> = ({ activeTab }) => {
   useEffect(() => {
     let cumulativeSum = 0;
     const updatedChartLineInfo = chartData.map(chart => {
-      let chartRegex = /\B(?=(\d{3})+(?!\d))/g;
       cumulativeSum += chart.uv;
       return {
         ...chart,
-        // uvString: chart.uv.toString().replace(chartRegex, ' '),
-        cumulative: cumulativeSum.toString().replace(chartRegex, ' '),
+        cumulative: getReadableChartData(cumulativeSum),
         infoLabel: activeChartTab.index,
       };
     });

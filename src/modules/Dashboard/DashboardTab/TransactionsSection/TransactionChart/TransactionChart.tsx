@@ -128,7 +128,7 @@ const CustomTooltip = (props: any) => {
       <Box>
         {`${payload[0]['payload'].infoLabel}: ${payload[0]['payload']['uvString']}`}
         <br />
-        {`${Object.keys(payload[0]['payload'])[3]}: ${payload[0]['payload']['cumulative']}`}
+        {`${Object.keys(payload[0]['payload'])[4]}: ${payload[0]['payload']['cumulative']}`}
       </Box>
     );
   }
