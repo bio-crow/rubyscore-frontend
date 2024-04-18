@@ -22,6 +22,7 @@ import ScrollImage from 'public/asserts/net/Scroll.svg';
 import MantaImage from 'public/asserts/net/manta.svg';
 import BlastImage from 'public/asserts/net/blast.svg';
 import ZoraImage from 'public/asserts/net/Zora.svg';
+import MantleImage from 'public/asserts/net/mantle.svg';
 
 const networkName = {
   zk_era: {
@@ -55,6 +56,10 @@ const networkName = {
   zora: {
     title: 'Zora',
     src: ZoraImage,
+  },
+  mantle: {
+    title: 'Mantle',
+    src: MantleImage,
   },
 };
 
