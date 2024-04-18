@@ -23,8 +23,10 @@ import {
   TooltipAchievementsWallet,
   TooltipAchievementsWeeks,
 } from '@/utils/tooltipsContent';
-import { track } from '@vercel/analytics';
 
+export const transformDataRegex = /\B(?=(\d{3})+(?!\d))/g;
+export const getReadableChartData = (number: number): string =>
+  Math.floor(number).toString().replace(transformDataRegex, ' ');
 export const copyToClickBoard = (text: string | undefined, message: string = 'Copied to clipboard') => {
   toast(message, { position: 'bottom-center' });
   text && copy(text);
@@ -51,51 +53,61 @@ export const transformApiTransactionResponse = (data: IDashboardTransactionsResp
       name: '1',
       shortName: '1',
       uv: data.result.tx1,
+      uvString: getReadableChartData(data.result.tx1),
     },
     {
       name: '2<5',
       shortName: '2<5',
       uv: data.result.tx2_5,
+      uvString: getReadableChartData(data.result.tx2_5),
     },
     {
       name: '6<10',
       shortName: '6<10',
       uv: data.result.tx6_10,
+      uvString: getReadableChartData(data.result.tx6_10),
     },
     {
       name: '11<20',
       shortName: '11<20',
       uv: data.result.tx11_20,
+      uvString: getReadableChartData(data.result.tx11_20),
     },
     {
       name: '21<30',
       shortName: '21<30',
       uv: data.result.tx21_30,
+      uvString: getReadableChartData(data.result.tx21_30),
     },
     {
       name: '31<50',
       shortName: '31<50',
       uv: data.result.tx31_50,
+      uvString: getReadableChartData(data.result.tx31_50),
     },
     {
       name: '51<100',
       shortName: '51<100',
       uv: data.result.tx51_100,
+      uvString: getReadableChartData(data.result.tx51_100),
     },
     {
       name: '101<200',
       shortName: '101<200',
       uv: data.result.tx101_200,
+      uvString: getReadableChartData(data.result.tx101_200),
     },
     {
       name: '201<500',
       shortName: '201<500',
       uv: data.result.tx201_500,
+      uvString: getReadableChartData(data.result.tx201_500),
     },
     {
       name: '501<1000',
       shortName: '501<1000',
       uv: data.result.tx501_1000,
+      uvString: getReadableChartData(data.result.tx501_1000),
     },
   ];
 
@@ -107,31 +119,37 @@ export const transformApiContractsResponse = (data: IDashboardContractsResponse)
       name: '1',
       shortName: '1',
       uv: data.result.contracts1,
+      uvString: getReadableChartData(data.result.contracts1),
     },
     {
       name: '2<5',
       shortName: '2<5',
       uv: data.result.contracts2_5,
+      uvString: getReadableChartData(data.result.contracts2_5),
     },
     {
       name: '6<10',
       shortName: '6<10',
       uv: data.result.contracts6_10,
+      uvString: getReadableChartData(data.result.contracts6_10),
     },
     {
       name: '11<25',
       shortName: '11<25',
       uv: data.result.contracts11_25,
+      uvString: getReadableChartData(data.result.contracts11_25),
     },
     {
       name: '26<50',
       shortName: '26<50',
       uv: data.result.contracts26_50,
+      uvString: getReadableChartData(data.result.contracts26_50),
     },
     {
       name: '51<100',
       shortName: '51<100',
       uv: data.result.contracts51_100,
+      uvString: getReadableChartData(data.result.contracts51_100),
     },
   ];
   return result;
@@ -142,31 +160,37 @@ export const transformApiDaysResponse = (data: IDashboardDaysResponse): IChartDo
       name: '1',
       shortName: '1',
       uv: data.result.days1,
+      uvString: getReadableChartData(data.result.days1),
     },
     {
       name: '2<5',
       shortName: '2<5',
       uv: data.result.days2_5,
+      uvString: getReadableChartData(data.result.days2_5),
     },
     {
       name: '6<10',
       shortName: '6<10',
       uv: data.result.days6_10,
+      uvString: getReadableChartData(data.result.days6_10),
     },
     {
       name: '11<25',
       shortName: '11<25',
       uv: data.result.days11_25,
+      uvString: getReadableChartData(data.result.days11_25),
     },
     {
       name: '26<50',
       shortName: '26<50',
       uv: data.result.days26_50,
+      uvString: getReadableChartData(data.result.days26_50),
     },
     {
       name: '51<100',
       shortName: '51<100',
       uv: data.result.days51_100,
+      uvString: getReadableChartData(data.result.days51_100),
     },
   ];
   return result;
@@ -177,51 +201,61 @@ export const transformApiWeeksResponse = (data: IDashboardWeeksResponse): IChart
       name: '1',
       shortName: '1',
       uv: data.result.weeks1,
+      uvString: getReadableChartData(data.result.weeks1),
     },
     {
       name: '2',
       shortName: '2',
       uv: data.result.weeks2,
+      uvString: getReadableChartData(data.result.weeks2),
     },
     {
       name: '3',
       shortName: '3',
       uv: data.result.weeks3,
+      uvString: getReadableChartData(data.result.weeks3),
     },
     {
       name: '4<5',
       shortName: '4<5',
       uv: data.result.weeks4_5,
+      uvString: getReadableChartData(data.result.weeks4_5),
     },
     {
       name: '6<7',
       shortName: '6<7',
       uv: data.result.weeks6_7,
+      uvString: getReadableChartData(data.result.weeks6_7),
     },
     {
       name: '8<10',
       shortName: '8<10',
       uv: data.result.weeks8_10,
+      uvString: getReadableChartData(data.result.weeks8_10),
     },
     {
       name: '11<15',
       shortName: '11<15',
       uv: data.result.weeks11_15,
+      uvString: getReadableChartData(data.result.weeks11_15),
     },
     {
       name: '16<20',
       shortName: '16<20',
       uv: data.result.weeks16_20,
+      uvString: getReadableChartData(data.result.weeks16_20),
     },
     {
       name: '21<30',
       shortName: '21<30',
       uv: data.result.weeks21_30,
+      uvString: getReadableChartData(data.result.weeks21_30),
     },
     {
       name: '31<50',
       shortName: '31<50',
       uv: data.result.weeks31_50,
+      uvString: getReadableChartData(data.result.weeks31_50),
     },
   ];
   return result;
@@ -232,61 +266,73 @@ export const transformApiMonthsResponse = (data: IDashboardMonthsResponse): ICha
       name: '1',
       shortName: '1',
       uv: data.result.months1,
+      uvString: getReadableChartData(data.result.months1),
     },
     {
       name: '2',
       shortName: '2',
       uv: data.result.months2,
+      uvString: getReadableChartData(data.result.months2),
     },
     {
       name: '3',
       shortName: '3',
       uv: data.result.months3,
+      uvString: getReadableChartData(data.result.months3),
     },
     {
       name: '4',
       shortName: '4',
       uv: data.result.months4,
+      uvString: getReadableChartData(data.result.months4),
     },
     {
       name: '5',
       shortName: '5',
       uv: data.result.months5,
+      uvString: getReadableChartData(data.result.months5),
     },
     {
       name: '6',
       shortName: '6',
       uv: data.result.months6,
+      uvString: getReadableChartData(data.result.months6),
     },
     {
       name: '7',
       shortName: '7',
       uv: data.result.months7,
+      uvString: getReadableChartData(data.result.months7),
     },
     {
       name: '8',
       shortName: '8',
       uv: data.result.months8,
+      uvString: getReadableChartData(data.result.months8),
     },
     {
       name: '9',
       shortName: '9',
       uv: data.result.months9,
+      uvString: getReadableChartData(data.result.months9),
     },
     {
       name: '10',
       shortName: '10',
       uv: data.result.months10,
+      uvString: getReadableChartData(data.result.months10),
     },
     {
       name: '11',
       shortName: '11',
       uv: data.result.months11,
+      uvString: getReadableChartData(data.result.months11),
     },
     {
       name: '12',
       shortName: '12',
       uv: data.result.months12,
+      uvString: getReadableChartData(data.result.months12),
     },
   ];
   return result;
@@ -297,46 +343,55 @@ export const transformApiGasResponse = (data: IDashboardGasResponse): IChartDot[
       name: '1',
       shortName: '1',
       uv: data.result.gas1,
+      uvString: getReadableChartData(data.result.gas1),
     },
     {
       name: '1<3',
       shortName: '1<3',
       uv: data.result.gas1_3,
+      uvString: getReadableChartData(data.result.gas1_3),
     },
     {
       name: '3<5',
       shortName: '3<5',
       uv: data.result.gas3_5,
+      uvString: getReadableChartData(data.result.gas3_5),
     },
     {
       name: '5<10',
       shortName: '5<10',
       uv: data.result.gas5_10,
+      uvString: getReadableChartData(data.result.gas5_10),
     },
     {
       name: '10<15',
       shortName: '10<15',
       uv: data.result.gas10_15,
+      uvString: getReadableChartData(data.result.gas10_15),
     },
     {
       name: '15<25',
       shortName: '15<25',
       uv: data.result.gas15_25,
+      uvString: getReadableChartData(data.result.gas15_25),
     },
     {
       name: '25<50',
       shortName: '25<50',
       uv: data.result.gas25_50,
+      uvString: getReadableChartData(data.result.gas25_50),
     },
     {
       name: '50<100',
       shortName: '50<100',
       uv: data.result.gas50_100,
+      uvString: getReadableChartData(data.result.gas50_100),
     },
     {
       name: '100<200',
       shortName: '100<200',
       uv: data.result.gas100_200,
+      uvString: getReadableChartData(data.result.gas100_200),
     },
   ];
   return result;
@@ -347,56 +402,67 @@ export const transformApiVolumeResponse = (data: IDashboardVolumeResponse): ICha
       name: '1',
       shortName: '1',
       uv: data.result.volume1,
+      uvString: getReadableChartData(data.result.volume1),
     },
     {
       name: '1<5',
       shortName: '1<5',
       uv: data.result.volume1_5,
+      uvString: getReadableChartData(data.result.volume1_5),
     },
     {
       name: '5<10',
       shortName: '5<10',
       uv: data.result.volume5_10,
+      uvString: getReadableChartData(data.result.volume5_10),
     },
     {
       name: '10<20',
       shortName: '10<20',
       uv: data.result.volume10_20,
+      uvString: getReadableChartData(data.result.volume10_20),
     },
     {
       name: '20<50',
       shortName: '20<50',
       uv: data.result.volume20_50,
+      uvString: getReadableChartData(data.result.volume20_50),
     },
     {
       name: '50<100',
       shortName: '50<100',
       uv: data.result.volume50_100,
+      uvString: getReadableChartData(data.result.volume50_100),
     },
     {
       name: '100<500',
       shortName: '100<500',
       uv: data.result.volume100_500,
+      uvString: getReadableChartData(data.result.volume100_500),
     },
     {
       name: '500<1000',
       shortName: '500<1000',
       uv: data.result.volume500_1000,
+      uvString: getReadableChartData(data.result.volume500_1000),
     },
     {
       name: '1k<10k',
       shortName: '1k<10k',
       uv: data.result.volume1000_10000,
+      uvString: getReadableChartData(data.result.volume1000_10000),
     },
     {
       name: '10k<100k',
       shortName: '10k<100k',
       uv: data.result.volume10000_100000,
+      uvString: getReadableChartData(data.result.volume10000_100000),
     },
     {
       name: '100k<1m',
       shortName: '100k<1m',
       uv: data.result.volume100000_1000000,
+      uvString: getReadableChartData(data.result.volume100000_1000000),
     },
   ];
   return result;
@@ -407,41 +473,49 @@ export const transformApiBalanceResponse = (data: IDashboardBalanceResponse): IC
       name: '1',
       shortName: '1',
       uv: data.result.balance1,
+      uvString: getReadableChartData(data.result.balance1),
     },
     {
       name: '1<5',
       shortName: '1<5',
       uv: data.result.balance1_5,
+      uvString: getReadableChartData(data.result.balance1_5),
     },
     {
       name: '6<10',
       shortName: '6<10',
       uv: data.result.balance6_10,
+      uvString: getReadableChartData(data.result.balance6_10),
     },
     {
       name: '10<50',
       shortName: '10<50',
       uv: data.result.balance10_50,
+      uvString: getReadableChartData(data.result.balance10_50),
     },
     {
       name: '50<100',
       shortName: '50<100',
       uv: data.result.balance50_100,
+      uvString: getReadableChartData(data.result.balance50_100),
     },
     {
       name: '100<1000',
       shortName: '100<1000',
       uv: data.result.balance100_1000,
+      uvString: getReadableChartData(data.result.balance100_1000),
     },
     {
       name: '1k<10k',
       shortName: '1k<10k',
       uv: data.result.balance1000_10000,
+      uvString: getReadableChartData(data.result.balance1000_10000),
     },
     {
       name: '10k<100k',
       shortName: '10k<100k',
       uv: data.result.balance10000_100000,
+      uvString: getReadableChartData(data.result.balance10000_100000),
     },
   ];
   return result;
@@ -452,6 +526,7 @@ export const transformApiChartInfoResponse = (data: any): IChartDot[] => {
       name: dot.date,
       shortName: '',
       uv: dot.count || dot.volume || dot.tvl,
+      uvString: getReadableChartData(dot.count || dot.volume || dot.tvl),
     };
   });
 };
