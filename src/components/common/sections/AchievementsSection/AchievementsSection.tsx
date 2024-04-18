@@ -4,17 +4,12 @@ import { useCustomTheme } from '@/hooks/useCustomTheme';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import RefreshIcon from '@/components/common/Icons/RefreshIcon';
 import AchievementCard from '@/components/common/sections/AchievementsSection/AchievementCard/AchievementCard';
-import {
-  getUserGradation,
-  getUserTransactionsDates,
-  updateUserLevelInfo,
-} from '@/core/thunk/dashboard.thunk';
+import { getUserGradation } from '@/core/thunk/dashboard.thunk';
 import { useAppDispatch, useAppSelector } from '@/core/store';
-import { FC, useEffect, useState } from 'react';
-import { DashboardTabIndexType, IAchievementCard } from '@/types/index';
+import { FC } from 'react';
+import { DashboardTabIndexType } from '@/types/index';
 import { prepareUserGradationToAchievementsCards } from '@/utils/helpers';
 import { Button, CircularProgress } from '@mui/material';
-import { loadUserProjectInfo } from '@/core/thunk/user.thunk';
 import ShareModalWrapper from '../../ShareModal';
 import { setShareModalState } from '@/core/state/shareModal.state';
 import Image from 'next/image';
@@ -33,6 +28,8 @@ const AchievementsSection: FC<Props> = ({ activeTab, wallet, onRefresh }) => {
   const theme = useCustomTheme();
   const isSm = useMediaQuery(theme.breakpoints.up('sm'));
   const isLg = useMediaQuery(theme.breakpoints.up('lg'));
+  const isDashboardPage =
+    typeof window !== 'undefined' ? window.location.pathname.includes('/dashboard') : false;
   const refreshGradation = () => {
     if (wallet) {
       const data = {
@@ -87,7 +84,7 @@ const AchievementsSection: FC<Props> = ({ activeTab, wallet, onRefresh }) => {
               >
                 Refresh
               </SecondaryButton>
-              {isLg && (
+              {isDashboardPage && isLg && (
                 <>
                   <Box color={theme.palette.powderWhite} className='Body-Inter-fw-700-fs-16'>
                     Share my stats

@@ -28,7 +28,7 @@ export const wagmiVote = async (data: IVotePayload): Promise<any> => {
       abi: abiVote,
       account: account,
     };
-    if (project !== 'zk_era') {
+    if (project !== 'zk_era' && project !== 'mantle') {
       config.gas = 22000;
     } else {
       const gasEstimate = await wagmiConfig.publicClient.estimateGas({
