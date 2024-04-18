@@ -124,7 +124,13 @@ export default TransactionChart;
 const CustomTooltip = (props: any) => {
   const { active, payload, label } = props;
   if (active && payload && payload.length) {
-    return <Box>{payload[0].value}</Box>;
+    return (
+      <Box>
+        {`${payload[0]['payload'].infoLabel}: ${payload[0]['payload']['uvString']}`}
+        <br />
+        {`${Object.keys(payload[0]['payload'])[3]}: ${payload[0]['payload']['cumulative']}`}
+      </Box>
+    );
   }
 
   return null;

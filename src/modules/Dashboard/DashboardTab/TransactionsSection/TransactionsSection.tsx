@@ -5,7 +5,7 @@ import { FC, SyntheticEvent, useEffect, useState } from 'react';
 import TransactionChart from '@/modules/Dashboard/DashboardTab/TransactionsSection/TransactionChart/TransactionChart';
 import { Tab } from '@mui/material';
 import ChartTabs from '@/components/common/ui/ChartTabs/ChartTabs';
-import { ChartIndexType, DashboardTabIndexType } from '@/types/index';
+import { ChartIndexType, DashboardTabIndexType, IChartDot } from '@/types/index';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { getDashboardChartData, getUserTransactionsDates } from '@/core/thunk/dashboard.thunk';
 import { axisLabelMap } from '@/constants/index';
@@ -56,6 +56,7 @@ const TransactionsSection: FC<Props> = ({ activeTab }) => {
   const [activeChartTab, setActiveChartTab] = useState<{ index: ChartIndexType; label: string }>(
     panelTabs[0]
   );
+  const [chartLineInfo, setChartLineInfo] = useState<IChartDot[]>([]);
   const handleChange = (event: SyntheticEvent, newValue: ChartIndexType) => {
     const tab = panelTabs.find(item => item.index === newValue);
     tab && setActiveChartTab(tab);
@@ -63,6 +64,20 @@ const TransactionsSection: FC<Props> = ({ activeTab }) => {
   useEffect(() => {
     dispatch(getDashboardChartData({ projectName: activeTab.index, type: activeChartTab.index }));
   }, [activeTab, activeChartTab]);
+  useEffect(() => {
+    let cumulativeSum = 0;
+    const updatedChartLineInfo = chartData.map(chart => {
+      let chartRegex = /\B(?=(\d{3})+(?!\d))/g;
+      cumulativeSum += chart.uv;
+      return {
+        ...chart,
+        // uvString: chart.uv.toString().replace(chartRegex, ' '),
+        cumulative: cumulativeSum.toString().replace(chartRegex, ' '),
+        infoLabel: activeChartTab.index,
+      };
+    });
+    setChartLineInfo(updatedChartLineInfo);
+  }, [chartData]);
   useEffect(() => {
     if (isAuth) {
       const data = {
@@ -99,7 +114,11 @@ const TransactionsSection: FC<Props> = ({ activeTab }) => {
             <Tab key={item.index} label={item.label} {...a11yProps(item.index)} value={item.index} />
           ))}
         </ChartTabs>
-        <TransactionChart data={chartData} loading={loading} axisLabel={axisLabelMap[activeChartTab.index]} />
+        <TransactionChart
+          data={chartLineInfo}
+          loading={loading}
+          axisLabel={axisLabelMap[activeChartTab.index]}
+        />
       </Box>
     </Box>
   );
