@@ -28,38 +28,83 @@ const networkName = {
   zk_era: {
     title: 'zkSync',
     src: ZkSyncImage,
+    twitterAccount: '@zkSync',
+    hashtag: 'zkSync',
+    telegramName: function () {
+      return this.hashtag;
+    },
   },
   linea: {
     title: 'Linea',
     src: LineaImage,
+    twitterAccount: '@LineaBuild',
+    hashtag: 'Linea',
+    telegramName: function () {
+      return this.hashtag;
+    },
   },
   base: {
     title: 'Base',
     src: BaseImage,
+    twitterAccount: '@base',
+    hashtag: 'Base',
+    telegramName: function () {
+      return this.hashtag;
+    },
   },
   zk_evm: {
     title: 'zkEVM',
     src: zkEVMImage,
+    twitterAccount: '@0xPolygon',
+    hashtag: 'zkEVM',
+    telegramName: function () {
+      return this.hashtag;
+    },
   },
   scroll: {
     title: 'Scroll',
     src: ScrollImage,
+    twitterAccount: '@Scroll_ZKP',
+    hashtag: 'Scroll',
+    telegramName: function () {
+      return this.hashtag;
+    },
   },
   manta: {
     title: 'Manta',
     src: MantaImage,
+    twitterAccount: '@MantaNetwork',
+    hashtag: 'MantaNetwork',
+    telegramName: function () {
+      return 'Manta Network';
+    },
   },
   blast: {
     title: 'Blast',
     src: BlastImage,
+    twitterAccount: '@Blast_L2',
+    hashtag: 'Blast',
+    telegramName: function () {
+      return this.hashtag;
+    },
   },
   zora: {
     title: 'Zora',
     src: ZoraImage,
+    twitterAccount: '@ourZORA',
+    hashtag: 'ZORA',
+    telegramName: function () {
+      return this.hashtag;
+    },
   },
   mantle: {
     title: 'Mantle',
     src: MantleImage,
+    twitterAccount: '@0xMantle',
+    hashtag: 'Mantle',
+    telegramName: function () {
+      return this.hashtag;
+    },
   },
 };
 
@@ -114,7 +159,11 @@ const ShareModal = ({ close, activeNetwork, type, social }: ShareModalProps) => 
       setIsLoading(false);
       return;
     }
-    const url = `https://t.me/share/url?url=${window.location.origin}/dashboard?og_image=${uploadedImageLink.data.id}%26ref=${refCode}`;
+    const url = `https://t.me/share/url?text=%0a%0aHey, everybody!%0aTake a look at my achievements in ${networkName[
+      activeNetwork as keyof typeof networkName
+    ]?.telegramName()} at @Ruby_Score&url=${window.location.origin}/dashboard?og_image=${
+      uploadedImageLink.data.id
+    }%26ref=${refCode}`;
     window.open(url, '_blank');
     setIsLoading(false);
   };
@@ -126,7 +175,13 @@ const ShareModal = ({ close, activeNetwork, type, social }: ShareModalProps) => 
       setIsLoading(false);
       return;
     }
-    const url = `https://twitter.com/intent/tweet?url=${window.location.origin}/dashboard?og_image=${uploadedImageLink.data.id}%26ref=${refCode}`;
+    const url = `https://twitter.com/intent/tweet?text=Hey, everybody!%0aTake a look at my achievements in ${networkName[
+      activeNetwork as keyof typeof networkName
+    ]?.twitterAccount} at @rubyscore_io%0a%0a%23RubyScore %23${networkName[
+      activeNetwork as keyof typeof networkName
+    ]?.hashtag} %0a%0a${window.location.origin}/dashboard?og_image=${
+      uploadedImageLink.data.id
+    }%26ref=${refCode}`;
     window.open(url, '_blank');
     setIsLoading(false);
   };
