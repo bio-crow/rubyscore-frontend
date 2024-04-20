@@ -202,6 +202,11 @@ const ShareModal = ({ close, activeNetwork, type, social }: ShareModalProps) => 
       ),
     })[social as string];
 
+  const formatNumber = (num: number) => {
+    const formattedNumber = new Intl.NumberFormat('en-US').format(num);
+    return num < 9999 ? formattedNumber.replaceAll(',', '') : formattedNumber.replaceAll(',', ' ');
+  };
+
   return (
     <Box
       sx={{
@@ -304,7 +309,7 @@ const ShareModal = ({ close, activeNetwork, type, social }: ShareModalProps) => 
                 CURRENT RANK
               </p>
               <p className='share-card-Montserrat-Alt-fw-600-fs-72' style={{ margin: 0, color: '#92FD9D' }}>
-                #{new Intl.NumberFormat().format(myLevelData?.position.current)}
+                #{formatNumber(myLevelData?.position.current)}
               </p>
             </Box>
             <Box>
@@ -315,11 +320,9 @@ const ShareModal = ({ close, activeNetwork, type, social }: ShareModalProps) => 
                 <p className='share-card-Montserrat-Alt-fw-600-fs-12' style={{ margin: 0 }}>
                   Wallet is better than{' '}
                   <span style={{ fontWeight: '700', color: '#92FD9D' }}>
-                    {new Intl.NumberFormat().format(
-                      myLevelData?.position.max - myLevelData?.position.current
-                    )}{' '}
+                    {formatNumber(myLevelData?.position.max - myLevelData?.position.current)}{' '}
                   </span>
-                  of {new Intl.NumberFormat().format(myLevelData?.position.max)}
+                  of {formatNumber(myLevelData?.position.max)}
                 </p>
               )}
             </Box>
