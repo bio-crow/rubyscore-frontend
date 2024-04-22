@@ -136,10 +136,7 @@ const Section1 = () => {
               url='https://debank.com/official/RubyScore/'
             />
             <CustomSocialLink icon='/asserts/social/medium.svg' url='https://medium.com/@rubyscore.io' />
-            <CustomSocialLink
-              icon='/asserts/social/discord.svg'
-              url='https://discord.com/invite/32Jr9QSyhV'
-            />
+            <CustomSocialLink icon='/asserts/social/discord.svg' url='https://discord.gg/rubyscore' />
             <CustomSocialLink icon='/asserts/social/mail.svg' url='mailto:Partnerships@rubyscore.io' />
           </Box>
         </Box>
