@@ -126,7 +126,7 @@ const CustomTooltip = (props: any) => {
   if (active && payload && payload.length) {
     return (
       <Box>
-        {`${payload[0]['payload'].infoLabel}: ${payload[0]['payload']['uvString']}`}
+        {`wallets: ${payload[0]['payload']['uvString']}`}
         <br />
         {`${Object.keys(payload[0]['payload'])[4]}: ${payload[0]['payload']['cumulative']}`}
       </Box>

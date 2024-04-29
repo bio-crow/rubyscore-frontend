@@ -73,7 +73,6 @@ const TransactionsSection: FC<Props> = ({ activeTab }) => {
       updatedChartLineInfo.unshift({
         ...chartData[index],
         cumulative: getReadableChartData(cumulativeSum),
-        infoLabel: activeChartTab.index,
       });
     }
     setChartLineInfo(updatedChartLineInfo);
