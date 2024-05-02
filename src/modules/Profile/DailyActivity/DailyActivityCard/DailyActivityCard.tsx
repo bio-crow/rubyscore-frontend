@@ -35,14 +35,12 @@ const DailyActivityCard: FC<Props> = ({ task }) => {
       sx={{
         position: 'relative',
         width: '100%',
-        height: '260px',
       }}
     >
       <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          position: 'absolute',
           transition: '0.5s',
           gap: '20px',
           padding: '20px',
@@ -59,7 +57,7 @@ const DailyActivityCard: FC<Props> = ({ task }) => {
             display: 'flex',
             alignItems: 'center',
             gap: '10px',
-            flewWrap: 'wrap',
+            flexWrap: 'wrap',
           }}
         >
           {task.projects.map(project => (
