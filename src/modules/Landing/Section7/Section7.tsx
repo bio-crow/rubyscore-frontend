@@ -36,13 +36,14 @@ const Section7 = () => {
         sx={{
           display: 'flex',
           alignItems: 'center',
-          gap: { xs: '20px', md: '60px' },
+          gap: { xs: '10px', md: '40px' },
         }}
       >
         <CustomSocialLink icon='/asserts/social/telegram.svg' url='https://t.me/RubyScore_ann' />
         <CustomSocialLink icon='/asserts/social/twitter.svg' url='https://twitter.com/rubyscore_io' />
         <CustomSocialLink icon='/asserts/social/debank.png' url='https://debank.com/official/RubyScore' />
         <CustomSocialLink icon='/asserts/social/medium.svg' url='https://medium.com/@rubyscore.io' />
+        <CustomSocialLink icon='/asserts/social/discord.svg' url='https://discord.gg/rubyscore' />
         <CustomSocialLink icon='/asserts/social/mail.svg' url='mailto:Partnerships@rubyscore.io' />
       </Box>
     </Box>

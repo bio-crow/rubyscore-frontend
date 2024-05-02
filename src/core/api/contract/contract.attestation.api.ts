@@ -1,5 +1,4 @@
-import { prodAttestationContracts } from '@/providers/prodChains';
-import { testAttestationContracts } from '@/providers/testChains';
+import { prodAttestationContracts } from '@/providers/networkChains';
 import { getAchievementsBaseContractConfig } from '@/utils/helpers';
 import {
   getNetwork,
@@ -18,12 +17,10 @@ import { wagmiClaimPrice } from '@/core/api/contract/contract.achievements.api';
 import { IAttestationData } from '@/types/index';
 import { abiAttestationCertificate } from '@/constants/abiAttestationCertificate';
 
-const contractInfo =
-  process.env.NEXT_PUBLIC_IS_PROD === 'true' ? prodAttestationContracts : testAttestationContracts;
 export const wagmiAttestationPrice = async (params: { schemaId: string; project: string }): Promise<any> => {
   const action = async (params: { schemaId: string; project: string }) => {
     const { schemaId, project } = params;
-    const baseConfig = getAchievementsBaseContractConfig(project, contractInfo);
+    const baseConfig = getAchievementsBaseContractConfig(project, prodAttestationContracts);
     let config: any = {
       ...baseConfig,
       abi: abiAttestation,
@@ -47,7 +44,7 @@ export const wagmiClaimAttestation = async (params: IClaimAttestationPayload): P
       attestationData: { attestationParams, signature },
     } = params;
     const { chain, chains } = await getNetwork();
-    const baseConfig = getAchievementsBaseContractConfig(project, contractInfo);
+    const baseConfig = getAchievementsBaseContractConfig(project, prodAttestationContracts);
 
     if (chain && chain.id !== baseConfig.chainId) {
       await switchNetwork({

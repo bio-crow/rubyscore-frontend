@@ -10,7 +10,7 @@ const Section1 = () => {
     <Box
       sx={{
         display: 'grid',
-        gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', xlg: '1fr 210px 170px 170px 260px' },
+        gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', xlg: '1fr 150px 170px 170px 310px' },
         gap: '20px',
         gridTemplateAreas: {
           xs: "'logo' 'community' 'learn' 'more' 'social'",
@@ -102,7 +102,7 @@ const Section1 = () => {
           flexDirection: 'column',
           gap: '20px',
           gridArea: 'social',
-          maxWidth: '260px',
+          maxWidth: '310px',
           alignSelf: 'start',
         }}
       >
@@ -136,6 +136,7 @@ const Section1 = () => {
               url='https://debank.com/official/RubyScore/'
             />
             <CustomSocialLink icon='/asserts/social/medium.svg' url='https://medium.com/@rubyscore.io' />
+            <CustomSocialLink icon='/asserts/social/discord.svg' url='https://discord.gg/rubyscore' />
             <CustomSocialLink icon='/asserts/social/mail.svg' url='mailto:Partnerships@rubyscore.io' />
           </Box>
         </Box>

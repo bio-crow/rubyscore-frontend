@@ -8,12 +8,10 @@ import {
   trustWallet,
   walletConnectWallet,
 } from '@rainbow-me/rainbowkit/wallets';
-import { testChains } from '@/providers/testChains';
-import { prodChains } from '@/providers/prodChains';
-const appChains = process.env.NEXT_PUBLIC_IS_PROD === 'true' ? prodChains : testChains;
+import { networkChains } from '@/providers/networkChains';
 const defaultNets = Object.values(allDefaultChains);
 const { chains, publicClient, webSocketPublicClient } = configureChains(
-  [...defaultNets, ...appChains],
+  [...defaultNets, ...networkChains],
   [publicProvider()]
 );
 

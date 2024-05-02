@@ -1,4 +1,3 @@
-import { testContracts } from '@/providers/testChains';
 import { readContract, readContracts, switchNetwork, waitForTransaction, writeContract } from '@wagmi/core';
 import { abiAchievements } from '@/constants/abiAchievements';
 import { apiPrivateAxios } from '@/core/api/axiosConfig';
@@ -9,9 +8,7 @@ import { toast } from 'react-toastify';
 import { getAchievementsBaseContractConfig } from '@/utils/helpers';
 import { ILevelsInfo } from '@/types/index';
 import { abiIXProjectSBT } from '@/constants/abiIXProjectSBT';
-import { prodContracts } from '@/providers/prodChains';
-const contractInfo = process.env.NEXT_PUBLIC_IS_PROD === 'true' ? prodContracts : testContracts;
-const appNet = process.env.NEXT_PUBLIC_IS_PROD === 'true' ? prodContracts.app : testContracts.app;
+import { networkContracts } from '@/providers/networkChains';
 export const wagmiLevels = async (params: { wallet: string; project: string }): Promise<any> => {
   const action = async (params: { wallet: string; project: string }) => {
     const { wallet: address, project } = params;
@@ -28,7 +25,7 @@ export const wagmiLevels = async (params: { wallet: string; project: string }): 
       address,
     ];
     const ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    const baseConfig = getAchievementsBaseContractConfig(project, contractInfo);
+    const baseConfig = getAchievementsBaseContractConfig(project, networkContracts);
     let config: any = {
       ...baseConfig,
       abi: abiAchievements,
@@ -52,7 +49,7 @@ export const wagmiLevels = async (params: { wallet: string; project: string }): 
 export const wagmiClaimLevel = async (data: IClaimLevelPayload): Promise<any> => {
   const action = async ({ signature, mintParams, project, account }: IClaimLevelPayload) => {
     const { chain, chains } = await getNetwork();
-    const baseConfig = getAchievementsBaseContractConfig(project, contractInfo);
+    const baseConfig = getAchievementsBaseContractConfig(project, networkContracts);
 
     if (chain && chain.id !== baseConfig.chainId) {
       await switchNetwork({
@@ -90,7 +87,7 @@ export const fetchClaimLevelSignature = async (params: IClaimLevelSignaturePaylo
 };
 export const wagmiClaimPrice = async (project: string): Promise<any> => {
   const action = async () => {
-    const baseConfig = getAchievementsBaseContractConfig(project, contractInfo);
+    const baseConfig = getAchievementsBaseContractConfig(project, networkContracts);
     let config: any = {
       ...baseConfig,
       abi: abiAchievements,
@@ -120,7 +117,7 @@ export const wagmiInitUserDataFromContract = async (wallet: string): Promise<any
     ];
     const ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     let contracts = [];
-    Object.entries(contractInfo).forEach(item => {
+    Object.entries(networkContracts).forEach(item => {
       if (item[0] !== 'app') {
         contracts.push({
           address: item[1].contract,
@@ -132,23 +129,23 @@ export const wagmiInitUserDataFromContract = async (wallet: string): Promise<any
       }
     });
     contracts.push({
-      address: appNet.contract,
+      address: networkContracts.app.contract,
       abi: abiIXProjectSBT,
-      chainId: appNet.chainId,
+      chainId: networkContracts.app.chainId,
       functionName: 'getNameByOwner',
       args: [address],
     });
     contracts.push({
-      address: appNet.contract,
+      address: networkContracts.app.contract,
       abi: abiIXProjectSBT,
-      chainId: appNet.chainId,
+      chainId: networkContracts.app.chainId,
       functionName: 'getPremiumStatus',
       args: [address],
     });
     contracts.push({
-      address: appNet.contract,
+      address: networkContracts.app.contract,
       abi: abiIXProjectSBT,
-      chainId: appNet.chainId,
+      chainId: networkContracts.app.chainId,
       functionName: 'getPremiumPrice',
     });
     const config: any = { contracts };
