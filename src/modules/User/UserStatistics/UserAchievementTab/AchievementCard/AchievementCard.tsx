@@ -1,6 +1,6 @@
 import { Box } from '@mui/system';
-import { FC, useState } from 'react';
-import { ITask } from '@/types/index';
+import { FC, useEffect, useState } from 'react';
+import { DashboardTabIndexType, ITask } from '@/types/index';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import Image from 'next/image';
 import { networkStaticData } from '@/constants/index';
@@ -14,6 +14,17 @@ interface Props {
 const AchievementCard: FC<Props> = ({ task, zIndex }) => {
   const theme = useCustomTheme();
   const [open, setOpen] = useState(false);
+  const [projects, setProjects] = useState<DashboardTabIndexType[]>([]);
+  useEffect(() => {
+    const data = [...task.projects];
+    if (data.length > 2) {
+      for (let i = data.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [data[i], data[j]] = [data[j], data[i]];
+      }
+      setProjects(data.slice(0, 6));
+    } else setProjects(data);
+  }, []);
   return (
     <Box
       sx={{
@@ -46,7 +57,7 @@ const AchievementCard: FC<Props> = ({ task, zIndex }) => {
             flewWrap: 'wrap',
           }}
         >
-          {task.projects.map(project => (
+          {projects.map(project => (
             <Image
               src={networkStaticData[project].icon}
               alt='icon'
@@ -55,6 +66,7 @@ const AchievementCard: FC<Props> = ({ task, zIndex }) => {
               key={`img/${project}`}
             />
           ))}
+          {projects?.length >= 6 && '...'}
           <Box
             sx={{
               color: theme.palette.lightGreen,
