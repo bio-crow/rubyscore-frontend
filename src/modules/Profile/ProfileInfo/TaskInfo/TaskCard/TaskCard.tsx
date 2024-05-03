@@ -1,6 +1,6 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Box } from '@mui/system';
-import { ITask } from '@/types/index';
+import { DashboardTabIndexType, ITask } from '@/types/index';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import pluralize from 'pluralize';
 import Image from 'next/image';
@@ -12,6 +12,17 @@ interface Props {
 }
 
 const TaskCard: FC<Props> = ({ task, zIndex }) => {
+  const [projects, setProjects] = useState<DashboardTabIndexType[]>([]);
+  useEffect(() => {
+    const data = [...task.projects];
+    if (data.length > 2) {
+      for (let i = data.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [data[i], data[j]] = [data[j], data[i]];
+      }
+      setProjects(data.slice(0, 6));
+    } else setProjects(data);
+  }, []);
   const theme = useCustomTheme();
   const [open, setOpen] = useState(false);
   return (
@@ -39,7 +50,7 @@ const TaskCard: FC<Props> = ({ task, zIndex }) => {
         onClick={() => setOpen(!open)}
       >
         <Box display='flex' alignItems='center' gap='10px' flexWrap='wrap'>
-          {task.projects.map(project => (
+          {projects.map(project => (
             <Image
               src={networkStaticData[project].icon}
               alt='icon'
@@ -48,6 +59,7 @@ const TaskCard: FC<Props> = ({ task, zIndex }) => {
               key={`img/${project}`}
             />
           ))}
+          {projects?.length >= 6 && '...'}
           <Box
             display='flex'
             alignItems='center'
