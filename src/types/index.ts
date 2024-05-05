@@ -29,6 +29,7 @@ export interface IScoreNetwork {
   icon: string;
   lvl: number;
   points: number;
+  rank: string;
 }
 export interface ILevelCard {
   lvl: number;
@@ -116,38 +117,47 @@ export interface IScoreList {
   rubyscore: {
     score: number;
     level: number;
+    rank: string;
   };
   linea: {
     score: number;
     level: number;
+    rank: string;
   };
   zk_era: {
     score: number;
     level: number;
+    rank: string;
   };
   zk_evm: {
     score: number;
     level: number;
+    rank: string;
   };
   manta: {
     score: number;
     level: number;
+    rank: string;
   };
   base: {
     score: number;
     level: number;
+    rank: string;
   };
   scroll: {
     score: number;
     level: number;
+    rank: string;
   };
   blast: {
     score: number;
     level: number;
+    rank: string;
   };
   zora: {
     score: number;
     level: number;
+    rank: string;
   };
   // taiko: {
   //   score: number;
@@ -156,6 +166,7 @@ export interface IScoreList {
   mantle: {
     score: number;
     level: number;
+    rank: string;
   };
 }
 export interface IUserGradation {

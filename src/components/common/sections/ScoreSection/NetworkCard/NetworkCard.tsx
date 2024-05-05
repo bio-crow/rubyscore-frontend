@@ -61,7 +61,13 @@ const NetworkCard: FC<Props> = ({ network, selectable, activeTab, onSelect }) =>
           justifyContent: 'space-between',
         }}
       >
-        <Box>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+          }}
+        >
           <Box
             sx={{
               color: theme.palette.lightGreen,
@@ -83,6 +89,7 @@ const NetworkCard: FC<Props> = ({ network, selectable, activeTab, onSelect }) =>
           sx={{
             display: 'flex',
             flexDirection: 'column',
+            justifyContent: 'space-between',
           }}
         >
           <Box
@@ -91,7 +98,7 @@ const NetworkCard: FC<Props> = ({ network, selectable, activeTab, onSelect }) =>
             }}
             className='Body-Lato-fw-700-fs-16'
           >
-            {Math.round(network.points)}
+            {network.rank}
           </Box>
           <Box
             sx={{
@@ -99,7 +106,7 @@ const NetworkCard: FC<Props> = ({ network, selectable, activeTab, onSelect }) =>
             }}
             className='Body-Lato-fw-600-fs-14'
           >
-            {pluralize('Point', network.points)}
+            RANK
           </Box>
         </Box>
       </Box>

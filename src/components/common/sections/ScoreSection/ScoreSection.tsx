@@ -97,6 +97,7 @@ const ScoreSection: FC<Props> = ({
       icon: networkStaticData['zk_era'].icon,
       lvl: userScoreList['zk_era']?.level,
       points: userScoreList['zk_era']?.score,
+      rank: userScoreList['zk_era']?.rank,
     },
     {
       index: 'linea',
@@ -104,6 +105,7 @@ const ScoreSection: FC<Props> = ({
       icon: networkStaticData['linea'].icon,
       lvl: userScoreList['linea']?.level,
       points: userScoreList['linea']?.score,
+      rank: userScoreList['linea']?.rank,
     },
     {
       index: 'base',
@@ -111,6 +113,7 @@ const ScoreSection: FC<Props> = ({
       icon: networkStaticData['base'].icon,
       lvl: userScoreList['base']?.level,
       points: userScoreList['base']?.score,
+      rank: userScoreList['base']?.rank,
     },
     {
       index: 'blast',
@@ -118,6 +121,7 @@ const ScoreSection: FC<Props> = ({
       icon: networkStaticData['blast'].icon,
       lvl: userScoreList['blast']?.level,
       points: userScoreList['blast']?.score,
+      rank: userScoreList['blast']?.rank,
     },
     {
       index: 'scroll',
@@ -125,6 +129,7 @@ const ScoreSection: FC<Props> = ({
       icon: networkStaticData['scroll'].icon,
       lvl: userScoreList['scroll']?.level,
       points: userScoreList['scroll']?.score,
+      rank: userScoreList['scroll']?.rank,
     },
     {
       index: 'zk_evm',
@@ -132,6 +137,7 @@ const ScoreSection: FC<Props> = ({
       icon: networkStaticData['zk_evm'].icon,
       lvl: userScoreList['zk_evm']?.level,
       points: userScoreList['zk_evm']?.score,
+      rank: userScoreList['zk_evm']?.rank,
     },
     {
       index: 'manta',
@@ -139,6 +145,7 @@ const ScoreSection: FC<Props> = ({
       icon: networkStaticData['manta'].icon,
       lvl: userScoreList['manta']?.level,
       points: userScoreList['manta']?.score,
+      rank: userScoreList['manta']?.rank,
     },
     {
       index: 'zora',
@@ -146,6 +153,7 @@ const ScoreSection: FC<Props> = ({
       icon: networkStaticData['zora'].icon,
       lvl: userScoreList['zora']?.level,
       points: userScoreList['zora']?.score,
+      rank: userScoreList['zora']?.rank,
     },
     // {
     //   index: 'taiko',
@@ -160,6 +168,7 @@ const ScoreSection: FC<Props> = ({
       icon: networkStaticData['mantle'].icon,
       lvl: userScoreList['mantle']?.level,
       points: userScoreList['mantle']?.score,
+      rank: userScoreList['mantle']?.rank,
     },
   ];
   const preparedNetworks = networks
@@ -182,7 +191,7 @@ const ScoreSection: FC<Props> = ({
         }}
       >
         <Box className='H1-Lato-fw-700-fs-32' color={theme.palette.powderWhite}>
-          Score
+          Ranks
         </Box>
         <Box
           sx={{
