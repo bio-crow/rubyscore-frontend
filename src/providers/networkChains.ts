@@ -261,10 +261,10 @@ export const networkChains: Chain[] = [
     },
     rpcUrls: {
       public: {
-        http: ['https://mantle-rpc.publicnode.com'],
+        http: ['https://rpc.mantle.xyz'],
       },
       default: {
-        http: ['https://mantle-rpc.publicnode.com'],
+        http: ['https://rpc.mantle.xyz'],
       },
     },
     blockExplorers: {

@@ -17,11 +17,7 @@ export const wagmiVote = async (data: IVotePayload): Promise<any> => {
         chainId: baseConfig.chainId,
       });
     }
-    const gasEstimate = await wagmiConfig.publicClient.estimateGas({
-      account,
-      to: baseConfig.address,
-      value: parseEther('0.00000001'),
-    });
+
     let config: any = {
       ...baseConfig,
       functionName: 'vote',
@@ -37,7 +33,8 @@ export const wagmiVote = async (data: IVotePayload): Promise<any> => {
         value: parseEther('0.00000001'),
       });
       if (gasEstimate) {
-        config.gas = Math.floor(Number(BigInt(gasEstimate)) * 0.7);
+        if (project === 'mantle')
+          config.gas = project === 'mantle' ? gasEstimate : Math.floor(Number(BigInt(gasEstimate)) * 0.7);
       }
     }
     const { hash } = await writeContract(config);
