@@ -68,15 +68,16 @@ const TransactionsSection: FC<Props> = ({ activeTab }) => {
   useEffect(() => {
     let cumulativeSum = 0;
     const updatedChartLineInfo = [];
-    for (let index = chartData.length - 1; index >= 0; index--) {
+    for (let index = 0; index < chartData.length; index++) {
       cumulativeSum += chartData[index].uv;
-      updatedChartLineInfo.unshift({
+      updatedChartLineInfo.push({
         ...chartData[index],
         cumulative: getReadableChartData(cumulativeSum),
       });
     }
     setChartLineInfo(updatedChartLineInfo);
   }, [chartData]);
+
   useEffect(() => {
     if (isAuth) {
       const data = {
