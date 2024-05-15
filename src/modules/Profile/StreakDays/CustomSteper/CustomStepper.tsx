@@ -7,15 +7,19 @@ import pluralize from 'pluralize';
 interface Props {
   steps: { day: number; points: number; percent: number }[];
   currentDay: number;
+  isClaimable: boolean;
 }
 
-const CustomStepper: FC<Props> = ({ currentDay, steps }) => {
+const CustomStepper: FC<Props> = ({ currentDay, steps, isClaimable }) => {
   const theme = useCustomTheme();
   let progress;
   if (currentDay < 15) {
     progress = Math.round((currentDay / steps[2].day) * 100);
   } else {
-    progress = Math.round(33 + ((10 - (steps[2].day - currentDay)) / 10) * 67);
+    // eslint-disable-next-line max-len
+    progress = isClaimable
+      ? Math.round(33 + ((10 - (steps[2].day - currentDay)) / 10) * 67)
+      : Math.round(25 + ((10 - (steps[2].day - currentDay)) / 10) * 67);
   }
   return (
     <Box

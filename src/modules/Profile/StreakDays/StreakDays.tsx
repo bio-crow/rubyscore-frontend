@@ -101,7 +101,7 @@ const StreakDays = () => {
         </SecondaryButton>
       </Box>
 
-      <CustomStepper currentDay={currentDay} steps={daySteps} />
+      <CustomStepper currentDay={currentDay} isClaimable={streakDays.isClaimable} steps={daySteps} />
     </Box>
   );
 };
