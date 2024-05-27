@@ -10,7 +10,7 @@ export const networkStaticData: {
   manta: { icon: string };
   blast: { icon: string };
   zora: { icon: string };
-  // taiko: { icon: string };
+  taiko: { icon: string };
   mantle: { icon: string };
 } = {
   zk_era: {
@@ -40,9 +40,9 @@ export const networkStaticData: {
   zora: {
     icon: '/asserts/net/Zora.svg',
   },
-  // taiko: {
-  //   icon: '/asserts/net/taiko.svg',
-  // },
+  taiko: {
+    icon: '/asserts/net/taiko.svg',
+  },
   mantle: {
     icon: '/asserts/net/mantle.svg',
   },
@@ -214,10 +214,10 @@ export const dashboardPanelTabs: { index: DashboardTabIndexType; label: string }
     index: 'zora',
     label: 'Zora',
   },
-  // {
-  //   index: 'taiko',
-  //   label: 'Taiko',
-  // },
+  {
+    index: 'taiko',
+    label: 'Taiko',
+  },
   {
     index: 'mantle',
     label: 'Mantle',

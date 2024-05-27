@@ -21,7 +21,7 @@ export type DashboardTabIndexType =
   | 'manta'
   | 'blast'
   | 'zora'
-  // | 'taiko'
+  | 'taiko'
   | 'mantle';
 export interface IScoreNetwork {
   index: DashboardTabIndexType;
@@ -159,10 +159,10 @@ export interface IScoreList {
     level: number;
     rank: string;
   };
-  // taiko: {
-  //   score: number;
-  //   level: number;
-  // };
+  taiko: {
+    score: number;
+    level: number;
+  };
   mantle: {
     score: number;
     level: number;
@@ -228,7 +228,7 @@ export interface ILevelsInfo {
   scroll: number[];
   blast: number[];
   zora: number[];
-  // taiko: number[];
+  taiko: number[];
   mantle: number[];
 }
 
@@ -252,7 +252,7 @@ export interface IDashboardTabsVoteInfo {
   rubyscore: { count: number | null; is_ok: boolean };
   blast: { count: number | null; is_ok: boolean };
   zora: { count: number | null; is_ok: boolean };
-  // taiko: { count: number | null; is_ok: boolean };
+  taiko: { count: number | null; is_ok: boolean };
   mantle: { count: number | null; is_ok: boolean };
 }
 export interface IAttestationData {

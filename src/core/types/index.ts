@@ -86,10 +86,10 @@ export interface IScoreListResponse {
       score: number;
       level: number;
     };
-    // taiko: {
-    //   score: number;
-    //   level: number;
-    // };
+    taiko: {
+      score: number;
+      level: number;
+    };
     mantle: {
       score: number;
       level: number;
