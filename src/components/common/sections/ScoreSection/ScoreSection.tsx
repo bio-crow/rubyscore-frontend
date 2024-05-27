@@ -161,6 +161,7 @@ const ScoreSection: FC<Props> = ({
       icon: networkStaticData['taiko'].icon,
       lvl: userScoreList['taiko']?.level,
       points: userScoreList['taiko']?.score,
+      rank: userScoreList['zora']?.rank,
     },
     {
       index: 'mantle',

@@ -162,6 +162,7 @@ export interface IScoreList {
   taiko: {
     score: number;
     level: number;
+    rank: string;
   };
   mantle: {
     score: number;
