@@ -1,7 +1,7 @@
 import { Box } from '@mui/system';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import CustomSwitch from '@/components/common/ui/CustomSwitch/CustomSwitch';
-import { FC, useState } from 'react';
+import { ChangeEvent, FC, useState } from 'react';
 import SingleWalletForm from '@/modules/Transactions/BalanceTab/sections/DepositSection/SingleWalletForm/SingleWalletForm';
 import AnotherWalletForm from '@/modules/Transactions/BalanceTab/sections/DepositSection/AnotherWalletForm/AnotherWalletForm';
 
@@ -9,7 +9,7 @@ interface Props {}
 const DepositSection: FC<Props> = () => {
   const theme = useCustomTheme();
   const [sendToAnotherWallet, setSendToAnotherWallet] = useState(false);
-  const handeChange = e => {
+  const handeChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSendToAnotherWallet(e.target.checked);
   };
   return (

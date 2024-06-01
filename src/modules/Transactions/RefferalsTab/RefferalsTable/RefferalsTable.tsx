@@ -15,7 +15,7 @@ interface Props {
 const RefferalsTable: FC<Props> = ({ data }) => {
   const theme = useCustomTheme();
   const prepareData = data;
-  const claim = params => {};
+  const claim = (params: GridRenderCellParams<any>) => {};
   const columns = [
     ...RefferalsBaseColumns,
     {

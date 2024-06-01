@@ -14,6 +14,7 @@ interface Props {}
 const AnotherWalletForm: FC<Props> = () => {
   const theme = useCustomTheme();
   const [value, setValue] = useState('zora');
+  const handleSubmit = () => {};
   return (
     <Box
       sx={{

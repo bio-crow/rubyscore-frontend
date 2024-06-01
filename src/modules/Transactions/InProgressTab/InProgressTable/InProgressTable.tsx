@@ -15,7 +15,7 @@ interface Props {
 const InProgressTable: FC<Props> = ({ data }) => {
   const theme = useCustomTheme();
   const prepareData = data;
-  const deleteRow = params => {};
+  const deleteRow = (params: GridRenderCellParams<any>) => {};
   const columns = [
     ...InProgressBaseColumns,
     {

@@ -15,7 +15,7 @@ interface Props {
 const HistoryTable: FC<Props> = ({ data }) => {
   const theme = useCustomTheme();
   const prepareData = data;
-  const openLink = params => {};
+  const openLink = (params: GridRenderCellParams<any>) => {};
   const columns = [
     ...HistoryBaseColumns,
     {
