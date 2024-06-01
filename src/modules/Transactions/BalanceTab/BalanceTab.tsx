@@ -28,7 +28,7 @@ const BalanceTab = () => {
     >
       <DepositSection />
       <BalanceSection />
-      <SentSection />
+      <SentSection tableData={tableData} />
     </Box>
   );
 };
