@@ -381,3 +381,72 @@ export const TooltipAttestationBtn = () => {
     </Box>
   );
 };
+
+export const TooltipBalanceAndSend = () => {
+  const theme = useCustomTheme();
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+      }}
+    >
+      <Box className='Body-Lato-fw-600-fs-14' color={theme.palette.white50}>
+        Balance and Sent
+      </Box>
+    </Box>
+  );
+};
+export const TooltipAnotherWallet = () => {
+  const theme = useCustomTheme();
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+      }}
+    >
+      <Box className='Body-Lato-fw-600-fs-14' color={theme.palette.white50}>
+        TooltipAnotherWallet
+      </Box>
+    </Box>
+  );
+};
+export const TimeHeaderTooltip = () => {
+  const theme = useCustomTheme();
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+      }}
+    >
+      <Box className='Body-Lato-fw-600-fs-14' color={theme.palette.white50}>
+        TimeHeaderTooltip
+      </Box>
+    </Box>
+  );
+};
+export const GasHeaderTooltip = () => {
+  const theme = useCustomTheme();
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+      }}
+    >
+      <Box className='Body-Lato-fw-600-fs-14' color={theme.palette.white50}>
+        GasHeaderTooltip
+      </Box>
+    </Box>
+  );
+};

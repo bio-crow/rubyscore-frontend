@@ -2,6 +2,8 @@ const API_URL = process.env.NEXT_PUBLIC_DEVELOP_PROXY_BACK_END_API;
 
 const nextConfig = {
   swcMinify: true,
+  productionBrowserSourceMaps: false,
+  optimizeFonts: false,
   async rewrites() {
     return [
       {

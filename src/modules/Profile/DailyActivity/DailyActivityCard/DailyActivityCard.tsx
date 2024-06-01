@@ -74,7 +74,7 @@ const DailyActivityCard: FC<Props> = ({ task }) => {
         >
           {projects?.map(project => (
             <Image
-              src={networkStaticData[project].icon}
+              src={networkStaticData[project]?.icon ?? ''}
               alt='icon'
               width='24'
               height='24'

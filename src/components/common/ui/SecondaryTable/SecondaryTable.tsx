@@ -5,8 +5,11 @@ import { DataGrid } from '@mui/x-data-grid';
 const SecondaryTable = styled(DataGrid)(({ theme }: { theme: CustomTheme | any }) => {
   return {
     '&.MuiDataGrid-root': {
-      border: 'none',
-      borderRadius: 'unset',
+      border: `1px solid ${theme.palette.white10}`,
+      borderRadius: '10px',
+    },
+    '.MuiDataGrid-iconSeparator': {
+      display: 'none',
     },
     '.MuiDataGrid-columnHeaders': {
       background: theme.palette.white10,
@@ -18,6 +21,14 @@ const SecondaryTable = styled(DataGrid)(({ theme }: { theme: CustomTheme | any }
       fontStyle: 'normal',
       fontWeight: 500,
       lineHeight: '24px',
+    },
+    '.MuiDataGrid-columnHeader': {
+      '&:focus-within': {
+        outline: 'none',
+      },
+      ':focus': {
+        outline: 'none',
+      },
     },
     '.MuiDataGrid-columnHeaderTitleContainer': {
       paddingLeft: '20px',
@@ -34,12 +45,15 @@ const SecondaryTable = styled(DataGrid)(({ theme }: { theme: CustomTheme | any }
       fontWeight: 500,
       lineHeight: '24px',
       paddingLeft: '30px',
-      '&:focus': {
-        outline: 'unset',
+      '&:focus-within': {
+        outline: 'none',
+      },
+      ':focus': {
+        outline: 'none',
       },
     },
     '.MuiDataGrid-virtualScroller': {
-      background: theme.palette.black,
+      background: theme.palette.backgroundColor,
       padding: '0',
     },
     '.MuiDataGrid-footerContainer': {

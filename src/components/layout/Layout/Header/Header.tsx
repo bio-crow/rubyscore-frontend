@@ -1,13 +1,12 @@
 import { Box } from '@mui/system';
 import UserAccount from '@/components/layout/Layout/Header/UserAccount/UserAccount';
 import Image from 'next/image';
-import ThemeSwitch from '@/components/layout/Layout/Header/ThemeSwith/ThemeSwith';
 import { appRoutes } from '@/constants/routes';
 import NavLink from '@/components/layout/Layout/Header/NavLink/NavLink';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { usePathname, useRouter } from 'next/navigation';
-import { useAppDispatch, useAppSelector } from '@/core/store';
+import { useRouter } from 'next/navigation';
+import { useAppSelector } from '@/core/store';
 import CustomConnectButton from '@/components/common/CustomConnectButton/CustomConnectButton';
 import PrimaryButton from '@/components/common/ui/PrimaryButton/PrimaryButton';
 
@@ -31,6 +30,10 @@ const navLinks = [
   {
     label: 'Linea Attestation',
     route: appRoutes.ATTESTATION_LINEA,
+  },
+  {
+    label: 'Transaction service',
+    route: appRoutes.TRANSACTION_SERVICE,
   },
 ];
 
