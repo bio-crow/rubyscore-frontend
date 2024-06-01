@@ -638,66 +638,7 @@ export const prepareUserGradationToAchievementsCards = (data: IUserGradation): I
   ];
   return result;
 };
-export const getAchievementsBaseContractConfig = (project: string, contractInfo: any) => {
-  switch (project) {
-    case 'base':
-      return {
-        address: contractInfo.base.contract,
-        chainId: contractInfo.base.chainId,
-      };
-    case 'manta':
-      return {
-        address: contractInfo.manta.contract,
-        chainId: contractInfo.manta.chainId,
-      };
-    case 'blast':
-      return {
-        address: contractInfo.blast.contract,
-        chainId: contractInfo.blast.chainId,
-      };
-    case 'linea':
-      return {
-        address: contractInfo.linea.contract,
-        chainId: contractInfo.linea.chainId,
-      };
-    case 'zk_evm':
-      return {
-        address: contractInfo.zkEVM.contract,
-        chainId: contractInfo.zkEVM.chainId,
-      };
-    case 'zk_era':
-      return {
-        address: contractInfo.zkSync.contract,
-        chainId: contractInfo.zkSync.chainId,
-      };
-    case 'scroll':
-      return {
-        address: contractInfo.scroll.contract,
-        chainId: contractInfo.scroll.chainId,
-      };
-    case 'zora':
-      return {
-        address: contractInfo.zora.contract,
-        chainId: contractInfo.zora.chainId,
-      };
-    // case 'taiko':
-    //   return {
-    //     address: contractInfo.taiko.contract,
-    //     chainId: contractInfo.taiko.chainId,
-    //   };
-    case 'mantle':
-      return {
-        address: contractInfo.mantle.contract,
-        chainId: contractInfo.mantle.chainId,
-      };
-    default:
-      return {
-        address: contractInfo.projectAchievements.contract,
-        chainId: contractInfo.projectAchievements.chainId,
-      };
-  }
-};
-export const getVoteBaseContractConfig = (project: string, contractInfo: any) => {
+export const getContractConfig = (project: string, contractInfo: any) => {
   switch (project) {
     case 'base':
       return {

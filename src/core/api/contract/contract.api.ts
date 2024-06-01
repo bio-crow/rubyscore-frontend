@@ -1,4 +1,4 @@
-import { getNetwork, switchNetwork, writeContract } from '@wagmi/core';
+import { writeContract } from '@wagmi/core';
 import { abiIXProjectSBT } from '@/constants/abiIXProjectSBT';
 import { waitForTransaction } from '@wagmi/core';
 import { IClaimPayload } from '@/core/types';
@@ -6,6 +6,7 @@ import { readContract } from '@wagmi/core';
 import { toast } from 'react-toastify';
 import { parseEther } from 'viem';
 import { networkContracts } from '@/providers/networkChains';
+import { switchToContractChain } from '@/core/api/contract/helpers';
 const baseConfig = {
   address: networkContracts.app.contract,
   abi: abiIXProjectSBT,
@@ -13,12 +14,7 @@ const baseConfig = {
 };
 export const wagmiClaimName = async (data: IClaimPayload): Promise<any> => {
   const action = async ({ account, name, payable, price }: IClaimPayload) => {
-    const { chain, chains } = await getNetwork();
-    if (chain && chain.id !== networkContracts.app.chainId) {
-      await switchNetwork({
-        chainId: networkContracts.app.chainId,
-      });
-    }
+    await switchToContractChain(networkContracts.app.chainId);
     let config: any = {
       ...baseConfig,
       functionName: 'claimName',

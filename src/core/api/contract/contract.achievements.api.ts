@@ -1,14 +1,14 @@
-import { readContract, readContracts, switchNetwork, waitForTransaction, writeContract } from '@wagmi/core';
+import { readContract, readContracts, waitForTransaction, writeContract } from '@wagmi/core';
 import { abiAchievements } from '@/constants/abiAchievements';
 import { apiPrivateAxios } from '@/core/api/axiosConfig';
-import { getNetwork } from '@wagmi/core';
 import { IClaimLevelPayload, IClaimLevelSignaturePayload, IClaimLevelSignatureResponse } from '@/core/types';
 import { parseEther, parseGwei, formatEther } from 'viem';
 import { toast } from 'react-toastify';
-import { getAchievementsBaseContractConfig } from '@/utils/helpers';
+import { getContractConfig } from '@/utils/helpers';
 import { ILevelsInfo } from '@/types/index';
 import { abiIXProjectSBT } from '@/constants/abiIXProjectSBT';
 import { networkContracts } from '@/providers/networkChains';
+import { switchToContractChain } from '@/core/api/contract/helpers';
 export const wagmiLevels = async (params: { wallet: string; project: string }): Promise<any> => {
   const action = async (params: { wallet: string; project: string }) => {
     const { wallet: address, project } = params;
@@ -25,7 +25,7 @@ export const wagmiLevels = async (params: { wallet: string; project: string }): 
       address,
     ];
     const ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    const baseConfig = getAchievementsBaseContractConfig(project, networkContracts);
+    const baseConfig = getContractConfig(project, networkContracts);
     let config: any = {
       ...baseConfig,
       abi: abiAchievements,
@@ -48,14 +48,8 @@ export const wagmiLevels = async (params: { wallet: string; project: string }): 
 };
 export const wagmiClaimLevel = async (data: IClaimLevelPayload): Promise<any> => {
   const action = async ({ signature, mintParams, project, account }: IClaimLevelPayload) => {
-    const { chain, chains } = await getNetwork();
-    const baseConfig = getAchievementsBaseContractConfig(project, networkContracts);
-
-    if (chain && chain.id !== baseConfig.chainId) {
-      await switchNetwork({
-        chainId: baseConfig.chainId,
-      });
-    }
+    const baseConfig = getContractConfig(project, networkContracts);
+    await switchToContractChain(baseConfig.chainId);
     const price = await wagmiClaimPrice(project);
     let config: any = {
       ...baseConfig,
@@ -87,7 +81,7 @@ export const fetchClaimLevelSignature = async (params: IClaimLevelSignaturePaylo
 };
 export const wagmiClaimPrice = async (project: string): Promise<any> => {
   const action = async () => {
-    const baseConfig = getAchievementsBaseContractConfig(project, networkContracts);
+    const baseConfig = getContractConfig(project, networkContracts);
     let config: any = {
       ...baseConfig,
       abi: abiAchievements,

@@ -145,7 +145,15 @@ export interface IVotePayload {
   account: any;
   project: string;
 }
-
+export interface IDepositSinglePayload {
+  project: string;
+  value: string;
+}
+export interface IDepositAnotherPayload {
+  project: string;
+  value: string;
+  address: string;
+}
 export interface IDashboardTransactionsResponse {
   result: {
     tx1: number;

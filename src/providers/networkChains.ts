@@ -305,3 +305,6 @@ export const networkVoteContracts = {
 export const prodAttestationContracts = {
   linea: { contract: '0xB9cC0Bb020cF55197C4C3d826AC87CAdba51f272', chainId: 59144 },
 };
+export const depositContracts = {
+  scroll: { contract: '0x4D1E2145082d0AB0fDa4a973dC4887C7295e21aB', chainId: 534351 },
+};
