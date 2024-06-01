@@ -7,6 +7,8 @@ import { CustomTheme } from '@/theme/index';
 import Image from 'next/image';
 import { Box } from '@mui/system';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
+import { FormHelperText, InputLabel } from '@mui/material';
+import { FormControl } from '@mui/material';
 const BootstrapInput = styled(InputBase)(({ theme }: { theme: CustomTheme | any }) => ({
   '&.MuiInputBase-root': {
     width: '100%',
@@ -38,47 +40,54 @@ const BootstrapInput = styled(InputBase)(({ theme }: { theme: CustomTheme | any 
 interface Props {
   value: any;
   onChange: Function;
+
+  placeholder?: string;
   options: any[];
+  helperText?: string | null;
+  error?: boolean;
 }
-export default function CustomSelect({ value, onChange, options }: Props) {
+export default function CustomSelect({ value, onChange, options, placeholder, error, helperText }: Props) {
   const theme = useCustomTheme();
   const anchorEl = useRef(null);
   const handleChange = (event: { target: { value: string } }) => {
     onChange(event.target.value);
   };
   return (
-    <Select
-      ref={anchorEl}
-      labelId='demo-customized-select-label'
-      id='demo-customized-select'
-      value={value}
-      MenuProps={{
-        disableScrollLock: true,
-      }}
-      onChange={handleChange}
-      input={<BootstrapInput />}
-    >
-      {options.map(option => (
-        <MenuItem key={option.value} value={option.value}>
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-            }}
-          >
-            <Image src={option.icon} alt='icon' width='24' height='24' />
+    <FormControl error={error} fullWidth>
+      <Select
+        ref={anchorEl}
+        labelId='demo-customized-select-label'
+        id='demo-customized-select'
+        value={value}
+        MenuProps={{
+          disableScrollLock: true,
+        }}
+        onChange={handleChange}
+        input={<BootstrapInput />}
+      >
+        {options.map(option => (
+          <MenuItem key={option.value} value={option.value}>
             <Box
               sx={{
-                color: theme.palette.powderWhite,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
               }}
-              className='Body-Lato-fw-600-fs-14'
             >
-              {option.text}
+              <Image src={option.icon} alt='icon' width='24' height='24' />
+              <Box
+                sx={{
+                  color: theme.palette.powderWhite,
+                }}
+                className='Body-Lato-fw-600-fs-14'
+              >
+                {option.text}
+              </Box>
             </Box>
-          </Box>
-        </MenuItem>
-      ))}
-    </Select>
+          </MenuItem>
+        ))}
+      </Select>
+      {error && <FormHelperText>{helperText}</FormHelperText>}
+    </FormControl>
   );
 }

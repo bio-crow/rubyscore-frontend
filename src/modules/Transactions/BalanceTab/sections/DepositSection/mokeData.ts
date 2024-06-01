@@ -2,6 +2,11 @@ import { networkStaticData } from '@/constants/index';
 
 export const networkOptions = [
   {
+    text: 'Scroll',
+    icon: networkStaticData['scroll'].icon,
+    value: 'scroll',
+  },
+  {
     text: 'zkEVM',
     icon: networkStaticData['zk_evm'].icon,
     value: 'zk_evm',
@@ -20,11 +25,6 @@ export const networkOptions = [
     text: 'Bas',
     icon: networkStaticData['base'].icon,
     value: 'base',
-  },
-  {
-    text: 'Scroll',
-    icon: networkStaticData['scroll'].icon,
-    value: 'scroll',
   },
   {
     text: 'Manta',

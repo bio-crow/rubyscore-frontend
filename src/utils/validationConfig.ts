@@ -1,4 +1,9 @@
-import { CLAIM_PROFILE_FIELDS, SEARCH_WALLET_FIELD } from '@/constants/formFields';
+import {
+  CLAIM_PROFILE_FIELDS,
+  DEPOSIT_ANOTHER_FIELDS,
+  DEPOSIT_SINGLE_FIELDS,
+  SEARCH_WALLET_FIELD,
+} from '@/constants/formFields';
 import * as yup from 'yup';
 export const claimProfileSchema = yup.object().shape({
   [CLAIM_PROFILE_FIELDS.NAME]: yup
@@ -6,6 +11,15 @@ export const claimProfileSchema = yup.object().shape({
     .trim()
     .required('Please enter your user name')
     .min(3, 'Min name length is 3'),
+});
+export const depositSingleSchema = yup.object().shape({
+  [DEPOSIT_SINGLE_FIELDS.VALUE]: yup.string().trim().required('Please enter value'),
+  [DEPOSIT_SINGLE_FIELDS.NETWORK]: yup.string().trim().required('Please choose network'),
+});
+export const depositAnotherSchema = yup.object().shape({
+  [DEPOSIT_ANOTHER_FIELDS.VALUE]: yup.string().trim().required('Please enter value'),
+  [DEPOSIT_ANOTHER_FIELDS.ADDRESS]: yup.string().trim().required('Please enter address'),
+  [DEPOSIT_ANOTHER_FIELDS.NETWORK]: yup.string().trim().required('Please choose network'),
 });
 export const searchWalletSchema = yup.object().shape({
   [SEARCH_WALLET_FIELD.WALLET]: yup.string().trim(),
