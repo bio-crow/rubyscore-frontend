@@ -10,23 +10,10 @@ import CustomSelect from '@/components/common/ui/CustomSelect/CustomSelect';
 import { networkOptions } from '@/modules/Transactions/BalanceTab/sections/DepositSection/mokeData';
 import { FC, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-interface Props {
-  addToTable: Function;
-}
-const AnotherWalletForm: FC<Props> = ({ addToTable }) => {
+interface Props {}
+const AnotherWalletForm: FC<Props> = () => {
   const theme = useCustomTheme();
   const [value, setValue] = useState('zora');
-  const handleSubmit = () => {
-    addToTable({
-      id: uuidv4(),
-      address: 'test1',
-      value: 'test2',
-      commission: 'test3',
-      network: 'test4',
-      gas: 'test5',
-      time: 'test6',
-    });
-  };
   return (
     <Box
       sx={{

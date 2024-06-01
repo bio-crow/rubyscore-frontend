@@ -11,9 +11,8 @@ import { FC } from 'react';
 
 interface Props {
   tableData: any[];
-  removeFromTable: Function;
 }
-const SentSection: FC<Props> = ({ tableData, removeFromTable }) => {
+const SentSection: FC<Props> = ({ tableData }) => {
   const theme = useCustomTheme();
   return (
     <Box
@@ -93,7 +92,7 @@ const SentSection: FC<Props> = ({ tableData, removeFromTable }) => {
           width: '100%',
         }}
       >
-        <BalanceAndSentTable data={tableData} removeFromTable={removeFromTable} />
+        <BalanceAndSentTable data={tableData} />
       </Box>
       <Box
         sx={{

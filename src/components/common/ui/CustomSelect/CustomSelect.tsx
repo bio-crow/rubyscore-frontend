@@ -35,8 +35,12 @@ const BootstrapInput = styled(InputBase)(({ theme }: { theme: CustomTheme | any 
     },
   },
 }));
-
-export default function CustomSelect({ value, onChange, options }) {
+interface Props {
+  value: any;
+  onChange: Function;
+  options: any[];
+}
+export default function CustomSelect({ value, onChange, options }: Props) {
   const theme = useCustomTheme();
   const anchorEl = useRef(null);
   const handleChange = (event: { target: { value: string } }) => {

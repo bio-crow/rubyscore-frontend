@@ -5,10 +5,8 @@ import { FC, useState } from 'react';
 import SingleWalletForm from '@/modules/Transactions/BalanceTab/sections/DepositSection/SingleWalletForm/SingleWalletForm';
 import AnotherWalletForm from '@/modules/Transactions/BalanceTab/sections/DepositSection/AnotherWalletForm/AnotherWalletForm';
 
-interface Props {
-  addToTable: Function;
-}
-const DepositSection: FC<Props> = ({ addToTable }) => {
+interface Props {}
+const DepositSection: FC<Props> = () => {
   const theme = useCustomTheme();
   const [sendToAnotherWallet, setSendToAnotherWallet] = useState(false);
   const handeChange = e => {
@@ -58,11 +56,7 @@ const DepositSection: FC<Props> = ({ addToTable }) => {
           </Box>
         </Box>
       </Box>
-      {sendToAnotherWallet ? (
-        <AnotherWalletForm addToTable={addToTable} />
-      ) : (
-        <SingleWalletForm addToTable={addToTable} />
-      )}
+      {sendToAnotherWallet ? <AnotherWalletForm /> : <SingleWalletForm />}
     </Box>
   );
 };

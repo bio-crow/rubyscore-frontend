@@ -3,18 +3,21 @@ import DepositSection from '@/modules/Transactions/BalanceTab/sections/DepositSe
 import BalanceSection from '@/modules/Transactions/BalanceTab/sections/BalanceSection/BalanceSection';
 import SentSection from '@/modules/Transactions/BalanceTab/sections/SentSection/SentSection';
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 const BalanceTab = () => {
-  const [tableData, setTableData] = useState([]);
-  const addToTable = data => {
-    const newData = [...tableData];
-    newData.push(data);
-    setTableData(newData);
-  };
-  const removeFromTable = params => {
-    const newData = [...tableData].filter(item => item.id !== params.row.id);
-    setTableData(newData);
-  };
+  const [tableData, setTableData] = useState([
+    {
+      id: uuidv4(),
+      address: 'test1',
+      value: 'test2',
+      commission: 'test3',
+      network: 'test4',
+      gas: 'test5',
+      time: 'test6',
+    },
+  ]);
+
   return (
     <Box
       sx={{
@@ -23,9 +26,9 @@ const BalanceTab = () => {
         gap: '48px',
       }}
     >
-      <DepositSection addToTable={addToTable} />
+      <DepositSection />
       <BalanceSection />
-      <SentSection tableData={tableData} removeFromTable={removeFromTable} />
+      <SentSection />
     </Box>
   );
 };

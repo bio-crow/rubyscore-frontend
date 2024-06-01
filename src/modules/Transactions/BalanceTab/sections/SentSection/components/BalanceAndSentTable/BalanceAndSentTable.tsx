@@ -10,14 +10,11 @@ import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { v4 as uuidv4 } from 'uuid';
 interface Props {
   data: any[];
-  removeFromTable: Function;
 }
-const BalanceAndSentTable: FC<Props> = ({ data, removeFromTable }) => {
+const BalanceAndSentTable: FC<Props> = ({ data }) => {
   const theme = useCustomTheme();
   const prepareData = data;
-  const deleteRow = params => {
-    removeFromTable(params);
-  };
+  const deleteRow = params => {};
   const columns = [
     ...BalanceAndSentBaseColumns,
     {
