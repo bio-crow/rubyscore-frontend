@@ -1,12 +1,10 @@
 import { Box } from '@mui/system';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
-import CustomInput from '@/components/common/ui/CustomInput/CustomInput';
+import LoadingButton from '@mui/lab/LoadingButton';
 import PlusIcon from '@/components/common/Icons/PlusIcon';
-import { Button } from '@mui/material';
 import CustomTooltip from '@/components/common/CustomTooltip/CustomTooltip';
 import { TooltipAnotherWallet } from '@/utils/tooltipsContent';
 import InfoIcon from '@/components/common/Icons/InfoIcon';
-import CustomSelect from '@/components/common/ui/CustomSelect/CustomSelect';
 import { networkOptions } from '@/modules/Transactions/BalanceTab/sections/DepositSection/mokeData';
 import { FC, useState } from 'react';
 import { DepositAnotherFormContext } from '@/context/index';
@@ -17,13 +15,16 @@ import { depositAnotherSchema } from '@/utils/validationConfig';
 import { FormInputText } from '@/components/common/fields/InputField';
 import { DEPOSIT_ANOTHER_FIELDS, DEPOSIT_SINGLE_FIELDS } from '@/constants/formFields';
 import { FormSelect } from '@/components/common/fields/SelectField';
+import { depositAnother, depositSingle } from '@/core/thunk/deposit.thunk';
+import { useAppDispatch, useAppSelector } from '@/core/store';
 
 interface Props {}
 
 const AnotherWalletForm: FC<Props> = () => {
   const theme = useCustomTheme();
   const isLg = useMediaQuery(theme.breakpoints.up('lg'));
-  const [network, setNetwork] = useState('zora');
+  const dispatch = useAppDispatch();
+  const depositLoading = useAppSelector(state => state.depositState.depositLoading);
   const {
     register,
     handleSubmit,
@@ -38,12 +39,14 @@ const AnotherWalletForm: FC<Props> = () => {
     reset,
   } = useForm({
     resolver: yupResolver<any>(depositAnotherSchema),
+    shouldUnregister: true,
     defaultValues: {
       [DEPOSIT_ANOTHER_FIELDS.NETWORK]: 'scroll',
     },
   });
   const onSubmit = async (data: any) => {
-    // console.log(data);
+    dispatch(depositAnother(data));
+    reset();
   };
   const onError = (data: any) => {
     // console.log(data);
@@ -152,8 +155,10 @@ const AnotherWalletForm: FC<Props> = () => {
               placeholder='Enter address'
             />
           </Box>
-          <Button
+          <LoadingButton
+            variant='contained'
             type='submit'
+            loading={depositLoading}
             sx={{
               padding: '12px',
               marginTop: '28px',
@@ -167,7 +172,7 @@ const AnotherWalletForm: FC<Props> = () => {
             }}
           >
             <PlusIcon fill={theme.palette.black} />
-          </Button>
+          </LoadingButton>
         </Box>
         <Box
           sx={{

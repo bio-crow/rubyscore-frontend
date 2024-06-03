@@ -275,6 +275,31 @@ export const networkChains: Chain[] = [
     },
     testnet: false,
   },
+  {
+    id: 5343521,
+    name: 'Scroll Sepolia Testnet',
+    network: 'Scroll Sepolia Testnet',
+    nativeCurrency: {
+      decimals: 18,
+      name: 'Scroll Sepolia Testnet',
+      symbol: 'ETH',
+    },
+    rpcUrls: {
+      public: {
+        http: ['https://scroll-testnet.rpc.grove.city/v1/a7a7c8e2'],
+      },
+      default: {
+        http: ['https://scroll-testnet.rpc.grove.city/v1/a7a7c8e2'],
+      },
+    },
+    blockExplorers: {
+      default: {
+        name: 'Scroll Sepolia Testnet',
+        url: 'https://sepolia.scrollscan.com',
+      },
+    },
+    testnet: false,
+  },
 ];
 export const networkContracts = {
   app: { contract: '0x009dbfee9e155766af434ed1652ca3769b05e76f', chainId: 10 },

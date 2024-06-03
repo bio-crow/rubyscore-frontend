@@ -1,28 +1,28 @@
 import { Box } from '@mui/system';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
-import CustomInput from '@/components/common/ui/CustomInput/CustomInput';
+import LoadingButton from '@mui/lab/LoadingButton';
 import PlusIcon from '@/components/common/Icons/PlusIcon';
-import { Button } from '@mui/material';
-import CustomSelect from '@/components/common/ui/CustomSelect/CustomSelect';
 import { networkOptions } from '@/modules/Transactions/BalanceTab/sections/DepositSection/mokeData';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { depositSingleSchema } from '@/utils/validationConfig';
 import { DepositSingleFormContext } from '@/context/index';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { CLAIM_PROFILE_FIELDS, DEPOSIT_ANOTHER_FIELDS, DEPOSIT_SINGLE_FIELDS } from '@/constants/formFields';
-import { wagmiCheckName } from '@/core/api/contract/contract.api';
-import { claimProfile } from '@/core/thunk/user.thunk';
+import { DEPOSIT_ANOTHER_FIELDS, DEPOSIT_SINGLE_FIELDS } from '@/constants/formFields';
+
 import { FormInputText } from '@/components/common/fields/InputField';
 import { FormSelect } from '@/components/common/fields/SelectField';
+import { useAppDispatch, useAppSelector } from '@/core/store';
+import { depositSingle } from '@/core/thunk/deposit.thunk';
 
 interface Props {}
 
 const SingleWalletForm: FC<Props> = () => {
   const theme = useCustomTheme();
   const isLg = useMediaQuery(theme.breakpoints.up('lg'));
-  const [network, setNetwork] = useState('zora');
+  const dispatch = useAppDispatch();
+  const depositLoading = useAppSelector(state => state.depositState.depositLoading);
   const {
     register,
     handleSubmit,
@@ -37,12 +37,14 @@ const SingleWalletForm: FC<Props> = () => {
     reset,
   } = useForm({
     resolver: yupResolver<any>(depositSingleSchema),
+    shouldUnregister: true,
     defaultValues: {
       [DEPOSIT_ANOTHER_FIELDS.NETWORK]: 'scroll',
     },
   });
   const onSubmit = async (data: any) => {
-    // console.log(data)
+    dispatch(depositSingle(data));
+    reset();
   };
   const onError = (data: any) => {
     //  console.log(data)
@@ -122,8 +124,10 @@ const SingleWalletForm: FC<Props> = () => {
           </Box>
           <FormInputText name={DEPOSIT_SINGLE_FIELDS.VALUE} control={control} placeholder='Enter value' />
         </Box>
-        <Button
+        <LoadingButton
+          variant='contained'
           type='submit'
+          loading={depositLoading}
           sx={{
             marginTop: '28px',
             padding: '12px',
@@ -137,7 +141,7 @@ const SingleWalletForm: FC<Props> = () => {
           }}
         >
           <PlusIcon fill={theme.palette.black} />
-        </Button>
+        </LoadingButton>
       </form>
     </DepositSingleFormContext.Provider>
   );

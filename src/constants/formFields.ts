@@ -5,11 +5,11 @@ export const SEARCH_WALLET_FIELD = {
   WALLET: 'wallet',
 };
 export const DEPOSIT_SINGLE_FIELDS = {
-  NETWORK: 'network',
+  NETWORK: 'project',
   VALUE: 'value',
 };
 export const DEPOSIT_ANOTHER_FIELDS = {
-  NETWORK: 'network',
+  NETWORK: 'project',
   VALUE: 'value',
   ADDRESS: 'address',
 };

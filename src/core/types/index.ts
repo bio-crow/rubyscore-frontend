@@ -152,7 +152,7 @@ export interface IDepositSinglePayload {
 export interface IDepositAnotherPayload {
   project: string;
   value: string;
-  address: string;
+  address: any;
 }
 export interface IDashboardTransactionsResponse {
   result: {
