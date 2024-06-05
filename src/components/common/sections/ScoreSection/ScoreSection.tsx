@@ -155,13 +155,14 @@ const ScoreSection: FC<Props> = ({
       points: userScoreList['zora']?.score,
       rank: userScoreList['zora']?.rank,
     },
-    // {
-    //   index: 'taiko',
-    //   title: 'Taiko',
-    //   icon: networkStaticData['taiko'].icon,
-    //   lvl: userScoreList['taiko']?.level,
-    //   points: userScoreList['taiko']?.score,
-    // },
+    {
+      index: 'taiko',
+      title: 'Taiko',
+      icon: networkStaticData['taiko'].icon,
+      lvl: userScoreList['taiko']?.level,
+      points: userScoreList['taiko']?.score,
+      rank: userScoreList['taiko']?.rank,
+    },
     {
       index: 'mantle',
       title: 'Mantle',

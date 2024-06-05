@@ -225,31 +225,31 @@ export const networkChains: Chain[] = [
     },
     testnet: false,
   },
-  // {
-  //   id: 167008,
-  //   name: 'Taiko Testnet',
-  //   network: 'Taiko Testnet',
-  //   nativeCurrency: {
-  //     decimals: 18,
-  //     name: 'Taiko Testnet',
-  //     symbol: 'ETH',
-  //   },
-  //   rpcUrls: {
-  //     public: {
-  //       http: ['https://taiko-katla.blockpi.network/v1/rpc/public'],
-  //     },
-  //     default: {
-  //       http: ['https://taiko-katla.blockpi.network/v1/rpc/public'],
-  //     },
-  //   },
-  //   blockExplorers: {
-  //     default: {
-  //       name: 'Taiko Testnet',
-  //       url: 'https://explorer.katla.taiko.xyz\n',
-  //     },
-  //   },
-  //   testnet: false,
-  // },
+  {
+    id: 167000,
+    name: 'Taiko Mainnet',
+    network: 'Taiko Mainnet',
+    nativeCurrency: {
+      decimals: 18,
+      name: 'Taiko Testnet',
+      symbol: 'ETH',
+    },
+    rpcUrls: {
+      public: {
+        http: ['https://rpc.mainnet.taiko.xyz'],
+      },
+      default: {
+        http: ['https://rpc.mainnet.taiko.xyz'],
+      },
+    },
+    blockExplorers: {
+      default: {
+        name: 'Taiko Testnet',
+        url: 'https://taikoscan.network',
+      },
+    },
+    testnet: false,
+  },
   {
     id: 5000,
     name: 'Mantle Mainnet',
@@ -312,7 +312,7 @@ export const networkContracts = {
   manta: { contract: '0xbDB018e21AD1e5756853fe008793a474d329991b', chainId: 169 },
   blast: { contract: '0x009DBFEe9E155766AF434ED1652CA3769B05E76f', chainId: 81457 },
   zora: { contract: '0xbDB018e21AD1e5756853fe008793a474d329991b', chainId: 7777777 },
-  // taiko: { contract: '', chainId: 167008 },
+  taiko: { contract: '0xDC3D8318Fbaec2de49281843f5bba22e78338146', chainId: 167000 },
   mantle: { contract: '0xDC3D8318Fbaec2de49281843f5bba22e78338146', chainId: 5000 },
 };
 export const networkVoteContracts = {
@@ -324,7 +324,7 @@ export const networkVoteContracts = {
   manta: { contract: '0xF57Cb671D50535126694Ce5Cc3CeBe3F32794896', chainId: 169 },
   blast: { contract: '0xbDB018e21AD1e5756853fe008793a474d329991b', chainId: 81457 },
   zora: { contract: '0xDC3D8318Fbaec2de49281843f5bba22e78338146', chainId: 7777777 },
-  // taiko: { contract: '', chainId: 167008 },
+  taiko: { contract: '0x4D1E2145082d0AB0fDa4a973dC4887C7295e21aB', chainId: 167000 },
   mantle: { contract: '0x4D1E2145082d0AB0fDa4a973dC4887C7295e21aB', chainId: 5000 },
 };
 export const prodAttestationContracts = {

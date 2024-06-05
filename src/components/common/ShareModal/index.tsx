@@ -23,6 +23,7 @@ import MantaImage from 'public/asserts/net/manta.svg';
 import BlastImage from 'public/asserts/net/blast.svg';
 import ZoraImage from 'public/asserts/net/Zora.svg';
 import MantleImage from 'public/asserts/net/mantle.svg';
+import TaikoImage from 'public/asserts/net/taiko.svg';
 
 const networkName = {
   zk_era: {
@@ -102,6 +103,15 @@ const networkName = {
     src: MantleImage,
     twitterAccount: '@0xMantle',
     hashtag: 'Mantle',
+    telegramName: function () {
+      return this.hashtag;
+    },
+  },
+  taiko: {
+    title: 'Taiko',
+    src: TaikoImage,
+    twitterAccount: '@taikoxyz',
+    hashtag: 'TAIKO',
     telegramName: function () {
       return this.hashtag;
     },

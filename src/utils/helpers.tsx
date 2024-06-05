@@ -680,11 +680,11 @@ export const getContractConfig = (project: string, contractInfo: any) => {
         address: contractInfo.zora.contract,
         chainId: contractInfo.zora.chainId,
       };
-    // case 'taiko':
-    //   return {
-    //     address: contractInfo.taiko.contract,
-    //     chainId: contractInfo.taiko.chainId,
-    //   };
+    case 'taiko':
+      return {
+        address: contractInfo.taiko.contract,
+        chainId: contractInfo.taiko.chainId,
+      };
     case 'mantle':
       return {
         address: contractInfo.mantle.contract,
