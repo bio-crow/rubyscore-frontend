@@ -3,6 +3,8 @@ import {
   IAttestationData,
   ILeaderboardData,
   ILeaderboardUser,
+  IMultisendBalanceData,
+  IMultisendTransactionsHistoryData,
   IStreakDays,
   ITask,
   IUserGradation,
@@ -21,6 +23,7 @@ import {
 } from '@/core/api/dashboard.api';
 import { fetchClaimLevelSignature } from '@/core/api/contract/contract.achievements.api';
 import { transformApiTransactionResponse } from '@/utils/helpers';
+import { fetchMultisendTransactionsHistoryData } from '@/core/api/deposit.api';
 
 export interface ILoginPayload {
   signature: string;
@@ -145,7 +148,15 @@ export interface IVotePayload {
   account: any;
   project: string;
 }
-
+export interface IDepositSinglePayload {
+  project: string;
+  value: string;
+}
+export interface IDepositAnotherPayload {
+  project: string;
+  value: string;
+  address: any;
+}
 export interface IDashboardTransactionsResponse {
   result: {
     tx1: number;
@@ -380,4 +391,17 @@ export interface IInfoChartVolumeResponse {
 }
 export interface IAttestationDataResponse {
   result: IAttestationData;
+}
+export interface IMultisendBalanceResponse {
+  result: IMultisendBalanceData[];
+  totalBalance: string;
+  totalBalanceFormatted: string;
+  totalBalanceOnHold: string;
+  totalBalanceOnHoldFormatted: string;
+  is_ok: boolean;
+}
+export interface IMultisendTransactionsHistoryResponse {
+  result: IMultisendTransactionsHistoryData[];
+  address: any;
+  is_ok: boolean;
 }

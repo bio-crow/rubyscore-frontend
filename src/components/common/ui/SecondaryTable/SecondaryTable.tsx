@@ -6,7 +6,10 @@ const SecondaryTable = styled(DataGrid)(({ theme }: { theme: CustomTheme | any }
   return {
     '&.MuiDataGrid-root': {
       border: 'none',
-      borderRadius: 'unset',
+      borderRadius: '10px',
+    },
+    '.MuiDataGrid-iconSeparator': {
+      display: 'none',
     },
     '.MuiDataGrid-columnHeaders': {
       background: theme.palette.white10,
@@ -18,6 +21,14 @@ const SecondaryTable = styled(DataGrid)(({ theme }: { theme: CustomTheme | any }
       fontStyle: 'normal',
       fontWeight: 500,
       lineHeight: '24px',
+    },
+    '.MuiDataGrid-columnHeader': {
+      '&:focus-within': {
+        outline: 'none',
+      },
+      ':focus': {
+        outline: 'none',
+      },
     },
     '.MuiDataGrid-columnHeaderTitleContainer': {
       paddingLeft: '20px',
@@ -34,19 +45,21 @@ const SecondaryTable = styled(DataGrid)(({ theme }: { theme: CustomTheme | any }
       fontWeight: 500,
       lineHeight: '24px',
       paddingLeft: '30px',
-      '&:focus': {
-        outline: 'unset',
+      '&:focus-within': {
+        outline: 'none',
+      },
+      ':focus': {
+        outline: 'none',
       },
     },
     '.MuiDataGrid-virtualScroller': {
-      background: theme.palette.black,
+      background: theme.palette.backgroundColor,
       padding: '0',
     },
-    '.MuiDataGrid-footerContainer': {
-      display: 'none',
-    },
+    '.MuiDataGrid-footerContainer': {},
     '.MuiDataGrid-main': {
-      borderRadius: '10px',
+      borderRadius: '10px 10px 0px 0px',
+      border: `1px solid ${theme.palette.white10}`,
     },
     '.active-user-highlight': {
       background: theme.palette.gray,

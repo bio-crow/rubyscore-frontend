@@ -1,50 +1,66 @@
 import { DashboardTabIndexType } from '@/types/index';
 
+interface NetworkStatic {
+  icon: string;
+  label: string;
+}
+
 export const networkStaticData: {
-  zk_evm: { icon: string };
-  zk_era: { icon: string };
-  linea: { icon: string };
-  base: { icon: string };
-  scroll: { icon: string };
-  rubyscore: { icon: string };
-  manta: { icon: string };
-  blast: { icon: string };
-  zora: { icon: string };
-  taiko: { icon: string };
-  mantle: { icon: string };
+  zk_evm: NetworkStatic;
+  zk_era: NetworkStatic;
+  linea: NetworkStatic;
+  base: NetworkStatic;
+  scroll: NetworkStatic;
+  rubyscore: NetworkStatic;
+  manta: NetworkStatic;
+  blast: NetworkStatic;
+  zora: NetworkStatic;
+  taiko: NetworkStatic;
+  mantle: NetworkStatic;
 } = {
   zk_era: {
     icon: '/asserts/net/zkSync.svg',
+    label: 'zkSync',
   },
   linea: {
     icon: '/asserts/net/Linea.svg',
+    label: 'Linea',
   },
   base: {
     icon: '/asserts/net/Base.svg',
+    label: 'Base',
   },
   zk_evm: {
     icon: '/asserts/net/zkEvm.svg',
+    label: 'zkEvm',
   },
   scroll: {
     icon: '/asserts/net/Scroll.svg',
+    label: 'Scroll',
   },
   rubyscore: {
     icon: '/asserts/net/rubyscore.svg',
+    label: 'Rubyscore',
   },
   manta: {
     icon: '/asserts/net/manta.svg',
+    label: 'Manta',
   },
   blast: {
     icon: '/asserts/net/blast.svg',
+    label: 'Blast',
   },
   zora: {
     icon: '/asserts/net/Zora.svg',
+    label: 'Zora',
   },
   taiko: {
     icon: '/asserts/net/taiko.svg',
+    label: 'Taiko',
   },
   mantle: {
     icon: '/asserts/net/mantle.svg',
+    label: 'Mantle',
   },
 };
 export const myLevelIcons = {

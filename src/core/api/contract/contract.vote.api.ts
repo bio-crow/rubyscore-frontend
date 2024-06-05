@@ -1,5 +1,5 @@
-import { getNetwork, switchNetwork, waitForTransaction, writeContract } from '@wagmi/core';
-import { getVoteBaseContractConfig } from '@/utils/helpers';
+import { waitForTransaction, writeContract } from '@wagmi/core';
+import { getContractConfig } from '@/utils/helpers';
 
 import { IVotePayload } from '@/core/types';
 import { networkVoteContracts } from '@/providers/networkChains';
@@ -7,16 +7,12 @@ import { abiVote } from '@/constants/abiVote';
 import { toast } from 'react-toastify';
 import { parseEther } from 'viem';
 import { wagmiConfig } from '@/providers/walletConfig';
+import { switchToContractChain } from '@/core/api/contract/helpers';
 export const wagmiVote = async (data: IVotePayload): Promise<any> => {
   const action = async (data: IVotePayload) => {
     const { project, account } = data;
-    const baseConfig = getVoteBaseContractConfig(project, networkVoteContracts);
-    const { chain, chains } = await getNetwork();
-    if (chain && chain.id !== baseConfig.chainId) {
-      await switchNetwork({
-        chainId: baseConfig.chainId,
-      });
-    }
+    const baseConfig = getContractConfig(project, networkVoteContracts);
+    await switchToContractChain(baseConfig.chainId);
 
     let config: any = {
       ...baseConfig,

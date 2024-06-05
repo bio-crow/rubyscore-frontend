@@ -1,10 +1,16 @@
-import { GridRenderCellParams } from '@mui/x-data-grid';
+import { GridColumnHeaderParams, GridRenderCellParams } from '@mui/x-data-grid';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { Box } from '@mui/system';
 import Image from 'next/image';
 import CopyIcon from '@/components/common/Icons/CopyIcon';
 import { copyToClickBoard } from '@/utils/helpers';
 import { useAppSelector } from '@/core/store';
+import CustomTooltip from '@/components/common/CustomTooltip/CustomTooltip';
+import { GasHeaderTooltip, TimeHeaderTooltip } from '@/utils/tooltipsContent';
+import InfoIcon from '@/components/common/Icons/InfoIcon';
+import CustomInput from '@/components/common/ui/CustomInput/CustomInput';
+import { networkStaticData } from '@/constants/index';
+import { DashboardTabIndexType } from '@/types/index';
 
 export const ReferralUserCell = (params: GridRenderCellParams<any>) => {
   const theme = useCustomTheme();
@@ -53,6 +59,92 @@ export const ReferralUserCell = (params: GridRenderCellParams<any>) => {
           </Box>
         </>
       )}
+    </Box>
+  );
+};
+
+export const NetworkCell = (params: GridRenderCellParams<any>) => {
+  const project = params.row.project.name;
+  // @ts-ignore
+  const icon = networkStaticData[project]?.icon;
+  // @ts-ignore
+  const label = networkStaticData[project]?.label;
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '5px',
+      }}
+    >
+      <Image src={icon} alt='icon' width='24' height='24' />
+      <Box>{label}</Box>
+    </Box>
+  );
+};
+
+export const TimeHeader = (params: GridColumnHeaderParams) => {
+  const theme = useCustomTheme();
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '10px',
+        color: theme.palette.white50,
+      }}
+    >
+      <Box>Time</Box>
+      <CustomTooltip title={<TimeHeaderTooltip />}>
+        <Box
+          sx={{
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          <InfoIcon fill={theme.palette.white50} />
+        </Box>
+      </CustomTooltip>
+    </Box>
+  );
+};
+
+export const GasHeader = (params: GridColumnHeaderParams) => {
+  const theme = useCustomTheme();
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '10px',
+        color: theme.palette.white50,
+      }}
+    >
+      <Box>Gas l1 (ETH)</Box>
+      <CustomTooltip title={<GasHeaderTooltip />}>
+        <Box
+          sx={{
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          <InfoIcon fill={theme.palette.white50} />
+        </Box>
+      </CustomTooltip>
+    </Box>
+  );
+};
+
+export const InputTableCell = (params: GridRenderCellParams<any>) => {
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+      }}
+    >
+      <CustomInput value={params.value} sx={{ flex: 1 }} size='medium' variant='outlined' />
     </Box>
   );
 };

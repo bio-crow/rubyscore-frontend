@@ -1,26 +1,16 @@
 import { prodAttestationContracts } from '@/providers/networkChains';
-import { getAchievementsBaseContractConfig } from '@/utils/helpers';
-import {
-  getNetwork,
-  readContract,
-  switchNetwork,
-  waitForTransaction,
-  writeContract,
-  prepareWriteContract,
-} from '@wagmi/core';
+import { getContractConfig } from '@/utils/helpers';
+import { readContract, waitForTransaction, writeContract, prepareWriteContract } from '@wagmi/core';
 import { abiAttestation } from '@/constants/abiAttestation';
-import { IClaimAttestationPayload, IClaimLevelPayload } from '@/core/types';
-import { abiAchievements } from '@/constants/abiAchievements';
-import { formatEther, parseEther } from 'viem';
+import { IClaimAttestationPayload } from '@/core/types';
+import { parseEther } from 'viem';
 import { toast } from 'react-toastify';
-import { wagmiClaimPrice } from '@/core/api/contract/contract.achievements.api';
-import { IAttestationData } from '@/types/index';
-import { abiAttestationCertificate } from '@/constants/abiAttestationCertificate';
+import { switchToContractChain } from '@/core/api/contract/helpers';
 
 export const wagmiAttestationPrice = async (params: { schemaId: string; project: string }): Promise<any> => {
   const action = async (params: { schemaId: string; project: string }) => {
     const { schemaId, project } = params;
-    const baseConfig = getAchievementsBaseContractConfig(project, prodAttestationContracts);
+    const baseConfig = getContractConfig(project, prodAttestationContracts);
     let config: any = {
       ...baseConfig,
       abi: abiAttestation,
@@ -43,14 +33,8 @@ export const wagmiClaimAttestation = async (params: IClaimAttestationPayload): P
       account,
       attestationData: { attestationParams, signature },
     } = params;
-    const { chain, chains } = await getNetwork();
-    const baseConfig = getAchievementsBaseContractConfig(project, prodAttestationContracts);
-
-    if (chain && chain.id !== baseConfig.chainId) {
-      await switchNetwork({
-        chainId: baseConfig.chainId,
-      });
-    }
+    const baseConfig = getContractConfig(project, prodAttestationContracts);
+    await switchToContractChain(baseConfig.chainId);
     let config: any = {
       ...baseConfig,
       abi: abiAttestation,

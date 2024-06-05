@@ -144,7 +144,13 @@ main {
     font-weight: 500;
     line-height: 24px;
 }
-
+.Body-Inter-fw-500-fs-14 {
+    font-family: var(--font-inter);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+}
 .Body-Inter-fw-700-fs-16 {
     font-family: var(--font-inter);
     font-size: 16px;

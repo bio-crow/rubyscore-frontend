@@ -14,6 +14,7 @@ export const FormInputText: FC<Props> = ({ name, control, label, placeholder, In
   return (
     <Controller
       name={name}
+      defaultValue=''
       control={control}
       render={({ field: { onChange, value }, fieldState: { error }, formState }) => (
         <CustomInput
