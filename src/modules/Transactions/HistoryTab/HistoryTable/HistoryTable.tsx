@@ -9,39 +9,16 @@ import { GridRenderCellParams } from '@mui/x-data-grid';
 import { v4 as uuidv4 } from 'uuid';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import NewWindowIcon from '@/components/common/Icons/NewWindowIcon';
+
 interface Props {
   data: any[];
 }
+
 const HistoryTable: FC<Props> = ({ data }) => {
   const theme = useCustomTheme();
   const prepareData = data;
   const openLink = (params: GridRenderCellParams<any>) => {};
-  const columns = [
-    ...HistoryBaseColumns,
-    {
-      field: 'actions',
-      headerName: '',
-      sortable: false,
-      width: 150,
-      renderCell: (params: GridRenderCellParams<any>) => {
-        return (
-          <Box
-            key={uuidv4()}
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '5px',
-              color: theme.palette.lightGreen,
-            }}
-            onClick={() => openLink(params)}
-          >
-            <Box>Link</Box>
-            <NewWindowIcon fill={theme.palette.lightGreen} />
-          </Box>
-        );
-      },
-    },
-  ];
+  const columns = [...HistoryBaseColumns];
   return (
     <SecondaryTable
       getRowId={params => uuidv4()}

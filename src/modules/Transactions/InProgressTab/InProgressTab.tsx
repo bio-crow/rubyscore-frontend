@@ -4,9 +4,20 @@ import { inProgressData } from '@/modules/Transactions/InProgressTab/InProgressT
 import FourthButton from '@/components/common/ui/FourthButton/FourthButton';
 import TrashIcon from '@/components/common/Icons/TrashIcon';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
+import {
+  getMultisendTransactionsHistory,
+  getMultisendTransactionsInProgress,
+} from '@/core/thunk/deposit.thunk';
+import { useAppDispatch, useAppSelector } from '@/core/store';
+import { useEffect } from 'react';
 
 const InProgressTab = () => {
   const theme = useCustomTheme();
+  const dispatch = useAppDispatch();
+  const inProgressData = useAppSelector(state => state.depositState.inProgressData);
+  useEffect(() => {
+    dispatch(getMultisendTransactionsInProgress());
+  }, []);
   return (
     <Box
       sx={{

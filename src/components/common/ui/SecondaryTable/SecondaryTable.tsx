@@ -5,7 +5,7 @@ import { DataGrid } from '@mui/x-data-grid';
 const SecondaryTable = styled(DataGrid)(({ theme }: { theme: CustomTheme | any }) => {
   return {
     '&.MuiDataGrid-root': {
-      border: `1px solid ${theme.palette.white10}`,
+      border: 'none',
       borderRadius: '10px',
     },
     '.MuiDataGrid-iconSeparator': {
@@ -56,11 +56,10 @@ const SecondaryTable = styled(DataGrid)(({ theme }: { theme: CustomTheme | any }
       background: theme.palette.backgroundColor,
       padding: '0',
     },
-    '.MuiDataGrid-footerContainer': {
-      display: 'none',
-    },
+    '.MuiDataGrid-footerContainer': {},
     '.MuiDataGrid-main': {
-      borderRadius: '10px',
+      borderRadius: '10px 10px 0px 0px',
+      border: `1px solid ${theme.palette.white10}`,
     },
     '.active-user-highlight': {
       background: theme.palette.gray,

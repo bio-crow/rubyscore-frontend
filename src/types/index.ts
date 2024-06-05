@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { IUserTransactionsDatesResponse } from '@/core/types';
+import { IMultisendTransactionsHistoryResponse, IUserTransactionsDatesResponse } from '@/core/types';
 
 export type ChartIndexType =
   | 'transactions'
@@ -263,4 +263,33 @@ export interface IAttestationData {
     attestationData: string;
   } | null;
   signature: string | null;
+}
+export interface IMultisendBalanceData {
+  project: DashboardTabIndexType;
+  balance: string;
+  balanceFormatted: string;
+  balanceOnHold: string;
+  balanceOnHoldFormatted: string;
+}
+export interface IMultisendTotalBalanceData {
+  totalBalance: string;
+  totalBalanceFormatted: string;
+  totalBalanceOnHold: string;
+  totalBalanceOnHoldFormatted: string;
+}
+export interface IMultisendTransactionsHistoryData {
+  L1Gas: string;
+  createdAt: string;
+  id: number;
+  project: {
+    id: number;
+    name: DashboardTabIndexType;
+  };
+  sendAt: string;
+  status: string;
+  to: any;
+  txHash: string;
+  txHashLink: string;
+  type: string;
+  value: string;
 }

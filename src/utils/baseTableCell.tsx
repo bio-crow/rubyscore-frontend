@@ -10,6 +10,7 @@ import { GasHeaderTooltip, TimeHeaderTooltip } from '@/utils/tooltipsContent';
 import InfoIcon from '@/components/common/Icons/InfoIcon';
 import CustomInput from '@/components/common/ui/CustomInput/CustomInput';
 import { networkStaticData } from '@/constants/index';
+import { DashboardTabIndexType } from '@/types/index';
 
 export const ReferralUserCell = (params: GridRenderCellParams<any>) => {
   const theme = useCustomTheme();
@@ -61,7 +62,13 @@ export const ReferralUserCell = (params: GridRenderCellParams<any>) => {
     </Box>
   );
 };
+
 export const NetworkCell = (params: GridRenderCellParams<any>) => {
+  const project = params.row.project.name;
+  // @ts-ignore
+  const icon = networkStaticData[project]?.icon;
+  // @ts-ignore
+  const label = networkStaticData[project]?.label;
   return (
     <Box
       sx={{
@@ -70,8 +77,8 @@ export const NetworkCell = (params: GridRenderCellParams<any>) => {
         gap: '5px',
       }}
     >
-      <Image src={networkStaticData['zk_evm'].icon} alt='icon' width='24' height='24' />
-      <Box>{params.row.network}</Box>
+      <Image src={icon} alt='icon' width='24' height='24' />
+      <Box>{label}</Box>
     </Box>
   );
 };

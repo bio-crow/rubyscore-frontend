@@ -143,7 +143,7 @@ export const BalanceAndSentBaseColumns: GridColDef[] = [
 ];
 export const InProgressBaseColumns: GridColDef[] = [
   {
-    field: 'address',
+    field: 'to',
     headerName: 'Address',
     sortable: false,
     flex: 1,
@@ -162,21 +162,27 @@ export const InProgressBaseColumns: GridColDef[] = [
     width: 150,
   },
   {
-    field: 'network',
+    field: 'project',
     headerName: 'Network',
     sortable: false,
     width: 150,
     renderCell: NetworkCell,
   },
   {
-    field: 'gas',
+    field: 'L1Gas',
     headerName: 'Gas',
     sortable: false,
     width: 150,
   },
   {
-    field: 'time',
+    field: 'sendAt',
     headerName: 'Time',
+    sortable: false,
+    width: 150,
+  },
+  {
+    field: 'status',
+    headerName: 'Status',
     sortable: false,
     width: 150,
   },
@@ -210,7 +216,7 @@ export const RefferalsBaseColumns: GridColDef[] = [
 ];
 export const HistoryBaseColumns: GridColDef[] = [
   {
-    field: 'address',
+    field: 'to',
     headerName: 'Address',
     sortable: false,
     flex: 1,
@@ -229,21 +235,33 @@ export const HistoryBaseColumns: GridColDef[] = [
     width: 150,
   },
   {
-    field: 'network',
+    field: 'project',
     headerName: 'Network',
     sortable: false,
     width: 150,
     renderCell: NetworkCell,
   },
   {
-    field: 'time',
+    field: 'createdAt',
     headerName: 'Time',
+    sortable: false,
+    width: 200,
+  },
+  {
+    field: 'sendAt',
+    headerName: 'Output date',
+    sortable: false,
+    width: 200,
+  },
+  {
+    field: 'status',
+    headerName: 'Status',
     sortable: false,
     width: 150,
   },
   {
-    field: 'outputDate',
-    headerName: 'Output date',
+    field: 'txHashLink',
+    headerName: 'Link',
     sortable: false,
     width: 150,
   },

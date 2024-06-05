@@ -3,14 +3,20 @@ import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { TooltipBalanceAndSend } from '@/utils/tooltipsContent';
 import InfoIcon from '@/components/common/Icons/InfoIcon';
 import CustomTooltip from '@/components/common/CustomTooltip/CustomTooltip';
-import {
-  netsBalances,
-  totalRubyScore,
-} from '@/modules/Transactions/BalanceTab/sections/BalanceSection/modeData';
 import Image from 'next/image';
+import { useAppDispatch, useAppSelector } from '@/core/store';
+import { useEffect } from 'react';
+import { getMultisendBalance } from '@/core/thunk/deposit.thunk';
+import { networkStaticData } from '@/constants/index';
 
 const BalanceSection = () => {
   const theme = useCustomTheme();
+  const dispatch = useAppDispatch();
+  const balanceData = useAppSelector(state => state.depositState.balanceData);
+  const totalBalance = useAppSelector(state => state.depositState.totalBalance);
+  useEffect(() => {
+    dispatch(getMultisendBalance());
+  }, []);
   return (
     <Box
       sx={{
@@ -85,21 +91,21 @@ const BalanceSection = () => {
                 color: theme.palette.lightGreen,
               }}
             >
-              {totalRubyScore.amount}
+              {totalBalance.totalBalanceFormatted}
             </Box>
             <Box
               sx={{
                 color: theme.palette.powderWhite,
               }}
             >
-              ({totalRubyScore.amountReal})
+              {totalBalance.totalBalanceOnHoldFormatted}
             </Box>
             <Box
               sx={{
                 color: theme.palette.white50,
               }}
             >
-              {totalRubyScore.currency}
+              ETH
             </Box>
           </Box>
         </Box>
@@ -110,9 +116,9 @@ const BalanceSection = () => {
             gap: '20px',
           }}
         >
-          {netsBalances.map(item => (
+          {balanceData.map(item => (
             <Box
-              key={item.net.title}
+              key={item.project}
               sx={{
                 display: 'flex',
                 justifyContent: 'space-between',
@@ -131,14 +137,14 @@ const BalanceSection = () => {
                   gap: '10px',
                 }}
               >
-                <Image src={item.net.icon} alt='icon' width='24' height='24' />
+                <Image src={networkStaticData[item.project]?.icon} alt='icon' width='24' height='24' />
                 <Box
                   sx={{
                     color: theme.palette.powderWhite,
                   }}
                   className='Body-Lato-fw-600-fs-14'
                 >
-                  {item.net.title}
+                  {networkStaticData[item.project]?.label}
                 </Box>
               </Box>
               <Box
@@ -153,21 +159,21 @@ const BalanceSection = () => {
                     color: theme.palette.lightGreen,
                   }}
                 >
-                  {item.amount}
+                  {item.balanceFormatted}
                 </Box>
                 <Box
                   sx={{
                     color: theme.palette.powderWhite,
                   }}
                 >
-                  ({item.amountReal})
+                  ({item.balanceOnHold})
                 </Box>
                 <Box
                   sx={{
                     color: theme.palette.white50,
                   }}
                 >
-                  {item.currency}
+                  ETH
                 </Box>
               </Box>
             </Box>
