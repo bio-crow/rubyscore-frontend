@@ -7,10 +7,11 @@ import { getMultisendTransactionsHistory } from '@/core/thunk/deposit.thunk';
 
 const HistoryTab = () => {
   const dispatch = useAppDispatch();
+  const activeProject = useAppSelector(state => state.depositState.activeProject);
   const historyData = useAppSelector(state => state.depositState.historyData);
   useEffect(() => {
-    dispatch(getMultisendTransactionsHistory());
-  }, []);
+    dispatch(getMultisendTransactionsHistory({ project: activeProject }));
+  }, [activeProject]);
   return (
     <Box
       sx={{
@@ -22,7 +23,6 @@ const HistoryTab = () => {
       <Box
         sx={{
           display: 'flex',
-          maxWidth: '1100px',
           marginLeft: 'auto',
           marginRight: 'auto',
           width: '100%',

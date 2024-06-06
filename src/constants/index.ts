@@ -63,6 +63,58 @@ export const networkStaticData: {
     label: 'Mantle',
   },
 };
+export const networkOptions: { text: string; value: DashboardTabIndexType; icon: string }[] = [
+  {
+    text: networkStaticData['scroll'].label,
+    icon: networkStaticData['scroll'].icon,
+    value: 'scroll',
+  },
+  {
+    text: networkStaticData['zk_evm'].label,
+    icon: networkStaticData['zk_evm'].icon,
+    value: 'zk_evm',
+  },
+  {
+    text: networkStaticData['zk_era'].label,
+    icon: networkStaticData['zk_era'].icon,
+    value: 'zk_era',
+  },
+  {
+    text: networkStaticData['linea'].label,
+    icon: networkStaticData['linea'].icon,
+    value: 'linea',
+  },
+  {
+    text: networkStaticData['base'].label,
+    icon: networkStaticData['base'].icon,
+    value: 'base',
+  },
+  {
+    text: networkStaticData['manta'].label,
+    icon: networkStaticData['manta'].icon,
+    value: 'manta',
+  },
+  {
+    text: networkStaticData['blast'].label,
+    icon: networkStaticData['blast'].icon,
+    value: 'blast',
+  },
+  {
+    text: networkStaticData['zora'].label,
+    icon: networkStaticData['zora'].icon,
+    value: 'zora',
+  },
+  {
+    text: networkStaticData['mantle'].label,
+    icon: networkStaticData['mantle'].icon,
+    value: 'mantle',
+  },
+  {
+    text: networkStaticData['taiko'].label,
+    icon: networkStaticData['taiko'].icon,
+    value: 'taiko',
+  },
+];
 export const myLevelIcons = {
   zk_era: [
     '/asserts/box/zkSynk/zkSynk1.png',

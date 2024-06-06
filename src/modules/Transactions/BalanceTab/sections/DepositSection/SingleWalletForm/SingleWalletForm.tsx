@@ -2,7 +2,6 @@ import { Box } from '@mui/system';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import LoadingButton from '@mui/lab/LoadingButton';
 import PlusIcon from '@/components/common/Icons/PlusIcon';
-import { networkOptions } from '@/modules/Transactions/BalanceTab/sections/DepositSection/mokeData';
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -15,6 +14,7 @@ import { FormInputText } from '@/components/common/fields/InputField';
 import { FormSelect } from '@/components/common/fields/SelectField';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { depositSingle } from '@/core/thunk/deposit.thunk';
+import { networkOptions } from '@/constants/index';
 
 interface Props {}
 

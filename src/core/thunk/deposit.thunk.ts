@@ -38,8 +38,8 @@ export const getMultisendBalance = createAsyncThunk(
 );
 export const getMultisendTransactionsHistory = createAsyncThunk(
   'depositSlice/getMultisendTransactionsHistory',
-  async (args, { dispatch }) => {
-    const res: any = await fetchMultisendTransactionsHistoryData();
+  async ({ project }: { project: string }, { dispatch }) => {
+    const res: any = await fetchMultisendTransactionsHistoryData({ project });
     const data = res?.data;
     if (data?.is_ok) {
       dispatch(setHistoryData(data.result));
@@ -49,8 +49,8 @@ export const getMultisendTransactionsHistory = createAsyncThunk(
 );
 export const getMultisendTransactionsInProgress = createAsyncThunk(
   'depositSlice/getMultisendTransactionsInProgress',
-  async (args, { dispatch }) => {
-    const res: any = await fetchMultisendTransactionsInProgressData();
+  async ({ project }: { project: string }, { dispatch }) => {
+    const res: any = await fetchMultisendTransactionsInProgressData({ project });
     const data = res?.data;
     if (data?.is_ok) {
       dispatch(setInProgressData(data.result));
