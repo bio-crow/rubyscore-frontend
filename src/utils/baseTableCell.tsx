@@ -4,13 +4,18 @@ import { Box } from '@mui/system';
 import Image from 'next/image';
 import CopyIcon from '@/components/common/Icons/CopyIcon';
 import { copyToClickBoard } from '@/utils/helpers';
-import { useAppSelector } from '@/core/store';
+import { useAppDispatch, useAppSelector } from '@/core/store';
 import CustomTooltip from '@/components/common/CustomTooltip/CustomTooltip';
 import { GasHeaderTooltip, TimeHeaderTooltip } from '@/utils/tooltipsContent';
 import InfoIcon from '@/components/common/Icons/InfoIcon';
 import CustomInput from '@/components/common/ui/CustomInput/CustomInput';
-import { networkStaticData } from '@/constants/index';
+import { networkOptions, networkStaticData } from '@/constants/index';
 import { DashboardTabIndexType } from '@/types/index';
+import moment from 'moment';
+import { MouseEvent, useEffect, useState } from 'react';
+import { Menu, MenuItem } from '@mui/material';
+import { setActiveProject } from '@/core/state/deposit.state';
+import { useTimer } from 'react-timer-hook';
 
 export const ReferralUserCell = (params: GridRenderCellParams<any>) => {
   const theme = useCustomTheme();
@@ -62,7 +67,39 @@ export const ReferralUserCell = (params: GridRenderCellParams<any>) => {
     </Box>
   );
 };
-
+export const FromNowCell = (params: GridRenderCellParams<any>) => {
+  const date = params.row.sendAt;
+  return <Box>{moment(date).fromNow()}</Box>;
+};
+export const TimerCell = (params: GridRenderCellParams<any>) => {
+  const date = new Date(params.row.sendAt);
+  const expiryTimestamp = date.getTime();
+  const config: any = {
+    expiryTimestamp,
+  };
+  const { seconds, minutes, hours, days, start } = useTimer(config);
+  useEffect(() => {
+    start();
+  }, []);
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '2px',
+      }}
+    >
+      <Box>{seconds}s</Box>
+      <Box>:</Box>
+      <Box>{minutes}m</Box>
+      <Box>:</Box>
+      <Box>{hours}h</Box>
+      <Box>:</Box>
+      <Box>{days}d</Box>
+      <Box></Box>
+    </Box>
+  );
+};
 export const NetworkCell = (params: GridRenderCellParams<any>) => {
   const project = params.row.project.name;
   // @ts-ignore
@@ -82,7 +119,77 @@ export const NetworkCell = (params: GridRenderCellParams<any>) => {
     </Box>
   );
 };
-
+export const NetworkHeader = (params: GridColumnHeaderParams) => {
+  const theme = useCustomTheme();
+  const dispatch = useAppDispatch();
+  const activeProject = useAppSelector(state => state.depositState.activeProject);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const chooseProject = (project: DashboardTabIndexType) => {
+    dispatch(setActiveProject(project));
+  };
+  return (
+    <Box>
+      <Box
+        id='net-select-button'
+        aria-controls={open ? 'net-select-menu' : undefined}
+        aria-haspopup='true'
+        sx={{
+          cursor: 'pointer',
+          display: 'flex',
+          gap: '5px',
+          alignItems: 'center',
+        }}
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+      >
+        <Box>Network</Box>
+        <Image src={networkStaticData[activeProject].icon} alt='icon' width='24' height='24' />
+      </Box>
+      <Menu
+        id='net-select-menu'
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'net-select-button',
+        }}
+      >
+        {networkOptions.map(option => (
+          <MenuItem
+            sx={{ background: activeProject === option.value ? theme.palette.white10 : 'transparent' }}
+            key={option.value}
+            onClick={() => chooseProject(option.value)}
+          >
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+              }}
+            >
+              <Image src={option.icon} alt='icon' width='24' height='24' />
+              <Box
+                sx={{
+                  color: theme.palette.powderWhite,
+                }}
+                className='Body-Lato-fw-600-fs-14'
+              >
+                {option.text}
+              </Box>
+            </Box>
+          </MenuItem>
+        ))}
+      </Menu>
+    </Box>
+  );
+};
 export const TimeHeader = (params: GridColumnHeaderParams) => {
   const theme = useCustomTheme();
   return (

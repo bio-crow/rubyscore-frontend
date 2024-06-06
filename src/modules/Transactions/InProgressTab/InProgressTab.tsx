@@ -15,16 +15,16 @@ const InProgressTab = () => {
   const theme = useCustomTheme();
   const dispatch = useAppDispatch();
   const inProgressData = useAppSelector(state => state.depositState.inProgressData);
+  const activeProject = useAppSelector(state => state.depositState.activeProject);
   useEffect(() => {
-    dispatch(getMultisendTransactionsInProgress());
-  }, []);
+    dispatch(getMultisendTransactionsInProgress({ project: activeProject }));
+  }, [activeProject]);
   return (
     <Box
       sx={{
         display: 'flex',
         flexDirection: 'column',
         gap: '20px',
-        maxWidth: '1100px',
         marginLeft: 'auto',
         marginRight: 'auto',
         width: '100%',

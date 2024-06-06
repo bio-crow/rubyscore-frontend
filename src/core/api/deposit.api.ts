@@ -8,11 +8,11 @@ export const fetchMultisendBalanceData = async () => {
     //console.error(error);
   }
 };
-export const fetchMultisendTransactionsHistoryData = async () => {
+export const fetchMultisendTransactionsHistoryData = async ({ project }: { project: string }) => {
   try {
     const config: any = {
       params: {
-        project: 'scroll',
+        project,
         status: `completed,failed,cancelled`,
         type: 'scheduled',
       },
@@ -25,11 +25,11 @@ export const fetchMultisendTransactionsHistoryData = async () => {
     //console.error(error);
   }
 };
-export const fetchMultisendTransactionsInProgressData = async () => {
+export const fetchMultisendTransactionsInProgressData = async ({ project }: { project: string }) => {
   try {
     const config: any = {
       params: {
-        project: 'scroll',
+        project,
         status: `pending,scheduled`,
         type: 'scheduled',
       },

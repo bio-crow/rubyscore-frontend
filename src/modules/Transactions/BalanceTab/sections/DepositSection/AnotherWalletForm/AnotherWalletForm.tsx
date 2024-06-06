@@ -5,7 +5,7 @@ import PlusIcon from '@/components/common/Icons/PlusIcon';
 import CustomTooltip from '@/components/common/CustomTooltip/CustomTooltip';
 import { TooltipAnotherWallet } from '@/utils/tooltipsContent';
 import InfoIcon from '@/components/common/Icons/InfoIcon';
-import { networkOptions } from '@/modules/Transactions/BalanceTab/sections/DepositSection/mokeData';
+
 import { FC, useState } from 'react';
 import { DepositAnotherFormContext } from '@/context/index';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -17,6 +17,7 @@ import { DEPOSIT_ANOTHER_FIELDS, DEPOSIT_SINGLE_FIELDS } from '@/constants/formF
 import { FormSelect } from '@/components/common/fields/SelectField';
 import { depositAnother, depositSingle } from '@/core/thunk/deposit.thunk';
 import { useAppDispatch, useAppSelector } from '@/core/store';
+import { networkOptions } from '@/constants/index';
 
 interface Props {}
 

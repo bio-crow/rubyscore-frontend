@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
+  DashboardTabIndexType,
   IAttestationData,
   IMultisendBalanceData,
   IMultisendTotalBalanceData,
@@ -8,6 +9,7 @@ import {
 import { fetchMultisendBalanceData } from '@/core/api/deposit.api';
 
 interface IDepositState {
+  activeProject: DashboardTabIndexType;
   depositLoading: boolean;
   balanceData: IMultisendBalanceData[];
   totalBalance: IMultisendTotalBalanceData;
@@ -16,6 +18,7 @@ interface IDepositState {
 }
 
 const initialState: IDepositState = {
+  activeProject: 'scroll',
   depositLoading: false,
   balanceData: [],
   totalBalance: {
@@ -47,10 +50,19 @@ export const depositSlice = createSlice({
     setInProgressData: (state, action: PayloadAction<IMultisendTransactionsHistoryData[]>) => {
       state.inProgressData = action.payload;
     },
+    setActiveProject: (state, action: PayloadAction<DashboardTabIndexType>) => {
+      state.activeProject = action.payload;
+    },
   },
 });
 
 export default depositSlice.reducer;
 
-export const { depositLoading, setTotalBalance, setHistoryData, setBalanceData, setInProgressData } =
-  depositSlice.actions;
+export const {
+  depositLoading,
+  setTotalBalance,
+  setActiveProject,
+  setHistoryData,
+  setBalanceData,
+  setInProgressData,
+} = depositSlice.actions;

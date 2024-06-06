@@ -13,7 +13,6 @@ const RefferalsTab = () => {
         display: 'flex',
         flexDirection: 'column',
         gap: '20px',
-        maxWidth: '1100px',
         marginLeft: 'auto',
         marginRight: 'auto',
         width: '100%',

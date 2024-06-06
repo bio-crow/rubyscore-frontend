@@ -1,9 +1,6 @@
 import { Controller } from 'react-hook-form';
 import { FC } from 'react';
-import CustomInput from '@/components/common/ui/CustomInput/CustomInput';
-import { Box } from '@mui/system';
 import CustomSelect from '@/components/common/ui/CustomSelect/CustomSelect';
-import { networkOptions } from '@/modules/Transactions/BalanceTab/sections/DepositSection/mokeData';
 interface Props {
   name: string;
   control: any;

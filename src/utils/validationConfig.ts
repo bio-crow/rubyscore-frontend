@@ -13,11 +13,14 @@ export const claimProfileSchema = yup.object().shape({
     .min(3, 'Min name length is 3'),
 });
 export const depositSingleSchema = yup.object().shape({
-  [DEPOSIT_SINGLE_FIELDS.VALUE]: yup.string().trim().required('Please enter value'),
+  [DEPOSIT_SINGLE_FIELDS.VALUE]: yup.number().required('Please enter value').typeError('Please enter number'),
   [DEPOSIT_SINGLE_FIELDS.NETWORK]: yup.string().trim().required('Please choose network'),
 });
 export const depositAnotherSchema = yup.object().shape({
-  [DEPOSIT_ANOTHER_FIELDS.VALUE]: yup.string().trim().required('Please enter value'),
+  [DEPOSIT_ANOTHER_FIELDS.VALUE]: yup
+    .number()
+    .required('Please enter value')
+    .typeError('Please enter number'),
   [DEPOSIT_ANOTHER_FIELDS.ADDRESS]: yup.string().trim().required('Please enter address'),
   [DEPOSIT_ANOTHER_FIELDS.NETWORK]: yup.string().trim().required('Please choose network'),
 });
