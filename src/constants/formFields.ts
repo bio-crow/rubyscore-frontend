@@ -13,3 +13,8 @@ export const DEPOSIT_ANOTHER_FIELDS = {
   VALUE: 'value',
   ADDRESS: 'address',
 };
+export const BALANCE_AND_SEND_FIELDS = {
+  NETWORK: 'project',
+  VALUE: 'value',
+  ADDRESS: 'address',
+};
