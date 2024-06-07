@@ -7,10 +7,12 @@ import {
   NetworkCell,
   NetworkHeader,
   ReferralUserCell,
+  SelectTableCell,
   TimeHeader,
   TimerCell,
 } from '@/utils/baseTableCell';
 import { dateComparator, numberComparator } from '@/utils/baseTableComparators';
+import { BALANCE_AND_SEND_FIELDS } from '@/constants/formFields';
 export const referralBaseColumns: GridColDef[] = [
   {
     field: 'rank',
@@ -104,40 +106,38 @@ export const leaderBoardBaseColumnsShort: GridColDef[] = [
     width: 150,
   },
 ];
+
 export const BalanceAndSentBaseColumns: GridColDef[] = [
   {
-    field: 'address',
+    field: BALANCE_AND_SEND_FIELDS.ADDRESS,
     headerName: 'Address',
     sortable: false,
-    flex: 1,
     renderCell: InputTableCell,
-    minWidth: 200,
+    width: 180,
   },
   {
-    field: 'value',
+    field: BALANCE_AND_SEND_FIELDS.VALUE,
     headerName: 'Value',
     sortable: false,
     renderCell: InputTableCell,
-    width: 150,
+    width: 180,
   },
   {
     field: 'commission',
     headerName: 'Commission',
     sortable: false,
-    renderCell: InputTableCell,
     width: 150,
   },
   {
-    field: 'network',
+    field: BALANCE_AND_SEND_FIELDS.NETWORK,
     headerName: 'Network',
     sortable: false,
-    renderCell: InputTableCell,
-    width: 150,
+    renderCell: SelectTableCell,
+    width: 180,
   },
   {
     field: 'gas',
     headerName: 'Gas',
-    renderCell: InputTableCell,
     sortable: false,
     renderHeader: GasHeader,
     width: 200,
@@ -145,7 +145,6 @@ export const BalanceAndSentBaseColumns: GridColDef[] = [
   {
     field: 'time',
     headerName: 'Time',
-    renderCell: InputTableCell,
     renderHeader: TimeHeader,
     sortable: false,
     width: 150,

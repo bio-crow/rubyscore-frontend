@@ -16,6 +16,9 @@ import { MouseEvent, useEffect, useState } from 'react';
 import { Menu, MenuItem } from '@mui/material';
 import { setActiveProject } from '@/core/state/deposit.state';
 import { useTimer } from 'react-timer-hook';
+import { FormInputText } from '@/components/common/fields/InputField';
+import { DEPOSIT_ANOTHER_FIELDS } from '@/constants/formFields';
+import { FormSelect } from '@/components/common/fields/SelectField';
 
 export const ReferralUserCell = (params: GridRenderCellParams<any>) => {
   const theme = useCustomTheme();
@@ -245,13 +248,39 @@ export const GasHeader = (params: GridColumnHeaderParams) => {
 };
 
 export const InputTableCell = (params: GridRenderCellParams<any>) => {
+  const { field, row } = params;
   return (
     <Box
       sx={{
         display: 'flex',
+        alignSelf: 'flex-start',
+        paddingTop: '5px',
       }}
     >
-      <CustomInput value={params.value} sx={{ flex: 1 }} size='medium' variant='outlined' />
+      <FormInputText
+        name={`${row.fieldArrayName}.${row.index}.${field}`}
+        control={row.control}
+        placeholder='Enter value'
+      />
+    </Box>
+  );
+};
+export const SelectTableCell = (params: GridRenderCellParams<any>) => {
+  const { field, row } = params;
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        alignSelf: 'flex-start',
+        paddingTop: '5px',
+      }}
+    >
+      <FormSelect
+        name={`${row.fieldArrayName}.${row.index}.${field}`}
+        control={row.control}
+        placeholder='Choose network'
+        options={networkOptions}
+      />
     </Box>
   );
 };

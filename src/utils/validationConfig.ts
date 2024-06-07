@@ -1,4 +1,5 @@
 import {
+  BALANCE_AND_SEND_FIELDS,
   CLAIM_PROFILE_FIELDS,
   DEPOSIT_ANOTHER_FIELDS,
   DEPOSIT_SINGLE_FIELDS,
@@ -26,4 +27,16 @@ export const depositAnotherSchema = yup.object().shape({
 });
 export const searchWalletSchema = yup.object().shape({
   [SEARCH_WALLET_FIELD.WALLET]: yup.string().trim(),
+});
+export const balanceAndSendSchema = yup.object().shape({
+  array: yup.array().of(
+    yup.object({
+      [BALANCE_AND_SEND_FIELDS.VALUE]: yup
+        .number()
+        .required('Please enter value')
+        .typeError('Please enter number'),
+      [BALANCE_AND_SEND_FIELDS.ADDRESS]: yup.string().trim().required('Please enter address'),
+      [BALANCE_AND_SEND_FIELDS.NETWORK]: yup.string().trim().required('Please choose network'),
+    })
+  ),
 });
