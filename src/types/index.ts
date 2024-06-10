@@ -299,5 +299,5 @@ export interface IUserTransaction {
   value: string;
   type: string;
   project: number;
-  sendAt: string;
+  sendAt?: string;
 }

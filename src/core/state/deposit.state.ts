@@ -11,6 +11,7 @@ import { fetchMultisendBalanceData } from '@/core/api/deposit.api';
 interface IDepositState {
   activeProject: DashboardTabIndexType;
   depositLoading: boolean;
+  sendTransactionsLoading: boolean;
   balanceData: IMultisendBalanceData[];
   totalBalance: IMultisendTotalBalanceData;
   historyData: IMultisendTransactionsHistoryData[];
@@ -20,6 +21,7 @@ interface IDepositState {
 const initialState: IDepositState = {
   activeProject: 'scroll',
   depositLoading: false,
+  sendTransactionsLoading: false,
   balanceData: [],
   totalBalance: {
     totalBalance: '',
@@ -53,6 +55,9 @@ export const depositSlice = createSlice({
     setActiveProject: (state, action: PayloadAction<DashboardTabIndexType>) => {
       state.activeProject = action.payload;
     },
+    setSendTransactionsLoading: (state, action: PayloadAction<boolean>) => {
+      state.sendTransactionsLoading = action.payload;
+    },
   },
 });
 
@@ -65,4 +70,5 @@ export const {
   setHistoryData,
   setBalanceData,
   setInProgressData,
+  setSendTransactionsLoading,
 } = depositSlice.actions;

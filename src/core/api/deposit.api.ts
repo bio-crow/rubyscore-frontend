@@ -5,6 +5,7 @@ import {
   IMultisendTransactionsHistoryResponse,
 } from '@/core/types';
 import { IUserTransaction } from '@/types/index';
+import { toast } from 'react-toastify';
 
 export const fetchMultisendBalanceData = async () => {
   try {
@@ -62,11 +63,11 @@ export const fetchProjectTax = async ({ project, value }: { project: any; value:
     //console.error(error);
   }
 };
-export const sendUserTransactions = async (params: { transactions: IUserTransaction[] }) => {
+export const sendUserTransactions = async (data: { transactions: IUserTransaction[] }) => {
   try {
-    const config: any = { params };
-    return await apiPrivateAxios.post<IInfoChartActiveUserResponse>(`/multisend/transactions`, null, config);
-  } catch (error) {
+    return await apiPrivateAxios.post<IInfoChartActiveUserResponse>(`/multisend/transactions`, data);
+  } catch (error: any) {
+    toast(error.response?.data?.message || 'Something went wrong', { position: 'top-right' });
     //console.error(error);
   }
 };
