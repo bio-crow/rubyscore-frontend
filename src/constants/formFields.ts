@@ -17,4 +17,7 @@ export const BALANCE_AND_SEND_FIELDS = {
   NETWORK: 'project',
   VALUE: 'value',
   ADDRESS: 'address',
+  MINUTE: 'm',
+  HOUR: 'h',
+  DAY: 'd',
 };

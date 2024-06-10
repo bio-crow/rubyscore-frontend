@@ -19,6 +19,9 @@ interface Props {
 }
 const emptyFormObject = {
   id: 'id',
+  [BALANCE_AND_SEND_FIELDS.MINUTE]: 1,
+  [BALANCE_AND_SEND_FIELDS.HOUR]: 0,
+  [BALANCE_AND_SEND_FIELDS.DAY]: 0,
   [BALANCE_AND_SEND_FIELDS.ADDRESS]: '',
   [BALANCE_AND_SEND_FIELDS.VALUE]: '',
   [BALANCE_AND_SEND_FIELDS.NETWORK]: 'scroll',
@@ -63,6 +66,13 @@ const SentSection: FC<Props> = ({ tableData }) => {
   const addWallet = () => {
     append({ ...emptyFormObject, id: uuidv4() });
   };
+  useEffect(() => {
+    if (fields.length === 0) {
+      reset({
+        array: [],
+      });
+    }
+  }, [fields]);
   return (
     <BalanceAndSentFormContext.Provider
       value={{

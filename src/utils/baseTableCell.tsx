@@ -12,13 +12,15 @@ import CustomInput from '@/components/common/ui/CustomInput/CustomInput';
 import { networkOptions, networkStaticData } from '@/constants/index';
 import { DashboardTabIndexType } from '@/types/index';
 import moment from 'moment';
-import { MouseEvent, useEffect, useState } from 'react';
+import { MouseEvent, useContext, useEffect, useState } from 'react';
 import { Menu, MenuItem } from '@mui/material';
 import { setActiveProject } from '@/core/state/deposit.state';
 import { useTimer } from 'react-timer-hook';
 import { FormInputText } from '@/components/common/fields/InputField';
-import { DEPOSIT_ANOTHER_FIELDS } from '@/constants/formFields';
+import { BALANCE_AND_SEND_FIELDS, DEPOSIT_ANOTHER_FIELDS } from '@/constants/formFields';
 import { FormSelect } from '@/components/common/fields/SelectField';
+import { fetchProjectTax } from '@/core/api/deposit.api';
+import { BalanceAndSentFormContext } from '@/context/index';
 
 export const ReferralUserCell = (params: GridRenderCellParams<any>) => {
   const theme = useCustomTheme();
@@ -246,7 +248,50 @@ export const GasHeader = (params: GridColumnHeaderParams) => {
     </Box>
   );
 };
-
+export const CommissionCell = (params: GridRenderCellParams<any>) => {
+  const { row } = params;
+  const projectFieldName = `${row.fieldArrayName}.${row.index}.${BALANCE_AND_SEND_FIELDS.NETWORK}`;
+  const valueFieldName = `${row.fieldArrayName}.${row.index}.${BALANCE_AND_SEND_FIELDS.VALUE}`;
+  const { getValues, watch } = useContext(BalanceAndSentFormContext);
+  const [project, setProject] = useState(getValues(projectFieldName));
+  const [value, setValue] = useState(0);
+  const [tax, setTax] = useState<any>(0);
+  useEffect(() => {
+    loadTax();
+  }, [project, value]);
+  const loadTax = async () => {
+    const res: any = await fetchProjectTax({ project, value });
+    if (res?.data?.is_ok) {
+      setTax(res.data.result.tax);
+    } else {
+      setTax('Err');
+    }
+  };
+  useEffect(() => {
+    const subscription = watch((value: any, { name, type }: any) => {
+      if (name === projectFieldName) {
+        const pr = value[row.fieldArrayName][row.index][BALANCE_AND_SEND_FIELDS.NETWORK];
+        setProject(pr);
+      }
+      if (name === valueFieldName) {
+        const val = value[row.fieldArrayName][row.index][BALANCE_AND_SEND_FIELDS.VALUE];
+        setValue(val);
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, [watch]);
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        alignSelf: 'flex-start',
+        paddingTop: '20px',
+      }}
+    >
+      {tax}
+    </Box>
+  );
+};
 export const InputTableCell = (params: GridRenderCellParams<any>) => {
   const { field, row } = params;
   return (
@@ -260,13 +305,14 @@ export const InputTableCell = (params: GridRenderCellParams<any>) => {
       <FormInputText
         name={`${row.fieldArrayName}.${row.index}.${field}`}
         control={row.control}
-        placeholder='Enter value'
+        placeholder=''
       />
     </Box>
   );
 };
 export const SelectTableCell = (params: GridRenderCellParams<any>) => {
   const { field, row } = params;
+
   return (
     <Box
       sx={{
@@ -281,6 +327,66 @@ export const SelectTableCell = (params: GridRenderCellParams<any>) => {
         placeholder='Choose network'
         options={networkOptions}
       />
+    </Box>
+  );
+};
+export const InputDateCell = (params: GridRenderCellParams<any>) => {
+  const { row } = params;
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        gap: '5px',
+        alignSelf: 'flex-start',
+        paddingTop: '5px',
+        '.MuiFormHelperText-root': {
+          position: 'absolute !important',
+          bottom: '-20px',
+        },
+      }}
+    >
+      <Box
+        sx={{
+          display: 'flex',
+          gap: '5px',
+          alignItems: 'center',
+        }}
+      >
+        <FormInputText
+          name={`${row.fieldArrayName}.${row.index}.${BALANCE_AND_SEND_FIELDS.MINUTE}`}
+          control={row.control}
+          placeholder=''
+        />
+        <Box>m</Box>
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          gap: '5px',
+          alignItems: 'center',
+        }}
+      >
+        <FormInputText
+          name={`${row.fieldArrayName}.${row.index}.${BALANCE_AND_SEND_FIELDS.HOUR}`}
+          control={row.control}
+          placeholder=''
+        />
+        <Box>h</Box>
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          gap: '5px',
+          alignItems: 'center',
+        }}
+      >
+        <FormInputText
+          name={`${row.fieldArrayName}.${row.index}.${BALANCE_AND_SEND_FIELDS.DAY}`}
+          control={row.control}
+          placeholder=''
+        />
+        <Box>d</Box>
+      </Box>
     </Box>
   );
 };
