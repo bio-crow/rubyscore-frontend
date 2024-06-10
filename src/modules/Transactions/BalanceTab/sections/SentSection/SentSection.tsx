@@ -7,7 +7,7 @@ import PlusIcon from '@/components/common/Icons/PlusIcon';
 import Disclamer from '@/modules/Transactions/BalanceTab/sections/SentSection/components/Disclamer';
 import FourthButton from '@/components/common/ui/FourthButton/FourthButton';
 import BalanceAndSentTable from '@/modules/Transactions/BalanceTab/sections/SentSection/components/BalanceAndSentTable/BalanceAndSentTable';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { BalanceAndSentFormContext } from '@/context/index';
 import { BALANCE_AND_SEND_FIELDS } from '@/constants/formFields';
@@ -28,6 +28,7 @@ const emptyFormObject = {
 };
 const SentSection: FC<Props> = ({ tableData }) => {
   const theme = useCustomTheme();
+  const [type, setType] = useState('scheduled');
   const {
     register,
     handleSubmit,
@@ -53,8 +54,7 @@ const SentSection: FC<Props> = ({ tableData }) => {
     shouldUnregister: false,
   });
   const onSubmit = async (data: any) => {
-    // console.log(data);
-    //implement request logic
+    //  console.log(data);
     remove();
     reset({
       array: [],
@@ -135,7 +135,7 @@ const SentSection: FC<Props> = ({ tableData }) => {
                 gap: '16px',
               }}
             >
-              <CustomSwitch />
+              <CustomSwitch value={} />
               <Box
                 sx={{
                   color: theme.palette.white50,

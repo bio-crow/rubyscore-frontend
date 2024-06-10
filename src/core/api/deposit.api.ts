@@ -1,5 +1,10 @@
-import { apiPrivateAxios, apiPrivateAxiosLimited } from '@/core/api/axiosConfig';
-import { IMultisendBalanceResponse, IMultisendTransactionsHistoryResponse } from '@/core/types';
+import { apiPrivateAxios, apiPrivateAxiosLimited, apiPublicAxios } from '@/core/api/axiosConfig';
+import {
+  IInfoChartActiveUserResponse,
+  IMultisendBalanceResponse,
+  IMultisendTransactionsHistoryResponse,
+} from '@/core/types';
+import { IUserTransaction } from '@/types/index';
 
 export const fetchMultisendBalanceData = async () => {
   try {
@@ -53,6 +58,14 @@ export const fetchProjectTax = async ({ project, value }: { project: any; value:
       `/multisend/${project}/tax`,
       config
     );
+  } catch (error) {
+    //console.error(error);
+  }
+};
+export const sendUserTransactions = async (params: { transactions: IUserTransaction[] }) => {
+  try {
+    const config: any = { params };
+    return await apiPrivateAxios.post<IInfoChartActiveUserResponse>(`/multisend/transactions`, null, config);
   } catch (error) {
     //console.error(error);
   }

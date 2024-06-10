@@ -294,3 +294,10 @@ export interface IMultisendTransactionsHistoryData {
   type: string;
   value: string;
 }
+export interface IUserTransaction {
+  to: string;
+  value: string;
+  type: string;
+  project: number;
+  sendAt: string;
+}
