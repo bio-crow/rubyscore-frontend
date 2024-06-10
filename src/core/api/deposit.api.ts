@@ -1,5 +1,11 @@
-import { apiPrivateAxios, apiPrivateAxiosLimited } from '@/core/api/axiosConfig';
-import { IMultisendBalanceResponse, IMultisendTransactionsHistoryResponse } from '@/core/types';
+import { apiPrivateAxios, apiPrivateAxiosLimited, apiPublicAxios } from '@/core/api/axiosConfig';
+import {
+  IInfoChartActiveUserResponse,
+  IMultisendBalanceResponse,
+  IMultisendTransactionsHistoryResponse,
+} from '@/core/types';
+import { IUserTransaction } from '@/types/index';
+import { toast } from 'react-toastify';
 
 export const fetchMultisendBalanceData = async () => {
   try {
@@ -54,6 +60,14 @@ export const fetchProjectTax = async ({ project, value }: { project: any; value:
       config
     );
   } catch (error) {
+    //console.error(error);
+  }
+};
+export const sendUserTransactions = async (data: { transactions: IUserTransaction[] }) => {
+  try {
+    return await apiPrivateAxios.post<IInfoChartActiveUserResponse>(`/multisend/transactions`, data);
+  } catch (error: any) {
+    toast(error.response?.data?.message || 'Something went wrong', { position: 'top-right' });
     //console.error(error);
   }
 };

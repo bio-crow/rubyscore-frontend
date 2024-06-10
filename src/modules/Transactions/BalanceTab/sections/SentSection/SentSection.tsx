@@ -7,13 +7,16 @@ import PlusIcon from '@/components/common/Icons/PlusIcon';
 import Disclamer from '@/modules/Transactions/BalanceTab/sections/SentSection/components/Disclamer';
 import FourthButton from '@/components/common/ui/FourthButton/FourthButton';
 import BalanceAndSentTable from '@/modules/Transactions/BalanceTab/sections/SentSection/components/BalanceAndSentTable/BalanceAndSentTable';
-import { FC, useEffect } from 'react';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { BalanceAndSentFormContext } from '@/context/index';
 import { BALANCE_AND_SEND_FIELDS } from '@/constants/formFields';
 import { v4 as uuidv4 } from 'uuid';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { balanceAndSendSchema, depositAnotherSchema } from '@/utils/validationConfig';
+import { IUserTransaction } from '@/types/index';
+import { setUserTransactions } from '@/core/thunk/deposit.thunk';
+import { useAppDispatch, useAppSelector } from '@/core/store';
 interface Props {
   tableData: any[];
 }
@@ -28,6 +31,9 @@ const emptyFormObject = {
 };
 const SentSection: FC<Props> = ({ tableData }) => {
   const theme = useCustomTheme();
+  const [isInstant, setIsInstant] = useState(false);
+  const dispatch = useAppDispatch();
+  const sendTransactionsLoading = useAppSelector(state => state.depositState.sendTransactionsLoading);
   const {
     register,
     handleSubmit,
@@ -53,12 +59,30 @@ const SentSection: FC<Props> = ({ tableData }) => {
     shouldUnregister: false,
   });
   const onSubmit = async (data: any) => {
-    // console.log(data);
-    //implement request logic
+    const transactions: IUserTransaction[] = data['array'].map((item: any) => {
+      const transaction: IUserTransaction = {
+        to: item[BALANCE_AND_SEND_FIELDS.ADDRESS],
+        value: item[BALANCE_AND_SEND_FIELDS.VALUE],
+        type: isInstant ? 'instant' : 'scheduled',
+        project: item[BALANCE_AND_SEND_FIELDS.NETWORK],
+      };
+      if (!isInstant) {
+        const date = new Date();
+        date.setMinutes(date.getMinutes() + item[BALANCE_AND_SEND_FIELDS.MINUTE]);
+        date.setHours(date.getHours() + item[BALANCE_AND_SEND_FIELDS.HOUR]);
+        date.setDate(date.getDate() + item[BALANCE_AND_SEND_FIELDS.DAY]);
+        transaction.sendAt = date.toISOString();
+      }
+      return transaction;
+    });
+    dispatch(setUserTransactions({ transactions }));
     remove();
     reset({
       array: [],
     });
+  };
+  const toggleInstant = (e: ChangeEvent<HTMLInputElement>) => {
+    setIsInstant(e.target.checked);
   };
   const onError = (data: any) => {
     // console.log(data);
@@ -135,7 +159,7 @@ const SentSection: FC<Props> = ({ tableData }) => {
                 gap: '16px',
               }}
             >
-              <CustomSwitch />
+              <CustomSwitch value={isInstant} onChange={toggleInstant} />
               <Box
                 sx={{
                   color: theme.palette.white50,
@@ -189,7 +213,13 @@ const SentSection: FC<Props> = ({ tableData }) => {
               width: { xs: 'fit-content', xlg: '390px' },
             }}
           >
-            <SecondaryButton variant='contained' size='large' type='submit' fullWidth>
+            <SecondaryButton
+              variant='contained'
+              size='large'
+              type='submit'
+              fullWidth
+              loading={sendTransactionsLoading}
+            >
               Confirm
             </SecondaryButton>
           </Box>

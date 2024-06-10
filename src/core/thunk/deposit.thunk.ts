@@ -1,11 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { IDepositAnotherPayload, IDepositSinglePayload } from '@/core/types';
+import { IDepositAnotherPayload, IDepositSinglePayload, IUserTransactionPayload } from '@/core/types';
 import {
   depositLoading,
   setBalanceData,
   setHistoryData,
   setInProgressData,
+  setSendTransactionsLoading,
   setTotalBalance,
 } from '@/core/state/deposit.state';
 import {
@@ -16,8 +17,10 @@ import {
   fetchMultisendBalanceData,
   fetchMultisendTransactionsHistoryData,
   fetchMultisendTransactionsInProgressData,
+  sendUserTransactions,
 } from '@/core/api/deposit.api';
-import { IMultisendTotalBalanceData } from '@/types/index';
+import { IMultisendTotalBalanceData, IUserTransaction } from '@/types/index';
+import { toast } from 'react-toastify';
 export const getMultisendBalance = createAsyncThunk(
   'depositSlice/getMultisendBalance',
   async (args, { dispatch }) => {
@@ -74,6 +77,15 @@ export const depositAnother = createAsyncThunk(
     dispatch(depositLoading(true));
     await wagmiDepositAnotherWallet(data);
     dispatch(depositLoading(false));
+    return;
+  }
+);
+export const setUserTransactions = createAsyncThunk(
+  'depositSlice/setUserTransactions',
+  async (params: IUserTransactionPayload, { dispatch }) => {
+    dispatch(setSendTransactionsLoading(true));
+    await sendUserTransactions(params);
+    dispatch(setSendTransactionsLoading(false));
     return;
   }
 );

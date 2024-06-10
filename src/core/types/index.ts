@@ -8,6 +8,7 @@ import {
   IStreakDays,
   ITask,
   IUserGradation,
+  IUserTransaction,
   IUserTransactionsDates,
 } from '@/types/index';
 import {
@@ -404,4 +405,7 @@ export interface IMultisendTransactionsHistoryResponse {
   result: IMultisendTransactionsHistoryData[];
   address: any;
   is_ok: boolean;
+}
+export interface IUserTransactionPayload {
+  transactions: IUserTransaction[];
 }
