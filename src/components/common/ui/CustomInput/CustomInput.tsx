@@ -20,6 +20,9 @@ const CustomInput = styled(TextField)(({ theme }: { theme: CustomTheme | any }) 
         '&:focus': {
           border: `1px solid ${theme.palette.lightGreen}`,
         },
+        '&.Mui-error': {
+          borderColor: 'rgb(244, 67, 54)',
+        },
         input: {
           borderRadius: '10px',
           padding: 0,

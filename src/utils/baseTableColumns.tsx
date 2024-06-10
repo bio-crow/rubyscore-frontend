@@ -1,8 +1,10 @@
 import { GridColDef } from '@mui/x-data-grid';
 import { Box } from '@mui/system';
 import {
+  CommissionCell,
   FromNowCell,
   GasHeader,
+  InputDateCell,
   InputTableCell,
   NetworkCell,
   NetworkHeader,
@@ -126,6 +128,7 @@ export const BalanceAndSentBaseColumns: GridColDef[] = [
     field: 'commission',
     headerName: 'Commission',
     sortable: false,
+    renderCell: CommissionCell,
     width: 150,
   },
   {
@@ -146,8 +149,9 @@ export const BalanceAndSentBaseColumns: GridColDef[] = [
     field: 'time',
     headerName: 'Time',
     renderHeader: TimeHeader,
+    renderCell: InputDateCell,
     sortable: false,
-    width: 150,
+    width: 300,
   },
 ];
 export const InProgressBaseColumns: GridColDef[] = [

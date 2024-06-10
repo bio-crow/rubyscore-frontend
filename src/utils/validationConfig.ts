@@ -37,6 +37,21 @@ export const balanceAndSendSchema = yup.object().shape({
         .typeError('Please enter number'),
       [BALANCE_AND_SEND_FIELDS.ADDRESS]: yup.string().trim().required('Please enter address'),
       [BALANCE_AND_SEND_FIELDS.NETWORK]: yup.string().trim().required('Please choose network'),
+      [BALANCE_AND_SEND_FIELDS.MINUTE]: yup
+        .number()
+        .required('required m')
+        .typeError('invalid m')
+        .max(59, 'max 59'),
+      [BALANCE_AND_SEND_FIELDS.HOUR]: yup
+        .number()
+        .required('required h')
+        .typeError('invalid h')
+        .max(23, 'max 23'),
+      [BALANCE_AND_SEND_FIELDS.DAY]: yup
+        .number()
+        .required('required d')
+        .typeError('invalid d')
+        .max(7, 'max 7'),
     })
   ),
 });

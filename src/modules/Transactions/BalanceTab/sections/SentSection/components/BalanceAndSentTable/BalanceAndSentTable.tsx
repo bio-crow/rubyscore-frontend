@@ -1,7 +1,6 @@
 'use client';
 import { Box } from '@mui/system';
 import { BalanceAndSentBaseColumns } from '@/utils/baseTableColumns';
-import CustomPagination from '@/components/common/CustomPagination/CustomPagination';
 import { FC, useContext, useEffect } from 'react';
 import CustomNoRows from '@/components/common/CustomNoRows/CustomNoRows';
 import SecondaryTable from '@/components/common/ui/SecondaryTable/SecondaryTable';
