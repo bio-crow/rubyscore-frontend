@@ -8,6 +8,8 @@ import SecondaryTable from '@/components/common/ui/SecondaryTable/SecondaryTable
 import { GridRenderCellParams } from '@mui/x-data-grid';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { v4 as uuidv4 } from 'uuid';
+import { useAppDispatch, useAppSelector } from '@/core/store';
+import { deleteTransactionById } from '@/core/thunk/deposit.thunk';
 interface Props {
   data: any[];
 }
@@ -15,7 +17,11 @@ interface Props {
 const InProgressTable: FC<Props> = ({ data }) => {
   const theme = useCustomTheme();
   const prepareData = data;
-  const deleteRow = (params: GridRenderCellParams<any>) => {};
+  const deleteRow = (params: GridRenderCellParams<any>) => {
+    const id = params?.row?.id as number;
+    dispatch(deleteTransactionById({ id }));
+  };
+  const dispatch = useAppDispatch();
   const columns = [
     ...InProgressBaseColumns,
     {

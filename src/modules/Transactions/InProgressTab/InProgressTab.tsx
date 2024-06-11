@@ -5,6 +5,7 @@ import FourthButton from '@/components/common/ui/FourthButton/FourthButton';
 import TrashIcon from '@/components/common/Icons/TrashIcon';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import {
+  deleteTransactions,
   getMultisendTransactionsHistory,
   getMultisendTransactionsInProgress,
 } from '@/core/thunk/deposit.thunk';
@@ -16,9 +17,14 @@ const InProgressTab = () => {
   const dispatch = useAppDispatch();
   const inProgressData = useAppSelector(state => state.depositState.inProgressData);
   const activeProject = useAppSelector(state => state.depositState.activeProject);
+  const deleteLoading = useAppSelector(state => state.depositState.deleteLoading);
   useEffect(() => {
     dispatch(getMultisendTransactionsInProgress({ project: activeProject }));
   }, [activeProject]);
+  const deleteAll = () => {
+    const ids = inProgressData.map(item => item.id);
+    dispatch(deleteTransactions({ ids }));
+  };
   return (
     <Box
       sx={{
@@ -38,8 +44,10 @@ const InProgressTab = () => {
       >
         <FourthButton
           className='white'
+          loading={deleteLoading}
           startIcon={<TrashIcon fill={theme.palette.powderWhite} />}
           variant='outlined'
+          onClick={deleteAll}
           size='medium'
         >
           Delete all

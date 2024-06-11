@@ -36,6 +36,7 @@
     "encoding": "^0.1.13",
     "ethers": "^6.7.1",
     "html-to-image": "^1.11.11",
+    "lodash": "^4.17.21",
     "lodash.merge": "^4.6.2",
     "lokijs": "^1.5.12",
     "modern-normalize": "^2.0.0",

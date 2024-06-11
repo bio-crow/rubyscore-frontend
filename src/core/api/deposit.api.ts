@@ -71,3 +71,12 @@ export const sendUserTransactions = async (data: { transactions: IUserTransactio
     //console.error(error);
   }
 };
+export const fetchDeleteTransactions = async (data: { ids: number[] }) => {
+  try {
+    const config: any = { data };
+    return await apiPrivateAxios.delete(`/multisend/transactions`, config);
+  } catch (error: any) {
+    toast(error.response?.data?.message || 'Something went wrong', { position: 'top-right' });
+    //console.error(error);
+  }
+};

@@ -12,7 +12,7 @@ import CustomInput from '@/components/common/ui/CustomInput/CustomInput';
 import { networkOptions, networkStaticData } from '@/constants/index';
 import { DashboardTabIndexType } from '@/types/index';
 import moment from 'moment';
-import { MouseEvent, useContext, useEffect, useState } from 'react';
+import { MouseEvent, useCallback, useContext, useEffect, useState } from 'react';
 import { Menu, MenuItem } from '@mui/material';
 import { setActiveProject } from '@/core/state/deposit.state';
 import { useTimer } from 'react-timer-hook';
@@ -21,7 +21,7 @@ import { BALANCE_AND_SEND_FIELDS, DEPOSIT_ANOTHER_FIELDS } from '@/constants/for
 import { FormSelect } from '@/components/common/fields/SelectField';
 import { fetchProjectTax } from '@/core/api/deposit.api';
 import { BalanceAndSentFormContext } from '@/context/index';
-
+import { debounce } from 'lodash';
 export const ReferralUserCell = (params: GridRenderCellParams<any>) => {
   const theme = useCustomTheme();
   const leaderboardUser = useAppSelector(state => state.leaderboardState.leaderboardUser);
@@ -257,16 +257,17 @@ export const CommissionCell = (params: GridRenderCellParams<any>) => {
   const [value, setValue] = useState(0);
   const [tax, setTax] = useState<any>(0);
   useEffect(() => {
-    loadTax();
+    loadTax({ project, value });
   }, [project, value]);
-  const loadTax = async () => {
+  const loadTaxCallback = async ({ project, value }: any) => {
     const res: any = await fetchProjectTax({ project, value });
     if (res?.data?.is_ok) {
       setTax(res.data.result.tax);
     } else {
-      setTax('Err');
+      setTax('unknown');
     }
   };
+  const loadTax = useCallback(debounce(loadTaxCallback, 1000), []);
   useEffect(() => {
     const subscription = watch((value: any, { name, type }: any) => {
       if (name === projectFieldName) {
@@ -292,7 +293,7 @@ export const CommissionCell = (params: GridRenderCellParams<any>) => {
     </Box>
   );
 };
-export const InputTableCell = (params: GridRenderCellParams<any>) => {
+export const InputAddressTableCell = (params: GridRenderCellParams<any>) => {
   const { field, row } = params;
   return (
     <Box
@@ -305,7 +306,25 @@ export const InputTableCell = (params: GridRenderCellParams<any>) => {
       <FormInputText
         name={`${row.fieldArrayName}.${row.index}.${field}`}
         control={row.control}
-        placeholder=''
+        placeholder='Enter address'
+      />
+    </Box>
+  );
+};
+export const InputValueTableCell = (params: GridRenderCellParams<any>) => {
+  const { field, row } = params;
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        alignSelf: 'flex-start',
+        paddingTop: '5px',
+      }}
+    >
+      <FormInputText
+        name={`${row.fieldArrayName}.${row.index}.${field}`}
+        control={row.control}
+        placeholder='Enter value'
       />
     </Box>
   );

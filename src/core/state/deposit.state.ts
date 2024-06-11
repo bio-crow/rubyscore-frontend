@@ -12,6 +12,7 @@ interface IDepositState {
   activeProject: DashboardTabIndexType;
   depositLoading: boolean;
   sendTransactionsLoading: boolean;
+  deleteLoading: boolean;
   balanceData: IMultisendBalanceData[];
   totalBalance: IMultisendTotalBalanceData;
   historyData: IMultisendTransactionsHistoryData[];
@@ -22,6 +23,7 @@ const initialState: IDepositState = {
   activeProject: 'scroll',
   depositLoading: false,
   sendTransactionsLoading: false,
+  deleteLoading: false,
   balanceData: [],
   totalBalance: {
     totalBalance: '',
@@ -39,6 +41,9 @@ export const depositSlice = createSlice({
   reducers: {
     depositLoading: (state, action: PayloadAction<boolean>) => {
       state.depositLoading = action.payload;
+    },
+    setDeleteLoading: (state, action: PayloadAction<boolean>) => {
+      state.deleteLoading = action.payload;
     },
     setTotalBalance: (state, action: PayloadAction<IMultisendTotalBalanceData>) => {
       state.totalBalance = action.payload;
@@ -71,4 +76,5 @@ export const {
   setBalanceData,
   setInProgressData,
   setSendTransactionsLoading,
+  setDeleteLoading,
 } = depositSlice.actions;
