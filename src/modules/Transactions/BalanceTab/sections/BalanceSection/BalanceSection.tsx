@@ -166,7 +166,7 @@ const BalanceSection = () => {
                     color: theme.palette.powderWhite,
                   }}
                 >
-                  ({item.balanceOnHold})
+                  ({item.balanceOnHoldFormatted})
                 </Box>
                 <Box
                   sx={{

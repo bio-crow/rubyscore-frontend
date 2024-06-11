@@ -4,6 +4,7 @@ import { IDepositAnotherPayload, IDepositSinglePayload, IUserTransactionPayload 
 import {
   depositLoading,
   setBalanceData,
+  setDeleteLoading,
   setHistoryData,
   setInProgressData,
   setSendTransactionsLoading,
@@ -14,12 +15,17 @@ import {
   wagmiDepositSingleWallet,
 } from '@/core/api/contract/contract.deposit.api';
 import {
+  fetchDeleteTransactions,
   fetchMultisendBalanceData,
   fetchMultisendTransactionsHistoryData,
   fetchMultisendTransactionsInProgressData,
   sendUserTransactions,
 } from '@/core/api/deposit.api';
-import { IMultisendTotalBalanceData, IUserTransaction } from '@/types/index';
+import {
+  IMultisendTotalBalanceData,
+  IMultisendTransactionsHistoryData,
+  IUserTransaction,
+} from '@/types/index';
 import { toast } from 'react-toastify';
 export const getMultisendBalance = createAsyncThunk(
   'depositSlice/getMultisendBalance',
@@ -84,8 +90,40 @@ export const setUserTransactions = createAsyncThunk(
   'depositSlice/setUserTransactions',
   async (params: IUserTransactionPayload, { dispatch }) => {
     dispatch(setSendTransactionsLoading(true));
-    await sendUserTransactions(params);
+    const res: any = await sendUserTransactions(params);
+    if (res?.data?.is_ok) {
+      toast(res?.data.message, { position: 'top-right' });
+    }
     dispatch(setSendTransactionsLoading(false));
+    return;
+  }
+);
+export const deleteTransactions = createAsyncThunk(
+  'depositSlice/deleteTransactions',
+  async (params: { ids: number[] }, { dispatch }) => {
+    dispatch(setDeleteLoading(true));
+    const res: any = await fetchDeleteTransactions(params);
+    if (res?.data?.is_ok) {
+      dispatch(setInProgressData([]));
+      toast(res?.data.message, { position: 'top-right' });
+    }
+    dispatch(setDeleteLoading(false));
+    return;
+  }
+);
+export const deleteTransactionById = createAsyncThunk(
+  'depositSlice/deleteTransactionById',
+  async (params: { id: number }, { dispatch, getState }) => {
+    const { id } = params;
+    const res: any = await fetchDeleteTransactions({ ids: [id] });
+    if (res?.data?.is_ok) {
+      const state: any = getState();
+      const updatedInProcess = state.depositState.inProgressData.filter(
+        (item: IMultisendTransactionsHistoryData) => item.id !== id
+      );
+      dispatch(setInProgressData(updatedInProcess));
+      toast(res?.data.message, { position: 'top-right' });
+    }
     return;
   }
 );
