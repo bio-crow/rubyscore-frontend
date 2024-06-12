@@ -14,7 +14,6 @@ import { FormInputText } from '@/components/common/fields/InputField';
 import { FormSelect } from '@/components/common/fields/SelectField';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { depositSingle } from '@/core/thunk/deposit.thunk';
-import { networkOptions } from '@/constants/index';
 
 interface Props {}
 
@@ -23,6 +22,7 @@ const SingleWalletForm: FC<Props> = () => {
   const isLg = useMediaQuery(theme.breakpoints.up('lg'));
   const dispatch = useAppDispatch();
   const depositLoading = useAppSelector(state => state.depositState.depositLoading);
+  const networkOptions = useAppSelector(state => state.depositState.networkOptions);
   const {
     register,
     handleSubmit,

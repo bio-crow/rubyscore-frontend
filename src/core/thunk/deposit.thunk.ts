@@ -7,6 +7,7 @@ import {
   setDeleteLoading,
   setHistoryData,
   setInProgressData,
+  setNetworkOptions,
   setSendTransactionsLoading,
   setTotalBalance,
 } from '@/core/state/deposit.state';
@@ -22,11 +23,13 @@ import {
   sendUserTransactions,
 } from '@/core/api/deposit.api';
 import {
+  DashboardTabIndexType,
   IMultisendTotalBalanceData,
   IMultisendTransactionsHistoryData,
-  IUserTransaction,
 } from '@/types/index';
 import { toast } from 'react-toastify';
+import { networkStaticData } from '@/constants/index';
+
 export const getMultisendBalance = createAsyncThunk(
   'depositSlice/getMultisendBalance',
   async (args, { dispatch }) => {
@@ -39,8 +42,18 @@ export const getMultisendBalance = createAsyncThunk(
         totalBalanceOnHold: data.totalBalanceOnHold,
         totalBalanceOnHoldFormatted: data.totalBalanceOnHoldFormatted,
       };
+      const networkOptions = data.result?.map((item: any) => {
+        const project = item.project as DashboardTabIndexType;
+        return {
+          text: networkStaticData[project]?.label,
+          icon: networkStaticData[project]?.icon,
+          value: item.project,
+          balance: item.balanceFormatted,
+        };
+      });
       dispatch(setBalanceData(data.result));
       dispatch(setTotalBalance(total));
+      dispatch(setNetworkOptions(networkOptions));
     }
     return;
   }

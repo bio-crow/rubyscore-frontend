@@ -8,9 +8,19 @@ interface Props {
   label?: string;
   placeholder?: string;
   InputProps?: any;
+  size?: 'small' | 'medium';
   startAdornment?: any;
+  disabled?: boolean;
 }
-export const FormInputText: FC<Props> = ({ name, control, label, placeholder, InputProps }) => {
+export const FormInputText: FC<Props> = ({
+  name,
+  control,
+  label,
+  placeholder,
+  InputProps,
+  disabled,
+  size = 'medium',
+}) => {
   return (
     <Controller
       name={name}
@@ -23,8 +33,9 @@ export const FormInputText: FC<Props> = ({ name, control, label, placeholder, In
           onChange={onChange}
           value={value}
           label={label}
+          disabled={disabled}
           sx={{ flex: 1 }}
-          size='medium'
+          size={size}
           variant='outlined'
           placeholder={placeholder}
           autoComplete='off'

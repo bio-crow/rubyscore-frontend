@@ -10,11 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { BalanceAndSentFormContext } from '@/context/index';
 
-interface Props {
-  data: any[];
-}
-
-const BalanceAndSentTable: FC<Props> = ({ data }) => {
+const BalanceAndSentTable = () => {
   const theme = useCustomTheme();
   const { control, fields, append, removeArrayField } = useContext(BalanceAndSentFormContext);
   const prepareData = fields.map((field: any, index: number) => {
@@ -42,7 +38,7 @@ const BalanceAndSentTable: FC<Props> = ({ data }) => {
             sx={{
               display: 'flex',
               alignSelf: 'flex-start',
-              paddingTop: '20px',
+              paddingTop: '15px',
               cursor: 'pointer',
               color: theme.palette.red,
             }}
@@ -59,7 +55,7 @@ const BalanceAndSentTable: FC<Props> = ({ data }) => {
       getRowId={params => params.index}
       rows={prepareData}
       columns={columns}
-      rowHeight={72}
+      rowHeight={70}
       slots={{
         pagination: null,
         noRowsOverlay: CustomNoRows,

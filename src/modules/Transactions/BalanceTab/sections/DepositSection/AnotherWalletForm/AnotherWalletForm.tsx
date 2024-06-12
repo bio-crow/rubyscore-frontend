@@ -17,7 +17,6 @@ import { DEPOSIT_ANOTHER_FIELDS, DEPOSIT_SINGLE_FIELDS } from '@/constants/formF
 import { FormSelect } from '@/components/common/fields/SelectField';
 import { depositAnother, depositSingle } from '@/core/thunk/deposit.thunk';
 import { useAppDispatch, useAppSelector } from '@/core/store';
-import { networkOptions } from '@/constants/index';
 
 interface Props {}
 
@@ -26,6 +25,7 @@ const AnotherWalletForm: FC<Props> = () => {
   const isLg = useMediaQuery(theme.breakpoints.up('lg'));
   const dispatch = useAppDispatch();
   const depositLoading = useAppSelector(state => state.depositState.depositLoading);
+  const networkOptions = useAppSelector(state => state.depositState.networkOptions);
   const {
     register,
     handleSubmit,
