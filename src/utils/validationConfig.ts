@@ -5,6 +5,7 @@ import {
   DEPOSIT_SINGLE_FIELDS,
   SEARCH_WALLET_FIELD,
 } from '@/constants/formFields';
+import { isAddress } from 'viem';
 import * as yup from 'yup';
 export const claimProfileSchema = yup.object().shape({
   [CLAIM_PROFILE_FIELDS.NAME]: yup
@@ -22,7 +23,13 @@ export const depositAnotherSchema = yup.object().shape({
     .number()
     .required('Please enter value')
     .typeError('Please enter number'),
-  [DEPOSIT_ANOTHER_FIELDS.ADDRESS]: yup.string().trim().required('Please enter address'),
+  [DEPOSIT_ANOTHER_FIELDS.ADDRESS]: yup
+    .string()
+    .trim()
+    .required('Please enter address')
+    .test('validateAddress', 'Is not valid address', value => {
+      return isAddress(value);
+    }),
   [DEPOSIT_ANOTHER_FIELDS.NETWORK]: yup.string().trim().required('Please choose network'),
 });
 export const searchWalletSchema = yup.object().shape({
@@ -35,7 +42,13 @@ export const balanceAndSendSchema = yup.object().shape({
         .number()
         .required('Please enter value')
         .typeError('Please enter number'),
-      [BALANCE_AND_SEND_FIELDS.ADDRESS]: yup.string().trim().required('Please enter address'),
+      [BALANCE_AND_SEND_FIELDS.ADDRESS]: yup
+        .string()
+        .trim()
+        .required('Please enter address')
+        .test('validateAddress', 'Is not valid address', value => {
+          return isAddress(value);
+        }),
       [BALANCE_AND_SEND_FIELDS.NETWORK]: yup.string().trim().required('Please choose network'),
       [BALANCE_AND_SEND_FIELDS.MINUTE]: yup
         .number()
