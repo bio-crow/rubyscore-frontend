@@ -89,7 +89,8 @@ const SentSection = () => {
     append({ ...emptyFormObject, id: uuidv4() });
   };
   useEffect(() => {
-    if (fields.length === 0) {
+    const values = getValues && getValues();
+    if (fields.length === 0 && values['array'] && values['array'].length !== 0) {
       reset({
         array: [],
       });
