@@ -14,7 +14,7 @@ export const wagmiDepositSingleWallet = async (data: IDepositSinglePayload): Pro
       ...baseConfig,
       abi: abiDeposit,
       functionName: 'deposit',
-      value: parseEther(value),
+      value: parseEther(value.toString()),
       gas: 50000,
     };
     const { hash } = await writeContract(config);
@@ -39,7 +39,7 @@ export const wagmiDepositAnotherWallet = async (data: IDepositAnotherPayload): P
       ...baseConfig,
       abi: abiDeposit,
       functionName: 'deposit',
-      value: parseEther(value),
+      value: parseEther(value.toString()),
       gas: 50000,
       args: [address],
     };
