@@ -1,7 +1,7 @@
 import Layout from '@/components/layout/Layout/Layout';
 import { Box, Tab } from '@mui/material';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
-import { SyntheticEvent, useState } from 'react';
+import { SyntheticEvent, useEffect, useState } from 'react';
 import { ChartIndexType } from '@/types/index';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import ChartTabs from '@/components/common/ui/ChartTabs/ChartTabs';
@@ -10,8 +10,9 @@ import BalanceTab from '@/modules/Transactions/BalanceTab/BalanceTab';
 import InProgressTab from '@/modules/Transactions/InProgressTab/InProgressTab';
 import HistoryTab from '@/modules/Transactions/HistoryTab/HistoryTab';
 import RefferalsTab from '@/modules/Transactions/RefferalsTab/RefferalsTab';
-import { useAppSelector } from '@/core/store';
+import { useAppDispatch, useAppSelector } from '@/core/store';
 import PrivatePageLayout from '@/components/layout/PrivatePageLayout/PrivatePageLayout';
+import { getMultisendBalance } from '@/core/thunk/deposit.thunk';
 type TransactionsTabType = 'balance' | 'inProgress' | 'history' | 'refferals';
 const panelTabs: { index: TransactionsTabType; label: string }[] = [
   {
@@ -34,6 +35,7 @@ const panelTabs: { index: TransactionsTabType; label: string }[] = [
 const Transactions = () => {
   const theme = useCustomTheme();
   const isAuth = useAppSelector(state => state.authState.isAuth);
+  const dispatch = useAppDispatch();
   const isXLg = useMediaQuery(theme.breakpoints.up('xlg'));
   const [activeTab, setActiveTab] = useState<{ index: TransactionsTabType; label: string }>(panelTabs[0]);
   const handleChange = (event: SyntheticEvent, newValue: ChartIndexType) => {
@@ -46,6 +48,11 @@ const Transactions = () => {
     history: <HistoryTab />,
     refferals: <RefferalsTab />,
   };
+  useEffect(() => {
+    if (isAuth) {
+      dispatch(getMultisendBalance());
+    }
+  }, [isAuth]);
   return (
     <Layout>
       {isAuth ? (

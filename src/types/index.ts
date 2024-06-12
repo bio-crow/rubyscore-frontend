@@ -301,3 +301,9 @@ export interface IUserTransaction {
   project: number;
   sendAt?: string;
 }
+export interface INetworkOption {
+  text: string;
+  value: DashboardTabIndexType;
+  icon: string;
+  balance: string;
+}

@@ -1,18 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   DashboardTabIndexType,
-  IAttestationData,
   IMultisendBalanceData,
   IMultisendTotalBalanceData,
   IMultisendTransactionsHistoryData,
+  INetworkOption,
 } from '@/types/index';
-import { fetchMultisendBalanceData } from '@/core/api/deposit.api';
 
 interface IDepositState {
   activeProject: DashboardTabIndexType;
   depositLoading: boolean;
   sendTransactionsLoading: boolean;
   deleteLoading: boolean;
+  isSendInstant: boolean;
+  networkOptions: INetworkOption[];
   balanceData: IMultisendBalanceData[];
   totalBalance: IMultisendTotalBalanceData;
   historyData: IMultisendTransactionsHistoryData[];
@@ -24,7 +25,9 @@ const initialState: IDepositState = {
   depositLoading: false,
   sendTransactionsLoading: false,
   deleteLoading: false,
+  isSendInstant: false,
   balanceData: [],
+  networkOptions: [],
   totalBalance: {
     totalBalance: '',
     totalBalanceFormatted: '',
@@ -44,6 +47,12 @@ export const depositSlice = createSlice({
     },
     setDeleteLoading: (state, action: PayloadAction<boolean>) => {
       state.deleteLoading = action.payload;
+    },
+    setIsSendInstant: (state, action: PayloadAction<boolean>) => {
+      state.isSendInstant = action.payload;
+    },
+    setNetworkOptions: (state, action: PayloadAction<INetworkOption[]>) => {
+      state.networkOptions = action.payload;
     },
     setTotalBalance: (state, action: PayloadAction<IMultisendTotalBalanceData>) => {
       state.totalBalance = action.payload;
@@ -77,4 +86,6 @@ export const {
   setInProgressData,
   setSendTransactionsLoading,
   setDeleteLoading,
+  setIsSendInstant,
+  setNetworkOptions,
 } = depositSlice.actions;

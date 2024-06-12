@@ -17,9 +17,7 @@ import { balanceAndSendSchema, depositAnotherSchema } from '@/utils/validationCo
 import { IUserTransaction } from '@/types/index';
 import { setUserTransactions } from '@/core/thunk/deposit.thunk';
 import { useAppDispatch, useAppSelector } from '@/core/store';
-interface Props {
-  tableData: any[];
-}
+import { setIsSendInstant } from '@/core/state/deposit.state';
 const emptyFormObject = {
   id: 'id',
   [BALANCE_AND_SEND_FIELDS.MINUTE]: 1,
@@ -29,11 +27,11 @@ const emptyFormObject = {
   [BALANCE_AND_SEND_FIELDS.VALUE]: '',
   [BALANCE_AND_SEND_FIELDS.NETWORK]: 'scroll',
 };
-const SentSection: FC<Props> = ({ tableData }) => {
+const SentSection = () => {
   const theme = useCustomTheme();
-  const [isInstant, setIsInstant] = useState(false);
   const dispatch = useAppDispatch();
   const sendTransactionsLoading = useAppSelector(state => state.depositState.sendTransactionsLoading);
+  const isSendInstant = useAppSelector(state => state.depositState.isSendInstant);
   const {
     register,
     handleSubmit,
@@ -63,10 +61,10 @@ const SentSection: FC<Props> = ({ tableData }) => {
       const transaction: IUserTransaction = {
         to: item[BALANCE_AND_SEND_FIELDS.ADDRESS],
         value: item[BALANCE_AND_SEND_FIELDS.VALUE],
-        type: isInstant ? 'instant' : 'scheduled',
+        type: isSendInstant ? 'instant' : 'scheduled',
         project: item[BALANCE_AND_SEND_FIELDS.NETWORK],
       };
-      if (!isInstant) {
+      if (!isSendInstant) {
         const date = new Date();
         date.setMinutes(date.getMinutes() + item[BALANCE_AND_SEND_FIELDS.MINUTE]);
         date.setHours(date.getHours() + item[BALANCE_AND_SEND_FIELDS.HOUR]);
@@ -82,7 +80,7 @@ const SentSection: FC<Props> = ({ tableData }) => {
     });
   };
   const toggleInstant = (e: ChangeEvent<HTMLInputElement>) => {
-    setIsInstant(e.target.checked);
+    dispatch(setIsSendInstant(e.target.checked));
   };
   const onError = (data: any) => {
     // console.log(data);
@@ -159,7 +157,7 @@ const SentSection: FC<Props> = ({ tableData }) => {
                 gap: '16px',
               }}
             >
-              <CustomSwitch value={isInstant} onChange={toggleInstant} />
+              <CustomSwitch value={isSendInstant} onChange={toggleInstant} />
               <Box
                 sx={{
                   color: theme.palette.white50,
@@ -196,7 +194,7 @@ const SentSection: FC<Props> = ({ tableData }) => {
             width: '100%',
           }}
         >
-          <BalanceAndSentTable data={tableData} />
+          <BalanceAndSentTable />
         </Box>
         <Box
           sx={{

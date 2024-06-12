@@ -2,7 +2,7 @@ import { styled } from '@mui/material/styles';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import InputBase from '@mui/material/InputBase';
-import { useRef } from 'react';
+import { FC, ReactNode, useRef } from 'react';
 import { CustomTheme } from '@/theme/index';
 import Image from 'next/image';
 import { Box } from '@mui/system';
@@ -35,19 +35,36 @@ const BootstrapInput = styled(InputBase)(({ theme }: { theme: CustomTheme | any 
       boxShadow: 'none',
       borderRadius: '10px',
     },
+    '&.MuiInputBase-inputSizeSmall': {
+      fontSize: '14px',
+      fontStyle: 'normal',
+      fontWeight: '600',
+      lineHeight: '16px',
+      borderRadius: '10px',
+      padding: '10px 16px 10px 16px',
+    },
   },
 }));
 interface Props {
   value: any;
   onChange: Function;
-
+  RenderOption?: FC<{ option: any }>;
   placeholder?: string;
   options: any[];
   helperText?: string | null;
   error?: boolean;
+  size?: 'small' | 'medium';
 }
-export default function CustomSelect({ value, onChange, options, placeholder, error, helperText }: Props) {
-  const theme = useCustomTheme();
+export default function CustomSelect({
+  value,
+  onChange,
+  options,
+  placeholder,
+  error,
+  helperText,
+  RenderOption,
+  size = 'medium',
+}: Props) {
   const anchorEl = useRef(null);
   const handleChange = (event: { target: { value: string } }) => {
     onChange(event.target.value);
@@ -63,27 +80,11 @@ export default function CustomSelect({ value, onChange, options, placeholder, er
           disableScrollLock: true,
         }}
         onChange={handleChange}
-        input={<BootstrapInput />}
+        input={<BootstrapInput size={size} />}
       >
         {options.map(option => (
           <MenuItem key={option.value} value={option.value}>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '10px',
-              }}
-            >
-              <Image src={option.icon} alt='icon' width='24' height='24' />
-              <Box
-                sx={{
-                  color: theme.palette.powderWhite,
-                }}
-                className='Body-Lato-fw-600-fs-14'
-              >
-                {option.text}
-              </Box>
-            </Box>
+            {RenderOption ? <RenderOption option={option} /> : <DefaultOptionRender option={option} />}
           </MenuItem>
         ))}
       </Select>
@@ -91,3 +92,26 @@ export default function CustomSelect({ value, onChange, options, placeholder, er
     </FormControl>
   );
 }
+
+export const DefaultOptionRender: FC<{ option: any }> = ({ option }) => {
+  const theme = useCustomTheme();
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '10px',
+      }}
+    >
+      <Image src={option.icon} alt='icon' width='24' height='24' />
+      <Box
+        sx={{
+          color: theme.palette.powderWhite,
+        }}
+        className='Body-Lato-fw-600-fs-14'
+      >
+        {option.text}
+      </Box>
+    </Box>
+  );
+};

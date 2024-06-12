@@ -130,21 +130,21 @@ export const BalanceAndSentBaseColumns: GridColDef[] = [
     headerName: 'Commission',
     sortable: false,
     renderCell: CommissionCell,
-    width: 150,
+    width: 130,
   },
   {
     field: BALANCE_AND_SEND_FIELDS.NETWORK,
-    headerName: 'Network',
+    headerName: 'Network | Balance (ETH)',
     sortable: false,
     renderCell: SelectTableCell,
-    width: 180,
+    width: 250,
   },
   {
     field: 'gas',
     headerName: 'Gas',
     sortable: false,
     renderHeader: GasHeader,
-    width: 200,
+    width: 170,
   },
   {
     field: 'time',
@@ -152,7 +152,7 @@ export const BalanceAndSentBaseColumns: GridColDef[] = [
     renderHeader: TimeHeader,
     renderCell: InputDateCell,
     sortable: false,
-    width: 300,
+    width: 240,
   },
 ];
 export const InProgressBaseColumns: GridColDef[] = [

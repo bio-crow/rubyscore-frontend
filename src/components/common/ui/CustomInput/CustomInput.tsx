@@ -38,6 +38,14 @@ const CustomInput = styled(TextField)(({ theme }: { theme: CustomTheme | any }) 
           border: 'none',
         },
       },
+      '.MuiInputBase-sizeSmall': {
+        fontSize: '14px',
+        fontStyle: 'normal',
+        fontWeight: '600',
+        lineHeight: '16px',
+        borderRadius: '10px',
+        padding: '10px 16px 10px 16px',
+      },
     },
   };
 });

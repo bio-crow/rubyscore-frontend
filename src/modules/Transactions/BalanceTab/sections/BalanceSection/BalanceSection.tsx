@@ -4,19 +4,13 @@ import { TooltipBalanceAndSend } from '@/utils/tooltipsContent';
 import InfoIcon from '@/components/common/Icons/InfoIcon';
 import CustomTooltip from '@/components/common/CustomTooltip/CustomTooltip';
 import Image from 'next/image';
-import { useAppDispatch, useAppSelector } from '@/core/store';
-import { useEffect } from 'react';
-import { getMultisendBalance } from '@/core/thunk/deposit.thunk';
+import { useAppSelector } from '@/core/store';
 import { networkStaticData } from '@/constants/index';
 
 const BalanceSection = () => {
   const theme = useCustomTheme();
-  const dispatch = useAppDispatch();
   const balanceData = useAppSelector(state => state.depositState.balanceData);
   const totalBalance = useAppSelector(state => state.depositState.totalBalance);
-  useEffect(() => {
-    dispatch(getMultisendBalance());
-  }, []);
   return (
     <Box
       sx={{

@@ -6,18 +6,6 @@ import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 const BalanceTab = () => {
-  const [tableData, setTableData] = useState([
-    {
-      id: uuidv4(),
-      address: 'test1',
-      value: 'test2',
-      commission: 'test3',
-      network: 'test4',
-      gas: 'test5',
-      time: 'test6',
-    },
-  ]);
-
   return (
     <Box
       sx={{
@@ -28,7 +16,7 @@ const BalanceTab = () => {
     >
       <DepositSection />
       <BalanceSection />
-      <SentSection tableData={tableData} />
+      <SentSection />
     </Box>
   );
 };

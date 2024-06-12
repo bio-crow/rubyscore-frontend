@@ -8,16 +8,15 @@ import { useAppDispatch, useAppSelector } from '@/core/store';
 import CustomTooltip from '@/components/common/CustomTooltip/CustomTooltip';
 import { GasHeaderTooltip, TimeHeaderTooltip } from '@/utils/tooltipsContent';
 import InfoIcon from '@/components/common/Icons/InfoIcon';
-import CustomInput from '@/components/common/ui/CustomInput/CustomInput';
-import { networkOptions, networkStaticData } from '@/constants/index';
+import { networkStaticData } from '@/constants/index';
 import { DashboardTabIndexType } from '@/types/index';
 import moment from 'moment';
-import { MouseEvent, useCallback, useContext, useEffect, useState } from 'react';
+import { FC, MouseEvent, useCallback, useContext, useEffect, useState } from 'react';
 import { Menu, MenuItem } from '@mui/material';
 import { setActiveProject } from '@/core/state/deposit.state';
 import { useTimer } from 'react-timer-hook';
 import { FormInputText } from '@/components/common/fields/InputField';
-import { BALANCE_AND_SEND_FIELDS, DEPOSIT_ANOTHER_FIELDS } from '@/constants/formFields';
+import { BALANCE_AND_SEND_FIELDS } from '@/constants/formFields';
 import { FormSelect } from '@/components/common/fields/SelectField';
 import { fetchProjectTax } from '@/core/api/deposit.api';
 import { BalanceAndSentFormContext } from '@/context/index';
@@ -128,6 +127,7 @@ export const NetworkHeader = (params: GridColumnHeaderParams) => {
   const theme = useCustomTheme();
   const dispatch = useAppDispatch();
   const activeProject = useAppSelector(state => state.depositState.activeProject);
+  const networkOptions = useAppSelector(state => state.depositState.networkOptions);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: MouseEvent<HTMLElement>) => {
@@ -202,6 +202,7 @@ export const TimeHeader = (params: GridColumnHeaderParams) => {
       sx={{
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'center',
         gap: '10px',
         color: theme.palette.white50,
       }}
@@ -250,6 +251,7 @@ export const GasHeader = (params: GridColumnHeaderParams) => {
 };
 export const CommissionCell = (params: GridRenderCellParams<any>) => {
   const { row } = params;
+  const theme = useCustomTheme();
   const projectFieldName = `${row.fieldArrayName}.${row.index}.${BALANCE_AND_SEND_FIELDS.NETWORK}`;
   const valueFieldName = `${row.fieldArrayName}.${row.index}.${BALANCE_AND_SEND_FIELDS.VALUE}`;
   const { getValues, watch } = useContext(BalanceAndSentFormContext);
@@ -286,8 +288,10 @@ export const CommissionCell = (params: GridRenderCellParams<any>) => {
       sx={{
         display: 'flex',
         alignSelf: 'flex-start',
-        paddingTop: '20px',
+        paddingTop: '15px',
+        color: theme.palette.white50,
       }}
+      className='Body-Lato-fw-600-fs-14'
     >
       {tax}
     </Box>
@@ -306,6 +310,7 @@ export const InputAddressTableCell = (params: GridRenderCellParams<any>) => {
       <FormInputText
         name={`${row.fieldArrayName}.${row.index}.${field}`}
         control={row.control}
+        size='small'
         placeholder='Enter address'
       />
     </Box>
@@ -324,6 +329,7 @@ export const InputValueTableCell = (params: GridRenderCellParams<any>) => {
       <FormInputText
         name={`${row.fieldArrayName}.${row.index}.${field}`}
         control={row.control}
+        size='small'
         placeholder='Enter value'
       />
     </Box>
@@ -331,13 +337,47 @@ export const InputValueTableCell = (params: GridRenderCellParams<any>) => {
 };
 export const SelectTableCell = (params: GridRenderCellParams<any>) => {
   const { field, row } = params;
-
+  const networkOptions = useAppSelector(state => state.depositState.networkOptions);
+  const OptionRender: FC<{ option: any }> = ({ option }) => {
+    const theme = useCustomTheme();
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px',
+          paddingRight: '15px',
+          overflow: 'hidden',
+        }}
+      >
+        <Image src={option.icon} alt='icon' width='20' height='20' />
+        <Box
+          sx={{
+            color: theme.palette.powderWhite,
+          }}
+          className='Body-Lato-fw-600-fs-14'
+        >
+          {option.text}
+        </Box>
+        <Box
+          sx={{
+            color: theme.palette.white50,
+            marginLeft: 'auto',
+          }}
+          className='Body-Lato-fw-600-fs-14'
+        >
+          {option.balance}
+        </Box>
+      </Box>
+    );
+  };
   return (
     <Box
       sx={{
         display: 'flex',
         alignSelf: 'flex-start',
         paddingTop: '5px',
+        width: '100%',
       }}
     >
       <FormSelect
@@ -345,12 +385,27 @@ export const SelectTableCell = (params: GridRenderCellParams<any>) => {
         control={row.control}
         placeholder='Choose network'
         options={networkOptions}
+        size='small'
+        RenderOption={OptionRender}
       />
     </Box>
   );
 };
 export const InputDateCell = (params: GridRenderCellParams<any>) => {
   const { row } = params;
+  const { setValue } = useContext(BalanceAndSentFormContext);
+  const isSendInstant = useAppSelector(state => state.depositState.isSendInstant);
+  useEffect(() => {
+    if (isSendInstant) {
+      setValue(`${row.fieldArrayName}.${row.index}.${BALANCE_AND_SEND_FIELDS.MINUTE}`, 0);
+      setValue(`${row.fieldArrayName}.${row.index}.${BALANCE_AND_SEND_FIELDS.HOUR}`, 0);
+      setValue(`${row.fieldArrayName}.${row.index}.${BALANCE_AND_SEND_FIELDS.DAY}`, 0);
+    } else {
+      setValue(`${row.fieldArrayName}.${row.index}.${BALANCE_AND_SEND_FIELDS.MINUTE}`, 1);
+      setValue(`${row.fieldArrayName}.${row.index}.${BALANCE_AND_SEND_FIELDS.HOUR}`, 0);
+      setValue(`${row.fieldArrayName}.${row.index}.${BALANCE_AND_SEND_FIELDS.DAY}`, 0);
+    }
+  }, [isSendInstant]);
   return (
     <Box
       sx={{
@@ -361,6 +416,7 @@ export const InputDateCell = (params: GridRenderCellParams<any>) => {
         '.MuiFormHelperText-root': {
           position: 'absolute !important',
           bottom: '-20px',
+          left: '-10px',
         },
       }}
     >
@@ -375,6 +431,8 @@ export const InputDateCell = (params: GridRenderCellParams<any>) => {
           name={`${row.fieldArrayName}.${row.index}.${BALANCE_AND_SEND_FIELDS.MINUTE}`}
           control={row.control}
           placeholder=''
+          size='small'
+          disabled={isSendInstant}
         />
         <Box>m</Box>
       </Box>
@@ -389,6 +447,8 @@ export const InputDateCell = (params: GridRenderCellParams<any>) => {
           name={`${row.fieldArrayName}.${row.index}.${BALANCE_AND_SEND_FIELDS.HOUR}`}
           control={row.control}
           placeholder=''
+          size='small'
+          disabled={isSendInstant}
         />
         <Box>h</Box>
       </Box>
@@ -403,6 +463,8 @@ export const InputDateCell = (params: GridRenderCellParams<any>) => {
           name={`${row.fieldArrayName}.${row.index}.${BALANCE_AND_SEND_FIELDS.DAY}`}
           control={row.control}
           placeholder=''
+          size='small'
+          disabled={isSendInstant}
         />
         <Box>d</Box>
       </Box>
