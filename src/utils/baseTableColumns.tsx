@@ -123,7 +123,7 @@ export const BalanceAndSentBaseColumns: GridColDef[] = [
     headerName: 'Value',
     sortable: false,
     renderCell: InputValueTableCell,
-    width: 180,
+    width: 200,
   },
   {
     field: 'commission',
