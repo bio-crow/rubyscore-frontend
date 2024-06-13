@@ -23,6 +23,7 @@ import MantaImage from 'public/asserts/net/manta.svg';
 import BlastImage from 'public/asserts/net/blast.svg';
 import ZoraImage from 'public/asserts/net/Zora.svg';
 import MantleImage from 'public/asserts/net/mantle.svg';
+import EthereumImage from 'public/asserts/net/ethereum.svg';
 import TaikoImage from 'public/asserts/net/taiko.svg';
 
 const networkName = {
@@ -112,6 +113,15 @@ const networkName = {
     src: TaikoImage,
     twitterAccount: '@taikoxyz',
     hashtag: 'TAIKO',
+    telegramName: function () {
+      return this.hashtag;
+    },
+  },
+  ethereum: {
+    title: 'Ethereum',
+    src: EthereumImage,
+    twitterAccount: '@ethereum',
+    hashtag: 'Ethereum ',
     telegramName: function () {
       return this.hashtag;
     },

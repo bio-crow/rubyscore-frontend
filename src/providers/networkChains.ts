@@ -11,10 +11,10 @@ export const networkChains: Chain[] = [
     },
     rpcUrls: {
       public: {
-        http: ['https://1rpc.io/op'],
+        http: ['https://rpc.ankr.com/optimism'],
       },
       default: {
-        http: ['https://1rpc.io/op'],
+        http: ['https://rpc.ankr.com/optimism'],
       },
     },
     blockExplorers: {
@@ -300,6 +300,31 @@ export const networkChains: Chain[] = [
     },
     testnet: false,
   },
+  {
+    id: 1,
+    name: 'Ethereum Mainnet',
+    network: 'Ethereum Mainnet',
+    nativeCurrency: {
+      decimals: 18,
+      name: 'Ethereum Mainnet',
+      symbol: 'ETH',
+    },
+    rpcUrls: {
+      public: {
+        http: ['https://ethereum-rpc.publicnode.com'],
+      },
+      default: {
+        http: ['https://ethereum-rpc.publicnode.com'],
+      },
+    },
+    blockExplorers: {
+      default: {
+        name: 'Ethereum Mainnet',
+        url: 'https://etherscan.io',
+      },
+    },
+    testnet: false,
+  },
 ];
 export const networkContracts = {
   app: { contract: '0x009dbfee9e155766af434ed1652ca3769b05e76f', chainId: 10 },
@@ -314,6 +339,7 @@ export const networkContracts = {
   zora: { contract: '0xbDB018e21AD1e5756853fe008793a474d329991b', chainId: 7777777 },
   taiko: { contract: '0xDC3D8318Fbaec2de49281843f5bba22e78338146', chainId: 167000 },
   mantle: { contract: '0xDC3D8318Fbaec2de49281843f5bba22e78338146', chainId: 5000 },
+  ethereum: { contract: '', chainId: 1 },
 };
 export const networkVoteContracts = {
   base: { contract: '0xe10Add2ad591A7AC3CA46788a06290De017b9fB4', chainId: 8453 },
@@ -326,6 +352,7 @@ export const networkVoteContracts = {
   zora: { contract: '0xDC3D8318Fbaec2de49281843f5bba22e78338146', chainId: 7777777 },
   taiko: { contract: '0x4D1E2145082d0AB0fDa4a973dC4887C7295e21aB', chainId: 167000 },
   mantle: { contract: '0x4D1E2145082d0AB0fDa4a973dC4887C7295e21aB', chainId: 5000 },
+  ethereum: { contract: '', chainId: 1 },
 };
 export const prodAttestationContracts = {
   linea: { contract: '0xB9cC0Bb020cF55197C4C3d826AC87CAdba51f272', chainId: 59144 },

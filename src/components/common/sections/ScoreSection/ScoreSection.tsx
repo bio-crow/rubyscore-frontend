@@ -171,6 +171,14 @@ const ScoreSection: FC<Props> = ({
       points: userScoreList['mantle']?.score,
       rank: userScoreList['mantle']?.rank,
     },
+    {
+      index: 'ethereum',
+      title: 'Ethereum',
+      icon: networkStaticData['ethereum'].icon,
+      lvl: userScoreList['ethereum']?.level,
+      points: userScoreList['ethereum']?.score,
+      rank: userScoreList['ethereum']?.rank,
+    },
   ];
   const preparedNetworks = networks
     ? getTwoLinesNetworksData(networks, swiperRef?.params?.slidesPerView)

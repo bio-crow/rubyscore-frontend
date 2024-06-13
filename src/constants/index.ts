@@ -6,6 +6,7 @@ interface NetworkStatic {
 }
 
 export const networkStaticData: {
+  ethereum: NetworkStatic;
   zk_evm: NetworkStatic;
   zk_era: NetworkStatic;
   linea: NetworkStatic;
@@ -61,6 +62,10 @@ export const networkStaticData: {
   mantle: {
     icon: '/asserts/net/mantle.svg',
     label: 'Mantle',
+  },
+  ethereum: {
+    icon: '/asserts/net/ethereum.svg',
+    label: 'Ethereum',
   },
 };
 export const myLevelIcons = {
@@ -196,8 +201,14 @@ export const myLevelIcons = {
     '/asserts/box/mantle/mantle9.png',
     '/asserts/box/mantle/mantle10.png',
   ],
+  // needed just to satisfy typescript since we're not providing boxes for ethereum network
+  ethereum: [],
 };
 export const dashboardPanelTabs: { index: DashboardTabIndexType; label: string }[] = [
+  {
+    index: 'ethereum',
+    label: 'Ethereum',
+  },
   {
     index: 'zk_era',
     label: 'zkSync',
