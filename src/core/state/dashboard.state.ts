@@ -52,6 +52,7 @@ const initialState: IDashboardState = {
     zora: { count: null, is_ok: true },
     taiko: { count: null, is_ok: true },
     mantle: { count: null, is_ok: true },
+    ethereum: { count: null, is_ok: true },
   },
   dashboardTabsVoteInfoLoading: null,
 };

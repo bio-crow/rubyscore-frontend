@@ -328,7 +328,7 @@ export const TooltipCurrentRank = () => {
     </Box>
   );
 };
-export const TooltipVoteTab = () => {
+export const TooltipVoteTab = ({ isEthereum }: { isEthereum: boolean }) => {
   const theme = useCustomTheme();
   return (
     <Box
@@ -339,8 +339,11 @@ export const TooltipVoteTab = () => {
         textAlign: 'center',
       }}
     >
-      <Box className='Body-Lato-fw-600-fs-14' color={theme.palette.red}>
-        Chain is experiencing some problems. Get back later
+      <Box
+        className='Body-Lato-fw-600-fs-14'
+        color={isEthereum ? theme.palette.btnThirdlyHover : theme.palette.red}
+      >
+        {isEthereum ? 'Voting is not yet possible' : 'Chain is experiencing some problems. Get back later'}
       </Box>
     </Box>
   );

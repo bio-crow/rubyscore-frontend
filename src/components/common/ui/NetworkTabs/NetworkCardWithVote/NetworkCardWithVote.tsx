@@ -31,6 +31,7 @@ const NetworkCardWithVote: FC<Props> = ({ network, activeTab, setActiveTab }) =>
   // 2 in case if levelStatus is undefined from mapMayLevelDataFromResult which using wagmiLevels connected to networks
   // levelStatus: levelStatus || [2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
   let isNetworkAvailable: boolean = false;
+  let isEthereum: boolean = false;
   if (dashboardTabsVoteInfo[network.index].is_ok) {
     // info loading case
     if (userLevelsInfo == null) {
@@ -38,6 +39,7 @@ const NetworkCardWithVote: FC<Props> = ({ network, activeTab, setActiveTab }) =>
     } else if (userLevelsInfo) {
       isNetworkAvailable = !userLevelsInfo[network.index].includes(2);
     }
+    isEthereum = network.label === 'Ethereum';
   }
   const dispatch = useAppDispatch();
   const vote = (e: any) => {
@@ -53,7 +55,7 @@ const NetworkCardWithVote: FC<Props> = ({ network, activeTab, setActiveTab }) =>
   };
   return (
     <CustomTooltip
-      title={isAuth && !isNetworkAvailable && <TooltipVoteTab />}
+      title={isAuth && !isNetworkAvailable && <TooltipVoteTab isEthereum={isEthereum} />}
       disableFocusListener={!isNetworkAvailable}
       disableHoverListener={!isNetworkAvailable}
       disableTouchListener={!isNetworkAvailable}
@@ -64,7 +66,9 @@ const NetworkCardWithVote: FC<Props> = ({ network, activeTab, setActiveTab }) =>
           border: `1px solid ${
             network.index === activeTab.index
               ? !isNetworkAvailable
-                ? theme.palette.red
+                ? isEthereum
+                  ? theme.palette.btnThirdlyHover
+                  : theme.palette.red
                 : theme.palette.lightGreen
               : theme.palette.white10
           }`,

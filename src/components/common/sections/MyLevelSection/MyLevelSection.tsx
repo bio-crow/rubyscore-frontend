@@ -116,6 +116,7 @@ const MyLevelSection: FC<Props> = ({
         };
       })
     : [];
+  if (project === 'ethereum') return null;
   return (
     <Box
       sx={{

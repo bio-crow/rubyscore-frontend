@@ -17,19 +17,19 @@ const bpConfig = {
     slidesPerView: 1,
   },
   500: {
-    slidesPerView: 1,
-  },
-  767: {
     slidesPerView: 2,
   },
-  992: {
+  767: {
     slidesPerView: 3,
+  },
+  992: {
+    slidesPerView: 5,
   },
   1200: {
-    slidesPerView: 3,
+    slidesPerView: 5,
   },
   1392: {
-    slidesPerView: 5,
+    slidesPerView: 6,
   },
 };
 interface btnProps {
@@ -126,7 +126,7 @@ const NetworkTabs: FC<Props> = ({
             onResize={onResize}
             initialSlide={networks.findIndex(item => item.index === netTab)}
             onSlideChange={onSlideChange}
-            slidesPerView={4}
+            slidesPerView={6}
             loop={false}
             spaceBetween={20}
             breakpoints={bpConfig}
