@@ -2,7 +2,7 @@
 import { Box } from '@mui/system';
 import { InProgressBaseColumns } from '@/utils/baseTableColumns';
 import CustomPagination from '@/components/common/CustomPagination/CustomPagination';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import CustomNoRows from '@/components/common/CustomNoRows/CustomNoRows';
 import SecondaryTable from '@/components/common/ui/SecondaryTable/SecondaryTable';
 import { GridRenderCellParams } from '@mui/x-data-grid';
@@ -16,6 +16,12 @@ interface Props {
 
 const InProgressTable: FC<Props> = ({ data }) => {
   const theme = useCustomTheme();
+  const [sortModel, setSortModel] = useState<any>([
+    {
+      field: 'sendAt',
+      sort: 'desc',
+    },
+  ]);
   const prepareData = data;
   const deleteRow = (params: GridRenderCellParams<any>) => {
     const id = params?.row?.id as number;
@@ -50,6 +56,8 @@ const InProgressTable: FC<Props> = ({ data }) => {
       getRowId={params => uuidv4()}
       rows={prepareData}
       columns={columns}
+      sortModel={sortModel}
+      onSortModelChange={model => setSortModel(model)}
       slots={{
         pagination: CustomPagination,
         noRowsOverlay: CustomNoRows,

@@ -1,6 +1,5 @@
 import { Box } from '@mui/system';
 import HistoryTable from '@/modules/Transactions/HistoryTab/HistoryTable/HistoryTable';
-import { historyTableData } from '@/modules/Transactions/HistoryTab/HistoryTable/mokeHistoryData';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { useEffect } from 'react';
 import { getMultisendTransactionsHistory } from '@/core/thunk/deposit.thunk';

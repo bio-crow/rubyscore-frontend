@@ -1,6 +1,5 @@
 import { Box } from '@mui/system';
 import InProgressTable from '@/modules/Transactions/InProgressTab/InProgressTable/InProgressTable';
-import { inProgressData } from '@/modules/Transactions/InProgressTab/InProgressTable/mokeInProgressData';
 import FourthButton from '@/components/common/ui/FourthButton/FourthButton';
 import TrashIcon from '@/components/common/Icons/TrashIcon';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
