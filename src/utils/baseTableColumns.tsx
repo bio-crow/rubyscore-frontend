@@ -171,7 +171,7 @@ export const InProgressBaseColumns: GridColDef[] = [
     width: 150,
   },
   {
-    field: 'commission',
+    field: 'taxFormatted',
     headerName: 'Commission',
     sortComparator: numberComparator,
     sortable: true,
@@ -250,7 +250,7 @@ export const HistoryBaseColumns: GridColDef[] = [
     width: 150,
   },
   {
-    field: 'commission',
+    field: 'taxFormatted',
     headerName: 'Commission',
     sortComparator: numberComparator,
     sortable: true,

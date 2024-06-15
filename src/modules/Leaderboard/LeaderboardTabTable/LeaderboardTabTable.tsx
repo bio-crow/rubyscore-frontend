@@ -34,6 +34,7 @@ const LeaderboardTabTable: FC<Props> = ({ tableData, activeTab }) => {
         }
         columns={activeTab.index === 'rubyscore' ? leaderBoardBaseColumns : leaderBoardBaseColumnsShort}
         slots={{
+          pagination: null,
           noRowsOverlay: CustomNoRows,
         }}
         onRowClick={(data: any) => {
