@@ -315,3 +315,13 @@ export interface INetworkOption {
   icon: string;
   balance: string;
 }
+export interface IReferralLink {
+  id: number;
+  status: string;
+  referralCode: string;
+  profit: string;
+  transactionsCount: number;
+  referralsCount: number;
+  createdAt: string;
+  updatedAt: string;
+}

@@ -5,6 +5,7 @@ import {
   ILeaderboardUser,
   IMultisendBalanceData,
   IMultisendTransactionsHistoryData,
+  IReferralLink,
   IStreakDays,
   ITask,
   IUserGradation,
@@ -408,4 +409,9 @@ export interface IMultisendTransactionsHistoryResponse {
 }
 export interface IUserTransactionPayload {
   transactions: IUserTransaction[];
+}
+export interface IMultisendReferralsResponse {
+  result: IReferralLink[];
+  address: any;
+  is_ok: boolean;
 }

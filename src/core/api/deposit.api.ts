@@ -2,6 +2,7 @@ import { apiPrivateAxios, apiPrivateAxiosLimited, apiPublicAxios } from '@/core/
 import {
   IInfoChartActiveUserResponse,
   IMultisendBalanceResponse,
+  IMultisendReferralsResponse,
   IMultisendTransactionsHistoryResponse,
 } from '@/core/types';
 import { IUserTransaction } from '@/types/index';
@@ -75,6 +76,14 @@ export const fetchDeleteTransactions = async (data: { ids: number[] }) => {
   try {
     const config: any = { data };
     return await apiPrivateAxios.delete(`/multisend/transactions`, config);
+  } catch (error: any) {
+    toast(error.response?.data?.message || 'Something went wrong', { position: 'top-right' });
+    //console.error(error);
+  }
+};
+export const fetchReferrals = async () => {
+  try {
+    return await apiPrivateAxios.get<IMultisendReferralsResponse>(`/multisend/referral-link`);
   } catch (error: any) {
     toast(error.response?.data?.message || 'Something went wrong', { position: 'top-right' });
     //console.error(error);

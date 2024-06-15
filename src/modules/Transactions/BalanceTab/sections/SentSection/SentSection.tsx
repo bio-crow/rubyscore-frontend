@@ -206,10 +206,11 @@ const SentSection = () => {
             flexDirection: { xs: 'column', sm: 'row' },
           }}
         >
-          <Disclamer />
+          {/*<Disclamer /> */}
           <Box
             sx={{
               width: { xs: 'fit-content', xlg: '390px' },
+              marginLeft: 'auto',
             }}
           >
             <SecondaryButton

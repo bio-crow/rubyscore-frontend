@@ -3,10 +3,17 @@ import FourthButton from '@/components/common/ui/FourthButton/FourthButton';
 import PlusIcon from '@/components/common/Icons/PlusIcon';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import RefferalsTable from '@/modules/Transactions/RefferalsTab/RefferalsTable/RefferalsTable';
-import { refferalsTableData } from '@/modules/Transactions/RefferalsTab/RefferalsTable/mokeRefferallData';
+import { useEffect } from 'react';
+import { getUserReferrals } from '@/core/thunk/deposit.thunk';
+import { useAppDispatch, useAppSelector } from '@/core/store';
 
 const RefferalsTab = () => {
   const theme = useCustomTheme();
+  const dispatch = useAppDispatch();
+  const referralsData = useAppSelector(state => state.depositState.referralsData);
+  useEffect(() => {
+    dispatch(getUserReferrals());
+  }, []);
   return (
     <Box
       sx={{
@@ -18,7 +25,7 @@ const RefferalsTab = () => {
         width: '100%',
       }}
     >
-      <Box
+      {/* <Box
         sx={{
           display: 'flex',
           justifyContent: 'flex-end',
@@ -32,13 +39,13 @@ const RefferalsTab = () => {
         >
           Add Refferal link
         </FourthButton>
-      </Box>
+      </Box> */}
       <Box
         sx={{
           display: 'flex',
         }}
       >
-        <RefferalsTable data={refferalsTableData} />
+        <RefferalsTable data={referralsData} />
       </Box>
       <Box
         sx={{

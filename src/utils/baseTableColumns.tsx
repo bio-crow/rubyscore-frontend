@@ -9,6 +9,8 @@ import {
   InputValueTableCell,
   NetworkCell,
   NetworkHeader,
+  ProfitCell,
+  ReferralLinkCell,
   ReferralUserCell,
   SelectTableCell,
   TimeHeader,
@@ -209,28 +211,30 @@ export const InProgressBaseColumns: GridColDef[] = [
 ];
 export const RefferalsBaseColumns: GridColDef[] = [
   {
-    field: 'RefferalLink',
+    field: 'referralCode',
     headerName: 'Refferal link',
     sortable: false,
+    renderCell: ReferralLinkCell,
     flex: 1,
     minWidth: 200,
   },
   {
-    field: 'NumberOfReferrals',
+    field: 'referralsCount',
     headerName: 'Number of referrals',
     sortable: false,
     width: 200,
   },
   {
-    field: 'transactions',
+    field: 'transactionsCount',
     headerName: 'Transactions',
     sortable: false,
     width: 150,
   },
   {
-    field: 'amount',
+    field: 'profit',
     headerName: 'Amount',
     sortable: false,
+    renderCell: ProfitCell,
     width: 150,
   },
 ];

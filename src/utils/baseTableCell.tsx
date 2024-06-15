@@ -21,6 +21,7 @@ import { FormSelect } from '@/components/common/fields/SelectField';
 import { fetchProjectTax } from '@/core/api/deposit.api';
 import { BalanceAndSentFormContext } from '@/context/index';
 import { debounce } from 'lodash';
+import { appRoutes } from '@/constants/routes';
 
 export const ReferralUserCell = (params: GridRenderCellParams<any>) => {
   const theme = useCustomTheme();
@@ -75,6 +76,40 @@ export const ReferralUserCell = (params: GridRenderCellParams<any>) => {
 export const FromNowCell = (params: GridRenderCellParams<any>) => {
   const date = params.row.sendAt;
   return <Box>{moment(date).fromNow()}</Box>;
+};
+export const ReferralLinkCell = (params: GridRenderCellParams<any>) => {
+  const theme = useCustomTheme();
+  const { field, row } = params;
+  const refCode = row[field];
+  const refLink = `${window.location.origin}${appRoutes.PROFILE}/?ref=${refCode}`;
+  const copyReferralLink = () => {
+    refCode && copyToClickBoard(refLink);
+  };
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        gap: '5px',
+        alignItems: 'center',
+      }}
+    >
+      <Box>{refCode && refLink}</Box>
+      <Box
+        sx={{
+          cursor: 'pointer',
+          height: '24px',
+        }}
+      >
+        <Box height='24px' onClick={copyReferralLink}>
+          <CopyIcon fill={theme.palette.white50} />
+        </Box>
+      </Box>
+    </Box>
+  );
+};
+export const ProfitCell = (params: GridRenderCellParams<any>) => {
+  const { field, row } = params;
+  return <Box>{row[field]} ETH</Box>;
 };
 export const TimerCell = (params: GridRenderCellParams<any>) => {
   const date = new Date(params.row.sendAt);

@@ -8,6 +8,7 @@ import {
   setHistoryData,
   setInProgressData,
   setNetworkOptions,
+  setReferralsData,
   setSendTransactionsLoading,
   setTotalBalance,
 } from '@/core/state/deposit.state';
@@ -20,6 +21,7 @@ import {
   fetchMultisendBalanceData,
   fetchMultisendTransactionsHistoryData,
   fetchMultisendTransactionsInProgressData,
+  fetchReferrals,
   sendUserTransactions,
 } from '@/core/api/deposit.api';
 import {
@@ -136,6 +138,16 @@ export const deleteTransactionById = createAsyncThunk(
       );
       dispatch(setInProgressData(updatedInProcess));
       toast(res?.data.message, { position: 'top-right' });
+    }
+    return;
+  }
+);
+export const getUserReferrals = createAsyncThunk(
+  'depositSlice/getUserReferrals',
+  async (args, { dispatch }) => {
+    const res: any = await fetchReferrals();
+    if (res?.data?.is_ok) {
+      dispatch(setReferralsData(res.data.result));
     }
     return;
   }
