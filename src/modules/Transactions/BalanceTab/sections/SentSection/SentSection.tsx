@@ -218,6 +218,7 @@ const SentSection = () => {
               size='large'
               type='submit'
               fullWidth
+              disabled={fields.length < 1}
               loading={sendTransactionsLoading}
             >
               Confirm
