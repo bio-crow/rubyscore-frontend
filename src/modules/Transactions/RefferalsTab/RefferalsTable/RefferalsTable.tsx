@@ -24,6 +24,7 @@ const RefferalsTable: FC<Props> = ({ data }) => {
       sortable: false,
       width: 200,
       renderCell: (params: GridRenderCellParams<any>) => {
+        const profit = params.row.profit;
         return (
           <Box
             key={uuidv4()}
@@ -34,7 +35,7 @@ const RefferalsTable: FC<Props> = ({ data }) => {
             }}
             onClick={() => claim(params)}
           >
-            <SecondaryButton variant='contained' size='medium' fullWidth>
+            <SecondaryButton variant='contained' size='medium' fullWidth disabled={!profit || profit == 0}>
               Claim
             </SecondaryButton>
           </Box>
