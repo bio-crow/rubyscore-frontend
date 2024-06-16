@@ -5,6 +5,7 @@ import {
   ILeaderboardUser,
   IMultisendBalanceData,
   IMultisendTransactionsHistoryData,
+  IReferralClaimData,
   IReferralLink,
   IStreakDays,
   ITask,
@@ -412,6 +413,11 @@ export interface IUserTransactionPayload {
 }
 export interface IMultisendReferralsResponse {
   result: IReferralLink[];
+  address: any;
+  is_ok: boolean;
+}
+export interface IMultisendReferralsClaimResponse {
+  result: IReferralClaimData[];
   address: any;
   is_ok: boolean;
 }

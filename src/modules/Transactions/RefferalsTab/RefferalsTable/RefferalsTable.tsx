@@ -5,17 +5,33 @@ import CustomPagination from '@/components/common/CustomPagination/CustomPaginat
 import { FC } from 'react';
 import CustomNoRows from '@/components/common/CustomNoRows/CustomNoRows';
 import SecondaryTable from '@/components/common/ui/SecondaryTable/SecondaryTable';
-import { GridRenderCellParams } from '@mui/x-data-grid';
+import { GridActionsCellItem, GridRenderCellParams } from '@mui/x-data-grid';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { v4 as uuidv4 } from 'uuid';
 import SecondaryButton from '@/components/common/ui/SecondaryButton/SecondaryButton';
+import { fetchClaimReferrals } from '@/core/api/deposit.api';
+import { IMultisendReferralsClaimResponse } from '@/core/types';
+import { IReferralClaimData } from '@/types/index';
+import { useAppDispatch, useAppSelector } from '@/core/store';
+import { claimReferrals } from '@/core/thunk/deposit.thunk';
 interface Props {
   data: any[];
 }
 const RefferalsTable: FC<Props> = ({ data }) => {
   const theme = useCustomTheme();
+  const dispatch = useAppDispatch();
+  const referralLoadingId = useAppSelector(state => state.depositState.referralLoadingId);
   const prepareData = data;
-  const claim = (params: GridRenderCellParams<any>) => {};
+  const claim = async (params: GridRenderCellParams<any>) => {
+    const { row } = params;
+    dispatch(
+      claimReferrals({
+        id: row.id,
+        project: row.project.name,
+        referralCode: row.referralCode,
+      })
+    );
+  };
   const columns = [
     ...RefferalsBaseColumns,
     {
@@ -24,7 +40,8 @@ const RefferalsTable: FC<Props> = ({ data }) => {
       sortable: false,
       width: 200,
       renderCell: (params: GridRenderCellParams<any>) => {
-        const profit = params.row.profit;
+        const { row } = params;
+        const profit = row.profit;
         return (
           <Box
             key={uuidv4()}
@@ -33,9 +50,18 @@ const RefferalsTable: FC<Props> = ({ data }) => {
               width: '120px',
               color: theme.palette.lightGreen,
             }}
-            onClick={() => claim(params)}
           >
-            <SecondaryButton variant='contained' size='medium' fullWidth disabled={!profit || profit == 0}>
+            <SecondaryButton
+              onClick={e => {
+                e.stopPropagation();
+                claim(params);
+              }}
+              variant='contained'
+              size='medium'
+              fullWidth
+              disabled={!profit || profit == 0}
+              loading={row.id === referralLoadingId}
+            >
               Claim
             </SecondaryButton>
           </Box>
