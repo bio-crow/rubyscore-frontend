@@ -2,6 +2,7 @@ import { apiPrivateAxios, apiPrivateAxiosLimited, apiPublicAxios } from '@/core/
 import {
   IInfoChartActiveUserResponse,
   IMultisendBalanceResponse,
+  IMultisendReferralsClaimResponse,
   IMultisendReferralsResponse,
   IMultisendTransactionsHistoryResponse,
 } from '@/core/types';
@@ -84,6 +85,14 @@ export const fetchDeleteTransactions = async (data: { ids: number[] }) => {
 export const fetchReferrals = async () => {
   try {
     return await apiPrivateAxios.get<IMultisendReferralsResponse>(`/multisend/referral-link`);
+  } catch (error: any) {
+    toast(error.response?.data?.message || 'Something went wrong', { position: 'top-right' });
+    //console.error(error);
+  }
+};
+export const fetchClaimReferrals = async (data: { project: string; referralCode: string }) => {
+  try {
+    return await apiPrivateAxios.post<IMultisendReferralsClaimResponse>(`/multisend/referral-claim`, data);
   } catch (error: any) {
     toast(error.response?.data?.message || 'Something went wrong', { position: 'top-right' });
     //console.error(error);

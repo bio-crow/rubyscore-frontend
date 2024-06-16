@@ -14,6 +14,7 @@ interface IDepositState {
   sendTransactionsLoading: boolean;
   deleteLoading: boolean;
   isSendInstant: boolean;
+  referralLoadingId: string | null;
   networkOptions: INetworkOption[];
   balanceData: IMultisendBalanceData[];
   totalBalance: IMultisendTotalBalanceData;
@@ -39,6 +40,7 @@ const initialState: IDepositState = {
   historyData: [],
   inProgressData: [],
   referralsData: [],
+  referralLoadingId: null,
 };
 
 export const depositSlice = createSlice({
@@ -50,6 +52,9 @@ export const depositSlice = createSlice({
     },
     setDeleteLoading: (state, action: PayloadAction<boolean>) => {
       state.deleteLoading = action.payload;
+    },
+    setReferralLoadingId: (state, action: PayloadAction<string | null>) => {
+      state.referralLoadingId = action.payload;
     },
     setIsSendInstant: (state, action: PayloadAction<boolean>) => {
       state.isSendInstant = action.payload;
@@ -95,4 +100,5 @@ export const {
   setIsSendInstant,
   setNetworkOptions,
   setReferralsData,
+  setReferralLoadingId,
 } = depositSlice.actions;

@@ -325,3 +325,11 @@ export interface IReferralLink {
   createdAt: string;
   updatedAt: string;
 }
+export interface IReferralClaimData {
+  amount: string;
+  amountFormatted: string;
+  project: string;
+  nonce: string;
+  recipient: string;
+  signature: string;
+}

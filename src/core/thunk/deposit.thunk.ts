@@ -8,6 +8,7 @@ import {
   setHistoryData,
   setInProgressData,
   setNetworkOptions,
+  setReferralLoadingId,
   setReferralsData,
   setSendTransactionsLoading,
   setTotalBalance,
@@ -15,8 +16,10 @@ import {
 import {
   wagmiDepositAnotherWallet,
   wagmiDepositSingleWallet,
+  wagmiReferralClaimProfit,
 } from '@/core/api/contract/contract.deposit.api';
 import {
+  fetchClaimReferrals,
   fetchDeleteTransactions,
   fetchMultisendBalanceData,
   fetchMultisendTransactionsHistoryData,
@@ -28,6 +31,7 @@ import {
   DashboardTabIndexType,
   IMultisendTotalBalanceData,
   IMultisendTransactionsHistoryData,
+  IReferralClaimData,
 } from '@/types/index';
 import { toast } from 'react-toastify';
 import { networkStaticData } from '@/constants/index';
@@ -149,6 +153,25 @@ export const getUserReferrals = createAsyncThunk(
     if (res?.data?.is_ok) {
       dispatch(setReferralsData(res.data.result));
     }
+    return;
+  }
+);
+export const claimReferrals = createAsyncThunk(
+  'depositSlice/claimReferrals',
+  async (params: { id: string; project: string; referralCode: string }, { dispatch }) => {
+    const { id, project, referralCode } = params;
+    dispatch(setReferralLoadingId(id));
+    const res: any = await fetchClaimReferrals({
+      project,
+      referralCode,
+    });
+    const data = res?.data;
+    if (data?.is_ok) {
+      const referralClaimData: IReferralClaimData = data.result;
+      await wagmiReferralClaimProfit({ ...referralClaimData, project });
+    }
+    dispatch(setReferralLoadingId(null));
+    dispatch(getUserReferrals());
     return;
   }
 );

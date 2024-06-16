@@ -42,7 +42,10 @@ const BalanceAndSentTable = () => {
               cursor: 'pointer',
               color: theme.palette.red,
             }}
-            onClick={() => deleteRow(params)}
+            onClick={e => {
+              e.stopPropagation();
+              deleteRow(params);
+            }}
           >
             Delete
           </Box>
