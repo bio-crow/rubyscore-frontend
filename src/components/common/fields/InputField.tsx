@@ -11,6 +11,7 @@ interface Props {
   size?: 'small' | 'medium';
   startAdornment?: any;
   disabled?: boolean;
+  fullWidth?: boolean;
 }
 export const FormInputText: FC<Props> = ({
   name,
@@ -19,6 +20,7 @@ export const FormInputText: FC<Props> = ({
   placeholder,
   InputProps,
   disabled,
+  fullWidth,
   size = 'medium',
 }) => {
   return (
@@ -36,6 +38,7 @@ export const FormInputText: FC<Props> = ({
           disabled={disabled}
           sx={{ flex: 1 }}
           size={size}
+          fullWidth={fullWidth}
           variant='outlined'
           placeholder={placeholder}
           autoComplete='off'

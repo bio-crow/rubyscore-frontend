@@ -5,13 +5,9 @@ import CustomPagination from '@/components/common/CustomPagination/CustomPaginat
 import { FC } from 'react';
 import CustomNoRows from '@/components/common/CustomNoRows/CustomNoRows';
 import SecondaryTable from '@/components/common/ui/SecondaryTable/SecondaryTable';
-import { GridActionsCellItem, GridRenderCellParams } from '@mui/x-data-grid';
+import { GridRenderCellParams } from '@mui/x-data-grid';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
-import { v4 as uuidv4 } from 'uuid';
 import SecondaryButton from '@/components/common/ui/SecondaryButton/SecondaryButton';
-import { fetchClaimReferrals } from '@/core/api/deposit.api';
-import { IMultisendReferralsClaimResponse } from '@/core/types';
-import { IReferralClaimData } from '@/types/index';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { claimReferrals } from '@/core/thunk/deposit.thunk';
 interface Props {
@@ -39,12 +35,13 @@ const RefferalsTable: FC<Props> = ({ data }) => {
       headerName: '',
       sortable: false,
       width: 200,
+      disableClickEventBubbling: true,
       renderCell: (params: GridRenderCellParams<any>) => {
         const { row } = params;
         const profit = row.profit;
         return (
           <Box
-            key={uuidv4()}
+            key={row.id}
             sx={{
               display: 'flex',
               width: '120px',
@@ -52,8 +49,7 @@ const RefferalsTable: FC<Props> = ({ data }) => {
             }}
           >
             <SecondaryButton
-              onClick={e => {
-                e.stopPropagation();
+              onClick={() => {
                 claim(params);
               }}
               variant='contained'
@@ -71,7 +67,7 @@ const RefferalsTable: FC<Props> = ({ data }) => {
   ];
   return (
     <SecondaryTable
-      getRowId={params => uuidv4()}
+      getRowId={params => params.id}
       rows={prepareData}
       columns={columns}
       slots={{
@@ -88,6 +84,8 @@ const RefferalsTable: FC<Props> = ({ data }) => {
       autoHeight
       disableColumnFilter
       disableColumnMenu
+      disableColumnSelector
+      disableDensitySelector
       disableRowSelectionOnClick
     />
   );

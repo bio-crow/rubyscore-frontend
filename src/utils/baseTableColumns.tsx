@@ -118,7 +118,7 @@ export const BalanceAndSentBaseColumns: GridColDef[] = [
     headerName: 'Address',
     sortable: false,
     renderCell: InputAddressTableCell,
-    width: 200,
+    width: 370,
   },
   {
     field: BALANCE_AND_SEND_FIELDS.VALUE,
@@ -141,13 +141,13 @@ export const BalanceAndSentBaseColumns: GridColDef[] = [
     renderCell: SelectTableCell,
     width: 250,
   },
-  {
+  /* {
     field: 'gas',
     headerName: 'Gas',
     sortable: false,
     renderHeader: GasHeader,
     width: 170,
-  },
+  },*/
   {
     field: 'time',
     headerName: 'Time',
@@ -163,14 +163,14 @@ export const InProgressBaseColumns: GridColDef[] = [
     headerName: 'Address',
     sortable: false,
     flex: 1,
-    minWidth: 150,
+    minWidth: 350,
   },
   {
     field: 'valueFormatted',
     headerName: 'Value',
     sortComparator: numberComparator,
     sortable: true,
-    width: 150,
+    width: 180,
   },
   {
     field: 'taxFormatted',
@@ -188,25 +188,25 @@ export const InProgressBaseColumns: GridColDef[] = [
     renderHeader: NetworkHeader,
     renderCell: NetworkCell,
   },
-  {
+  /* {
     field: 'L1Gas',
     headerName: 'Gas',
     sortable: true,
     width: 150,
-  },
+  },*/
   {
     field: 'sendAt',
     headerName: 'Time',
     sortable: true,
     renderCell: TimerCell,
     sortComparator: dateComparator,
-    width: 150,
+    width: 200,
   },
   {
     field: 'status',
     headerName: 'Status',
     sortable: false,
-    width: 150,
+    width: 100,
   },
 ];
 export const RefferalsBaseColumns: GridColDef[] = [
