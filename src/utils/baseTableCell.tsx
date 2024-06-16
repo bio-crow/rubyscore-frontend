@@ -341,12 +341,14 @@ export const InputAddressTableCell = (params: GridRenderCellParams<any>) => {
         display: 'flex',
         alignSelf: 'flex-start',
         paddingTop: '5px',
+        width: '100%',
       }}
     >
       <FormInputText
         name={`${row.fieldArrayName}.${row.index}.${field}`}
         control={row.control}
         size='small'
+        fullWidth
         placeholder='Enter address'
       />
     </Box>

@@ -178,7 +178,7 @@ const SentSection = () => {
             >
               Add wallet
             </FourthButton>
-            <FourthButton
+            {/* <FourthButton
               className='white'
               startIcon={<DownloadIcon fill={theme.palette.powderWhite} />}
               variant='outlined'
@@ -186,7 +186,7 @@ const SentSection = () => {
               size='medium'
             >
               Export wallet
-            </FourthButton>
+            </FourthButton> */}
           </Box>
         </Box>
         <Box

@@ -7,7 +7,6 @@ import CustomNoRows from '@/components/common/CustomNoRows/CustomNoRows';
 import SecondaryTable from '@/components/common/ui/SecondaryTable/SecondaryTable';
 import { GridRenderCellParams } from '@mui/x-data-grid';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
-import { v4 as uuidv4 } from 'uuid';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { deleteTransactionById } from '@/core/thunk/deposit.thunk';
 interface Props {
@@ -38,7 +37,7 @@ const InProgressTable: FC<Props> = ({ data }) => {
       renderCell: (params: GridRenderCellParams<any>) => {
         return (
           <Box
-            key={uuidv4()}
+            key={params.row.id}
             sx={{
               display: 'flex',
               color: theme.palette.red,
@@ -56,7 +55,7 @@ const InProgressTable: FC<Props> = ({ data }) => {
   ];
   return (
     <SecondaryTable
-      getRowId={params => uuidv4()}
+      getRowId={params => params.id}
       rows={prepareData}
       columns={columns}
       sortModel={sortModel}
