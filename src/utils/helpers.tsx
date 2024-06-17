@@ -23,6 +23,8 @@ import {
   TooltipAchievementsWallet,
   TooltipAchievementsWeeks,
 } from '@/utils/tooltipsContent';
+import readXlsxFile from 'read-excel-file';
+import { BALANCE_AND_SEND_FIELDS } from '@/constants/formFields';
 
 export const transformDataRegex = /\B(?=(\d{3})+(?!\d))/g;
 export const getReadableChartData = (number: number): string =>
@@ -795,4 +797,35 @@ export const getTwoLinesNetworksData = (networks: any[], minLineLength = 5) => {
     }
   }
   return result;
+};
+
+export const parseExcelToJson = async (file: any) => {
+  const schema = {
+    Address: {
+      prop: BALANCE_AND_SEND_FIELDS.ADDRESS,
+      type: String,
+    },
+    Network: {
+      prop: BALANCE_AND_SEND_FIELDS.NETWORK,
+      type: String,
+    },
+    Value: {
+      prop: BALANCE_AND_SEND_FIELDS.VALUE,
+      type: Number,
+    },
+    'Time (Minutes)': {
+      prop: BALANCE_AND_SEND_FIELDS.MINUTE,
+      type: Number,
+    },
+    'Time (Hours)': {
+      prop: BALANCE_AND_SEND_FIELDS.HOUR,
+      type: Number,
+    },
+    'Time (Days)': {
+      prop: BALANCE_AND_SEND_FIELDS.DAY,
+      type: Number,
+    },
+  };
+  const data = await readXlsxFile(file, { schema });
+  return data;
 };

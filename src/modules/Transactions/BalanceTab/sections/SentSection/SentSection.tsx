@@ -18,6 +18,7 @@ import { IUserTransaction } from '@/types/index';
 import { setUserTransactions } from '@/core/thunk/deposit.thunk';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { setIsSendInstant } from '@/core/state/deposit.state';
+import ImportWallets from '@/modules/Transactions/BalanceTab/sections/SentSection/components/ImportWallets/ImportWallets';
 const emptyFormObject = {
   id: 'id',
   [BALANCE_AND_SEND_FIELDS.MINUTE]: 1,
@@ -178,15 +179,7 @@ const SentSection = () => {
             >
               Add wallet
             </FourthButton>
-            {/* <FourthButton
-              className='white'
-              startIcon={<DownloadIcon fill={theme.palette.powderWhite} />}
-              variant='outlined'
-              fullWidth
-              size='medium'
-            >
-              Export wallet
-            </FourthButton> */}
+            <ImportWallets />
           </Box>
         </Box>
         <Box
