@@ -155,7 +155,7 @@ const AchievementsSection: FC<Props> = ({ activeTab, wallet, onRefresh }) => {
                 }}
               >
                 {prepareUserGradationToAchievementsCards(userGradation).map(item => (
-                  <AchievementCard key={item.key} data={item} />
+                  <AchievementCard key={item.key} data={item} activeTab={activeTab} />
                 ))}
               </Box>
             ) : (

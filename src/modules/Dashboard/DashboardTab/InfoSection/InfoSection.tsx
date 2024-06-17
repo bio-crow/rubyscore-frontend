@@ -33,7 +33,7 @@ const InfoSection: FC<Props> = ({ activeTab }) => {
         gap: '20px',
       }}
     >
-      <MainInfo />
+      <MainInfo activeTab={activeTab} />
       <InfoChartSection activeTab={activeTab} />
       {isAuth && showTransactionsInfo && <TransactionInfo activeTab={activeTab} />}
     </Box>

@@ -1,6 +1,6 @@
 import { Box } from '@mui/system';
 import { FC, useState } from 'react';
-import { IAchievementCard } from '@/types/index';
+import { DashboardTabIndexType, IAchievementCard } from '@/types/index';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import CustomLinearProgress from '@/components/common/ui/CustomLinearProgress/CustomLinearProgress';
 import InfoIcon from '@/components/common/Icons/InfoIcon';
@@ -8,10 +8,12 @@ import CustomTooltip from '@/components/common/CustomTooltip/CustomTooltip';
 import { formatPercentsForCards } from '@/utils/helpers';
 interface Props {
   data: IAchievementCard;
+  activeTab: { index: DashboardTabIndexType; label: string };
 }
-const AchievementCard: FC<Props> = ({ data }) => {
+const AchievementCard: FC<Props> = ({ data, activeTab }) => {
   const theme = useCustomTheme();
   const [progress, setProgress] = useState(100 - data.top);
+  if (activeTab?.label === 'Ethereum' && data?.key === 'total_balance_usd') return null;
   return (
     <Box
       sx={{

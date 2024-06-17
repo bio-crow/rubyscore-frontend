@@ -6,7 +6,12 @@ import 'swiper/css';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { formatCash } from '@/utils/helpers';
 import { TooltipMainInfoTransactionVolume, TooltipMainInfoUser } from '@/utils/tooltipsContent';
-const MainInfo = () => {
+import { DashboardTabIndexType } from '@/types/index';
+import { FC } from 'react';
+interface Props {
+  activeTab: { index: DashboardTabIndexType; label: string };
+}
+const MainInfo: FC<Props> = ({ activeTab }) => {
   const projectStatistics = useAppSelector(state => state.dashboardState.projectStatistics);
   const data = projectStatistics
     ? [
@@ -23,10 +28,14 @@ const MainInfo = () => {
           value: formatCash(projectStatistics.total_value_locked),
           description: 'Total Value Locked',
         },
-        {
-          value: projectStatistics.bridge_transaction_count.toLocaleString(),
-          description: 'Transactions through ETH bridge',
-        },
+        ...(activeTab.label !== 'Ethereum'
+          ? [
+              {
+                value: projectStatistics.bridge_transaction_count.toLocaleString(),
+                description: 'Transactions through ETH bridge',
+              },
+            ]
+          : []),
         {
           value: formatCash(projectStatistics.total_volume),
           description: 'Transaction volume',
