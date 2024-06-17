@@ -1,4 +1,4 @@
-import { waitForTransaction, writeContract } from '@wagmi/core';
+import { prepareWriteContract, waitForTransaction, writeContract } from '@wagmi/core';
 import { getContractConfig } from '@/utils/helpers';
 import { depositContracts } from '@/providers/networkChains';
 import { switchToContractChain } from '@/core/api/contract/helpers';
@@ -11,13 +11,12 @@ export const wagmiDepositSingleWallet = async (data: IDepositSinglePayload): Pro
   const action = async ({ project, value }: IDepositSinglePayload) => {
     const baseConfig = getContractConfig(project, depositContracts);
     await switchToContractChain(baseConfig.chainId);
-    let config: any = {
+    let config: any = await prepareWriteContract({
       ...baseConfig,
       abi: abiDeposit,
       functionName: 'deposit',
       value: parseEther(value.toString()),
-      gas: 50000,
-    };
+    });
     const { hash } = await writeContract(config);
     const result = await waitForTransaction({
       hash: hash,
@@ -36,14 +35,13 @@ export const wagmiDepositAnotherWallet = async (data: IDepositAnotherPayload): P
   const action = async ({ project, value, address }: IDepositAnotherPayload) => {
     const baseConfig = getContractConfig(project, depositContracts);
     await switchToContractChain(baseConfig.chainId);
-    let config: any = {
+    const config = await prepareWriteContract({
       ...baseConfig,
       abi: abiDeposit,
       functionName: 'deposit',
       value: parseEther(value.toString()),
-      gas: 50000,
       args: [address],
-    };
+    });
     const { hash } = await writeContract(config);
     const result = await waitForTransaction({
       hash: hash,
@@ -63,13 +61,12 @@ export const wagmiReferralClaimProfit = async (data: IReferralClaimData): Promis
   const action = async ({ project, recipient, nonce, signature, amount }: IReferralClaimData) => {
     const baseConfig = getContractConfig(project, depositContracts);
     await switchToContractChain(baseConfig.chainId);
-    let config: any = {
+    let config: any = await prepareWriteContract({
       ...baseConfig,
       abi: abiDeposit,
       functionName: 'claimProfit',
-      gas: 200000,
       args: [[recipient, amount, nonce], signature],
-    };
+    });
     const { hash } = await writeContract(config);
     const result = await waitForTransaction({
       hash: hash,
