@@ -84,14 +84,20 @@ export const LinkCell = (params: GridRenderCellParams<any>) => {
     window.open(row[field], '_blank');
   };
   return (
-    <Box
-      onClick={openLink}
-      sx={{
-        color: theme.palette.lightGreen,
-        cursor: 'pointer',
-      }}
-    >
-      Link
+    <Box>
+      {row[field] ? (
+        <Box
+          onClick={openLink}
+          sx={{
+            color: theme.palette.lightGreen,
+            cursor: 'pointer',
+          }}
+        >
+          Link
+        </Box>
+      ) : (
+        '-'
+      )}
     </Box>
   );
 };
