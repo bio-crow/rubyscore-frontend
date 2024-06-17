@@ -34,7 +34,7 @@ const BalanceAndSentTable = () => {
       renderCell: (params: GridRenderCellParams<any>) => {
         return (
           <Box
-            key={uuidv4()}
+            key={params.id}
             sx={{
               display: 'flex',
               alignSelf: 'flex-start',
@@ -55,7 +55,7 @@ const BalanceAndSentTable = () => {
   ];
   return (
     <SecondaryTable
-      getRowId={params => params.index}
+      getRowId={params => params.id}
       rows={prepareData}
       columns={columns}
       rowHeight={70}

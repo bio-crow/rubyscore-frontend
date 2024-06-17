@@ -453,7 +453,7 @@ export const SelectTableCell = (params: GridRenderCellParams<any>) => {
 };
 export const InputDateCell = (params: GridRenderCellParams<any>) => {
   const { row } = params;
-  const { setValue } = useContext(BalanceAndSentFormContext);
+  const { setValue, getValues } = useContext(BalanceAndSentFormContext);
   const isSendInstant = useAppSelector(state => state.depositState.isSendInstant);
   useEffect(() => {
     if (isSendInstant) {
@@ -461,9 +461,18 @@ export const InputDateCell = (params: GridRenderCellParams<any>) => {
       setValue(`${row.fieldArrayName}.${row.index}.${BALANCE_AND_SEND_FIELDS.HOUR}`, 0);
       setValue(`${row.fieldArrayName}.${row.index}.${BALANCE_AND_SEND_FIELDS.DAY}`, 0);
     } else {
-      setValue(`${row.fieldArrayName}.${row.index}.${BALANCE_AND_SEND_FIELDS.MINUTE}`, 1);
-      setValue(`${row.fieldArrayName}.${row.index}.${BALANCE_AND_SEND_FIELDS.HOUR}`, 0);
-      setValue(`${row.fieldArrayName}.${row.index}.${BALANCE_AND_SEND_FIELDS.DAY}`, 0);
+      setValue(
+        `${row.fieldArrayName}.${row.index}.${BALANCE_AND_SEND_FIELDS.MINUTE}`,
+        getValues(`${row.fieldArrayName}.${row.index}.${BALANCE_AND_SEND_FIELDS.MINUTE}`) || 1
+      );
+      setValue(
+        `${row.fieldArrayName}.${row.index}.${BALANCE_AND_SEND_FIELDS.HOUR}`,
+        getValues(`${row.fieldArrayName}.${row.index}.${BALANCE_AND_SEND_FIELDS.HOUR}`) || 0
+      );
+      setValue(
+        `${row.fieldArrayName}.${row.index}.${BALANCE_AND_SEND_FIELDS.DAY}`,
+        getValues(`${row.fieldArrayName}.${row.index}.${BALANCE_AND_SEND_FIELDS.DAY}`) || 0
+      );
     }
   }, [isSendInstant]);
   return (
