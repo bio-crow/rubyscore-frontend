@@ -7,6 +7,7 @@ import {
   InputAddressTableCell,
   InputDateCell,
   InputValueTableCell,
+  LinkCell,
   NetworkCell,
   NetworkHeader,
   ProfitCell,
@@ -162,23 +163,21 @@ export const InProgressBaseColumns: GridColDef[] = [
     field: 'to',
     headerName: 'Address',
     sortable: false,
-    flex: 1,
-    minWidth: 350,
+    width: 400,
   },
   {
     field: 'valueFormatted',
     headerName: 'Value',
     sortComparator: numberComparator,
     sortable: true,
-    width: 180,
+    width: 150,
   },
   {
     field: 'taxFormatted',
     headerName: 'Commission',
     sortComparator: numberComparator,
     sortable: true,
-    flex: 1,
-    minWidth: 200,
+    width: 150,
   },
   {
     field: 'project',
@@ -188,12 +187,6 @@ export const InProgressBaseColumns: GridColDef[] = [
     renderHeader: NetworkHeader,
     renderCell: NetworkCell,
   },
-  /* {
-    field: 'L1Gas',
-    headerName: 'Gas',
-    sortable: true,
-    width: 150,
-  },*/
   {
     field: 'sendAt',
     headerName: 'Time',
@@ -206,7 +199,7 @@ export const InProgressBaseColumns: GridColDef[] = [
     field: 'status',
     headerName: 'Status',
     sortable: false,
-    width: 100,
+    width: 130,
   },
 ];
 export const RefferalsBaseColumns: GridColDef[] = [
@@ -243,8 +236,7 @@ export const HistoryBaseColumns: GridColDef[] = [
     field: 'to',
     headerName: 'Address',
     sortable: false,
-    flex: 1,
-    minWidth: 150,
+    width: 400,
   },
   {
     field: 'valueFormatted',
@@ -258,8 +250,7 @@ export const HistoryBaseColumns: GridColDef[] = [
     headerName: 'Commission',
     sortComparator: numberComparator,
     sortable: true,
-    flex: 1,
-    minWidth: 200,
+    width: 150,
   },
   {
     field: 'project',
@@ -287,6 +278,7 @@ export const HistoryBaseColumns: GridColDef[] = [
     field: 'txHashLink',
     headerName: 'Link',
     sortable: false,
-    width: 150,
+    renderCell: LinkCell,
+    width: 100,
   },
 ];

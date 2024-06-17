@@ -199,7 +199,7 @@ const AnotherWalletForm: FC<Props> = () => {
             }}
             className='Body-Inter-fw-500-fs-14'
           >
-            The amount will go to the deposit of this wallet in the Rubiscore system
+            The amount will go to the deposit of this wallet in the Rubyscore system
           </Box>
         </Box>
       </form>
