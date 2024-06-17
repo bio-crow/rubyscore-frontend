@@ -77,6 +77,24 @@ export const FromNowCell = (params: GridRenderCellParams<any>) => {
   const date = params.row.sendAt;
   return <Box>{moment(date).fromNow()}</Box>;
 };
+export const LinkCell = (params: GridRenderCellParams<any>) => {
+  const theme = useCustomTheme();
+  const { row, field } = params;
+  const openLink = () => {
+    window.open(row[field], '_blank');
+  };
+  return (
+    <Box
+      onClick={openLink}
+      sx={{
+        color: theme.palette.lightGreen,
+        cursor: 'pointer',
+      }}
+    >
+      Link
+    </Box>
+  );
+};
 export const ReferralLinkCell = (params: GridRenderCellParams<any>) => {
   const theme = useCustomTheme();
   const { field, row } = params;
