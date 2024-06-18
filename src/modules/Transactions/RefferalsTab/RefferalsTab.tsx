@@ -23,6 +23,7 @@ const RefferalsTab = () => {
         marginLeft: 'auto',
         marginRight: 'auto',
         width: '100%',
+        flex: '1',
       }}
     >
       {/* <Box
