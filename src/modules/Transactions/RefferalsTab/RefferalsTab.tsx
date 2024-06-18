@@ -43,6 +43,7 @@ const RefferalsTab = () => {
       <Box
         sx={{
           display: 'flex',
+          flex: '1',
         }}
       >
         <RefferalsTable data={referralsData} />

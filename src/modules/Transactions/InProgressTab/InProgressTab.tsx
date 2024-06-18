@@ -33,6 +33,7 @@ const InProgressTab = () => {
         marginLeft: 'auto',
         marginRight: 'auto',
         width: '100%',
+        flex: '1',
       }}
     >
       <Box
@@ -55,6 +56,7 @@ const InProgressTab = () => {
       <Box
         sx={{
           display: 'flex',
+          flex: '1',
         }}
       >
         <InProgressTable data={inProgressData} />

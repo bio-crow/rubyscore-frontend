@@ -17,6 +17,7 @@ const HistoryTab = () => {
         display: 'flex',
         flexDirection: 'column',
         gap: '20px',
+        flex: '1',
       }}
     >
       <Box
@@ -25,6 +26,7 @@ const HistoryTab = () => {
           marginLeft: 'auto',
           marginRight: 'auto',
           width: '100%',
+          flex: '1',
         }}
       >
         <HistoryTable data={historyData} />
