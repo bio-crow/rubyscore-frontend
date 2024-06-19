@@ -7,6 +7,7 @@ import {
   setDeleteLoading,
   setHistoryData,
   setInProgressData,
+  setInProgressDataLoading,
   setNetworkOptions,
   setReferralLoadingId,
   setReferralsData,
@@ -78,11 +79,13 @@ export const getMultisendTransactionsHistory = createAsyncThunk(
 export const getMultisendTransactionsInProgress = createAsyncThunk(
   'depositSlice/getMultisendTransactionsInProgress',
   async ({ project }: { project: string }, { dispatch }) => {
+    dispatch(setInProgressDataLoading(true));
     const res: any = await fetchMultisendTransactionsInProgressData({ project });
     const data = res?.data;
     if (data?.is_ok) {
       dispatch(setInProgressData(data.result));
     }
+    dispatch(setInProgressDataLoading(false));
     return;
   }
 );

@@ -10,6 +10,7 @@ import {
 } from '@/core/thunk/deposit.thunk';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { useEffect } from 'react';
+import RefreshIcon from '@/components/common/Icons/RefreshIcon';
 
 const InProgressTab = () => {
   const theme = useCustomTheme();
@@ -17,12 +18,16 @@ const InProgressTab = () => {
   const inProgressData = useAppSelector(state => state.depositState.inProgressData);
   const activeProject = useAppSelector(state => state.depositState.activeProject);
   const deleteLoading = useAppSelector(state => state.depositState.deleteLoading);
+  const inProgressDataLoading = useAppSelector(state => state.depositState.inProgressDataLoading);
   useEffect(() => {
     dispatch(getMultisendTransactionsInProgress({ project: activeProject }));
   }, [activeProject]);
   const deleteAll = () => {
     const ids = inProgressData.map(item => item.id);
     dispatch(deleteTransactions({ ids }));
+  };
+  const refresh = () => {
+    dispatch(getMultisendTransactionsInProgress({ project: activeProject }));
   };
   return (
     <Box
@@ -40,8 +45,19 @@ const InProgressTab = () => {
         sx={{
           display: 'flex',
           justifyContent: 'flex-end',
+          gap: '20px',
         }}
       >
+        <FourthButton
+          className='green'
+          startIcon={<RefreshIcon fill={theme.palette.lightGreen} />}
+          variant='outlined'
+          loading={inProgressDataLoading}
+          onClick={refresh}
+          size='medium'
+        >
+          Refresh
+        </FourthButton>
         <FourthButton
           className='white'
           loading={deleteLoading}

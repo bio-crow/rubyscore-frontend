@@ -146,21 +146,27 @@ export const TimerCell = (params: GridRenderCellParams<any>) => {
     start();
   }, []);
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '2px',
-      }}
-    >
-      <Box>{seconds}s</Box>
-      <Box>:</Box>
-      <Box>{minutes}m</Box>
-      <Box>:</Box>
-      <Box>{hours}h</Box>
-      <Box>:</Box>
-      <Box>{days}d</Box>
-      <Box></Box>
+    <Box>
+      {seconds || minutes || hours || days ? (
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '2px',
+          }}
+        >
+          <Box>{seconds}s</Box>
+          <Box>:</Box>
+          <Box>{minutes}m</Box>
+          <Box>:</Box>
+          <Box>{hours}h</Box>
+          <Box>:</Box>
+          <Box>{days}d</Box>
+          <Box></Box>
+        </Box>
+      ) : (
+        'In progress'
+      )}
     </Box>
   );
 };
