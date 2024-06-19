@@ -18,7 +18,7 @@ const InProgressTable: FC<Props> = ({ data }) => {
   const [sortModel, setSortModel] = useState<any>([
     {
       field: 'sendAt',
-      sort: 'desc',
+      sort: 'asc',
     },
   ]);
   const prepareData = data;

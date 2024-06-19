@@ -32,17 +32,32 @@ const FourthButton = styled(LoadingButton)(({ theme }: { theme: CustomTheme | an
       '&.white': {
         background: 'transparent',
         border: `1px solid ${theme.palette.powderWhite}`,
+        '.MuiLoadingButton-loadingIndicator': {
+          color: theme.palette.powderWhite,
+        },
       },
       '&.green': {
         border: `1px solid ${theme.palette.lightGreen}`,
         color: theme.palette.lightGreen,
+        '.MuiLoadingButton-loadingIndicator': {
+          color: theme.palette.lightGreen,
+        },
       },
       '&.gray': {
         border: `1px solid ${theme.palette.white50}`,
         color: theme.palette.white50,
+        '.MuiLoadingButton-loadingIndicator': {
+          color: theme.palette.white50,
+        },
       },
       '&.rounded': {
         borderRadius: '16px',
+      },
+      '&.MuiLoadingButton-loading': {
+        color: 'transparent',
+        '.MuiButton-startIcon': {
+          visibility: 'hidden',
+        },
       },
     },
     '&.MuiButton-sizeLarge': {
