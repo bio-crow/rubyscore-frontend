@@ -359,6 +359,6 @@ export const prodAttestationContracts = {
 };
 export const depositContracts = {
   scroll: { contract: '0x4D1E2145082d0AB0fDa4a973dC4887C7295e21aB', chainId: 534351 },
-  base: { contract: '0xDC3D8318Fbaec2de49281843f5bba22e78338146', chainId: 534351 },
-  linea: { contract: '0xDC3D8318Fbaec2de49281843f5bba22e78338146', chainId: 534351 },
+  base: { contract: '0xDC3D8318Fbaec2de49281843f5bba22e78338146', chainId: 84531 },
+  linea: { contract: '0xDC3D8318Fbaec2de49281843f5bba22e78338146', chainId: 59140 },
 };
