@@ -18,7 +18,7 @@ const DownloadIcon: FC<Props> = ({ style, fill = '#333333' }) => {
       <path d='M6 20H18' stroke={fill} strokeWidth='1.6' strokeLinecap='round' strokeLinejoin='round' />
       <path
         d='M12 16V4M12 4L15.5 7.5M12 4L8.5 7.5'
-        stroke='#F5F7F3'
+        stroke={fill}
         strokeWidth='1.6'
         strokeLinecap='round'
         strokeLinejoin='round'

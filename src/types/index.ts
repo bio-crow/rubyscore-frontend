@@ -301,6 +301,8 @@ export interface IMultisendTransactionsHistoryData {
   txHashLink: string;
   type: string;
   value: string;
+  taxFormatted: string;
+  valueFormatted: string;
 }
 export interface IUserTransaction {
   to: string;
