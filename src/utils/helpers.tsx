@@ -11,7 +11,13 @@ import {
   IDashboardVolumeResponse,
   IDashboardWeeksResponse,
 } from '@/core/types';
-import { IAchievementCard, IChartDot, ILevelsInfo, IUserGradation } from '@/types/index';
+import {
+  IAchievementCard,
+  IChartDot,
+  ILevelsInfo,
+  IMultisendTransactionsHistoryData,
+  IUserGradation,
+} from '@/types/index';
 import { steps } from '@motionone/easing';
 import {
   TooltipAchievementsBalance,
@@ -25,6 +31,8 @@ import {
 } from '@/utils/tooltipsContent';
 import readXlsxFile from 'read-excel-file';
 import { BALANCE_AND_SEND_FIELDS } from '@/constants/formFields';
+import writeXlsxFile from 'write-excel-file';
+import { saveAs } from 'file-saver';
 
 export const transformDataRegex = /\B(?=(\d{3})+(?!\d))/g;
 export const getReadableChartData = (number: number): string =>
@@ -828,4 +836,142 @@ export const parseExcelToJson = async (file: any) => {
   };
   const data = await readXlsxFile(file, { schema });
   return data;
+};
+export const downloadHistoryExcel = async (data: IMultisendTransactionsHistoryData[]) => {
+  const columns = [
+    {
+      width: 55,
+    },
+    {
+      width: 15,
+    },
+    {
+      width: 15,
+    },
+    {
+      width: 15,
+    },
+    {
+      width: 30,
+    },
+    {
+      width: 10,
+    },
+    {
+      width: 105,
+    },
+  ];
+  const HEADER_ROW = [
+    {
+      value: 'Address',
+      fontWeight: 'bold',
+      fontSize: '14px',
+      height: 25,
+      align: 'center',
+      alignVertical: 'center',
+      backgroundColor: '#92fe9d',
+    },
+    {
+      value: 'Value',
+      fontWeight: 'bold',
+      fontSize: '14px',
+      height: 25,
+      align: 'center',
+      alignVertical: 'center',
+      backgroundColor: '#92fe9d',
+    },
+    {
+      value: 'Commission',
+      fontWeight: 'bold',
+      fontSize: '14px',
+      height: 25,
+      align: 'center',
+      alignVertical: 'center',
+      backgroundColor: '#92fe9d',
+    },
+    {
+      value: 'Network',
+      fontWeight: 'bold',
+      fontSize: '14px',
+      height: 25,
+      align: 'center',
+      alignVertical: 'center',
+      backgroundColor: '#92fe9d',
+    },
+    {
+      value: 'Time',
+      fontWeight: 'bold',
+      fontSize: '14px',
+      height: 25,
+      align: 'center',
+      alignVertical: 'center',
+      backgroundColor: '#92fe9d',
+    },
+    {
+      value: 'Status',
+      fontWeight: 'bold',
+      fontSize: '14px',
+      height: 25,
+      align: 'center',
+      alignVertical: 'center',
+      backgroundColor: '#92fe9d',
+    },
+    {
+      value: 'Link',
+      fontWeight: 'bold',
+      fontSize: '14px',
+      height: 25,
+      align: 'center',
+      alignVertical: 'center',
+      backgroundColor: '#92fe9d',
+    },
+  ];
+  const DATA_ROWS = data.map(item => {
+    return [
+      {
+        value: item.to,
+        type: String,
+      },
+      {
+        value: item.valueFormatted,
+        type: String,
+        fontSize: '12px',
+        height: 20,
+      },
+      {
+        value: item.taxFormatted,
+        type: String,
+        fontSize: '12px',
+        height: 20,
+      },
+      {
+        value: item.project.name,
+        type: String,
+        fontSize: '12px',
+        height: 20,
+      },
+      {
+        value: new Date(item.sendAt),
+        type: Date,
+        format: 'dd/mm/yyyy hh:mm AM/PM',
+        fontSize: '12px',
+        height: 20,
+      },
+      {
+        value: item.status,
+        type: String,
+        fontSize: '12px',
+        height: 20,
+      },
+      {
+        value: `HYPERLINK("${item.txHashLink}")`,
+        type: 'Formula',
+        fontSize: '12px',
+        height: 20,
+      },
+    ];
+  });
+  const resultData: any[] = [HEADER_ROW, ...DATA_ROWS];
+  const blob: any = await writeXlsxFile(resultData, { columns, fontFamily: 'Arial' });
+  saveAs(blob, 'export_history');
 };
