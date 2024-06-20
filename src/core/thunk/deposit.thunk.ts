@@ -91,9 +91,11 @@ export const getMultisendTransactionsInProgress = createAsyncThunk(
 );
 export const depositSingle = createAsyncThunk(
   'depositSlice/depositSingle',
-  async (data: IDepositSinglePayload, { dispatch }) => {
+  async (params: { data: IDepositAnotherPayload; reset: Function }, { dispatch }) => {
+    const { data, reset } = params;
     dispatch(depositLoading(true));
     await wagmiDepositSingleWallet(data);
+    reset();
     dispatch(depositLoading(false));
     return;
   }
@@ -101,9 +103,11 @@ export const depositSingle = createAsyncThunk(
 
 export const depositAnother = createAsyncThunk(
   'depositSlice/depositAnother',
-  async (data: IDepositAnotherPayload, { dispatch }) => {
+  async (params: { data: IDepositAnotherPayload; reset: Function }, { dispatch }) => {
+    const { data, reset } = params;
     dispatch(depositLoading(true));
     await wagmiDepositAnotherWallet(data);
+    reset();
     dispatch(depositLoading(false));
     return;
   }
