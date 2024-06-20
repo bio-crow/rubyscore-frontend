@@ -1,5 +1,5 @@
 import { Box } from '@mui/system';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { DashboardTabIndexType, IAchievementCard } from '@/types/index';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import CustomLinearProgress from '@/components/common/ui/CustomLinearProgress/CustomLinearProgress';
@@ -13,7 +13,11 @@ interface Props {
 const AchievementCard: FC<Props> = ({ data, activeTab }) => {
   const theme = useCustomTheme();
   const [progress, setProgress] = useState(100 - data.top);
-  if (activeTab?.label === 'Ethereum' && data?.key === 'total_balance_usd') return null;
+  useEffect(() => {
+    if (activeTab?.label === 'Ethereum' && parseFloat(data.value.replace(/[^0-9.]/g, '')) > 0)
+      setProgress(100);
+  }, [data, activeTab]);
+
   return (
     <Box
       sx={{
@@ -76,20 +80,24 @@ const AchievementCard: FC<Props> = ({ data, activeTab }) => {
             }}
             className='Body-Lato-fw-700-fs-18'
           >
-            <Box
-              sx={{
-                color: theme.palette.lightGreen,
-              }}
-            >
-              {formatPercentsForCards(data.top)}%
-            </Box>
-            <Box
-              sx={{
-                color: theme.palette.powderWhite,
-              }}
-            >
-              TOP
-            </Box>
+            {!(activeTab?.label === 'Ethereum') && (
+              <>
+                <Box
+                  sx={{
+                    color: theme.palette.lightGreen,
+                  }}
+                >
+                  {formatPercentsForCards(data.top)}%
+                </Box>
+                <Box
+                  sx={{
+                    color: theme.palette.powderWhite,
+                  }}
+                >
+                  TOP
+                </Box>
+              </>
+            )}
           </Box>
           {data.ToolTip && (
             <CustomTooltip title={data.ToolTip}>
