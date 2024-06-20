@@ -46,8 +46,7 @@ const AnotherWalletForm: FC<Props> = () => {
     },
   });
   const onSubmit = async (data: any) => {
-    dispatch(depositAnother(data));
-    reset();
+    dispatch(depositAnother({ data, reset }));
   };
   const onError = (data: any) => {
     // console.log(data);

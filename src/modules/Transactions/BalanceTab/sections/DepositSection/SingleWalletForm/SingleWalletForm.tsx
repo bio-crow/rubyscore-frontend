@@ -43,8 +43,7 @@ const SingleWalletForm: FC<Props> = () => {
     },
   });
   const onSubmit = async (data: any) => {
-    dispatch(depositSingle(data));
-    reset();
+    dispatch(depositSingle({ data, reset }));
   };
   const onError = (data: any) => {
     //  console.log(data)

@@ -301,6 +301,56 @@ export const networkChains: Chain[] = [
     testnet: false,
   },
   {
+    id: 59141,
+    name: 'Linea Sepolia Testnet',
+    network: 'Linea Sepolia Testnet',
+    nativeCurrency: {
+      decimals: 18,
+      name: 'Linea Sepolia Testnet',
+      symbol: 'ETH',
+    },
+    rpcUrls: {
+      public: {
+        http: ['https://linea-sepolia.blockpi.network/v1/rpc/public'],
+      },
+      default: {
+        http: ['https://linea-sepolia.blockpi.network/v1/rpc/public'],
+      },
+    },
+    blockExplorers: {
+      default: {
+        name: 'Scroll Sepolia Testnet',
+        url: 'https://sepolia.lineascan.build',
+      },
+    },
+    testnet: false,
+  },
+  {
+    id: 84532,
+    name: 'Base Sepolia Testnet',
+    network: 'Base Sepolia Testnet',
+    nativeCurrency: {
+      decimals: 18,
+      name: 'Base Sepolia Testnet',
+      symbol: 'ETH',
+    },
+    rpcUrls: {
+      public: {
+        http: ['https://sepolia.base.org'],
+      },
+      default: {
+        http: ['https://sepolia.base.org'],
+      },
+    },
+    blockExplorers: {
+      default: {
+        name: 'Scroll Sepolia Testnet',
+        url: 'https://sepolia.basescan.org',
+      },
+    },
+    testnet: false,
+  },
+  {
     id: 1,
     name: 'Ethereum Mainnet',
     network: 'Ethereum Mainnet',
