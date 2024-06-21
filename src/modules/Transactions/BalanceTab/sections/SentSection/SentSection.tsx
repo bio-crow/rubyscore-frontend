@@ -19,6 +19,7 @@ import { setUserTransactions } from '@/core/thunk/deposit.thunk';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import { setIsSendInstant } from '@/core/state/deposit.state';
 import ImportWallets from '@/modules/Transactions/BalanceTab/sections/SentSection/components/ImportWallets/ImportWallets';
+import DownloadFileTemplate from '@/modules/Transactions/BalanceTab/sections/SentSection/components/DownloadFileTamplate/DownloadFileTamplate';
 const emptyFormObject = {
   id: 'id',
   [BALANCE_AND_SEND_FIELDS.MINUTE]: 1,
@@ -180,6 +181,7 @@ const SentSection = () => {
               Add wallet
             </FourthButton>
             <ImportWallets />
+            <DownloadFileTemplate />
           </Box>
         </Box>
         <Box
