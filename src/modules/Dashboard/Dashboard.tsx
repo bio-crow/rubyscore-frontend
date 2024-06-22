@@ -22,7 +22,7 @@ const Dashboard = () => {
   const refCode = searchParams.get('ref');
   const { address } = useAccount();
   const [activeTab, setActiveTab] = useState<{ index: DashboardTabIndexType; label: string }>(
-    dashboardPanelTabs[0]
+    dashboardPanelTabs.find(item => item.index === netTab) || dashboardPanelTabs[0]
   );
   const shareModalConfig = useAppSelector(state => state.shareModalState);
 

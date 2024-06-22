@@ -23,7 +23,7 @@ const Dashboard = () => {
   const isAuth = useAppSelector(state => state.authState.isAuth);
   const dispatch = useAppDispatch();
   const [activeTab, setActiveTab] = useState<{ index: DashboardTabIndexType; label: string }>(
-    dashboardPanelTabs[0]
+    dashboardPanelTabs.find(item => item.index === netTab) || dashboardPanelTabs[0]
   );
   const shownLeaderBoard = useAppSelector(state => state.leaderboardState.shownLeaderBoard);
   const filteredUser = useAppSelector(state => state.leaderboardState.filteredUser);

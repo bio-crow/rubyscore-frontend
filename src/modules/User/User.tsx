@@ -50,7 +50,7 @@ const User = () => {
   const searchParams = useSearchParams();
   const netTab = searchParams.get('net');
   const [activeProject, setActiveProject] = useState<{ index: DashboardTabIndexType; label: string }>(
-    dashboardPanelTabs[0]
+    dashboardPanelTabs.find(item => item.index === netTab) || dashboardPanelTabs[0]
   );
   const userNotFound = useAppSelector(state => state.leaderboardState.userNotFound);
   const userStatistics = useAppSelector(state => state.leaderboardState.userStatistics);
