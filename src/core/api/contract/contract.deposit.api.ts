@@ -1,12 +1,18 @@
-import { prepareWriteContract, waitForTransaction, writeContract } from '@wagmi/core';
+import { fetchBalance, prepareWriteContract, waitForTransaction, writeContract } from '@wagmi/core';
 import { getContractConfig } from '@/utils/helpers';
 import { depositContracts } from '@/providers/networkChains';
 import { switchToContractChain } from '@/core/api/contract/helpers';
 import { abiDeposit } from '@/constants/abiDeposit';
-import { IDepositAnotherPayload, IDepositSinglePayload } from '@/core/types';
+import {
+  IClaimLevelSignaturePayload,
+  IClaimLevelSignatureResponse,
+  IDepositAnotherPayload,
+  IDepositSinglePayload,
+} from '@/core/types';
 import { parseEther } from 'viem';
 import { toast } from 'react-toastify';
 import { IReferralClaimData } from '@/types/index';
+import { apiPrivateAxios } from '@/core/api/axiosConfig';
 export const wagmiDepositSingleWallet = async (data: IDepositSinglePayload): Promise<any> => {
   const action = async ({ project, value }: IDepositSinglePayload) => {
     const baseConfig = getContractConfig(project, depositContracts);
@@ -78,6 +84,20 @@ export const wagmiReferralClaimProfit = async (data: IReferralClaimData): Promis
     return await action(data);
   } catch (error: any) {
     toast(error.shortMessage, { position: 'top-right' });
+  }
+  return;
+};
+
+export const wagmiFetchBalance = async (params: { project: string; address: any }) => {
+  try {
+    const { project, address } = params;
+    const baseConfig = getContractConfig(project, depositContracts);
+    return await fetchBalance({
+      address,
+      chainId: baseConfig.chainId,
+    });
+  } catch (error) {
+    //console.error(error);
   }
   return;
 };

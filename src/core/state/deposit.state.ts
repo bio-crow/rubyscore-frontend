@@ -9,7 +9,7 @@ import {
 } from '@/types/index';
 
 interface IDepositState {
-  activeProject: DashboardTabIndexType;
+  activeProject: DashboardTabIndexType | 'all';
   depositLoading: boolean;
   sendTransactionsLoading: boolean;
   deleteLoading: boolean;
@@ -17,6 +17,7 @@ interface IDepositState {
   referralLoadingId: string | null;
   networkOptions: INetworkOption[];
   balanceData: IMultisendBalanceData[];
+  balanceDataLoading: boolean;
   totalBalance: IMultisendTotalBalanceData;
   historyData: IMultisendTransactionsHistoryData[];
   inProgressData: IMultisendTransactionsHistoryData[];
@@ -25,13 +26,14 @@ interface IDepositState {
 }
 
 const initialState: IDepositState = {
-  activeProject: 'scroll',
+  activeProject: 'all',
   depositLoading: false,
   sendTransactionsLoading: false,
   deleteLoading: false,
 
   isSendInstant: false,
   balanceData: [],
+  balanceDataLoading: false,
   networkOptions: [],
   totalBalance: {
     totalBalance: '',
@@ -71,6 +73,9 @@ export const depositSlice = createSlice({
     setBalanceData: (state, action: PayloadAction<IMultisendBalanceData[]>) => {
       state.balanceData = action.payload;
     },
+    setBalanceDataLoading: (state, action: PayloadAction<boolean>) => {
+      state.balanceDataLoading = action.payload;
+    },
     setHistoryData: (state, action: PayloadAction<IMultisendTransactionsHistoryData[]>) => {
       state.historyData = action.payload;
     },
@@ -83,7 +88,7 @@ export const depositSlice = createSlice({
     setReferralsData: (state, action: PayloadAction<IReferralLink[]>) => {
       state.referralsData = action.payload;
     },
-    setActiveProject: (state, action: PayloadAction<DashboardTabIndexType>) => {
+    setActiveProject: (state, action: PayloadAction<DashboardTabIndexType | 'all'>) => {
       state.activeProject = action.payload;
     },
     setSendTransactionsLoading: (state, action: PayloadAction<boolean>) => {
@@ -108,4 +113,5 @@ export const {
   setNetworkOptions,
   setReferralsData,
   setReferralLoadingId,
+  setBalanceDataLoading,
 } = depositSlice.actions;

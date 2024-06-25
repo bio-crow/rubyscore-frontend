@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { parseExcelToJson } from '@/utils/helpers';
 import { BalanceAndSentFormContext } from '@/context/index';
 import { v4 as uuidv4 } from 'uuid';
+import UploadIcon from '@/components/common/Icons/UploadIcon';
 
 const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
 const ImportWallets = () => {
@@ -46,7 +47,7 @@ const ImportWallets = () => {
     >
       <FourthButton
         className='white'
-        startIcon={<DownloadIcon fill={theme.palette.powderWhite} />}
+        startIcon={<UploadIcon fill={theme.palette.powderWhite} />}
         variant='outlined'
         fullWidth
         size='medium'

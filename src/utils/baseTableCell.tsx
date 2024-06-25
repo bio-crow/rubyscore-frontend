@@ -22,6 +22,9 @@ import { fetchProjectTax } from '@/core/api/deposit.api';
 import { BalanceAndSentFormContext } from '@/context/index';
 import { debounce } from 'lodash';
 import { appRoutes } from '@/constants/routes';
+import UploadIcon from '@/components/common/Icons/UploadIcon';
+import LinkIcon from '@/components/common/Icons/LinkIcon';
+import MenuIcon from '@/components/common/Icons/MenuIcon';
 
 export const ReferralUserCell = (params: GridRenderCellParams<any>) => {
   const theme = useCustomTheme();
@@ -91,9 +94,13 @@ export const LinkCell = (params: GridRenderCellParams<any>) => {
           sx={{
             color: theme.palette.lightGreen,
             cursor: 'pointer',
+            display: 'flex',
+            gap: '5px',
+            alignItems: 'center',
           }}
         >
-          Link
+          <Box>Link</Box>
+          <LinkIcon fill={theme.palette.lightGreen} />
         </Box>
       ) : (
         '-'
@@ -184,7 +191,7 @@ export const NetworkCell = (params: GridRenderCellParams<any>) => {
         gap: '5px',
       }}
     >
-      <Image src={icon} alt='icon' width='24' height='24' />
+      {icon && <Image src={icon} alt='icon' width='24' height='24' />}
       <Box>{label}</Box>
     </Box>
   );
@@ -202,9 +209,10 @@ export const NetworkHeader = (params: GridColumnHeaderParams) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const chooseProject = (project: DashboardTabIndexType) => {
+  const chooseProject = (project: DashboardTabIndexType | 'all') => {
     dispatch(setActiveProject(project));
   };
+  const preparedOptions: any[] = [{ value: 'all', text: 'All' }, ...networkOptions];
   return (
     <Box>
       <Box
@@ -221,7 +229,12 @@ export const NetworkHeader = (params: GridColumnHeaderParams) => {
         onClick={handleClick}
       >
         <Box>Network</Box>
-        <Image src={networkStaticData[activeProject].icon} alt='icon' width='24' height='24' />
+        {activeProject !== 'all' && (
+          <Image src={networkStaticData[activeProject]?.icon} alt='icon' width='24' height='24' />
+        )}
+        {activeProject === 'all' && (
+          <MenuIcon style={{ width: '16px', height: '16px' }} fill={theme.palette.white50} />
+        )}
       </Box>
       <Menu
         id='net-select-menu'
@@ -232,7 +245,7 @@ export const NetworkHeader = (params: GridColumnHeaderParams) => {
           'aria-labelledby': 'net-select-button',
         }}
       >
-        {networkOptions.map(option => (
+        {preparedOptions.map(option => (
           <MenuItem
             sx={{ background: activeProject === option.value ? theme.palette.white10 : 'transparent' }}
             key={option.value}
@@ -245,7 +258,7 @@ export const NetworkHeader = (params: GridColumnHeaderParams) => {
                 gap: '10px',
               }}
             >
-              <Image src={option.icon} alt='icon' width='24' height='24' />
+              {option.icon && <Image src={option.icon} alt='icon' width='24' height='24' />}
               <Box
                 sx={{
                   color: theme.palette.powderWhite,
