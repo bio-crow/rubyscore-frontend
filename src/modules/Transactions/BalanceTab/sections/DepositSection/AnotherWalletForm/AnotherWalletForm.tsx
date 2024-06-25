@@ -17,12 +17,16 @@ import { DEPOSIT_ANOTHER_FIELDS, DEPOSIT_SINGLE_FIELDS } from '@/constants/formF
 import { FormSelect } from '@/components/common/fields/SelectField';
 import { depositAnother, depositSingle } from '@/core/thunk/deposit.thunk';
 import { useAppDispatch, useAppSelector } from '@/core/store';
+import { useAccount } from 'wagmi';
+import { wagmiFetchBalance } from '@/core/api/contract/contract.deposit.api';
+import { CircularProgress } from '@mui/material';
 
 interface Props {}
 
 const AnotherWalletForm: FC<Props> = () => {
   const theme = useCustomTheme();
-  const isLg = useMediaQuery(theme.breakpoints.up('lg'));
+  const { address } = useAccount();
+  const [isMaxLoading, setIsMaxLoading] = useState(false);
   const dispatch = useAppDispatch();
   const depositLoading = useAppSelector(state => state.depositState.depositLoading);
   const networkOptions = useAppSelector(state => state.depositState.networkOptions);
@@ -50,6 +54,18 @@ const AnotherWalletForm: FC<Props> = () => {
   };
   const onError = (data: any) => {
     // console.log(data);
+  };
+  const setMaxValue = async () => {
+    const values = getValues && getValues();
+    const project = values && values[DEPOSIT_ANOTHER_FIELDS.NETWORK];
+
+    if (project) {
+      setIsMaxLoading(true);
+      const balance = await wagmiFetchBalance({ project, address });
+      const value = balance?.formatted;
+      setValue(DEPOSIT_ANOTHER_FIELDS.VALUE, value);
+      setIsMaxLoading(false);
+    }
   };
   return (
     <DepositAnotherFormContext.Provider
@@ -132,7 +148,32 @@ const AnotherWalletForm: FC<Props> = () => {
             >
               Value
             </Box>
-            <FormInputText name={DEPOSIT_ANOTHER_FIELDS.VALUE} control={control} placeholder='Enter value' />
+            <FormInputText
+              name={DEPOSIT_ANOTHER_FIELDS.VALUE}
+              control={control}
+              placeholder='Enter value'
+              InputProps={{
+                endAdornment: (
+                  <Box
+                    sx={{
+                      cursor: 'pointer',
+                    }}
+                    onClick={setMaxValue}
+                  >
+                    {isMaxLoading ? (
+                      <CircularProgress
+                        sx={{
+                          color: theme.palette.powderWhite,
+                        }}
+                        size='1rem'
+                      />
+                    ) : (
+                      'MAX'
+                    )}
+                  </Box>
+                ),
+              }}
+            />
           </Box>
           <Box
             sx={{

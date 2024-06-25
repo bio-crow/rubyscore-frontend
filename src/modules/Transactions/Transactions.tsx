@@ -13,7 +13,8 @@ import RefferalsTab from '@/modules/Transactions/RefferalsTab/RefferalsTab';
 import { useAppDispatch, useAppSelector } from '@/core/store';
 import PrivatePageLayout from '@/components/layout/PrivatePageLayout/PrivatePageLayout';
 import { getMultisendBalance } from '@/core/thunk/deposit.thunk';
-type TransactionsTabType = 'balance' | 'inProgress' | 'history' | 'refferals';
+import DepositTab from '@/modules/Transactions/DepositTab/DepositTab';
+type TransactionsTabType = 'balance' | 'inProgress' | 'history' | 'refferals' | 'deposit';
 const panelTabs: { index: TransactionsTabType; label: string }[] = [
   {
     index: 'balance',
@@ -23,6 +24,10 @@ const panelTabs: { index: TransactionsTabType; label: string }[] = [
     index: 'inProgress',
     label: 'In Progress',
   },
+  /* {
+    index: 'deposit',
+    label: 'Deposit',
+  },*/
   {
     index: 'history',
     label: 'History',
@@ -47,6 +52,7 @@ const Transactions = () => {
     inProgress: <InProgressTab />,
     history: <HistoryTab />,
     refferals: <RefferalsTab />,
+    deposit: <DepositTab />,
   };
   useEffect(() => {
     if (isAuth) {

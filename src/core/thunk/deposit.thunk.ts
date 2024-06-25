@@ -4,6 +4,7 @@ import { IDepositAnotherPayload, IDepositSinglePayload, IUserTransactionPayload 
 import {
   depositLoading,
   setBalanceData,
+  setBalanceDataLoading,
   setDeleteLoading,
   setHistoryData,
   setInProgressData,
@@ -40,6 +41,7 @@ import { networkStaticData } from '@/constants/index';
 export const getMultisendBalance = createAsyncThunk(
   'depositSlice/getMultisendBalance',
   async (args, { dispatch }) => {
+    dispatch(setBalanceDataLoading(true));
     const res: any = await fetchMultisendBalanceData();
     const data = res?.data;
     if (data?.is_ok) {
@@ -62,6 +64,7 @@ export const getMultisendBalance = createAsyncThunk(
       dispatch(setTotalBalance(total));
       dispatch(setNetworkOptions(networkOptions));
     }
+    dispatch(setBalanceDataLoading(false));
     return;
   }
 );
