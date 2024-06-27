@@ -23,7 +23,8 @@ export type DashboardTabIndexType =
   | 'zora'
   | 'taiko'
   | 'mantle'
-  | 'ethereum';
+  | 'ethereum'
+  | 'opbnb';
 export interface IScoreNetwork {
   index: DashboardTabIndexType;
   title: string;
@@ -175,6 +176,11 @@ export interface IScoreList {
     level: number;
     rank: string;
   };
+  opbnb: {
+    score: number;
+    level: number;
+    rank: string;
+  };
 }
 export interface IUserGradation {
   address: string;
@@ -238,6 +244,7 @@ export interface ILevelsInfo {
   taiko: number[];
   mantle: number[];
   ethereum: number[];
+  opbnb: number[];
 }
 
 export interface ITask {
@@ -263,6 +270,7 @@ export interface IDashboardTabsVoteInfo {
   taiko: { count: number | null; is_ok: boolean };
   mantle: { count: number | null; is_ok: boolean };
   ethereum: { count: number | null; is_ok: boolean };
+  opbnb: { count: number | null; is_ok: boolean };
 }
 export interface IAttestationData {
   attestationParams: {

@@ -375,6 +375,31 @@ export const networkChains: Chain[] = [
     },
     testnet: false,
   },
+  {
+    id: 204,
+    name: 'opBNB Mainnet',
+    network: 'opBNB Mainnet',
+    nativeCurrency: {
+      decimals: 18,
+      name: 'BNB',
+      symbol: 'BNB',
+    },
+    rpcUrls: {
+      public: {
+        http: ['https://opbnb-mainnet-rpc.bnbchain.org'],
+      },
+      default: {
+        http: ['https://opbnb-mainnet-rpc.bnbchain.org'],
+      },
+    },
+    blockExplorers: {
+      default: {
+        name: 'opBNB',
+        url: 'https://opbnbscan.com/',
+      },
+    },
+    testnet: false,
+  },
 ];
 export const networkContracts = {
   app: { contract: '0x009dbfee9e155766af434ed1652ca3769b05e76f', chainId: 10 },
@@ -390,6 +415,7 @@ export const networkContracts = {
   taiko: { contract: '0xDC3D8318Fbaec2de49281843f5bba22e78338146', chainId: 167000 },
   mantle: { contract: '0xDC3D8318Fbaec2de49281843f5bba22e78338146', chainId: 5000 },
   ethereum: { contract: '', chainId: 1 },
+  opbnb: { contract: '0xDC3D8318Fbaec2de49281843f5bba22e78338146', chainId: 204 },
 };
 export const networkVoteContracts = {
   base: { contract: '0xe10Add2ad591A7AC3CA46788a06290De017b9fB4', chainId: 8453 },
@@ -403,6 +429,7 @@ export const networkVoteContracts = {
   taiko: { contract: '0x4D1E2145082d0AB0fDa4a973dC4887C7295e21aB', chainId: 167000 },
   mantle: { contract: '0x4D1E2145082d0AB0fDa4a973dC4887C7295e21aB', chainId: 5000 },
   ethereum: { contract: '', chainId: 1 },
+  opbnb: { contract: '0x4D1E2145082d0AB0fDa4a973dC4887C7295e21aB', chainId: 204 },
 };
 export const prodAttestationContracts = {
   linea: { contract: '0xB9cC0Bb020cF55197C4C3d826AC87CAdba51f272', chainId: 59144 },

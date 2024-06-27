@@ -53,6 +53,7 @@ const initialState: IDashboardState = {
     taiko: { count: null, is_ok: true },
     mantle: { count: null, is_ok: true },
     ethereum: { count: null, is_ok: true },
+    opbnb: { count: null, is_ok: true },
   },
   dashboardTabsVoteInfoLoading: null,
 };

@@ -18,6 +18,7 @@ export const networkStaticData: {
   zora: NetworkStatic;
   taiko: NetworkStatic;
   mantle: NetworkStatic;
+  opbnb: NetworkStatic;
 } = {
   zk_era: {
     icon: '/asserts/net/zkSync.svg',
@@ -66,6 +67,10 @@ export const networkStaticData: {
   ethereum: {
     icon: '/asserts/net/ethereum.svg',
     label: 'Ethereum',
+  },
+  opbnb: {
+    icon: '/asserts/net/opbnb.svg',
+    label: 'opBNB',
   },
 };
 export const myLevelIcons = {
@@ -203,6 +208,18 @@ export const myLevelIcons = {
   ],
   // needed just to satisfy typescript since we're not providing boxes for ethereum network
   ethereum: [],
+  opbnb: [
+    '/asserts/box/opbnb/opbnb1.png',
+    '/asserts/box/opbnb/opbnb2.png',
+    '/asserts/box/opbnb/opbnb3.png',
+    '/asserts/box/opbnb/opbnb4.png',
+    '/asserts/box/opbnb/opbnb5.png',
+    '/asserts/box/opbnb/opbnb6.png',
+    '/asserts/box/opbnb/opbnb7.png',
+    '/asserts/box/opbnb/opbnb8.png',
+    '/asserts/box/opbnb/opbnb9.png',
+    '/asserts/box/opbnb/opbnb10.png',
+  ],
 };
 export const dashboardPanelTabs: { index: DashboardTabIndexType; label: string }[] = [
   {
@@ -248,6 +265,10 @@ export const dashboardPanelTabs: { index: DashboardTabIndexType; label: string }
   {
     index: 'mantle',
     label: 'Mantle',
+  },
+  {
+    index: 'opbnb',
+    label: 'opBNB',
   },
 ];
 export const axisLabelMap = {

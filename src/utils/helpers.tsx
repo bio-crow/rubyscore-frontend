@@ -700,6 +700,11 @@ export const getContractConfig = (project: string, contractInfo: any) => {
         address: contractInfo.mantle.contract,
         chainId: contractInfo.mantle.chainId,
       };
+    case 'opbnb':
+      return {
+        address: contractInfo.opbnb.contract,
+        chainId: contractInfo.opbnb.chainId,
+      };
     default:
       return {
         address: contractInfo.projectAchievements.contract,

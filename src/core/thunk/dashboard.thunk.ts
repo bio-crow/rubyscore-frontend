@@ -294,6 +294,7 @@ export const initDashboardTabsVotes = createAsyncThunk(
       'taiko',
       'mantle',
       'ethereum',
+      'opbnb',
     ];
     const initValue: IDashboardTabsVoteInfo = {
       zk_era: { count: null, is_ok: true },
@@ -308,6 +309,7 @@ export const initDashboardTabsVotes = createAsyncThunk(
       taiko: { count: null, is_ok: true },
       mantle: { count: null, is_ok: true },
       ethereum: { count: null, is_ok: true },
+      opbnb: { count: null, is_ok: true },
     };
     const promises = projects.map(project =>
       fetchProjectVotes({

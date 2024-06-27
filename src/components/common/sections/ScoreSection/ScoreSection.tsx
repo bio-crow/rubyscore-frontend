@@ -179,6 +179,14 @@ const ScoreSection: FC<Props> = ({
       points: userScoreList['ethereum']?.score,
       rank: userScoreList['ethereum']?.rank,
     },
+    {
+      index: 'opbnb',
+      title: 'opBNB',
+      icon: networkStaticData['opbnb'].icon,
+      lvl: userScoreList['opbnb']?.level,
+      points: userScoreList['opbnb']?.score,
+      rank: userScoreList['opbnb']?.rank,
+    },
   ];
   const preparedNetworks = networks
     ? getTwoLinesNetworksData(networks, swiperRef?.params?.slidesPerView)

@@ -109,8 +109,9 @@ export const wagmiInitUserDataFromContract = async (wallet: string): Promise<any
       address,
       address,
       address,
+      address,
     ];
-    const ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+    const ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
     let contracts = [];
     Object.entries(networkContracts).forEach(item => {
       if (item[0] !== 'app') {
@@ -169,10 +170,12 @@ export const wagmiInitUserDataFromContract = async (wallet: string): Promise<any
         result[10].status === 'success' ? result[10].result.map((item: string) => parseInt(item)) : errData,
       ethereum:
         result[11].status === 'success' ? result[11].result.map((item: string) => parseInt(item)) : errData,
+      opbnb:
+        result[12].status === 'success' ? result[12].result.map((item: string) => parseInt(item)) : errData,
     };
-    const userName = result[12].status === 'success' ? result[12].result : null;
-    const userStatus = result[13].status === 'success' ? result[13].result : null;
-    const premiumPrice = result[14].status === 'success' ? result[14].result : null;
+    const userName = result[13].status === 'success' ? result[12].result : null;
+    const userStatus = result[14].status === 'success' ? result[13].result : null;
+    const premiumPrice = result[15].status === 'success' ? result[14].result : null;
     return { levelsInfo, userName, userStatus, premiumPrice };
   };
   try {

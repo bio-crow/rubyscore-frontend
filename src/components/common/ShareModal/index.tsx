@@ -25,6 +25,7 @@ import ZoraImage from 'public/asserts/net/Zora.svg';
 import MantleImage from 'public/asserts/net/mantle.svg';
 import EthereumImage from 'public/asserts/net/ethereum.svg';
 import TaikoImage from 'public/asserts/net/taiko.svg';
+import OpBNBImage from 'public/asserts/net/opbnb.svg';
 
 const networkName = {
   zk_era: {
@@ -122,6 +123,15 @@ const networkName = {
     src: EthereumImage,
     twitterAccount: '@ethereum',
     hashtag: 'Ethereum ',
+    telegramName: function () {
+      return this.hashtag;
+    },
+  },
+  opbnb: {
+    title: 'opBNB',
+    src: OpBNBImage,
+    twitterAccount: '@OP_BNB_',
+    hashtag: 'opBNB',
     telegramName: function () {
       return this.hashtag;
     },
