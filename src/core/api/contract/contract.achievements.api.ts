@@ -173,9 +173,9 @@ export const wagmiInitUserDataFromContract = async (wallet: string): Promise<any
       opbnb:
         result[12].status === 'success' ? result[12].result.map((item: string) => parseInt(item)) : errData,
     };
-    const userName = result[13].status === 'success' ? result[12].result : null;
-    const userStatus = result[14].status === 'success' ? result[13].result : null;
-    const premiumPrice = result[15].status === 'success' ? result[14].result : null;
+    const userName = result[13].status === 'success' ? result[13].result : null;
+    const userStatus = result[14].status === 'success' ? result[14].result : null;
+    const premiumPrice = result[15].status === 'success' ? result[15].result : null;
     return { levelsInfo, userName, userStatus, premiumPrice };
   };
   try {
