@@ -9,6 +9,7 @@ import {
   InputValueTableCell,
   LinkCell,
   NetworkCell,
+  DepositValueCell,
   NetworkHeader,
   ProfitCell,
   ReferralLinkCell,
@@ -276,6 +277,53 @@ export const HistoryBaseColumns: GridColDef[] = [
   },
   {
     field: 'txHashLink',
+    headerName: 'Link',
+    sortable: false,
+    renderCell: LinkCell,
+    width: 100,
+  },
+];
+
+export const DepositsBaseColumns: GridColDef[] = [
+  {
+    field: 'from',
+    headerName: 'From',
+    sortable: false,
+    width: 400,
+  },
+  {
+    field: 'to',
+    headerName: 'To',
+    sortable: true,
+    sortComparator: numberComparator,
+    width: 400,
+  },
+  {
+    field: 'value',
+    headerName: 'Value',
+    sortComparator: numberComparator,
+    sortable: true,
+    renderCell: DepositValueCell,
+    width: 150,
+  },
+  {
+    field: 'project',
+    headerName: 'Network',
+    sortable: false,
+    width: 150,
+    renderHeader: NetworkHeader,
+    renderCell: NetworkCell,
+  },
+  {
+    field: 'depositedAt',
+    headerName: 'Time',
+    sortable: true,
+    width: 200,
+    renderCell: FromNowCell,
+    sortComparator: dateComparator,
+  },
+  {
+    field: 'txLink',
     headerName: 'Link',
     sortable: false,
     renderCell: LinkCell,

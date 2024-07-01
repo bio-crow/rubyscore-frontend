@@ -4,6 +4,7 @@ import {
   IMultisendBalanceData,
   IMultisendTotalBalanceData,
   IMultisendTransactionsHistoryData,
+  IMultisendDepositsHistoryData,
   INetworkOption,
   IReferralLink,
 } from '@/types/index';
@@ -20,6 +21,7 @@ interface IDepositState {
   balanceDataLoading: boolean;
   totalBalance: IMultisendTotalBalanceData;
   historyData: IMultisendTransactionsHistoryData[];
+  depositsHistoryData: IMultisendDepositsHistoryData[];
   inProgressData: IMultisendTransactionsHistoryData[];
   inProgressDataLoading: boolean;
   referralsData: IReferralLink[];
@@ -42,6 +44,7 @@ const initialState: IDepositState = {
     totalBalanceOnHoldFormatted: '',
   },
   historyData: [],
+  depositsHistoryData: [],
   inProgressData: [],
   inProgressDataLoading: false,
   referralsData: [],
@@ -79,6 +82,11 @@ export const depositSlice = createSlice({
     setHistoryData: (state, action: PayloadAction<IMultisendTransactionsHistoryData[]>) => {
       state.historyData = action.payload;
     },
+
+    setDepositsHistoryData: (state, action: PayloadAction<IMultisendDepositsHistoryData[]>) => {
+      state.depositsHistoryData = action.payload;
+    },
+
     setInProgressData: (state, action: PayloadAction<IMultisendTransactionsHistoryData[]>) => {
       state.inProgressData = action.payload;
     },
@@ -104,6 +112,7 @@ export const {
   setTotalBalance,
   setActiveProject,
   setHistoryData,
+  setDepositsHistoryData,
   setBalanceData,
   setInProgressData,
   setInProgressDataLoading,

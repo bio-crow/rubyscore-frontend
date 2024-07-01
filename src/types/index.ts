@@ -312,6 +312,20 @@ export interface IMultisendTransactionsHistoryData {
   taxFormatted: string;
   valueFormatted: string;
 }
+export interface IMultisendDepositsHistoryData {
+  id: number;
+  project: {
+    id: number;
+    name: DashboardTabIndexType;
+  };
+  from: string;
+  to: string;
+  depositedAt: string;
+  txHash: string;
+  txHashLink: string;
+  type: string;
+  value: string;
+}
 export interface IUserTransaction {
   to: string;
   value: string;

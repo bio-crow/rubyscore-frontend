@@ -77,7 +77,7 @@ export const ReferralUserCell = (params: GridRenderCellParams<any>) => {
   );
 };
 export const FromNowCell = (params: GridRenderCellParams<any>) => {
-  const date = params.row.sendAt;
+  const date = params.row.sendAt || params.row.depositedAt;
   return <Box>{moment(date).fromNow()}</Box>;
 };
 export const LinkCell = (params: GridRenderCellParams<any>) => {
@@ -141,6 +141,11 @@ export const ReferralLinkCell = (params: GridRenderCellParams<any>) => {
 export const ProfitCell = (params: GridRenderCellParams<any>) => {
   const { field, row } = params;
   return <Box>{row[field]} ETH</Box>;
+};
+export const DepositValueCell = (params: GridRenderCellParams<any>) => {
+  const { value } = params.row;
+  const valueColor = params.row.value > 0 ? '#449e48' : '#ff0000';
+  return <Box color={valueColor}>{value}</Box>;
 };
 export const TimerCell = (params: GridRenderCellParams<any>) => {
   const date = new Date(params.row.sendAt);

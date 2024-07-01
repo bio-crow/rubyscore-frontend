@@ -1,5 +1,5 @@
 'use client';
-import { HistoryBaseColumns } from '@/utils/baseTableColumns';
+import { DepositsBaseColumns } from '@/utils/baseTableColumns';
 import CustomPagination from '@/components/common/CustomPagination/CustomPagination';
 import { FC, useState } from 'react';
 import CustomNoRows from '@/components/common/CustomNoRows/CustomNoRows';
@@ -22,7 +22,7 @@ const DepositTable: FC<Props> = ({ data }) => {
   ]);
   const prepareData = data;
   const openLink = (params: GridRenderCellParams<any>) => {};
-  const columns = [...HistoryBaseColumns];
+  const columns = [...DepositsBaseColumns];
   return (
     <SecondaryTable
       getRowId={params => uuidv4()}
