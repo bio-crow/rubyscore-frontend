@@ -7,6 +7,7 @@ import {
   setBalanceDataLoading,
   setDeleteLoading,
   setHistoryData,
+  setDepositsHistoryData,
   setInProgressData,
   setInProgressDataLoading,
   setNetworkOptions,
@@ -24,6 +25,7 @@ import {
   fetchClaimReferrals,
   fetchDeleteTransactions,
   fetchMultisendBalanceData,
+  fetchMultisendDepositsData,
   fetchMultisendTransactionsHistoryData,
   fetchMultisendTransactionsInProgressData,
   fetchReferrals,
@@ -75,6 +77,18 @@ export const getMultisendTransactionsHistory = createAsyncThunk(
     const data = res?.data;
     if (data?.is_ok) {
       dispatch(setHistoryData(data.result));
+    }
+    return;
+  }
+);
+
+export const getDepositsHistory = createAsyncThunk(
+  'depositSlice/getDepositsHistory',
+  async ({ project }: { project: string }, { dispatch }) => {
+    const res: any = await fetchMultisendDepositsData({ project });
+    const data = res?.data;
+    if (data?.is_ok) {
+      dispatch(setDepositsHistoryData(data.result));
     }
     return;
   }

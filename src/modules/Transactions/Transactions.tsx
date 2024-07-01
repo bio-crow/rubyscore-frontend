@@ -24,10 +24,10 @@ const panelTabs: { index: TransactionsTabType; label: string }[] = [
     index: 'inProgress',
     label: 'In Progress',
   },
-  /* {
+  {
     index: 'deposit',
     label: 'Deposit',
-  },*/
+  },
   {
     index: 'history',
     label: 'History',

@@ -3,16 +3,16 @@ import { useAppDispatch, useAppSelector } from '@/core/store';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import DepositTable from '@/modules/Transactions/DepositTab/DepositTable/DepositTable';
 import { useEffect } from 'react';
-import { getMultisendTransactionsHistory } from '@/core/thunk/deposit.thunk';
+import { getDepositsHistory } from '@/core/thunk/deposit.thunk';
 
 const DepositTab = () => {
   const theme = useCustomTheme();
   const dispatch = useAppDispatch();
   const activeProject = useAppSelector(state => state.depositState.activeProject);
   useEffect(() => {
-    dispatch(getMultisendTransactionsHistory({ project: activeProject }));
+    dispatch(getDepositsHistory({ project: activeProject }));
   }, [activeProject]);
-  const historyData = useAppSelector(state => state.depositState.historyData);
+  const historyData = useAppSelector(state => state.depositState.depositsHistoryData);
   return (
     <Box
       sx={{

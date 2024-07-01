@@ -50,6 +50,22 @@ export const fetchMultisendTransactionsInProgressData = async ({ project }: { pr
     //console.error(error);
   }
 };
+export const fetchMultisendDepositsData = async ({ project }: { project: string }) => {
+  try {
+    const config: any = {
+      params: {
+        project,
+      },
+    };
+    return await apiPrivateAxiosLimited.get<IMultisendTransactionsHistoryResponse>(
+      '/multisend/deposits',
+      config
+    );
+  } catch (error) {
+    //console.error(error);
+  }
+};
+
 export const fetchProjectTax = async ({ project, value }: { project: any; value: any }) => {
   try {
     const config: any = {
