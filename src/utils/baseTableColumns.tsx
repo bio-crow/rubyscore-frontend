@@ -9,6 +9,7 @@ import {
   InputValueTableCell,
   LinkCell,
   NetworkCell,
+  DepositValueCell,
   NetworkHeader,
   ProfitCell,
   ReferralLinkCell,
@@ -302,6 +303,7 @@ export const DepositsBaseColumns: GridColDef[] = [
     headerName: 'Value',
     sortComparator: numberComparator,
     sortable: true,
+    renderCell: DepositValueCell,
     width: 150,
   },
   {
