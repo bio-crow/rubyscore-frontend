@@ -332,6 +332,7 @@ export interface IUserTransaction {
   type: string;
   project: number;
   sendAt?: string;
+  refCode: string | null;
 }
 export interface INetworkOption {
   text: string;

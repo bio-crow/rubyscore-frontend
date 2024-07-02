@@ -20,6 +20,7 @@ import { useAppDispatch, useAppSelector } from '@/core/store';
 import { setIsSendInstant } from '@/core/state/deposit.state';
 import ImportWallets from '@/modules/Transactions/BalanceTab/sections/SentSection/components/ImportWallets/ImportWallets';
 import DownloadFileTemplate from '@/modules/Transactions/BalanceTab/sections/SentSection/components/DownloadFileTamplate/DownloadFileTamplate';
+import { useSearchParams } from 'next/navigation';
 const emptyFormObject = {
   id: 'id',
   [BALANCE_AND_SEND_FIELDS.MINUTE]: 1,
@@ -32,8 +33,10 @@ const emptyFormObject = {
 const SentSection = () => {
   const theme = useCustomTheme();
   const dispatch = useAppDispatch();
+  const searchParams = useSearchParams();
   const sendTransactionsLoading = useAppSelector(state => state.depositState.sendTransactionsLoading);
   const isSendInstant = useAppSelector(state => state.depositState.isSendInstant);
+  const multisendRefCode = searchParams.get('ms_ref');
   const {
     register,
     handleSubmit,
@@ -65,6 +68,7 @@ const SentSection = () => {
         value: item[BALANCE_AND_SEND_FIELDS.VALUE],
         type: isSendInstant ? 'instant' : 'scheduled',
         project: item[BALANCE_AND_SEND_FIELDS.NETWORK],
+        refCode: multisendRefCode || null,
       };
       if (!isSendInstant) {
         const date = new Date();
