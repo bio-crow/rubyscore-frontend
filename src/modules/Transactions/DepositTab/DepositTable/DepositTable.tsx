@@ -16,7 +16,7 @@ const DepositTable: FC<Props> = ({ data }) => {
   const theme = useCustomTheme();
   const [sortModel, setSortModel] = useState<any>([
     {
-      field: 'sendAt',
+      field: 'depositedAt',
       sort: 'desc',
     },
   ]);

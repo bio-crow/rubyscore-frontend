@@ -62,23 +62,25 @@ const SentSection = () => {
     shouldUnregister: false,
   });
   const onSubmit = async (data: any) => {
-    const transactions: IUserTransaction[] = data['array'].map((item: any) => {
-      const transaction: IUserTransaction = {
-        to: item[BALANCE_AND_SEND_FIELDS.ADDRESS],
-        value: item[BALANCE_AND_SEND_FIELDS.VALUE],
-        type: isSendInstant ? 'instant' : 'scheduled',
-        project: item[BALANCE_AND_SEND_FIELDS.NETWORK],
-        refCode: multisendRefCode || null,
-      };
-      if (!isSendInstant) {
-        const date = new Date();
-        date.setMinutes(date.getMinutes() + item[BALANCE_AND_SEND_FIELDS.MINUTE]);
-        date.setHours(date.getHours() + item[BALANCE_AND_SEND_FIELDS.HOUR]);
-        date.setDate(date.getDate() + item[BALANCE_AND_SEND_FIELDS.DAY]);
-        transaction.sendAt = date.toISOString();
-      }
-      return transaction;
-    });
+    const transactions: IUserTransaction[] = data['array']
+      .filter((item: any) => !!item)
+      .map((item: any) => {
+        const transaction: IUserTransaction = {
+          to: item[BALANCE_AND_SEND_FIELDS.ADDRESS],
+          value: item[BALANCE_AND_SEND_FIELDS.VALUE],
+          type: isSendInstant ? 'instant' : 'scheduled',
+          project: item[BALANCE_AND_SEND_FIELDS.NETWORK],
+          refCode: multisendRefCode || null,
+        };
+        if (!isSendInstant) {
+          const date = new Date();
+          date.setMinutes(date.getMinutes() + item[BALANCE_AND_SEND_FIELDS.MINUTE]);
+          date.setHours(date.getHours() + item[BALANCE_AND_SEND_FIELDS.HOUR]);
+          date.setDate(date.getDate() + item[BALANCE_AND_SEND_FIELDS.DAY]);
+          transaction.sendAt = date.toISOString();
+        }
+        return transaction;
+      });
     dispatch(setUserTransactions({ transactions }));
     remove();
     reset({
