@@ -116,7 +116,6 @@ const MyLevelSection: FC<Props> = ({
         };
       })
     : [];
-  if (project === 'ethereum') return null;
   return (
     <Box
       sx={{
@@ -358,7 +357,7 @@ const MyLevelSection: FC<Props> = ({
         </Box>
       ) : (
         <>
-          {prepareLevels && (
+          {prepareLevels && project !== 'ethereum' && (
             <>
               <Box>
                 <Swiper
